@@ -1,0 +1,24 @@
+<nav class="navbar">
+
+	<a class="nav-link" href="{{path('app_main')}}">
+		<i class="fa-solid fa-house"></i>Accueil</a>
+
+		<a href="{{path('app_offres_catalogue')}}" class="nav-link"><i class="fa-solid fa-clipboard-list"></i>Offres</a>
+	<div class="connexion">
+
+		{% if not app.user %}
+			<a class="nav-link" href="{{path('app_login')}}">
+				<i class="fa fa-sign-in" aria-hidden="true"></i>
+				Se connecter</a>
+			<a class="nav-link" href="{{path('app_register')}}">
+				<i class="fa fa-user-plus" aria-hidden="true"></i>
+				S'inscrire</a>
+		{% else %}
+			<a class="nav-link" href="{{ path('app_logout') }}">
+				<i class="fa fa-sign-out" aria-hidden="true"></i>Déconnexion</a>
+		{% endif %}
+	</div>
+</nav>
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
+{% endblock %}

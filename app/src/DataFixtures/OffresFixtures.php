@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\CategoriesOffres;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -33,10 +34,17 @@ class OffresFixtures extends Fixture
                 ->setNbrAdultes($this->faker->numberBetween(1, 2))
                 ->setNbrEnfants($this->faker->numberBetween(1, 6))
                 ->setIsLocked($this->faker->boolean($i - 2))
+                //On récupère une référence à la catégorie d'offre en se basant sur le tableau
+                //présent dans CategoriesOffresFixtures
+                ->setCategorie($this->getReference('categorie_offre_' . random_int(0, 3), CategoriesOffres::class))
                 ->setIsPublished(true)
                 ->setCreatedAt(new \DateTimeImmutable());
             $manager->persist($offre);
         }
         $manager->flush();
+    }
+    public function getDependencies(): array
+    {
+        return [CategoriesOffresFixtures::class];
     }
 }

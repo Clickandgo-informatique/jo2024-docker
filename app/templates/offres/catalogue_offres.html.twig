@@ -9,6 +9,10 @@
 				{% for offre in offres %}
 					<div class="card card-offre">
 						<div class="card-header">
+						<div class="card-title">
+						<span class="title-text">{{offre.sport.intitule}}</span>
+						</div>
+						<img src="#" alt="#" class="card-image">
 							<span class="dates-offres">Du
 								{{offre.dateDebut|date("d-m-Y H:i")}}
 								au
@@ -19,25 +23,14 @@
 						</div>
 						<div class="card-content">{{offre.description}}</div>
 						<div class="card-footer">
-							{% if not offre.isLocked %}
 
-								<div class="row">
-									<label for="inputNbrAdultes">Adultes :
-										<input type="number" name="inputNbrAdultes" id="inputNbrAdultes" value={{offre.nbrAdultes}}>
-									</label>
-									<label for="inputNbrEnfants">Enfants :
-										<input type="number" name="inputNbrEnfants" id="inputNbrEnfants" value={{offre.nbrEnfants}}>
-									</label>
-								</div>
-
-							{% else %}
 								<div class="row">
 									<span>Adultes :
 										{{offre.nbrAdultes}}</span>
 									<span>Enfants :
 										{{offre.nbrEnfants}}</span>
 								</div>
-							{% endif %}
+						
 							<span class="prix text-right">{{offre.prix}}
 								€</span>
 							<a href="{{path('app_cart_add',{id:offre.id})}}" class="btn btn-primary">Ajouter au panier</a>

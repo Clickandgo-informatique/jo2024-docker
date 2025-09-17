@@ -22,7 +22,7 @@ class Offres
     private ?string $intitule = null;
 
     #[ORM\Column]
-    private ?float $prix = null;
+    private ?int $prix = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $date_debut = null;
@@ -69,12 +69,23 @@ class Offres
     #[ORM\OneToMany(targetEntity: DetailsCommandes::class, mappedBy: 'offres')]
     private Collection $detailsCommandes;
 
+    #[ORM\ManyToOne(inversedBy: 'offres')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CategoriesOffres $categorie = null;
+
+    /**
+     * @var Collection<int, Sports>
+     */
+    #[ORM\ManyToMany(targetEntity: Sports::class, inversedBy: 'offres')]
+    private Collection $sport;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
         $this->images = new ArrayCollection();
         $this->detailsCommandes = new ArrayCollection();
+        $this->sport = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -294,6 +305,42 @@ class Offres
                 $detailsCommande->setOffres(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategorie(): ?CategoriesOffres
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?CategoriesOffres $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sports>
+     */
+    public function getSport(): Collection
+    {
+        return $this->sport;
+    }
+
+    public function addSport(Sports $sport): static
+    {
+        if (!$this->sport->contains($sport)) {
+            $this->sport->add($sport);
+        }
+
+        return $this;
+    }
+
+    public function removeSport(Sports $sport): static
+    {
+        $this->sport->removeElement($sport);
 
         return $this;
     }

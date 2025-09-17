@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-	Liste des disciplines
+	Liste des sports
 {% endblock %}
 {% block body %}
 	<main>
-		<H1 class="text-center">Liste des disciplines</H1>
-        <a href="{{path('app_disciplines_new')}}"><i class="fa-solid fa-circle-plus"></i>Ajouter une discipline</a>
+		<H1 class="text-center">Liste des sports sportives</H1>
+        <a href="{{path('app_sports_new')}}"><i class="fa-solid fa-circle-plus"></i>Ajouter une discipline sportive</a>
 		<table>
 
 			<thead>
@@ -15,10 +15,10 @@
 			</thead>
 			<tbody>
 
-				{% for d in disciplines %}
+				{% for d in sports %}
 					<tr>
 						<td class="text-center">
-							<a href="{{path('app_disciplines_edit',{slug:d.slug})}}">
+							<a href="{{path('app_sports_edit',{slug:d.slug})}}">
 								<i class="fa-solid fa-pen-to-square"></i>
 							</a>
 						</td>
@@ -30,7 +30,7 @@
 						<td>{{d.intitule}}</td>
 					</tr>
 				{% else %}
-					<p>Il n'existe encore aucune discipline enregistrée dans la base.</p>
+					<p>Il n'existe encore aucune discipline sportive enregistrée dans la base.</p>
 				{% endfor %}
 			</tbody>
 		</table>

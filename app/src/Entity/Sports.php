@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\DisciplinesRepository;
+use App\Repository\SportsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-#[ORM\Entity(repositoryClass: DisciplinesRepository::class)]
+#[ORM\Entity(repositoryClass: SportsRepository::class)]
 #[UniqueEntity(fields: ['intitule'], message: 'Il existe déjà une discipline sportive avec ce nom')]
-class Disciplines
+class Sports
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -26,6 +28,17 @@ class Disciplines
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
+
+    /**
+     * @var Collection<int, Offres>
+     */
+    #[ORM\ManyToMany(targetEntity: Offres::class, mappedBy: 'sport')]
+    private Collection $offres;
+
+    public function __construct()
+    {
+        $this->offres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,6 +89,33 @@ class Disciplines
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Offres>
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offres $offre): static
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres->add($offre);
+            $offre->addSport($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offres $offre): static
+    {
+        if ($this->offres->removeElement($offre)) {
+            $offre->removeSport($this);
+        }
 
         return $this;
     }

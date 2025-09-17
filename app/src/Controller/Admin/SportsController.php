@@ -2,9 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Disciplines;
-use App\Form\DisciplinesFormType;
-use App\Repository\DisciplinesRepository;
+use App\Entity\Sports;
+use App\Form\SportsFormType;
+use App\Repository\SportsRepository;
 use BaconQrCode\Renderer\Color\Rgb;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,24 +13,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-final class DisciplinesController extends AbstractController
+final class SportsController extends AbstractController
 {
-    //liste de toutes les disciplines
-    #[Route('/admin/disciplines', name: 'app_disciplines_index')]
-    public function index(DisciplinesRepository $disciplinesRepo): Response
+    //liste de toutes les sports
+    #[Route('/admin/sports', name: 'app_sports_index')]
+    public function index(SportsRepository $sportsRepo): Response
     {
-        $disciplines = $disciplinesRepo->findBy([], ['intitule' => 'ASC']);
-        return $this->render('admin/disciplines/index.html.twig', ['disciplines' => $disciplines]);
+        $sports = $sportsRepo->findBy([], ['intitule' => 'ASC']);
+        return $this->render('admin/sports/index.html.twig', ['sports' => $sports]);
     }
 
-    //Ajout d'une nouvelle discipline
-    #[Route('/admin/disciplines/ajout', name: 'app_disciplines_new')]
+    //Ajout d'une nouvelle discipline sportive
+    #[Route('/admin/sports/ajout', name: 'app_sports_new')]
     public function new(EntityManagerInterface $em, Request $request, SluggerInterface $slugger): Response
     {
-        $discipline = new Disciplines();
+        $discipline = new Sports();
         $title = "Ajouter une discipline";
 
-        $form = $this->createForm(DisciplinesFormType::class, $discipline);
+        $form = $this->createForm(SportsFormType::class, $discipline);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -41,21 +41,21 @@ final class DisciplinesController extends AbstractController
             $em->persist($discipline);
             $em->flush();
 
-            $this->redirectToRoute('app_disciplines_index');
+            $this->redirectToRoute('app_sports_index');
         }
 
         $this->addFlash('succcess', 'La discipline a bien été enregistrée dans la base.');
-        return $this->render('admin/disciplines/discipline-form.html.twig', ['form' => $form->createView(), 'title' => $title]);
+        return $this->render('admin/sports/sports-form.html.twig', ['form' => $form->createView(), 'title' => $title]);
     }
 
     //Modifier une discipline
-    #[Route('/admin/disciplines/edit/{slug}', name: 'app_disciplines_edit')]
-    public function edit(DisciplinesRepository $disciplinesRepo, EntityManagerInterface $em, Request $request, string $slug, SluggerInterface $slugger): Response
+    #[Route('/admin/sports/edit/{slug}', name: 'app_sports_edit')]
+    public function edit(SportsRepository $sportsRepo, EntityManagerInterface $em, Request $request, string $slug, SluggerInterface $slugger): Response
     {
-        $discipline = $disciplinesRepo->findOneBy(['slug' => $slug]);
+        $discipline = $sportsRepo->findOneBy(['slug' => $slug]);
         $title = "Modifier une discipline";
 
-        $form = $this->createForm(DisciplinesFormType::class, $discipline);
+        $form = $this->createForm(SportsFormType::class, $discipline);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -66,10 +66,10 @@ final class DisciplinesController extends AbstractController
             $em->persist($discipline);
             $em->flush();
 
-            $this->redirectToRoute('app_disciplines_index');
+            $this->redirectToRoute('app_sports_index');
         }
 
         $this->addFlash('succcess', 'Les modification concernant la discipline ont bien été enregistrées dans la base.');
-        return $this->render('admin/disciplines/discipline-form.html.twig', ['discipline' => $discipline, 'form' => $form->createView(), 'title' => $title]);
+        return $this->render('admin/sports/sports-form.html.twig', ['discipline' => $discipline, 'form' => $form->createView(), 'title' => $title]);
     }
 }

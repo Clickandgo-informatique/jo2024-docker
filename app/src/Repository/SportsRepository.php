@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Disciplines;
+use App\Entity\Sports;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Disciplines>
+ * @extends ServiceEntityRepository<Sports>
  */
-class DisciplinesRepository extends ServiceEntityRepository
+class SportsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Disciplines::class);
+        parent::__construct($registry, Sports::class);
     }
 
     //    /**
-    //     * @return Disciplines[] Returns an array of Disciplines objects
+    //     * @return Sports[] Returns an array of Sports objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class DisciplinesRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Disciplines
+    //    public function findOneBySomeField($value): ?Sports
     //    {
     //        return $this->createQueryBuilder('d')
     //            ->andWhere('d.exampleField = :val')

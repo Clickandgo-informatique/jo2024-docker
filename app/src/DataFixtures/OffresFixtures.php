@@ -3,13 +3,15 @@
 namespace App\DataFixtures;
 
 use App\Entity\CategoriesOffres;
+use App\Entity\Sports;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class OffresFixtures extends Fixture
+class OffresFixtures extends Fixture implements DependentFixtureInterface
 {
     private Generator $faker;
     private $slugger;
@@ -20,6 +22,10 @@ class OffresFixtures extends Fixture
     }
     public function load(ObjectManager $manager): void
     {
+        $faker = Factory::create('fr_FR');
+
+        $sports = $manager->getRepository(Sports::class)->findAll();
+        $categoriesOffres = $manager->getRepository(CategoriesOffres::class)->findAll();
 
         for ($i = 0; $i < 50; $i++) {
             $offre = new \App\Entity\Offres();
@@ -34,17 +40,26 @@ class OffresFixtures extends Fixture
                 ->setNbrAdultes($this->faker->numberBetween(1, 2))
                 ->setNbrEnfants($this->faker->numberBetween(1, 6))
                 ->setIsLocked($this->faker->boolean($i - 2))
-                //On récupère une référence à la catégorie d'offre en se basant sur le tableau
-                //présent dans CategoriesOffresFixtures
-                ->setCategorie($this->getReference('categorie_offre_' . random_int(0, 3), CategoriesOffres::class))
-                ->setIsPublished(true)
-                ->setCreatedAt(new \DateTimeImmutable());
+
+                //On récupère une référence à la catégorie d'offre
+                ->setCategorie($this->faker->randomElement($categoriesOffres))
+                ->setIsPublished(true);
+
+            // Associer entre 1 et 3 sports au hasard
+            $randomSports = $faker->randomElements($sports, $faker->numberBetween(1, 3));
+            foreach ($randomSports as $sport) {
+                $offre->addSport($sport);
+            }
+            $offre->setCreatedAt(new \DateTimeImmutable());
             $manager->persist($offre);
         }
         $manager->flush();
     }
     public function getDependencies(): array
     {
-        return [CategoriesOffresFixtures::class];
+        return [
+            SportsFixtures::class,
+            CategoriesOffresFixtures::class,
+        ];
     }
 }

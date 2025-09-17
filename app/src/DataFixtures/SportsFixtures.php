@@ -38,7 +38,8 @@ class SportsFixtures extends Fixture
             $sport = new Sports();
             $sport->setIntitule($item['intitule']);
             //On crée le slug correspondant
-            $sport->setSlug($this->slugger->slug(strtolower($sport->getIntitule())));
+            $sport->setSlug($this->slugger->slug(strtolower($sport->getIntitule())));            
+
             $manager->persist($sport);
         }
         $manager->flush();

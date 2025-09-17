@@ -6,6 +6,7 @@ use App\Entity\Offres;
 use App\Form\OffresFormType;
 use App\Repository\OffresRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,15 +19,15 @@ final class OffresController extends AbstractController
 {
     //Liste des offres dans le backend
     #[Route('admin/offres', name: 'app_offres_index')]
-    public function index(OffresRepository $offresRepo, Request $request): Response
+    public function index(OffresRepository $offresRepo, Request $request, PaginatorInterface $paginator)
     {
-        $offres = $offresRepo->findBy([], ['intitule' => 'ASC']);
+        $data = $offresRepo->findBy([], ['intitule' => 'ASC']);
 
-        // $offres = $paginator->paginate(
-        //     $data,
-        //     $request->query->getInt('page', 1),
-        //     12
-        // );
+        $offres = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            12
+        );
         return $this->render('admin/offres/index.html.twig', [
             'offres' => $offres,
         ]);
@@ -34,9 +35,15 @@ final class OffresController extends AbstractController
 
     //Catalogue des offres de tickets pour les clients 
     #[Route('/catalogue-offres-clients', 'app_offres_catalogue')]
-    public function catalogue(OffresRepository $offresRepo): Response
+    public function catalogue(OffresRepository $offresRepo, Request $request, PaginatorInterface $paginator): Response
     {
-        $offres = $offresRepo->findBy(['isPublished' => true], ['date_debut' => 'ASC']);
+        $data = $offresRepo->findBy(['isPublished' => true], ['date_debut' => 'ASC']);
+
+        $offres = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            12
+        );
 
         return $this->render('offres/catalogue_offres.html.twig', compact('offres'));
     }

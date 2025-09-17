@@ -10,30 +10,39 @@
 					<div class="card card-offre">
 						<div class="card-header">
 						<div class="card-title">
-						<span class="title-text">{{offre.sport.intitule}}</span>
-						</div>
+					<div class="catégorie-offre">
+					Offre : {{offre.categorie.nom}}
+					</div>
+					</div>
+												<div class="intitule">
+								{{offre.intitule}}</div>				
 						<img src="#" alt="#" class="card-image">
-							<span class="dates-offres">Du
-								{{offre.dateDebut|date("d-m-Y H:i")}}
-								au
-								{{offre.dateFin|date("d-m-Y H:i")}}
-							</span>
-							<span class="intitule">
-								{{offre.intitule}}</span>
 						</div>
-						<div class="card-content">{{offre.description}}</div>
+						<div class="card-content">						
+							<div class="dates-offres">Du
+								{{offre.dateDebut|date("d-m-Y")}}
+								au
+								{{offre.dateFin|date("d-m-Y")}}
+							</div>
+						<ul class="liste-sports">
+						{% for sport in offre.sport %}
+						<li class="sport-item">{{sport.intitule}}</li>							
+						{% endfor %}						
+						</ul>					
+										
+						</div>
 						<div class="card-footer">
 
 								<div class="row">
-									<span>Adultes :
-										{{offre.nbrAdultes}}</span>
-									<span>Enfants :
-										{{offre.nbrEnfants}}</span>
+									<div>Adultes :
+										{{offre.nbrAdultes}}</div>
+									<div>Enfants :
+										{{offre.nbrEnfants}}</div>
 								</div>
 						
-							<span class="prix text-right">{{offre.prix}}
-								€</span>
-							<a href="{{path('app_cart_add',{id:offre.id})}}" class="btn btn-primary">Ajouter au panier</a>
+							<div class="prix text-right"><strong>{{offre.prix}}
+								€</strong></div>
+							<a href="{{path('app_cart_add',{id:offre.id})}}" class="btn btn-primary btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i>Ajouter au panier</a>
 
 						</div>
 					</div>
@@ -43,7 +52,7 @@
 			Il n'existe aucune offre enregistrée dans la base de données
 		{% endif %}
 		<div class="pagination">
-		{# {{ knp_pagination_render(offres) }} #}
+		{{ knp_pagination_render(offres) }} 
 		</div>
 	</main>
 {% endblock %}

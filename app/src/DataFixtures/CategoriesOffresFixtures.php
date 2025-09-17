@@ -17,19 +17,13 @@ class CategoriesOffresFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $tblCategories = ["Duo", "Familiale", "Solo", "Groupe"];
-
-        //On boucle sur le tableau et on crée une référence
-        $i = 0;
+ 
         foreach ($tblCategories as $cat) {
             $categorie = new CategoriesOffres();
             $categorie->setNom($cat);
-            $categorie->setSlug($this->slugger->slug(strtolower($categorie->getNom())));
-
-            $this->setReference('categorie_offre_' . $i, $categorie);
-            $manager->persist($categorie);
-
-            $i++;
-          
+            $categorie->setSlug($this->slugger->slug(strtolower($categorie->getNom())));           
+            
+            $manager->persist($categorie);        
         }
 
         $manager->flush();

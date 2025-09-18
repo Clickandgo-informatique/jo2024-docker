@@ -4,11 +4,12 @@ namespace App\Controller\Admin;
 
 use App\Entity\Offres;
 use App\Form\OffresFormType;
+use App\Repository\CategoriesOffresRepository;
 use App\Repository\OffresRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -21,6 +22,7 @@ final class OffresController extends AbstractController
     #[Route('admin/offres', name: 'app_offres_index')]
     public function index(OffresRepository $offresRepo, Request $request, PaginatorInterface $paginator)
     {
+
         $data = $offresRepo->findBy([], ['intitule' => 'ASC']);
 
         $offres = $paginator->paginate(
@@ -35,8 +37,10 @@ final class OffresController extends AbstractController
 
     //Catalogue des offres de tickets pour les clients 
     #[Route('/catalogue-offres-clients', 'app_offres_catalogue')]
-    public function catalogue(OffresRepository $offresRepo, Request $request, PaginatorInterface $paginator): Response
+    public function catalogue(OffresRepository $offresRepo, Request $request, PaginatorInterface $paginator, CategoriesOffresRepository $categoriesOffresRepo): Response
     {
+        $categoriesOffres = $categoriesOffresRepo->findBy([], ['nom' => 'ASC']);
+
         $data = $offresRepo->findBy(['isPublished' => true], ['date_debut' => 'ASC']);
 
         $offres = $paginator->paginate(
@@ -45,7 +49,23 @@ final class OffresController extends AbstractController
             12
         );
 
-        return $this->render('offres/catalogue_offres.html.twig', compact('offres'));
+        // 👉 Si requête AJAX → JSON
+        if ($request->isXmlHttpRequest()) {
+            $html = $this->renderView('_partials/_catalogue-offres-clients.html.twig', [
+                'offres' => $offres,
+            ]);
+
+            return new JsonResponse([
+                'status' => 'success',
+                'html'   => $html,
+            ]);
+        }
+
+        // 👉 Sinon → page complète (avec catégories, SEO…)
+        return $this->render('offres/catalogue-offres-clients.html.twig', [
+            'offres' => $offres,
+            'categoriesOffres' => $categoriesOffres,
+        ]);
     }
 
     //Créer une offre
@@ -110,6 +130,46 @@ final class OffresController extends AbstractController
             'offre' => $offre,
             'title' => $title,
             'form' => $form->createView(),
+        ]);
+    }
+
+    // Filtrer les offres par catégorie dans le front-end (catalogue client)
+    #[Route('/offres-par-categorie/{slug}', name: 'app_offres-par-categories')]
+    public function filter(
+        Request $request,
+        OffresRepository $offresRepo,
+        string $slug,
+        PaginatorInterface $paginator
+    ): JsonResponse|Response {
+        
+        $data = $offresRepo->getOffresParCategories($slug);
+
+        $offres = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            12
+        );
+
+        // 👉 Si la requête est AJAX → on renvoie JSON avec HTML (cartes + pagination)
+        if ($request->isXmlHttpRequest()) {
+            $html = $this->renderView('_partials/_catalogue-offres-clients.html.twig', [
+                'offres' => $offres,
+            ]);
+
+            $pagination = $this->renderView('_partials/_pagination-offres.html.twig', [
+                'offres' => $offres,
+            ]);
+
+            return new JsonResponse([
+                'status' => 'success',
+                'html'   => $html . $pagination, // 👉 un seul bloc complet
+            ]);
+        }
+
+        // 👉 Sinon (requête classique), on renvoie la page entière avec le layout
+        return $this->render('offres/catalogue-offres-clients.html.twig', [
+            'offres'    => $offres,
+            'categorie' => $slug,
         ]);
     }
 }

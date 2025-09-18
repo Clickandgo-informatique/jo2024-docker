@@ -16,6 +16,24 @@ class OffresRepository extends ServiceEntityRepository
         parent::__construct($registry, Offres::class);
     }
 
+    public function getOffresParCategories(string $categorie): array
+    {
+        if ($categorie = 'toutes') {
+            return $this->createQueryBuilder('o')
+                ->orderBy('o.intitule', 'ASC')
+                ->getQuery()
+                ->getResult();
+        } else {
+            return $this->createQueryBuilder('o')
+                ->join('o.categorie', 'c')
+                ->andWhere('c.nom = :categorie')
+                ->setParameter('categorie', $categorie)
+                ->orderBy('o.intitule', 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
+    }
+
     //    /**
     //     * @return Offres[] Returns an array of Offres objects
     //     */

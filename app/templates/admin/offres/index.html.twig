@@ -5,7 +5,7 @@
 
 {% block body %}
 	<main>
-		<div class="container my-5">
+		
 			<h1 class="text-center">
 				<i class="fa-solid fa-clipboard-list"></i>Gestion des offres</h1>
 			<a href="{{path('app_offres_new')}}" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i>Ajouter une nouvelle offre</a>
@@ -58,9 +58,9 @@
 
 			{# Affiche la  navigation #}
 			<div
-				class="navigation">{{ knp_offres_render(offres) }}
+				class="navigation">{{ knp_pagination_render(offres) }}
 			</div>
-		</div>
+		
 	</main>
 {% endblock %}
 {% block stylesheets %}

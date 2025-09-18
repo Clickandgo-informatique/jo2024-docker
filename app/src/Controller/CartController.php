@@ -18,7 +18,9 @@ class CartController extends AbstractController
     #[Route('/', 'index')]
     public function index(SessionInterface $session, OffresRepository $offresRepo, Request $request): Response
     {
+        //On vérifie si la reqûete est Ajax ou pas
         $template = $request->isXmlHttpRequest() ? '_partials/_cart-items.html.twig' : 'cart/index.html.twig';
+       
         $panier = $session->get('panier', []);
 
         //Initialisation des variables
@@ -37,7 +39,7 @@ class CartController extends AbstractController
             $total += $offre->getPrix() * $quantite;
             $totalItems += $quantite;
         }
-     
+
         return $this->render($template, compact('data', 'total', 'totalItems'));
     }
 
@@ -63,7 +65,7 @@ class CartController extends AbstractController
 
         $session->set('panier', $panier);
 
-        $this->addFlash('success','Votre offre a bien été ajoutée au panier.');
+        $this->addFlash('success', 'Votre offre a bien été ajoutée au panier.');
 
         return $this->redirectToRoute('app_cart_index');
     }
@@ -90,7 +92,7 @@ class CartController extends AbstractController
         }
         $session->set('panier', $panier);
 
-        $this->addFlash('success','Votre offre a bien été retirée du panier.');
+        $this->addFlash('success', 'Votre offre a bien été retirée du panier.');
 
         //Redirection vers la page du panier
         return $this->redirectToRoute('app_cart_index');

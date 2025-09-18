@@ -10,4 +10,12 @@ RUN apt-get update && apt-get install -y \
 # Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+#Intallation de Xdebug pour les tests
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+#Paramètrages de Git
+RUN git config --global user.email "mail@clickandgo-informatique.com"
+RUN git config --global user.name "Clickandgo-informatique"
+
 WORKDIR /var/www/symfony

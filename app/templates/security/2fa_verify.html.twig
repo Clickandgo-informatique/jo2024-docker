@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+	{% for message in app.flashes('error') %}
+		<div class="error">{{ message }}</div>
+	{% endfor %}
+
+	<form method="post">
+		<caption>
+			<h2 class="text-center">Vérification 2FA</h2>
+		</caption>
+		<label for="code">Code Google Authenticator</label>
+		<input
+		type="text" name="code" id="code" maxlength="6" required>
+
+		{# Affichage du "se souvenir de moi sur cet appareil" #}
+		<div>
+			<input type="checkbox" id="remember_device" name="remember_device" placeholder="Saisissez le code à 6 chiffres">
+			<label for="remember_device">Se souvenir de moi sur cet appareil</label>
+		</div>
+
+		<button type="submit" class="btn btn-primary">
+			<i class="fa-solid fa-check"></i>Vérifier</button>
+	</form>
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/form.css')}}">
+{% endblock %}

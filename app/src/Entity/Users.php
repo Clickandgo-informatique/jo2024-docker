@@ -52,8 +52,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::GUID, nullable: true)]
     private ?string $uuid = null;
 
-    #[ORM\Column(options:['default'=>'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $google2FASecret = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $is2FAEnabled = false;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+private ?string $trustedToken = null;
 
     /**
      * @var Collection<int, Commandes>
@@ -225,4 +234,44 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function getGoogle2FASecret(): ?string
+    {
+        return $this->google2FASecret;
+    }
+
+    public function setGoogle2FASecret(?string $secret): self
+    {
+        $this->google2FASecret = $secret;
+        return $this;
+    }
+    public function is2FAEnabled(): bool
+    {
+        return $this->is2FAEnabled;
+    }
+
+    public function setIs2FAEnabled(bool $enabled): self
+    {
+        $this->is2FAEnabled = $enabled;
+        return $this;
+    }
+
+/**
+ * Get the value of trustedToken
+ */ 
+public function getTrustedToken()
+{
+return $this->trustedToken;
+}
+
+/**
+ * Set the value of trustedToken
+ *
+ * @return  self
+ */ 
+public function setTrustedToken($trustedToken)
+{
+$this->trustedToken = $trustedToken;
+
+return $this;
+}
 }

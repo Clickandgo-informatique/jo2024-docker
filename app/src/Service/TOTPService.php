@@ -2,70 +2,49 @@
 
 namespace App\Service;
 
+use App\Entity\Users;
 use BaconQrCode\Renderer\GDLibRenderer;
 use BaconQrCode\Writer;
 use PragmaRX\Google2FA\Google2FA;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
-
 
 class TOTPService
 {
-    protected $requestStack;
-    private $session;
-    private $google2FA;
+    private Google2FA $google2FA;
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct()
     {
-        //On initialise la session
-        $this->requestStack = $requestStack;
-        $this->session = $this->requestStack->getSession();
-        // On initialise Google2FA
         $this->google2FA = new Google2FA();
     }
 
-    public function startTOTP()
+    public function generateSecret(): string
     {
-        // On génère une clé secrète
-        $secretKey = $this->google2FA->generateSecretKey();
-       
-        //On stocke la clé secrète dans un tableau User
-        $user = ['google2FA_secret' => $secretKey, 'email' => 'user@example.com'];
+        return $this->google2FA->generateSecretKey();
+    }
 
-        // On stocke la variable $user dans la session
-        $this->session->set('user', $user);
-
-        //On nomme notre application
+    public function getQRCode(Users $user, int $size = 200): string
+    {
         $appName = 'reservations-jo-2024';
 
-        // On génère l'URL du QR code
         $qrCodeUrl = $this->google2FA->getQRCodeUrl(
             $appName,
-            $user['email'],
-            $user['google2FA_secret']
+            $user->getEmail(),
+            $user->getGoogle2FASecret()
         );
 
-        //On prépare le QRCode pour l'affichage
-        $imageSize = 250;
-        $writer = new Writer(new GDLibRenderer($imageSize));
-
-        //On encode l'url en base64 pour l'afficher dans la vue
-        $encodedQrCodeData = base64_encode($writer->writeString($qrCodeUrl));
-
-        //On stocke le QRCode dans la session
-        // $currentOtp = $this->google2FA->getCurrentOtp($user['google2FA_secret']);      
-        // $this->session->set('currentOtp', $currentOtp);
-        $this->session->set('qrCode', $encodedQrCodeData);
+        $writer = new Writer(new GDLibRenderer($size));
+        return 'data:image/png;base64,' . base64_encode($writer->writeString($qrCodeUrl));
     }
-    public function checkEnteredCode(string $code): JsonResponse
+
+    public function verifyCode(Users $user, string $code): bool
     {
-        $google2FASecret = $this->session->get('user')['google2FA_secret'];
-   
-        $isValid = $this->google2FA->verifyKey($google2FASecret, $code);
-
-        return new JsonResponse([
-            'code' => $code,
-            'result' => $isValid
-        ]);
+        return $this->google2FA->verifyKey($user->getGoogle2FASecret(), $code, 4);
     }
+    public function checkCode(Users $user, string $code): bool
+{
+    if (!$user->getGoogle2FASecret()) {
+        return false;
+    }
+
+    return $this->google2FA->verifyKey($user->getGoogle2FASecret(), $code);
+}
 }

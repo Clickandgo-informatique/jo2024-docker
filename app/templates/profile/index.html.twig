@@ -12,5 +12,11 @@
 		{{ app.user.email }}</p>
 	<p>Rôle :
 		{{ app.user.roles|join(', ') }}</p>
+
+		{% if app.user.is2FAEnabled %}
+    <p>Le 2FA est activé sur votre compte.</p>
+    <a href="{{ path('app_2fa_disable') }}" class="btn btn-danger">Désactiver le 2FA</a>
+{% endif %}
+
 </main>
 {% endblock %}

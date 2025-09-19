@@ -3,26 +3,31 @@
 	<head>
 		<meta charset="UTF-8">
 
-		<title>{% block title %}Welcome!{% endblock %}</title>
+		<title>
+			{% block title %}JO 2024
+			{% endblock %}
+		</title>
 
-    {# Favicon SVG pour navigateurs modernes #}
-    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+		{# Favicon SVG pour navigateurs modernes #}
+		<link
+		rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 
-    {# Fallback PNGs pour compatibilité #}
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}">
-
-    {# Optionnel : iOS #}
-    <link rel="apple-touch-icon" href="{{ asset('favicon-32.png') }}">
-
-		{% block stylesheets %}{% endblock %}
+		{# Fallback PNGs pour compatibilité #}
+		<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
+		<link
+		rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}">
+		{# CSS pour flashbags #}
+		<link
+		rel="stylesheet" href="{{ asset('flashbags.css') }}">
+		{# Optionnel : iOS #}
+		<link rel="apple-touch-icon" href="{{ asset('favicon-32.png') }}"> {% block stylesheets %}{% endblock %}
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 		<link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 
 
 		{% block javascripts %}
-            {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
+		{# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
 		{# {% block importmap %}{{ importmap('app') }}{% endblock %} #}{% endblock %}
 	</head>
 	<body>
@@ -30,21 +35,22 @@
 		{{ include('_partials/_subnav.html.twig') }}
 
 		{% if is_granted('ROLE_ADMIN') %}
-		{{ include('_partials/_sidenav.html.twig') }}			
+			{# {{ include('_partials/_sidenav.html.twig') }}			 #}
 		{% endif %}
 
-		{# Flashbags #}
-		{% for label, messages in app.flashes %}
-			<div class="alert alert-{{ label }}">
-				{% for message in messages %}
-					{{ message|raw }}
-				{% endfor %}
-				<span class="btn-close">&times;</span>
-			</div>
-		{% endfor %}
-		{% block body %}
-		
-		{% endblock %}
+		{# Gestion des Flashbags #}
+		<script src="{{ asset('flashbags.js') }}"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+{% for label, messages in app.flashes %}
+{% for message in messages %}
+showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfor %}
+{% endfor %}
+});
+		</script>
+		<main>
+			{% block body %}{% endblock %}
+		</main>
 	</body>
 </html>
 <script type="module" src="{{asset('assets/js/main.js')}}"></script>

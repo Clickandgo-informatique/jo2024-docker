@@ -1,33 +1,78 @@
-{% extends "base.html.twig" %}
-{% block title %}
-	Catalogue offres clients
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue des offres
 {% endblock %}
+
 {% block body %}
-	<main>
-	{# Filtre sur les catégories d'offres #}
-	{% include '_partials/_categories-offres.html.twig' with { categoriesOffres : categoriesOffres } %}		
-	
-	   {# Loader affiché pendant l'AJAX #}
-    <div id="loader" style="display:none; text-align:center; margin:20px 0;">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Chargement...</span>
-        </div>
-    </div>
-{# Fin loader #}
-	
-	{# Contenu rafraichit en Ajax #}
-			<div class="cards-container ajax-reloaded-data">
-				{% include '_partials/_catalogue-offres-clients.html.twig' with { offres : offres } %}	
-				{% include '_partials/_pagination-offres.html.twig' with { offres : offres } %}	
+	<div
+		class="catalogue-layout">
+		{# Colonne filtres (desktop) #}
+		<aside class="filters-column">
+			<div class="filter-block">
+				<h5 class="filter-title">Catégories</h5>
+				<ul class="categories-list">
+					{% for cat in categoriesOffres %}
+						<li>
+							<a href="{{ path('app_offres-par-categories', { slug: cat.slug }) }}" class="filter-link {% if categorie is defined and categorie == cat.slug %}active{% endif %}">
+								{{ cat.nom }}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="filter-block">
+				{% include '_partials/_sports-filter.html.twig' with {
+                sports: sports,
+                selectedSlugs: selectedSlugs
+            } only %}
+			</div>
+		</aside>
+
+		{# Colonne résultats (cards) #}
+		<div class="results-column">
+			<div class="results-header">
+				<span id="resultsCount">
+					{{ offres.getTotalItemCount }}
+					offre
+					{% if offres.getTotalItemCount > 1 %}s
+					{% endif %}
+				</span>
+			</div>
+
+			<div id="results" class="ajax-reloaded-data">
+				{% include '_partials/_catalogue-offres-ajax-wrapper.html.twig' with { 'offres': offres } only %}
+			</div>
 		</div>
-	{# Fin de contenu Ajax #}
+	</div>
 
-	</main>
+	{# Drawer mobile #}
+	<button id="filtersFAB" class="btn-filter-mobile" title="Filtrer">
+		<i class="fas fa-filter"></i>
+	</button>
+
+	<div id="filtersDrawer" class="filters-drawer" aria-hidden="true">
+		<div class="drawer-header">
+			<h4>Filtres</h4>
+			<button id="closeFilters" class="drawer-close">&times;</button>
+		</div>
+		<div class="drawer-content">
+			{% include '_partials/_categories-offres.html.twig' with { 'categoriesOffres': categoriesOffres } only %}
+			{% include '_partials/_sports-filter.html.twig' with {
+            sports: sports,
+            selectedSlugs: selectedSlugs
+        } only %}
+		</div>
+	</div>
+	<div id="drawerOverlay" class="drawer-overlay" style="display:none;"></div>
+{% endblock %}
+
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('assets/css/cards.css')}}">
-	<link rel="stylesheet" href="{{asset('assets/css/filters.css')}}">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('assets/css/catalogue-offres.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/filters.js') }}"></script>
 {% endblock %}
 
-		<script type="module" src="{{asset('assets/js/filters.js')}}"></script>
-	
-{% endblock %}

@@ -25,10 +25,10 @@ class Offres
     private ?int $prix = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date_debut = null;
+    private ?\DateTime $dateDebut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date_fin = null;
+    private ?\DateTime $dateFin = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -37,16 +37,16 @@ class Offres
     private ?string $code = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updated_at = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
-    private ?int $nbr_adultes = null;
+    private ?int $nbrAdultes = null;
 
     #[ORM\Column]
-    private ?int $nbr_enfants = null;
+    private ?int $nbrEnfants = null;
 
     #[ORM\Column]
     private ?bool $isLocked = false;
@@ -77,15 +77,16 @@ class Offres
      * @var Collection<int, Sports>
      */
     #[ORM\ManyToMany(targetEntity: Sports::class, inversedBy: 'offres')]
-    private Collection $sport;
+    #[ORM\JoinTable(name: 'offres_sports')]
+    private Collection $sports;
 
     public function __construct()
     {
-        $this->created_at = new \DateTimeImmutable();
-        $this->updated_at = new \DateTimeImmutable();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
         $this->images = new ArrayCollection();
         $this->detailsCommandes = new ArrayCollection();
-        $this->sport = new ArrayCollection();
+        $this->sports = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,7 +102,6 @@ class Offres
     public function setIntitule(string $intitule): static
     {
         $this->intitule = $intitule;
-
         return $this;
     }
 
@@ -113,31 +113,28 @@ class Offres
     public function setPrix(float $prix): static
     {
         $this->prix = $prix;
-
         return $this;
     }
 
     public function getDateDebut(): ?\DateTime
     {
-        return $this->date_debut;
+        return $this->dateDebut;
     }
 
-    public function setDateDebut(\DateTime $date_debut): static
+    public function setDateDebut(\DateTime $dateDebut): static
     {
-        $this->date_debut = $date_debut;
-
+        $this->dateDebut = $dateDebut;
         return $this;
     }
 
     public function getDateFin(): ?\DateTime
     {
-        return $this->date_fin;
+        return $this->dateFin;
     }
 
-    public function setDateFin(\DateTime $date_fin): static
+    public function setDateFin(\DateTime $dateFin): static
     {
-        $this->date_fin = $date_fin;
-
+        $this->dateFin = $dateFin;
         return $this;
     }
 
@@ -149,7 +146,6 @@ class Offres
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -161,55 +157,50 @@ class Offres
     public function setCode(string $code): static
     {
         $this->code = $code;
-
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->created_at = $created_at;
-
+        $this->createdAt = $createdAt;
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updated_at): static
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
-        $this->updated_at = $updated_at;
-
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 
     public function getNbrAdultes(): ?int
     {
-        return $this->nbr_adultes;
+        return $this->nbrAdultes;
     }
 
-    public function setNbrAdultes(int $nbr_adultes): static
+    public function setNbrAdultes(int $nbrAdultes): static
     {
-        $this->nbr_adultes = $nbr_adultes;
-
+        $this->nbrAdultes = $nbrAdultes;
         return $this;
     }
 
     public function getNbrEnfants(): ?int
     {
-        return $this->nbr_enfants;
+        return $this->nbrEnfants;
     }
 
-    public function setNbrEnfants(int $nbr_enfants): static
+    public function setNbrEnfants(int $nbrEnfants): static
     {
-        $this->nbr_enfants = $nbr_enfants;
-
+        $this->nbrEnfants = $nbrEnfants;
         return $this;
     }
 
@@ -221,7 +212,6 @@ class Offres
     public function setIsLocked(bool $isLocked): static
     {
         $this->isLocked = $isLocked;
-
         return $this;
     }
 
@@ -233,7 +223,6 @@ class Offres
     public function setIsPublished(bool $isPublished): static
     {
         $this->isPublished = $isPublished;
-
         return $this;
     }
 
@@ -245,7 +234,6 @@ class Offres
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
-
         return $this;
     }
 
@@ -270,7 +258,6 @@ class Offres
     public function removeImage(Images $image): static
     {
         if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
             if ($image->getOffres() === $this) {
                 $image->setOffres(null);
             }
@@ -300,7 +287,6 @@ class Offres
     public function removeDetailsCommande(DetailsCommandes $detailsCommande): static
     {
         if ($this->detailsCommandes->removeElement($detailsCommande)) {
-            // set the owning side to null (unless already changed)
             if ($detailsCommande->getOffres() === $this) {
                 $detailsCommande->setOffres(null);
             }
@@ -317,22 +303,22 @@ class Offres
     public function setCategorie(?CategoriesOffres $categorie): static
     {
         $this->categorie = $categorie;
-
         return $this;
     }
 
     /**
      * @return Collection<int, Sports>
      */
-    public function getSport(): Collection
+    public function getSports(): Collection
     {
-        return $this->sport;
+        return $this->sports;
     }
 
     public function addSport(Sports $sport): static
     {
-        if (!$this->sport->contains($sport)) {
-            $this->sport->add($sport);
+        if (!$this->sports->contains($sport)) {
+            $this->sports->add($sport);
+            $sport->addOffre($this); // synchro côté Sports
         }
 
         return $this;
@@ -340,7 +326,9 @@ class Offres
 
     public function removeSport(Sports $sport): static
     {
-        $this->sport->removeElement($sport);
+        if ($this->sports->removeElement($sport)) {
+            $sport->removeOffre($this); // synchro côté Sports
+        }
 
         return $this;
     }

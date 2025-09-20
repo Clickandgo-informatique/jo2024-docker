@@ -50,7 +50,7 @@ class TwoFactorController extends AbstractController
 
 
                 // Redirection finale (dashboard)
-                return $this->redirectToRoute('app_dashboard');
+                return $this->redirectToRoute('app_main');
             }
 
             $this->addFlash('error', 'Code incorrect');
@@ -60,7 +60,7 @@ class TwoFactorController extends AbstractController
     }
     #[Route('/2fa/setup', name: 'app_2fa_setup')]
     
-    public function setup(Request $request, TOTPService $totpService): Response
+    public function setup(TOTPService $totpService): Response
     {
         /** @var \App\Entity\Users $user */
         $user = $this->getUser();

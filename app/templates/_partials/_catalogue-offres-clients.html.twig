@@ -1,48 +1,40 @@
-{% if offres %}
+{# templates/_partials/_catalogue-offres-clients.html.twig #}
 
 {% for offre in offres %}
-					<div class="card card-offre">
-						<div class="card-header">
-						<div class="card-title">
-					
-					 <span class="text-center">Offre : {{offre.categorie.nom}}</span>
-					</div>
-					
-					<div class="intitule">
-								{{offre.intitule}}</div>				
-						<img src="#" alt="#" class="card-image">
-						</div>
-						<div class="card-content">						
-							<div class="dates-offres">Du
-								{{offre.dateDebut|date("d-m-Y")}}
-								au
-								{{offre.dateFin|date("d-m-Y")}}
-							</div>
-						<ul class="liste-sports">
-						{% for sport in offre.sport %}
-						<li class="sport-item">{{sport.intitule}}</li>							
-						{% endfor %}						
-						</ul>					
-										
-						</div>
-						<div class="card-footer">
+	<article class="offer-card">
+		{% if offre.categorie is defined %}
+			<span class="offer-category">{{ offre.categorie.nom }}</span>
+		{% endif %}
+		<h3 class="offer-title">{{ offre.intitule }}</h3>
+		<div class="offer-image">
+			{% if offre.imagePath is defined and offre.imagePath %}
+				<img src="{{ asset(offre.imagePath) }}" alt="{{ offre.intitule }}">
+			{% else %}
+				{# ✅ fallback si pas d’image, version locale #}
+				<img src="{{ asset('assets/img/no-image.png') }}" alt="Pas d’image disponible">
 
-								<div class="row">
-									<div>Adultes :
-										{{offre.nbrAdultes}}</div>
-									<div>Enfants :
-										{{offre.nbrEnfants}}</div>
-								</div>
-						
-							<div class="prix text-right"><strong>{{offre.prix}}
-								€</strong></div>
-							<a href="{{path('app_cart_add',{id:offre.id})}}" class="btn btn-primary btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i>Ajouter au panier</a>
+			{% endif %}
+		</div>
 
-						</div>
-					</div>
-				{% endfor %}
+		<div class="offer-content">
+			<div class="offer-sports">
+				<ul class="sport-list">		
+					{% for sport in offre.sports %}
+						<li class="sport-items">{{sport.intitule}}</li>
+					{% endfor %}
+				</ul>
 			</div>
 
-		{% else %}
-			Il n'existe aucune offre enregistrée dans la base de données
-		{% endif %}
+			<div class="offer-meta">
+				{% if offre.prix is defined %}
+					<span class="offer-price">{{ offre.prix }}
+						€</span>
+				{% endif %}
+				{% if offre.dateDebut is defined %}
+					<span class="offer-date">À partir du
+						{{ offre.dateDebut|date('d/m/Y') }}</span>
+				{% endif %}
+			</div>
+		</div>
+	</article>
+{% endfor %}

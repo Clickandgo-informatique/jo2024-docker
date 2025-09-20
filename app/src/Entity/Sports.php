@@ -6,7 +6,8 @@ use App\Repository\SportsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SportsRepository::class)]
 #[UniqueEntity(fields: ['intitule'], message: 'Il existe déjà une discipline sportive avec ce nom')]
@@ -20,7 +21,7 @@ class Sports
     #[ORM\Column(length: 150)]
     #[Assert\NotBlank(message: "Le nom de la discipline sportive est obligatoire")]
     #[Assert\Length(
-        min:3,
+        min: 3,
         max: 150,
         maxMessage: "Le nom de la discipline sportive ne peut pas dépasser {{ limit }} caractères",
         minMessage: "Le nom de la discipline sportive doit contenir au moins {{ limit }} caractères"
@@ -32,11 +33,10 @@ class Sports
         max: 100,
         maxMessage: "Le nom du fichier icône ne peut pas dépasser {{ limit }} caractères"
     )]
-    
     private ?string $icone = null;
 
     #[ORM\Column(length: 10, nullable: true)]
-        #[Assert\Regex(
+    #[Assert\Regex(
         pattern: '/^#[0-9A-Fa-f]{6}$/',
         message: "La couleur doit être un code hexadécimal valide (ex: #FFFFFF)",
         match: true
@@ -44,9 +44,9 @@ class Sports
     private ?string $background_color = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-        #[Assert\Length(
+    #[Assert\Length(
         max: 255,
-        min:3,
+        min: 3,
         maxMessage: "Le slug ne peut pas dépasser {{ limit }} caractères",
         minMessage: "Le slug doit contenir au moins {{ limit }} caractères"
     )]
@@ -55,7 +55,7 @@ class Sports
     /**
      * @var Collection<int, Offres>
      */
-    #[ORM\ManyToMany(targetEntity: Offres::class, mappedBy: 'sport')]
+    #[ORM\ManyToMany(targetEntity: Offres::class, mappedBy: 'sports')]
     private Collection $offres;
 
     public function __construct()
@@ -76,7 +76,6 @@ class Sports
     public function setIntitule(string $intitule): static
     {
         $this->intitule = $intitule;
-
         return $this;
     }
 
@@ -88,7 +87,6 @@ class Sports
     public function setIcone(?string $icone): static
     {
         $this->icone = $icone;
-
         return $this;
     }
 
@@ -100,7 +98,6 @@ class Sports
     public function setBackgroundColor(?string $background_color): static
     {
         $this->background_color = $background_color;
-
         return $this;
     }
 
@@ -112,7 +109,6 @@ class Sports
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
-
         return $this;
     }
 

@@ -22,11 +22,11 @@
 		<h1 class="h3 mb-3 font-weight-normal">Me connecter</h1>
 		<div>
 			<label for="inputNickname">Pseudo</label>
-			<input type="text" value="{{ last_username }}" name="nickname" id="inputNickname" class="form-control" autocomplete="username" required autofocus>
+			<input type="text" value="{{ last_username }}" name="nickname" id="inputNickname" class="form-control" autocomplete="username" required autofocus placeholder="">
 		</div>
 		<div>
 			<label for="inputPassword">Mot de passe</label>
-			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="">
 		</div>
 
 		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">

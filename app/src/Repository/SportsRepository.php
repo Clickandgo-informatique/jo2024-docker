@@ -15,6 +15,19 @@ class SportsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Sports::class);
     }
+    //Filtrage par discipline sportive
+    // uniquement les sports qui apparaissent dans des offres
+
+    public function findSportsInOffres(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->distinct() // évite les doublons
+            ->innerJoin('s.offres', 'o')
+            ->addSelect('o')
+            ->orderBy('s.intitule', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Sports[] Returns an array of Sports objects

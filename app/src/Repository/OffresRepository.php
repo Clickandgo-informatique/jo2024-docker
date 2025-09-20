@@ -16,9 +16,9 @@ class OffresRepository extends ServiceEntityRepository
         parent::__construct($registry, Offres::class);
     }
 
-    public function getOffresParCategories(string $categorie): array
+    public function getOffresParCategories(string $slug): array
     {
-        if ($categorie = 'toutes') {
+        if ($slug === 'toutes') {
             return $this->createQueryBuilder('o')
                 ->orderBy('o.intitule', 'ASC')
                 ->getQuery()
@@ -26,13 +26,33 @@ class OffresRepository extends ServiceEntityRepository
         } else {
             return $this->createQueryBuilder('o')
                 ->join('o.categorie', 'c')
-                ->andWhere('c.nom = :categorie')
-                ->setParameter('categorie', $categorie)
+                ->andWhere('c.slug = :slug')
+                ->andWhere('o.isPublished = true')
+                ->setParameter('slug', $slug)
                 ->orderBy('o.intitule', 'ASC')
                 ->getQuery()
                 ->getResult();
         }
     }
+
+    // OffreRepository → filtrer par slugs (ManyToMany)
+    /**
+     * Retourne toutes les offres liées à une liste de sports (par slug)
+     *
+     * @param array $slugs Liste de slugs des sports
+     */
+    // src/Repository/OffresRepository.php
+
+    public function findBySportSlugs(array $slugs)
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.sports', 's') // relation ManyToMany
+            ->andWhere('s.slug IN (:slugs)')
+            ->setParameter('slugs', $slugs)
+            ->orderBy('o.dateDebut', 'ASC') // adapte le champ si nécessaire
+            ->getQuery();
+    }
+
 
     //    /**
     //     * @return Offres[] Returns an array of Offres objects

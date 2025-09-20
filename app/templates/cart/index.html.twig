@@ -3,21 +3,21 @@
 	Mon panier
 {% endblock %}
 {% block body %}
-	<main>
-		<a href="{{path('app_offres_catalogue')}}" class="btn btn-primary">
-			<i class="fa-solid fa-list"></i>Revenir à la liste d'offres</a>
-		<h1 class="text-center">
-			<i class="fa-solid fa-cart-shopping"></i>Mon panier</h1>
 
-		{# Lignes panier :Contenu requête dynamique en Ajax #}
-		<div class="ajax-reloaded-data">
-			{{include('_partials/_cart-items.html.twig')}}
-		</div>
-		{# Fin contenu requête Ajax #}
+	<a href="{{path('app_offres_catalogue')}}" class="btn btn-primary">
+		<i class="fa-solid fa-list"></i>Revenir à la liste d'offres</a>
+	<h1 class="text-center">
+		<i class="fa-solid fa-cart-shopping"></i>Mon panier</h1>
 
-		<a href="{{path('app_commandes_ajout')}}" class="btn btn-primary">
-			<i class="fa-solid fa-circle-check"></i>Valider le panier</a>
-	</main>
+	{# Lignes panier :Contenu requête dynamique en Ajax #}
+	<div class="ajax-reloaded-data">
+		{{include('_partials/_cart-items.html.twig')}}
+	</div>
+	{# Fin contenu requête Ajax #}
+
+	<a href="{{path('app_commandes_ajout')}}" class="btn btn-primary">
+		<i class="fa-solid fa-circle-check"></i>Valider le panier</a>
+
 {% endblock %}
 {% block stylesheets %}<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">
 {% endblock %}

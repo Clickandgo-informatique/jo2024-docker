@@ -3,7 +3,7 @@
 	Catégories d'offres
 {% endblock %}
 {% block body %}
-	<main>
+
 		<h1 class="text-center">Catégories d'offres</h1>
 		<a href="{{path('app_categories_offres_new')}}" class="btn btn-primary">
 			<i class="fa-solid fa-circle-plus"></i>Créer une catégorie</a>
@@ -28,7 +28,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
-	</main>
+	
 {% endblock %}
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">

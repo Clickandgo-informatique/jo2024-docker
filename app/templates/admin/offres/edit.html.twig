@@ -3,7 +3,7 @@
 	{{title}}
 {% endblock %}
 {% block body %}
-	<main>
+
 		<a class="text-center" href="{{ path('app_offres_index') }}" class="btn btn-secondary">Retour à la liste</a>
 
 		{% block form %}
@@ -36,7 +36,7 @@
 			</div>
 			{{ form_end(form) }}
 		{% endblock %}
-	</main>
+
 {% endblock %}
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">

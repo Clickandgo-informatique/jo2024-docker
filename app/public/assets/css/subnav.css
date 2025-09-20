@@ -1,0 +1,19 @@
+.subnav{
+    display: flex;
+    flex-direction: row;
+    background-color: RGB(0,85,164);
+    color: #fff;
+    padding: 10px ;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subnav a {
+    color: #333;
+    text-decoration: none;
+}
+
+.subnav a:hover {
+    text-decoration: underline;
+}

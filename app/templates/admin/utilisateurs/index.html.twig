@@ -3,7 +3,7 @@
 	Liste des utilisateurs
 {% endblock %}
 {% block body %}
-	<main>
+
 		<h1 class="text-center">
 			<i class="fa-solid fa-users"></i>Liste des utilisateurs</h1>
 		{% if utilisateurs %}
@@ -53,7 +53,7 @@
 		{% else %}
 			<p class="text-center">Il n'existe encore aucun utilisateur enregistré dans la base de données</p>
 		{% endif %}
-	</main>
+	
 {% endblock %}
 {% block stylesheets %}<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">
 {% endblock %}

@@ -1,0 +1,75 @@
+/* Container centré */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+/* Pagination UL */
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+/* Items */
+.pagination li {
+    display: inline-block;
+}
+
+/* Liens */
+.pagination li a,
+.pagination li span {
+    display: block;
+    padding: 0.5rem 0.9rem;
+    background: #f1f3f5;
+    color: #333;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover */
+.pagination li a:hover {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* Page active */
+.pagination li.active span {
+    background: #007bff;
+    color: #fff;
+    font-weight: bold;
+    border-color: #007bff;
+}
+
+/* Désactivé */
+.pagination li.disabled span {
+    background: #e9ecef;
+    color: #999;
+    border-color: #ddd;
+    pointer-events: none;
+}
+
+/* --- Version compacte en mobile --- */
+@media (max-width: 576px) {
+    .pagination li:not(.previous):not(.next):not(.active) {
+        display: none; /* masque toutes les pages sauf actif */
+    }
+
+    .pagination {
+        gap: 0.6rem;
+    }
+
+    .pagination li.previous,
+    .pagination li.next,
+    .pagination li.active {
+        display: inline-block;
+    }
+}

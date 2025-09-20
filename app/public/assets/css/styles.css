@@ -17,7 +17,7 @@ main {
     justify-content: center;
     align-items: center;
     margin: 10px auto;
-    width: 97%;
+    width: 97%;    
 }
 h1 {
     margin: 10px auto;
@@ -134,4 +134,7 @@ ul {
 }
 .btn-add-cart {
     margin: 10px auto;
+}
+.qrCode {
+    max-width: 400px;
 }

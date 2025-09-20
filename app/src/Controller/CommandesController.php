@@ -81,8 +81,8 @@ class CommandesController extends AbstractController
     }
 
     //Affichage d'une commande individuelle et paiement
-    #[Route('/afficher-commande/{id}', 'show')]
-    public function show($id, CommandesRepository $commandesRepo): Response
+    #[Route('/mock/payment/{id}', 'paiement')]
+    public function payerCommande($id, CommandesRepository $commandesRepo): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $commande = $commandesRepo->find($id);

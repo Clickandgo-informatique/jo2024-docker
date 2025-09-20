@@ -1,5 +1,9 @@
 {
     "require-dev": {
         "symfony/test-pack": "^1.2"
+    },
+    "require": {
+        "pragmarx/google2fa-qrcode": "^3.0",
+        "bacon/bacon-qr-code": "^3.0"
     }
 }

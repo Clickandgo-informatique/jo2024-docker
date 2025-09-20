@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ticket - Commande
+	{{ commande.reference }}
+{% endblock %}
+
+{% block body %}
+	<h1>Votre ticket</h1>
+
+	<p>
+		<strong>Commande :</strong>
+		{{ commande.reference }}</p>
+	<p>
+		<strong>Payée le :</strong>
+		{{ commande.payeeLe|date('d/m/Y H:i') }}</p>
+
+	<div class="qr-code">
+		{{ ticket.qrCodePath|raw }}
+	</div>
+
+	<p>
+		<strong>Clé du ticket :</strong>
+		{{ ticket.ticketKey }}</p>
+	<p>
+		<strong>Hash :</strong>
+		{{ ticket.payloadHash }}</p>
+
+	<a href="{{ path('app_main') }}">Retour à l'accueil</a>
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-	Commandes en cours
+	Mes commandes en cours
 {% endblock %}
 {% block body %}
 	
@@ -17,7 +17,7 @@
 				{% for c in commandes %}
 					<tr>
 						<td>
-							<a href="{{path('app_commandes_show',{id:c.id})}}"><i class="fa-solid fa-folder-open"></i>{{c.reference}}</a>
+							<a href="{{path('app_commandes_paiement',{id:c.id})}}"><i class="fa-solid fa-folder-open"></i>{{c.reference}}</a>
 						</td>
 						<td class="text-right">
 							{{c.createdAt|date('d/m/Y H:i')}}
@@ -27,7 +27,7 @@
 						<td>
 							{% if c.payeeLe is null%}
 							<div class="row">
-								<a href="{{path('app_commandes_paiement')}}" class="btn btn-primary">
+								<a href="{{path('app_mock-payment',{id:c.id})}}" class="btn btn-primary">
 									<i class="fa-regular fa-credit-card"></i>Procéder au paiement</a>
 								<a href="#" class="btn btn-warning">
 									<i class="fa-regular fa-trash-can"></i>Annuler cette commande</a>							

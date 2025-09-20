@@ -3,9 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -17,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['nickname'], message: 'Il existe déjà un compte avec ce pseudo,veuillez vérifier votre saisie')]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -31,29 +29,24 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $nickname = null;
 
-    /**
-     * @var list<string> The user roles
-     */
-    #[ORM\Column]
-    private array $roles = [];
-
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
-    private ?string $password = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column]
-    private ?bool $isVerified = false;
+    private array $roles = [];
 
-    #[ORM\Column(type: Types::GUID, nullable: true)]
-    private ?string $uuid = null;
+    #[ORM\Column]
+    private ?string $password = null;
 
-    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
-    private ?\DateTimeImmutable $created_at = null;
+    #[ORM\Column(type: 'boolean')]
+    private bool $isVerified = false;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    // ✅ Clé binaire de 32 octets, nullable par défaut
+    #[ORM\Column(type: 'binary', length: 32, nullable: true)]
+    private ?string $accountKey = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $google2FASecret = null;
@@ -62,50 +55,30 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $is2FAEnabled = false;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-private ?string $trustedToken = null;
-
-    /**
-     * @var Collection<int, Commandes>
-     */
-    #[ORM\OneToMany(targetEntity: Commandes::class, mappedBy: 'user')]
-    private Collection $commandes;
-
-    public function __construct()
-    {
-        $this->commandes = new ArrayCollection();
-    }
+    private ?string $trustedToken = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNickname(): ?string
+    public function getEmail(): ?string
     {
-        return $this->nickname;
+        return $this->email;
     }
 
-    public function setNickname(string $nickname): static
+    public function setEmail(string $email): self
     {
-        $this->nickname = $nickname;
+        $this->email = $email;
 
         return $this;
     }
 
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
-        return (string) $this->nickname;
+        return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -115,125 +88,94 @@ private ?string $trustedToken = null;
         return array_unique($roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
-    public function setRoles(array $roles): static
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    /**
-     * Ensure the session doesn't contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.
-     */
-    public function __serialize(): array
-    {
-        $data = (array) $this;
-        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
-
-        return $data;
-    }
-
-    #[\Deprecated]
     public function eraseCredentials(): void
     {
-        // @deprecated, to be removed when upgrading to Symfony 8
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function isVerified(): ?bool
+    public function isVerified(): bool
     {
         return $this->isVerified;
     }
 
-    public function setIsVerified(bool $isVerified): static
+    public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
 
         return $this;
     }
 
-    public function getUuid(): ?string
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid(?string $uuid): static
-    {
-        $this->uuid = $uuid;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    // ✅ AccountKey
+    public function getAccountKey(): ?string
+    {
+        return $this->accountKey;
+    }
+
+    public function setAccountKey(string $accountKey): self
+    {
+        $this->accountKey = $accountKey;
+
+        return $this;
+    }
+
+    // ✅ Pour avoir la clé en format lisible (hexadécimal)
+    public function getAccountKeyHex(): ?string
+    {
+        return $this->accountKey ? bin2hex($this->accountKey) : null;
     }
 
     /**
-     * @return Collection<int, Commandes>
+     * Get the value of nickname
      */
-    public function getCommandes(): Collection
+    public function getNickname()
     {
-        return $this->commandes;
+        return $this->nickname;
     }
 
-    public function addCommande(Commandes $commande): static
+    /**
+     * Set the value of nickname
+     *
+     * @return  self
+     */
+    public function setNickname($nickname)
     {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes->add($commande);
-            $commande->setUser($this);
-        }
+        $this->nickname = $nickname;
 
         return $this;
     }
 
-    public function removeCommande(Commandes $commande): static
-    {
-        if ($this->commandes->removeElement($commande)) {
-            // set the owning side to null (unless already changed)
-            if ($commande->getUser() === $this) {
-                $commande->setUser(null);
-            }
-        }
-
-        return $this;
-    }
     public function getGoogle2FASecret(): ?string
     {
         return $this->google2FASecret;
@@ -255,23 +197,23 @@ private ?string $trustedToken = null;
         return $this;
     }
 
-/**
- * Get the value of trustedToken
- */ 
-public function getTrustedToken()
-{
-return $this->trustedToken;
-}
+    /**
+     * Get the value of trustedToken
+     */
+    public function getTrustedToken()
+    {
+        return $this->trustedToken;
+    }
 
-/**
- * Set the value of trustedToken
- *
- * @return  self
- */ 
-public function setTrustedToken($trustedToken)
-{
-$this->trustedToken = $trustedToken;
+    /**
+     * Set the value of trustedToken
+     *
+     * @return  self
+     */
+    public function setTrustedToken($trustedToken)
+    {
+        $this->trustedToken = $trustedToken;
 
-return $this;
-}
+        return $this;
+    }
 }

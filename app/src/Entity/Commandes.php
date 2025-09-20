@@ -1,5 +1,5 @@
 <?php
-
+// App\Entity\Commandes.php
 namespace App\Entity;
 
 use App\Repository\CommandesRepository;
@@ -22,7 +22,7 @@ class Commandes
     private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Users $user = null;
 
     /**
@@ -31,7 +31,10 @@ class Commandes
     #[ORM\OneToMany(targetEntity: DetailsCommandes::class, mappedBy: 'commande', orphanRemoval: true, cascade: ['persist'])]
     private Collection $detailsCommandes;
 
-    #[ORM\Column(nullable:true)]
+    #[ORM\OneToOne(mappedBy: 'commande', cascade: ['persist', 'remove'])]
+    private ?Tickets $ticket = null;
+
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $payee_le = null;
 
     public function __construct()
@@ -53,7 +56,6 @@ class Commandes
     public function setReference(string $reference): static
     {
         $this->reference = $reference;
-
         return $this;
     }
 
@@ -65,7 +67,6 @@ class Commandes
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
-
         return $this;
     }
 
@@ -77,7 +78,6 @@ class Commandes
     public function setUser(?Users $user): static
     {
         $this->user = $user;
-
         return $this;
     }
 
@@ -95,31 +95,41 @@ class Commandes
             $this->detailsCommandes->add($detailsCommande);
             $detailsCommande->setCommande($this);
         }
-
         return $this;
     }
 
     public function removeDetailsCommande(DetailsCommandes $detailsCommande): static
     {
         if ($this->detailsCommandes->removeElement($detailsCommande)) {
-            // set the owning side to null (unless already changed)
             if ($detailsCommande->getCommande() === $this) {
                 $detailsCommande->setCommande(null);
             }
         }
+        return $this;
+    }
+
+    public function getTicket(): ?Tickets
+    {
+        return $this->ticket;
+    }
+
+    public function setTicket(Tickets $ticket): static
+    {
+        // cohérence bidirectionnelle
+        if ($ticket->getCommande() !== $this) {
+            $ticket->setCommande($this);
+        }
+        $this->ticket = $ticket;
 
         return $this;
     }
 
     public function getTotalCommande(): float
     {
-        $totalLigne = $this->getDetailsCommandes();
         $total = 0;
-
-        foreach ($totalLigne as $item) {
+        foreach ($this->getDetailsCommandes() as $item) {
             $total += $item->getPrix();
         }
-
         return $total;
     }
 
@@ -128,10 +138,9 @@ class Commandes
         return $this->payee_le;
     }
 
-    public function setPayeeLe(\DateTimeImmutable $payee_le): static
+    public function setPayeeLe(?\DateTimeImmutable $payee_le): static
     {
         $this->payee_le = $payee_le;
-
         return $this;
     }
 }

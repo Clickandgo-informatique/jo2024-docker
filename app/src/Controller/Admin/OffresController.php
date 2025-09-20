@@ -3,7 +3,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\CategoriesOffres;
 use App\Entity\Offres;
 use App\Form\OffresFormType;
 use App\Repository\CategoriesOffresRepository;

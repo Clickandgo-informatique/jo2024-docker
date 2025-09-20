@@ -153,9 +153,69 @@
 }
 /* Grille des offres */
 .offers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+/* Bloc global */
+.filter-block {
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+    max-width: 900px;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+/* Titre */
+.filter-block h5 {
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Grille des cases */
+.sports-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px 16px;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+/* Chaque option */
+.sport-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #444;
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: background 0.2s ease-in-out;
+}
+
+/* Effet hover */
+.sport-option:hover {
+    background: #f5faff;
+}
+
+/* Case à cocher */
+.sport-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #007bff; /* couleur moderne (Chrome, Edge, Firefox récents) */
+    cursor: pointer;
+}
+
+/* Texte */
+.sport-option span,
+.sport-option {
+    user-select: none;
 }
 
 /* Sticky (optionnel) pour que les filtres restent visibles en scroll */

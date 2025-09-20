@@ -14,7 +14,8 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    justify-content: center;    
+    justify-content: center;
+    align-items: center;
     margin: 10px auto;
     width: 97%;
 }
@@ -130,4 +131,7 @@ ul {
     border-radius: 10px;
     background-color: rgb(83, 83, 83);
     color: #fff;
+}
+.btn-add-cart {
+    margin: 10px auto;
 }

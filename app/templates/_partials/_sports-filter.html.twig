@@ -1,17 +1,12 @@
 {# templates/_partials/_sports-filter.html.twig #}
 <div id="sports-filter" class="sports-filter" data-base-url="{{ path('app_offres_filter') }}">
-    <h5 class="mb-2">Filtrer par sport(s)</h5>
-    <div class="sports-checkboxes">
-        {% for sport in sports %}
-            <label class="sport-option">
-                <input
-                    type="checkbox"
-                    value="{{ sport.slug }}"
-                    {% if selectedSlugs is defined and sport.slug in selectedSlugs %}checked{% endif %}
-                >
-                {{ sport.intitule }}
-            </label>
-        {% endfor %}
-    </div>
+	<h5 class="mb-2">Filtrer par sport(s)</h5>
+	<div class="sports-checkboxes">
+		{% for sport in sports %}
+			<label class="sport-option">
+				<input type="checkbox" value="{{ sport.slug }}" {% if selectedSlugs is defined and sport.slug in selectedSlugs %} checked {% endif %}>
+				<span>{{ sport.intitule }}</span>
+			</label>
+		{% endfor %}
+	</div>
 </div>
-

@@ -1,2 +1,18 @@
-.env.local
-.essai.env
+# Symfony env files
+/.env.local
+/.env.local.php
+/.env.*.local
+
+# Symfony cache, logs, sessions
+/var/
+
+# Vendors
+/vendor/
+
+# PHPUnit
+/.phpunit.result.cache
+
+# Frontend stuff
+/node_modules/
+/public/build/
+/public/bundles/

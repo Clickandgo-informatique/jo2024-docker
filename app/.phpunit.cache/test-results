@@ -1,0 +1,1 @@
+{"version":2,"defects":[],"times":{"App\\Tests\\Entity\\SportsTest::testGettersAndSetters":0.001,"App\\Tests\\Entity\\SportsTest::testAddOffre":0.004,"App\\Tests\\Entity\\SportsTest::testAddOffreDoesNotDuplicate":0,"App\\Tests\\Entity\\SportsTest::testRemoveOffre":0}}

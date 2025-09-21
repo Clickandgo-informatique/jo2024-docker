@@ -4,31 +4,31 @@
 {% endblock %}
 {% block body %}
 
-		<h1 class="text-center">Catégories d'offres</h1>
-		<a href="{{path('app_categories_offres_new')}}" class="btn btn-primary">
-			<i class="fa-solid fa-circle-plus"></i>Créer une catégorie</a>
+	<h1 class="text-center">Catégories d'offres</h1>
+	<a href="{{path('app_categories_offres_new')}}" class="btn btn-primary">
+		<i class="fa-solid fa-circle-plus"></i>Créer une catégorie</a>
 
-		<table>
-			<thead>
-				<th>Intitulé</th>
-				<th>Actions</th>
-			</thead>
-			<tbody>
-				{% for c in categoriesOffres %}
-					<tr>
-						<td>{{c.nom}}</td>
-						<td class="text-center">
-							<a href="{{path('app_categories_offres_edit',{slug:c.slug})}}">
-								<i class="fa-solid fa-pen-to-square"></i>
-							</a>
-						</td>
-					</tr>
-				{% else %}
-					<p class="text-center">Il n'existe encore aucune catégorie d'offre enregistrée.</p>
-				{% endfor %}
-			</tbody>
-		</table>
-	
+	<table>
+		<thead>
+			<th>Intitulé</th>
+			<th>Actions</th>
+		</thead>
+		<tbody>
+			{% for c in categoriesOffres %}
+				<tr>
+					<td>{{c.nom}}</td>
+					<td class="text-center">
+						<a href="{{path('app_categories_offres_edit',{slug:c.slug})}}">
+							<i class="fa-solid fa-pen-to-square"></i>
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<p class="text-center">Il n'existe encore aucune catégorie d'offre enregistrée.</p>
+			{% endfor %}
+		</tbody>
+	</table>
+
 {% endblock %}
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">

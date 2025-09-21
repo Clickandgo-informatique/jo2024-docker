@@ -1,9 +1,0 @@
-.sidenav{
-    display:flex;
-    flex-direction: column;
-    width:250px;
-    padding: 10px;
-    height:100%;
-    position:absolute;
-    background-color: aliceblue;
-}

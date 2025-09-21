@@ -1,18 +1,848 @@
 [
   {
-    "slug": "archery",
-    "label": "Tir à l’arc",
-    "pictogram": "archery.svg",
-    "dateStart": "2024-07-25",
-    "dateEnd": "2024-08-04",
-    "type": "olympics"
-  },
-  {
-    "slug": "para-swimming",
-    "label": "Para Natation",
-    "pictogram": "para-swimming.svg",
-    "dateStart": "2024-08-29",
-    "dateEnd": "2024-09-07",
-    "type": "paralympics"
+    "data": [
+      {
+        "slug": "tir-a-l-arc",
+        "sport": "Tir à l’arc",
+        "pictogramme": "archery.svg",
+        "emoji": "🏹",
+        "dateDebut": "2024-07-25",
+        "dateFin": "2024-08-04",
+        "type": "olympiques",
+        "lieux": [
+          "Esplanade des Invalides (Paris)"
+        ]
+      },
+      {
+        "slug": "gymnastique-artistique",
+        "sport": "Gymnastique artistique",
+        "pictogramme": "artistic-gymnastics.svg",
+        "emoji": "🤸",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-05",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition halls (Paris)"
+        ]
+      },
+      {
+        "slug": "natation-artistique",
+        "sport": "Natation artistique",
+        "pictogramme": "artistic-swimming.svg",
+        "emoji": "🤽‍♀️",
+        "dateDebut": "2024-08-05",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Paris La Défense Arena (Nanterre)"
+        ]
+      },
+      {
+        "slug": "athletisme",
+        "sport": "Athlétisme",
+        "pictogramme": "athletics.svg",
+        "emoji": "🥇",
+        "dateDebut": "2024-08-01",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Stade de France (Saint-Denis)",
+          "Pont d'Iéna / Paris roads (road events)"
+        ]
+      },
+      {
+        "slug": "badminton",
+        "sport": "Badminton",
+        "pictogramme": "badminton.svg",
+        "emoji": "🏸",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-05",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "basketball-5x5",
+        "sport": "Basketball 5x5",
+        "pictogramme": "basketball.svg",
+        "emoji": "🏀",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Accor Arena / Bercy (Paris) - finals",
+          "Stade Pierre-Mauroy (Villeneuve d'Ascq) - pool games"
+        ]
+      },
+      {
+        "slug": "basket-3x3",
+        "sport": "Basket 3x3",
+        "pictogramme": "3x3-basketball.svg",
+        "emoji": "🏀",
+        "dateDebut": "2024-07-30",
+        "dateFin": "2024-08-06",
+        "type": "olympiques",
+        "lieux": [
+          "Place de la Concorde (Paris)"
+        ]
+      },
+      {
+        "slug": "volleyball-de-plage",
+        "sport": "Volleyball de plage",
+        "pictogramme": "beach-volleyball.svg",
+        "emoji": "🏖️",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Temporary beach lieux (Paris)"
+        ]
+      },
+      {
+        "slug": "boxe",
+        "sport": "Boxe",
+        "pictogramme": "boxing.svg",
+        "emoji": "🥊",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "breaking",
+        "sport": "Breaking",
+        "pictogramme": "breaking.svg",
+        "emoji": "🕺",
+        "dateDebut": "2024-08-09",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Place de la Concorde (Paris)"
+        ]
+      },
+      {
+        "slug": "canoe-slalom",
+        "sport": "Canoë slalom",
+        "pictogramme": "canoe-slalom.svg",
+        "emoji": "🛶",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-05",
+        "type": "olympiques",
+        "lieux": [
+          "Canoe slalom course (regional site)"
+        ]
+      },
+      {
+        "slug": "canoe-sprint",
+        "sport": "Canoë sprint",
+        "pictogramme": "canoe-sprint.svg",
+        "emoji": "🏁",
+        "dateDebut": "2024-08-06",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Vaires-sur-Marne"
+        ]
+      },
+      {
+        "slug": "cyclisme-bmx-freestyle",
+        "sport": "Cyclisme BMX Freestyle",
+        "pictogramme": "cycling-bmx-freestyle.svg",
+        "emoji": "🚲",
+        "dateDebut": "2024-07-30",
+        "dateFin": "2024-07-31",
+        "type": "olympiques",
+        "lieux": [
+          "BMX Park (Paris event site)"
+        ]
+      },
+      {
+        "slug": "cyclisme-bmx-racing",
+        "sport": "Cyclisme BMX Racing",
+        "pictogramme": "cycling-bmx-racing.svg",
+        "emoji": "🚲",
+        "dateDebut": "2024-08-01",
+        "dateFin": "2024-08-03",
+        "type": "olympiques",
+        "lieux": [
+          "BMX Racing circuit"
+        ]
+      },
+      {
+        "slug": "cyclisme-vtt",
+        "sport": "Cyclisme VTT",
+        "pictogramme": "cycling-mountain-bike.svg",
+        "emoji": "🚵",
+        "dateDebut": "2024-07-28",
+        "dateFin": "2024-07-29",
+        "type": "olympiques",
+        "lieux": [
+          "Mountain bike course (regional)"
+        ]
+      },
+      {
+        "slug": "cyclisme-sur-route",
+        "sport": "Cyclisme sur route",
+        "pictogramme": "cycling-road.svg",
+        "emoji": "🚴",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-04",
+        "type": "olympiques",
+        "lieux": [
+          "Road courses across Paris and regions"
+        ]
+      },
+      {
+        "slug": "cyclisme-sur-piste",
+        "sport": "Cyclisme sur piste",
+        "pictogramme": "cycling-track.svg",
+        "emoji": "🚴‍♂️",
+        "dateDebut": "2024-08-05",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Velodrome (Saint-Quentin-en-Yvelines)"
+        ]
+      },
+      {
+        "slug": "plongeon",
+        "sport": "Plongeon",
+        "pictogramme": "diving.svg",
+        "emoji": "🤽‍♂️",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Paris La Défense Arena (Nanterre) - aquatic centre"
+        ]
+      },
+      {
+        "slug": "equitation-dressage",
+        "sport": "Équitation - Dressage",
+        "pictogramme": "equestrian-dressage.svg",
+        "emoji": "🐎",
+        "dateDebut": "2024-07-30",
+        "dateFin": "2024-08-04",
+        "type": "olympiques",
+        "lieux": [
+          "Equestrian park (regional)"
+        ]
+      },
+      {
+        "slug": "equitation-concours-complet",
+        "sport": "Équitation - Concours complet",
+        "pictogramme": "equestrian-eventing.svg",
+        "emoji": "🐎",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-07-29",
+        "type": "olympiques",
+        "lieux": [
+          "Equestrian park (regional)"
+        ]
+      },
+      {
+        "slug": "equitation-saut-d-obstacles",
+        "sport": "Équitation - Saut d’obstacles",
+        "pictogramme": "equestrian-jumping.svg",
+        "emoji": "🐎",
+        "dateDebut": "2024-08-01",
+        "dateFin": "2024-08-06",
+        "type": "olympiques",
+        "lieux": [
+          "Equestrian park (regional)"
+        ]
+      },
+      {
+        "slug": "escrime",
+        "sport": "Escrime",
+        "pictogramme": "fencing.svg",
+        "emoji": "🤺",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-04",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "football",
+        "sport": "Football",
+        "pictogramme": "football.svg",
+        "emoji": "⚽",
+        "dateDebut": "2024-07-24",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Multiple stadiums (Stade de France, regional stadiums)"
+        ]
+      },
+      {
+        "slug": "golf",
+        "sport": "Golf",
+        "pictogramme": "golf.svg",
+        "emoji": "⛳",
+        "dateDebut": "2024-08-01",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Le Golf National (Saint-Quentin-en-Yvelines)"
+        ]
+      },
+      {
+        "slug": "handball",
+        "sport": "Handball",
+        "pictogramme": "handball.svg",
+        "emoji": "🤾",
+        "dateDebut": "2024-07-25",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor arenas (Paris)"
+        ]
+      },
+      {
+        "slug": "hockey-sur-gazon",
+        "sport": "Hockey sur gazon",
+        "pictogramme": "hockey.svg",
+        "emoji": "🥅",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-09",
+        "type": "olympiques",
+        "lieux": [
+          "Hockey lieux (regional)"
+        ]
+      },
+      {
+        "slug": "judo",
+        "sport": "Judo",
+        "pictogramme": "judo.svg",
+        "emoji": "🥋",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-03",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "natation-marathon",
+        "sport": "Natation marathon",
+        "pictogramme": "marathon-swimming.svg",
+        "emoji": "🏊‍♂️",
+        "dateDebut": "2024-08-08",
+        "dateFin": "2024-08-09",
+        "type": "olympiques",
+        "lieux": [
+          "Seine / open-water sites in Paris"
+        ]
+      },
+      {
+        "slug": "pentathlon-moderne",
+        "sport": "Pentathlon moderne",
+        "pictogramme": "modern-pentathlon.svg",
+        "emoji": "🎯",
+        "dateDebut": "2024-08-08",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Multi-discipline lieuxs (Paris region)"
+        ]
+      },
+      {
+        "slug": "gymnastique-rythmique",
+        "sport": "Gymnastique rythmique",
+        "pictogramme": "rhythmic-gymnastics.svg",
+        "emoji": "🤸‍♀️",
+        "dateDebut": "2024-08-08",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "aviron",
+        "sport": "Aviron",
+        "pictogramme": "rowing.svg",
+        "emoji": "🚣",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-03",
+        "type": "olympiques",
+        "lieux": [
+          "Vaires-sur-Marne Rowing Centre"
+        ]
+      },
+      {
+        "slug": "rugby-a-7",
+        "sport": "Rugby à 7",
+        "pictogramme": "rugby-sevens.svg",
+        "emoji": "🏉",
+        "dateDebut": "2024-07-24",
+        "dateFin": "2024-07-30",
+        "type": "olympiques",
+        "lieux": [
+          "Stade de France / regional stadiums"
+        ]
+      },
+      {
+        "slug": "voile",
+        "sport": "Voile",
+        "pictogramme": "sailing.svg",
+        "emoji": "⛵",
+        "dateDebut": "2024-07-28",
+        "dateFin": "2024-08-08",
+        "type": "olympiques",
+        "lieux": [
+          "Marseille / coastal lieuxs"
+        ]
+      },
+      {
+        "slug": "tir",
+        "sport": "Tir",
+        "pictogramme": "shooting.svg",
+        "emoji": "🎯",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-05",
+        "type": "olympiques",
+        "lieux": [
+          "Shooting range (competition site)"
+        ]
+      },
+      {
+        "slug": "skateboard",
+        "sport": "Skateboard",
+        "pictogramme": "skateboarding.svg",
+        "emoji": "🛹",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-07",
+        "type": "olympiques",
+        "lieux": [
+          "Skatepark / Paris temporary lieux"
+        ]
+      },
+      {
+        "slug": "escalade-sportive",
+        "sport": "Escalade sportive",
+        "pictogramme": "sport-climbing.svg",
+        "emoji": "🧗",
+        "dateDebut": "2024-08-05",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Climbing centre (Paris event site)"
+        ]
+      },
+      {
+        "slug": "surf",
+        "sport": "Surf",
+        "pictogramme": "surfing.svg",
+        "emoji": "🏄",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-07-30",
+        "type": "olympiques",
+        "lieux": [
+          "Official surfing lieux (ocean site)"
+        ]
+      },
+      {
+        "slug": "natation-piscine",
+        "sport": "Natation (piscine)",
+        "pictogramme": "swimming.svg",
+        "emoji": "🏊",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-04",
+        "type": "olympiques",
+        "lieux": [
+          "Paris La Défense Arena (Nanterre)"
+        ]
+      },
+      {
+        "slug": "tennis-de-table",
+        "sport": "Tennis de table",
+        "pictogramme": "table-tennis.svg",
+        "emoji": "🏓",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "taekwondo",
+        "sport": "Taekwondo",
+        "pictogramme": "taekwondo.svg",
+        "emoji": "🥋",
+        "dateDebut": "2024-08-07",
+        "dateFin": "2024-08-10",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "tennis",
+        "sport": "Tennis",
+        "pictogramme": "tennis.svg",
+        "emoji": "🎾",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-04",
+        "type": "olympiques",
+        "lieux": [
+          "Stade Roland-Garros (Paris)"
+        ]
+      },
+      {
+        "slug": "trampoline",
+        "sport": "Trampoline",
+        "pictogramme": "trampoline-gymnastics.svg",
+        "emoji": "🤸‍♂️",
+        "dateDebut": "2024-08-02",
+        "dateFin": "2024-08-03",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "triathlon",
+        "sport": "Triathlon",
+        "pictogramme": "triathlon.svg",
+        "emoji": "🏊🚴🏃",
+        "dateDebut": "2024-07-30",
+        "dateFin": "2024-08-05",
+        "type": "olympiques",
+        "lieux": [
+          "Pont d'Iéna / Seine course / Paris streets"
+        ]
+      },
+      {
+        "slug": "volleyball-interieur",
+        "sport": "Volleyball intérieur",
+        "pictogramme": "volleyball.svg",
+        "emoji": "🏐",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor arenas (Paris)"
+        ]
+      },
+      {
+        "slug": "water-polo",
+        "sport": "Water-polo",
+        "pictogramme": "water-polo.svg",
+        "emoji": "🤽",
+        "dateDebut": "2024-07-27",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Paris La Défense Arena (Nanterre)"
+        ]
+      },
+      {
+        "slug": "halterophilie",
+        "sport": "Haltérophilie",
+        "pictogramme": "weightlifting.svg",
+        "emoji": "🏋️",
+        "dateDebut": "2024-08-07",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "lutte",
+        "sport": "Lutte",
+        "pictogramme": "wrestling.svg",
+        "emoji": "🤼",
+        "dateDebut": "2024-08-05",
+        "dateFin": "2024-08-11",
+        "type": "olympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "para-tir-a-l-arc",
+        "sport": "Para Tir à l’arc",
+        "pictogramme": "para-archery.svg",
+        "emoji": "♿🏹",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-05",
+        "type": "paralympiques",
+        "lieux": [
+          "Esplanade des Invalides (Paris)"
+        ]
+      },
+      {
+        "slug": "para-athletisme",
+        "sport": "Para Athlétisme",
+        "pictogramme": "para-athletics.svg",
+        "emoji": "♿🥇",
+        "dateDebut": "2024-08-30",
+        "dateFin": "2024-09-08",
+        "type": "paralympiques",
+        "lieux": [
+          "Stade de France (Saint-Denis)"
+        ]
+      },
+      {
+        "slug": "para-badminton",
+        "sport": "Para Badminton",
+        "pictogramme": "para-badminton.svg",
+        "emoji": "♿🏸",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-02",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "blind-football",
+        "sport": "Blind Football",
+        "pictogramme": "blind-football.svg",
+        "emoji": "⚽👁️",
+        "dateDebut": "2024-08-30",
+        "dateFin": "2024-09-07",
+        "type": "paralympiques",
+        "lieux": [
+          "Football lieuxs (regional)"
+        ]
+      },
+      {
+        "slug": "boccia",
+        "sport": "Boccia",
+        "pictogramme": "boccia.svg",
+        "emoji": "🎯",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-05",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "goalball",
+        "sport": "Goalball",
+        "pictogramme": "goalball.svg",
+        "emoji": "🥅",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-05",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "para-canoe",
+        "sport": "Para Canoë",
+        "pictogramme": "para-canoe.svg",
+        "emoji": "♿🛶",
+        "dateDebut": "2024-09-06",
+        "dateFin": "2024-09-08",
+        "type": "paralympiques",
+        "lieux": [
+          "Vaires-sur-Marne"
+        ]
+      },
+      {
+        "slug": "paracyclisme-sur-route",
+        "sport": "Paracyclisme sur route",
+        "pictogramme": "para-cycling-road.svg",
+        "emoji": "♿🚴",
+        "dateDebut": "2024-09-04",
+        "dateFin": "2024-09-07",
+        "type": "paralympiques",
+        "lieux": [
+          "Road courses across Paris and regions"
+        ]
+      },
+      {
+        "slug": "paracyclisme-sur-piste",
+        "sport": "Paracyclisme sur piste",
+        "pictogramme": "para-cycling-track.svg",
+        "emoji": "♿🚴‍♂️",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-01",
+        "type": "paralympiques",
+        "lieux": [
+          "Velodrome (competition site)"
+        ]
+      },
+      {
+        "slug": "para-equitation",
+        "sport": "Para Équitation",
+        "pictogramme": "para-equestrian.svg",
+        "emoji": "♿🐎",
+        "dateDebut": "2024-09-03",
+        "dateFin": "2024-09-07",
+        "type": "paralympiques",
+        "lieux": [
+          "Equestrian park (regional)"
+        ]
+      },
+      {
+        "slug": "para-judo",
+        "sport": "Para Judo",
+        "pictogramme": "para-judo.svg",
+        "emoji": "♿🥋",
+        "dateDebut": "2024-09-05",
+        "dateFin": "2024-09-07",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "para-force-athletique",
+        "sport": "Para Force athlétique",
+        "pictogramme": "para-powerlifting.svg",
+        "emoji": "♿🏋️",
+        "dateDebut": "2024-09-04",
+        "dateFin": "2024-09-08",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "para-aviron",
+        "sport": "Para Aviron",
+        "pictogramme": "para-rowing.svg",
+        "emoji": "♿🚣",
+        "dateDebut": "2024-08-30",
+        "dateFin": "2024-09-01",
+        "type": "paralympiques",
+        "lieux": [
+          "Vaires-sur-Marne Rowing Centre"
+        ]
+      },
+      {
+        "slug": "para-tir-sportif",
+        "sport": "Para Tir sportif",
+        "pictogramme": "para-shooting.svg",
+        "emoji": "♿🎯",
+        "dateDebut": "2024-08-30",
+        "dateFin": "2024-09-05",
+        "type": "paralympiques",
+        "lieux": [
+          "Shooting range (competition site)"
+        ]
+      },
+      {
+        "slug": "para-natation",
+        "sport": "Para Natation",
+        "pictogramme": "para-swimming.svg",
+        "emoji": "♿🏊",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-07",
+        "type": "paralympiques",
+        "lieux": [
+          "Paris La Défense Arena (Nanterre)"
+        ]
+      },
+      {
+        "slug": "para-tennis-de-table",
+        "sport": "Para Tennis de table",
+        "pictogramme": "para-table-tennis.svg",
+        "emoji": "♿🏓",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-07",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "para-taekwondo",
+        "sport": "Para Taekwondo",
+        "pictogramme": "para-taekwondo.svg",
+        "emoji": "♿🥋",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-08-31",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "para-triathlon",
+        "sport": "Para Triathlon",
+        "pictogramme": "para-triathlon.svg",
+        "emoji": "♿🏊🚴🏃",
+        "dateDebut": "2024-09-01",
+        "dateFin": "2024-09-02",
+        "type": "paralympiques",
+        "lieux": [
+          "Triathlon course (Paris streets / Seine)"
+        ]
+      },
+      {
+        "slug": "volley-assis",
+        "sport": "Volley assis",
+        "pictogramme": "sitting-volleyball.svg",
+        "emoji": "♿🏐",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-07",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "basket-fauteuil-roulant",
+        "sport": "Basket fauteuil roulant",
+        "pictogramme": "wheelchair-basketball.svg",
+        "emoji": "♿🏀",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-08",
+        "type": "paralympiques",
+        "lieux": [
+          "Accor Arena / Bercy (Paris)"
+        ]
+      },
+      {
+        "slug": "escrime-fauteuil",
+        "sport": "Escrime fauteuil",
+        "pictogramme": "wheelchair-fencing.svg",
+        "emoji": "♿🤺",
+        "dateDebut": "2024-09-03",
+        "dateFin": "2024-09-07",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "rugby-fauteuil",
+        "sport": "Rugby fauteuil",
+        "pictogramme": "wheelchair-rugby.svg",
+        "emoji": "♿🏉",
+        "dateDebut": "2024-08-29",
+        "dateFin": "2024-09-02",
+        "type": "paralympiques",
+        "lieux": [
+          "Indoor competition hall (Paris)"
+        ]
+      },
+      {
+        "slug": "tennis-fauteuil",
+        "sport": "Tennis fauteuil",
+        "pictogramme": "wheelchair-tennis.svg",
+        "emoji": "♿🎾",
+        "dateDebut": "2024-08-30",
+        "dateFin": "2024-09-07",
+        "type": "paralympiques",
+        "lieux": [
+          "Roland-Garros / Tennis lieux (Paris)"
+        ]
+      }
+    ]
   }
 ]

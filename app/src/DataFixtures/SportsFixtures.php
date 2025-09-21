@@ -20,7 +20,7 @@ class SportsFixtures extends Fixture
         $appDir = dirname(__DIR__, 2);
 
         // Construire le chemin complet
-        $jsonPath = $appDir . '/public/json-data/disciplines.json';
+        $jsonPath = $appDir . '/public/json-data/sports-paris2024.json';
 
         //Lecture du fichier
         $jsonContent = file_get_contents($jsonPath);
@@ -36,9 +36,11 @@ class SportsFixtures extends Fixture
         //Création de chaque sport dans la bdd
         foreach ($data[0]['data'] as $item) {
             $sport = new Sports();
-            $sport->setIntitule($item['intitule']);
+            $sport->setIntitule($item['sport']);
             //On crée le slug correspondant
-            $sport->setSlug($this->slugger->slug(strtolower($sport->getIntitule())));            
+            $sport->setSlug($this->slugger->slug(strtolower($sport->getIntitule())));
+            $sport->setEmoji($item['emoji']);
+            $sport->setPictogramme($item['pictogramme']);
 
             $manager->persist($sport);
         }

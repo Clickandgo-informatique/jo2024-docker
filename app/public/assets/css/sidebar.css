@@ -1,0 +1,58 @@
+/* Sidebar admin */
+.sidebar {
+    position: fixed;
+    top: var(--header-height, 100px); /* démarre sous navbar + subnav */
+    left: 0;
+    width: 250px;
+    height: calc(100% - var(--header-height, 100px)); /* occupe le reste */
+    background: #222;
+    color: white;
+    padding: 15px;
+    overflow-y: auto;
+    z-index: 4000; /* sous la navbar mais au-dessus du main */
+    display: none;
+}
+
+.sidebar.open {
+    display: block;
+}
+
+/* Liens dans la sidebar */
+.sidebar a {
+    display: block;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background: #333;
+}
+
+/* Bouton de fermeture (optionnel en desktop) */
+#sidebarClose {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* Décalage du main quand sidebar ouverte en desktop */
+@media (min-width: 768px) {
+    #main.shifted {
+        margin-left: 250px;
+        transition: margin-left 0.3s ease;
+    }
+}
+
+/* En mobile, la sidebar devient un bloc sous le header */
+@media (max-width: 767px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;    
+        margin-top: var(--header-height, 100px); /* collée sous navbar+subnav */
+    }
+}

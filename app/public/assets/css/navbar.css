@@ -1,38 +1,102 @@
+/* === Navbar générale === */
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: auto;/* hauteur calculée automatiquement */
+    min-height: 60px;
+    background: #111;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background-color: #333;
-    color: #fff;
-    padding: 5px;
+    align-items: center;
     justify-content: space-between;
+    padding: 0 20px;
+    z-index: 5000;
+    color: white;
 }
 
-.navbar a {
-    color: #fff;
+.navbar-brand .logo {
+    height: 40px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-link {
+    color: white;
     text-decoration: none;
 }
-
-.navbar a:hover {
+.navbar-link:hover {
     text-decoration: underline;
 }
-.nav-link {
-    margin: 5px;
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    word-break: unset;
-    color: #ffff;
-}
-.nav-link:visited {
-    color: #ffff;
-}
-.connexion,
-.connected {
-    margin: 0;
+
+/* === Hamburger === */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
     padding: 0;
-    display: flex;
-    justify-content: center;
+}
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* État actif → croix */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* === Overlay === */
+.navbar-overlay {
+    position: fixed;
+    top: var(--header-height, 100px); /* démarre sous navbar + subnav */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 2500;
+}
+.navbar-overlay.active {
+    display: block;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        gap: 15px;
+        background: #111;
+        width: 100%;
+        padding: 15px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+    .navbar-links.open {
+        display: flex;
+    }
 }

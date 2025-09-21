@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
 
-		<title>
-			{% block title %}JO 2024
-			{% endblock %}
-		</title>
+    <title>
+        {% block title %}JO 2024{% endblock %}
+    </title>
 
-		{# Favicon SVG pour navigateurs modernes #}
-		<link
-		rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    {# Favicon SVG pour navigateurs modernes #}
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 
-		{# Fallback PNGs pour compatibilité #}
-		<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
-		<link
-		rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}">
-		{# CSS pour flashbags #}
-		<link
-		rel="stylesheet" href="{{ asset('assets/css/flashbag.css') }}">
-		{# Optionnel : iOS #}
-		<link rel="apple-touch-icon" href="{{ asset('favicon-32.png') }}"> {% block stylesheets %}{% endblock %}
+    {# Fallback PNGs pour compatibilité #}
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}">
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-		<link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/pagination.css') }}">
+    {# CSS Flashbags #}
+    <link rel="stylesheet" href="{{ asset('assets/css/flashbag.css') }}">
 
+    {# iOS #}
+    <link rel="apple-touch-icon" href="{{ asset('favicon-32.png') }}">
 
-		{% block javascripts %}
-		{# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
-		{# {% block importmap %}{{ importmap('app') }}{% endblock %} #}{% endblock %}
-	</head>
-	<body>
-		{{ include('_partials/_navbar.html.twig') }}
-		{{ include('_partials/_subnav.html.twig') }}
+    {% block stylesheets %}{% endblock %}
 
-		{% if is_granted('ROLE_ADMIN') %}
-			{# {{ include('_partials/_sidenav.html.twig') }}			 #}
-		{% endif %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+          integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-		{# Gestion des Flashbags #}
-		<script src="{{ asset('assets/js/flashbags.js') }}"></script>
-		<script>
-			document.addEventListener("DOMContentLoaded", function () {
-{% for label, messages in app.flashes %}
-{% for message in messages %}
-showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfor %}{% endfor %}
-});
-		</script>
-		<main>
-			{% block body %}{% endblock %}
-		</main>
-	</body>
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pagination.css') }}">
+</head>
+<body>
+    {{ include('_partials/_navbar.html.twig') }}
+    {{ include('_partials/_subnav.html.twig') }}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        {{ include('_partials/_sidebar.html.twig') }}
+    {% endif %}
+
+    {# Flashbags #}
+    <script src="{{ asset('assets/js/flashbags.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");
+                {% endfor %}
+            {% endfor %}
+        });
+    </script>
+
+    <main id="main">
+        {% block body %}{% endblock %}
+    </main>
+
+    {# Scripts #}
+    <script type="module" src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/sidebar.js') }}"></script>
+</body>
 </html>
-<script type="module" src="{{asset('assets/js/main.js')}}"></script>

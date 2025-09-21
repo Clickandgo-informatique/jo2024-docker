@@ -3,7 +3,7 @@
 	Authentification à double facteur
 {% endblock %}
 {% block body %}
-	<main>
+
 		<h1 class="text-center">Google Authenticator</h1>
 		<div id="qrcode">
 			<p>Code actuel :
@@ -19,7 +19,7 @@
 			<button id="code-verify-btn" class="btn btn-primary" type="submit">Vérifier le code</button>
 			{{ form_end(form) }}
 		</form>
-	</main>
+
 	{% block javascripts %}
 		<script type="module" src="{{asset('assets/js/checkGoogle2FA.js')}}"></script>
 	{% endblock %}

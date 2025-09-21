@@ -1,19 +1,81 @@
-.subnav{
+/* ----- Subnav Container ----- */
+.subnav-container {
+    position: fixed;
+    top: var(--navbar-height, 60px);
+    left: 0;
+    right: 0;
+    height: auto; /* <-- laisse le contenu définir la hauteur */
+    background: #531eff;
+    display: flex;
+    align-items: center;
+    z-index: 4500;
+    min-height: 40px;
+}
+
+/* ----- Flèches ----- */
+.subnav-arrow {
+    width: 30px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1200;
+}
+
+.subnav-arrow:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ----- Subnav (scroll horizontal) ----- */
+.subnav {
+    flex: 1;
     display: flex;
     flex-direction: row;
-    background-color: RGB(0,85,164);
-    color: #fff;
-    padding: 10px ;
-    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 15px;
+    padding: 0 10px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    white-space: nowrap;
+}
+
+.subnav::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
 }
 
 .subnav a {
-    color: #333;
+    color: white;
     text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap; /* évite les retours ligne */
 }
-
 .subnav a:hover {
     text-decoration: underline;
+}
+.user-options {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    & .profile,
+    .cart {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+.connected,
+.not-connected {
+    width: fit-content;
+    font-size: 0.8rem;
+    color: #fff;
+    word-break: keep-all;
 }

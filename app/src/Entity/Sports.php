@@ -52,6 +52,14 @@ class Sports
     )]
     private ?string $slug = null;
 
+        // ✅ emoji → VARCHAR(10) utf8mb4
+    #[ORM\Column(type: "string", length: 10, options: ["charset" => "utf8mb4", "collation" => "utf8mb4_unicode_ci"])]
+    private string $emoji;
+
+    // ✅ pictogramme → VARCHAR classique
+    #[ORM\Column(length: 255)]
+    private string $pictogramme;
+
     /**
      * @var Collection<int, Offres>
      */
@@ -135,6 +143,46 @@ class Sports
         if ($this->offres->removeElement($offre)) {
             $offre->removeSport($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of emoji
+     */ 
+    public function getEmoji()
+    {
+        return $this->emoji;
+    }
+
+    /**
+     * Set the value of emoji
+     *
+     * @return  self
+     */ 
+    public function setEmoji($emoji)
+    {
+        $this->emoji = $emoji;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pictogramme
+     */ 
+    public function getPictogramme()
+    {
+        return $this->pictogramme;
+    }
+
+    /**
+     * Set the value of pictogramme
+     *
+     * @return  self
+     */ 
+    public function setPictogramme($pictogramme)
+    {
+        $this->pictogramme = $pictogramme;
 
         return $this;
     }

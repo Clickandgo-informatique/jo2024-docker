@@ -4,37 +4,38 @@
 {% endblock %}
 {% block body %}
 
-		<H1 class="text-center">Liste des sports sportives</H1>
-        <a href="{{path('app_sports_new')}}"><i class="fa-solid fa-circle-plus"></i>Ajouter une discipline sportive</a>
-		<table>
+	<H1 class="text-center">Liste des sports sportives</H1>
+	<a href="{{path('app_sports_new')}}">
+		<i class="fa-solid fa-circle-plus"></i>Ajouter une discipline sportive</a>
+	<table>
 
-			<thead>
-				<th></th>
-				<th></th>
-				<th>intitulé</th>
-			</thead>
-			<tbody>
+		<thead>
+			<th></th>
+			<th></th>
+			<th>intitulé</th>
+		</thead>
+		<tbody>
 
-				{% for d in sports %}
-					<tr>
-						<td class="text-center">
-							<a href="{{path('app_sports_edit',{slug:d.slug})}}">
-								<i class="fa-solid fa-pen-to-square"></i>
-							</a>
-						</td>
-						<td class="text-center">
-							<a href="#">
-								<i class="fa-solid fa-trash-can"></i>
-							</a>
-						</td>
-						<td>{{d.intitule}}</td>
-					</tr>
-				{% else %}
-					<p>Il n'existe encore aucune discipline sportive enregistrée dans la base.</p>
-				{% endfor %}
-			</tbody>
-		</table>
-	
+			{% for d in sports %}
+				<tr>
+					<td class="text-center">
+						<a href="{{path('app_sports_edit',{slug:d.slug})}}">
+							<i class="fa-solid fa-pen-to-square"></i>
+						</a>
+					</td>
+					<td class="text-center">
+						<a href="#">
+							<i class="fa-solid fa-trash-can"></i>
+						</a>
+					</td>
+					<td>{{d.intitule}}</td>
+				</tr>
+			{% else %}
+				<p>Il n'existe encore aucune discipline sportive enregistrée dans la base.</p>
+			{% endfor %}
+		</tbody>
+	</table>
+
 {% endblock %}
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">

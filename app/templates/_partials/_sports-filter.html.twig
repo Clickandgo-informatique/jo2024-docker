@@ -5,8 +5,13 @@
 		{% for sport in sports %}
 			<label class="sport-option">
 				<input type="checkbox" value="{{ sport.slug }}" {% if selectedSlugs is defined and sport.slug in selectedSlugs %} checked {% endif %}>
-				<span>{{ sport.intitule }}</span>
+
+				<span>{{sport.emoji}}
+					{{ sport.intitule }}</span>
 			</label>
 		{% endfor %}
 	</div>
 </div>
+{% block javascripts %}
+	<script type="module" src="{{asset('assets/js/filters.js')}}"></script>
+{% endblock %}

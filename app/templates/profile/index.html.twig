@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<main class="container">
+
 	<h1>Profil de
 		{{ app.user.nickname }}</h1>
 	<p>Email :
@@ -18,5 +18,5 @@
     <a href="{{ path('app_2fa_disable') }}" class="btn btn-danger">Désactiver le 2FA</a>
 {% endif %}
 
-</main>
+
 {% endblock %}

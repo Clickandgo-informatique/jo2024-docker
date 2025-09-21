@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  php:
+    build:
+      context: ./docker/php
+    container_name: jo2024-php
+    working_dir: /var/www/symfony
+    volumes:
+      - ./app:/var/www/symfony:cached
+    networks:
+      - symfony
+
+  web:
+    image: nginx:alpine
+    container_name: jo2024-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./app:/var/www/symfony:cached
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - symfony
+
+networks:
+  symfony:
+    driver: bridge

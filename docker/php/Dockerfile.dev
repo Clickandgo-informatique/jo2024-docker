@@ -1,0 +1,25 @@
+FROM php:8.3-fpm
+
+# Installer dépendances système et extensions PHP
+RUN apt-get update && apt-get install -y \
+    git unzip zip libicu-dev libonig-dev libxml2-dev libzip-dev \
+    libfreetype6-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libxpm-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install \
+        pdo_mysql \
+        intl \
+        zip \
+        opcache \
+        gd \
+    && pecl install redis xdebug \
+    && docker-php-ext-enable redis xdebug \
+    && rm -rf /var/lib/apt/lists/*
+
+# Installer Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Paramétrages de Git
+RUN git config --global user.email "mail@clickandgo-informatique.com" \
+    && git config --global user.name "Clickandgo-informatique"
+
+WORKDIR /var/www/symfony

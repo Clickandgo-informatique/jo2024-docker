@@ -5,14 +5,14 @@ FROM php:8.3-fpm AS builder
 RUN apt-get update && apt-get install -y \
     unzip zip libicu-dev libonig-dev libxml2-dev libzip-dev \
     libfreetype6-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libxpm-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install \
+ && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+ && docker-php-ext-install \
         pdo_mysql \
         intl \
         zip \
         opcache \
         gd \
-    && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/*
 
 # Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -22,32 +22,35 @@ WORKDIR /var/www/symfony
 # Copier uniquement les fichiers composer.* pour profiter du cache Docker
 COPY ./app/composer.* ./
 
-# Installer dépendances PHP sans dev
+# Installer dépendances PHP sans dev (cache Docker optimisé)
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # Copier le reste du projet
 COPY ./app ./
 
-# Étape 2 : Image finale légère
+# Étape 2 : Image finale
 FROM php:8.3-fpm
 
 # Installer seulement les extensions nécessaires
 RUN apt-get update && apt-get install -y \
     libicu-dev libonig-dev libxml2-dev libzip-dev \
     libfreetype6-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libxpm-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install \
+ && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+ && docker-php-ext-install \
         pdo_mysql \
         intl \
         zip \
         opcache \
         gd \
-    && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/symfony
 
-# Copier depuis le builder
+# Copier le projet et vendor depuis le builder
 COPY --from=builder /var/www/symfony ./
+
+# Garder Composer dans l’image finale
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Ajouter une conf PHP (Opcache activé)
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini

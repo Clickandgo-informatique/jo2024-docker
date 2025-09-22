@@ -69,7 +69,7 @@ class __TwigTemplate_bde33278fdcffe6cea3d6a6b82173dfd extends Template
             // line 14
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_profile_index");
             yield "\">
-\t\t\t\t\t\t<i class=\"fa fa-user\" aria-hidden=\"true\"></i>
+\t\t\t\t\t\t<i class=\"fa-regular fa-address-card\" aria-hidden=\"true\"></i>
 \t\t\t\t\t\tMon profil
 \t\t\t\t\t</a>
 \t\t\t\t</div>
@@ -78,39 +78,41 @@ class __TwigTemplate_bde33278fdcffe6cea3d6a6b82173dfd extends Template
             // line 20
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_index");
             yield "\">
-\t\t\t\t\t\t<i class=\"fa-solid fa-basket-shopping\"></i> Mon panier
+\t\t\t\t\t\t<i class=\"fa-solid fa-basket-shopping\"></i>
+\t\t\t\t\t\tMon panier
 \t\t\t\t\t</a>
 \t\t\t\t</div>
 \t\t\t</div>
 
 \t\t\t";
-            // line 26
+            // line 27
             if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-                // line 27
+                // line 28
                 yield "\t\t\t\t<a class=\"nav-link\" href=\"";
                 yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_admin_index");
                 yield "\">
-\t\t\t\t\t<i class=\"fa fa-cog\" aria-hidden=\"true\"></i> Administration
+\t\t\t\t\t<i class=\"fa fa-cog\" aria-hidden=\"true\"></i>
+\t\t\t\t\tAdministration
 \t\t\t\t</a>
 \t\t\t";
             }
-            // line 31
+            // line 33
             yield "\t\t";
         } else {
-            // line 32
+            // line 34
             yield "\t\t\t<p class=\"text-center not-connected\">
 \t\t\t\tBonjour visiteur, vous n'êtes pas encore connecté(e).
 \t\t\t</p>
 \t\t";
         }
-        // line 36
+        // line 38
         yield "\t</div>
 
 \t<button class=\"subnav-arrow\" id=\"subnavRight\">›</button>
 </div>
 
 ";
-        // line 41
+        // line 43
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -133,7 +135,7 @@ class __TwigTemplate_bde33278fdcffe6cea3d6a6b82173dfd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 42
+        // line 44
         yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/subnav.css"), "html", null, true);
         yield "\">
@@ -168,7 +170,7 @@ class __TwigTemplate_bde33278fdcffe6cea3d6a6b82173dfd extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  137 => 42,  114 => 41,  107 => 36,  101 => 32,  98 => 31,  90 => 27,  88 => 26,  79 => 20,  70 => 14,  62 => 9,  58 => 7,  56 => 6,  49 => 1,);
+        return array (  139 => 44,  116 => 43,  109 => 38,  103 => 34,  100 => 33,  91 => 28,  89 => 27,  79 => 20,  70 => 14,  62 => 9,  58 => 7,  56 => 6,  49 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -187,20 +189,22 @@ class __TwigTemplate_bde33278fdcffe6cea3d6a6b82173dfd extends Template
 \t\t\t<div class=\"user-options\">
 \t\t\t\t<div class=\"profile\">
 \t\t\t\t\t<a class=\"nav-link\" href=\"{{ path('app_profile_index') }}\">
-\t\t\t\t\t\t<i class=\"fa fa-user\" aria-hidden=\"true\"></i>
+\t\t\t\t\t\t<i class=\"fa-regular fa-address-card\" aria-hidden=\"true\"></i>
 \t\t\t\t\t\tMon profil
 \t\t\t\t\t</a>
 \t\t\t\t</div>
 \t\t\t\t<div class=\"cart\">
 \t\t\t\t\t<a href=\"{{ path('app_cart_index') }}\">
-\t\t\t\t\t\t<i class=\"fa-solid fa-basket-shopping\"></i> Mon panier
+\t\t\t\t\t\t<i class=\"fa-solid fa-basket-shopping\"></i>
+\t\t\t\t\t\tMon panier
 \t\t\t\t\t</a>
 \t\t\t\t</div>
 \t\t\t</div>
 
 \t\t\t{% if is_granted('ROLE_ADMIN') %}
 \t\t\t\t<a class=\"nav-link\" href=\"{{ path('app_admin_index') }}\">
-\t\t\t\t\t<i class=\"fa fa-cog\" aria-hidden=\"true\"></i> Administration
+\t\t\t\t\t<i class=\"fa fa-cog\" aria-hidden=\"true\"></i>
+\t\t\t\t\tAdministration
 \t\t\t\t</a>
 \t\t\t{% endif %}
 \t\t{% else %}

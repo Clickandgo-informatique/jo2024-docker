@@ -37,10 +37,20 @@ class Commandes
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $payee_le = null;
 
+    #[ORM\Column(type: "string", unique: true)]
+    private string $qrToken;
+
+    #[ORM\Column(type: "datetime_immutable", nullable: true)]
+    private ?\DateTimeImmutable $dateScan = null;
+
+    #[ORM\ManyToOne(targetEntity: Users::class)]
+    private ?Users $scannedBy = null;
+
     public function __construct()
     {
         $this->detailsCommandes = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
+        $this->qrToken = bin2hex(random_bytes(16)); // ✅ Token unique généré automatiquement
     }
 
     public function getId(): ?int
@@ -141,6 +151,39 @@ class Commandes
     public function setPayeeLe(?\DateTimeImmutable $payee_le): static
     {
         $this->payee_le = $payee_le;
+        return $this;
+    }
+
+    public function getQrToken(): string
+    {
+        return $this->qrToken;
+    }
+
+    public function setQrToken(string $qrToken): static
+    {
+        $this->qrToken = $qrToken;
+        return $this;
+    }
+
+    public function getDateScan(): ?\DateTimeImmutable
+    {
+        return $this->dateScan;
+    }
+
+    public function setDateScan(?\DateTimeImmutable $dateScan): static
+    {
+        $this->dateScan = $dateScan;
+        return $this;
+    }
+
+    public function getScannedBy(): ?Users
+    {
+        return $this->scannedBy;
+    }
+
+    public function setScannedBy(?Users $scannedBy): static
+    {
+        $this->scannedBy = $scannedBy;
         return $this;
     }
 }

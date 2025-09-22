@@ -217,6 +217,18 @@
 .sport-option {
     user-select: none;
 }
+.status-scan-tickets{
+    background-color: #ffff;
+    display:flex;
+    flex-direction: row;
+    border-radius: 10px;
+    border:1px solid darkgray;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.35);
+    margin: 10px;
+    & a{
+        color:darkblue;
+    }
+}
 
 /* Sticky (optionnel) pour que les filtres restent visibles en scroll */
 @media (min-width: 800px) {
@@ -228,7 +240,7 @@
 }
 
 /* Responsive : sur petits écrans on cache la colonne (utilise le drawer) */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .filters-column {
         display: none;
     }

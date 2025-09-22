@@ -8,6 +8,7 @@ use App\Repository\CommandesRepository;
 use App\Repository\OffresRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,18 +68,39 @@ class CommandesController extends AbstractController
         return $this->redirectToRoute('app_commandes_liste');
     }
 
-    //Affichage de la liste commandes du client
+    //Affichage de la liste commandes du client et status du scan qrcode
     #[Route('/liste', 'liste')]
-    public function liste(CommandesRepository $commandesRepo): Response
+    public function liste(CommandesRepository $commandesRepo, Request $request): Response
     {
-        //Recherche du client connecté
         $user = $this->getUser();
+        $status = $request->query->get('status'); // récupère ?status=
 
-        //Recherche de la liste des commandes filtrée par client
-        $commandes = $commandesRepo->findBy(['user' => $user], ['created_at' => 'DESC']);
+        $criteria = ['user' => $user];
 
-        return $this->render('commandes/index.html.twig', compact('commandes'));
+        if ($status === 'scanne') {
+            $criteria['dateScan'] = ['not' => null]; // hack Doctrine custom
+            $commandes = $commandesRepo->createQueryBuilder('c')
+                ->where('c.user = :user')
+                ->andWhere('c.dateScan IS NOT NULL')
+                ->setParameter('user', $user)
+                ->orderBy('c.created_at', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } elseif ($status === 'non-scanne') {
+            $commandes = $commandesRepo->createQueryBuilder('c')
+                ->where('c.user = :user')
+                ->andWhere('c.dateScan IS NULL')
+                ->setParameter('user', $user)
+                ->orderBy('c.created_at', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } else {
+            $commandes = $commandesRepo->findBy(['user' => $user], ['created_at' => 'DESC']);
+        }
+
+        return $this->render('commandes/index.html.twig', compact('commandes', 'status'));
     }
+
 
     //Affichage d'une commande individuelle et paiement
     #[Route('/mock/payment/{id}', 'paiement')]
@@ -86,7 +108,7 @@ class CommandesController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $commande = $commandesRepo->find($id);
-        
+
         return $this->render('commandes/show.html.twig', compact('commande'));
     }
 }

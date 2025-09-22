@@ -60,27 +60,29 @@ return [
                 .')'
                 .'|/admin/(?'
                     .'|offres/categories\\-offres/([^/]++)/edit(*:251)'
-                    .'|edit/([^/]++)(*:272)'
-                    .'|sports/edit/([^/]++)(*:300)'
-                    .'|utilisateurs/edit/(\\d+)(*:331)'
+                    .'|commande/scan/([^/]++)(*:281)'
+                    .'|edit/([^/]++)(*:302)'
+                    .'|sports/edit/([^/]++)(*:330)'
+                    .'|utilisateurs/edit/(\\d+)(*:361)'
                 .')'
                 .'|/mo(?'
-                    .'|ck/payment/([^/]++)(*:365)'
-                    .'|t\\-de\\-passe\\-oublie/([^/]++)(*:402)'
+                    .'|ck/payment/([^/]++)(*:395)'
+                    .'|t\\-de\\-passe\\-oublie/([^/]++)(*:432)'
                 .')'
+                .'|/tickets/([^/]++)(*:458)'
                 .'|/offres(?'
-                    .'|\\-par\\-categorie/([^/]++)(*:446)'
-                    .'|/sports(?:/([^/]++))?(*:475)'
+                    .'|\\-par\\-categorie/([^/]++)(*:501)'
+                    .'|/sports(?:/([^/]++))?(*:530)'
                 .')'
                 .'|/c(?'
                     .'|art/(?'
-                        .'|add/([^/]++)(*:508)'
-                        .'|remove/([^/]++)(*:531)'
-                        .'|delete/([^/]++)(*:554)'
+                        .'|add/([^/]++)(*:563)'
+                        .'|remove/([^/]++)(*:586)'
+                        .'|delete/([^/]++)(*:609)'
                     .')'
-                    .'|ommandes/mock/payment/([^/]++)(*:593)'
+                    .'|ommandes/mock/payment/([^/]++)(*:648)'
                 .')'
-                .'|/verif/([^/]++)(*:617)'
+                .'|/verif/([^/]++)(*:672)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -93,18 +95,20 @@ return [
         181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         251 => [[['_route' => 'app_categories_offres_edit', '_controller' => 'App\\Controller\\Admin\\CategoriesOffresController::edit'], ['slug'], null, null, false, false, null]],
-        272 => [[['_route' => 'app_offres_edit', '_controller' => 'App\\Controller\\Admin\\OffresController::edit'], ['slug'], null, null, false, true, null]],
-        300 => [[['_route' => 'app_sports_edit', '_controller' => 'App\\Controller\\Admin\\SportsController::edit'], ['slug'], null, null, false, true, null]],
-        331 => [[['_route' => 'app_utilisateurs_edit', '_controller' => 'App\\Controller\\Admin\\UsersController::edit'], ['id'], null, null, false, true, null]],
-        365 => [[['_route' => 'app_mock-payment', '_controller' => 'App\\Controller\\Admin\\MockPaymentController::pay'], ['id'], null, null, false, true, null]],
-        402 => [[['_route' => 'reset_password', '_controller' => 'App\\Controller\\SecurityController::resetPassword'], ['token'], null, null, false, true, null]],
-        446 => [[['_route' => 'app_offres-par-categories', '_controller' => 'App\\Controller\\Admin\\OffresController::filterByCategorie'], ['slug'], null, null, false, true, null]],
-        475 => [[['_route' => 'app_offres_filter', 'slugs' => null, '_controller' => 'App\\Controller\\Admin\\OffresController::filterBySportsSlugs'], ['slugs'], null, null, false, true, null]],
-        508 => [[['_route' => 'app_cart_add', '_controller' => 'App\\Controller\\CartController::add'], ['id'], null, null, false, true, null]],
-        531 => [[['_route' => 'app_cart_remove', '_controller' => 'App\\Controller\\CartController::remove'], ['id'], null, null, false, true, null]],
-        554 => [[['_route' => 'app_cart_delete', '_controller' => 'App\\Controller\\CartController::delete'], ['id'], null, null, false, true, null]],
-        593 => [[['_route' => 'app_commandes_paiement', '_controller' => 'App\\Controller\\CommandesController::payerCommande'], ['id'], null, null, false, true, null]],
-        617 => [
+        281 => [[['_route' => 'admin_commande_scan', '_controller' => 'App\\Controller\\Admin\\CommandeScanController::scanCommande'], ['token'], null, null, false, true, null]],
+        302 => [[['_route' => 'app_offres_edit', '_controller' => 'App\\Controller\\Admin\\OffresController::edit'], ['slug'], null, null, false, true, null]],
+        330 => [[['_route' => 'app_sports_edit', '_controller' => 'App\\Controller\\Admin\\SportsController::edit'], ['slug'], null, null, false, true, null]],
+        361 => [[['_route' => 'app_utilisateurs_edit', '_controller' => 'App\\Controller\\Admin\\UsersController::edit'], ['id'], null, null, false, true, null]],
+        395 => [[['_route' => 'app_mock-payment', '_controller' => 'App\\Controller\\Admin\\MockPaymentController::pay'], ['id'], null, null, false, true, null]],
+        432 => [[['_route' => 'reset_password', '_controller' => 'App\\Controller\\SecurityController::resetPassword'], ['token'], null, null, false, true, null]],
+        458 => [[['_route' => 'app_tickets_show', '_controller' => 'App\\Controller\\Admin\\MockPaymentController::showTicket'], ['id'], null, null, false, true, null]],
+        501 => [[['_route' => 'app_offres-par-categories', '_controller' => 'App\\Controller\\Admin\\OffresController::filterByCategorie'], ['slug'], null, null, false, true, null]],
+        530 => [[['_route' => 'app_offres_filter', 'slugs' => null, '_controller' => 'App\\Controller\\Admin\\OffresController::filterBySportsSlugs'], ['slugs'], null, null, false, true, null]],
+        563 => [[['_route' => 'app_cart_add', '_controller' => 'App\\Controller\\CartController::add'], ['id'], null, null, false, true, null]],
+        586 => [[['_route' => 'app_cart_remove', '_controller' => 'App\\Controller\\CartController::remove'], ['id'], null, null, false, true, null]],
+        609 => [[['_route' => 'app_cart_delete', '_controller' => 'App\\Controller\\CartController::delete'], ['id'], null, null, false, true, null]],
+        648 => [[['_route' => 'app_commandes_paiement', '_controller' => 'App\\Controller\\CommandesController::payerCommande'], ['id'], null, null, false, true, null]],
+        672 => [
             [['_route' => 'verify_user', '_controller' => 'App\\Controller\\RegistrationController::verifUser'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -3,50 +3,90 @@
 	Mes commandes en cours
 {% endblock %}
 {% block body %}
-	
-		<h1 class="text-center"><i class="fa-solid fa-list-check"></i>Mes commandes en cours</h1>
-		<p class="text-center">{{ commandes|length }} commandes enregistrées</p>
-		<table>
-			<thead>
-				<th>Référence</th>
-				<th>Date</th>
-				<th>Total</th>
-				<th>Etat</th>
-			</thead>
-			<tbody>
-				{% for c in commandes %}
-					<tr>
-						<td>
-							<a href="{{path('app_commandes_paiement',{id:c.id})}}"><i class="fa-solid fa-folder-open"></i>{{c.reference}}</a>
-						</td>
-						<td class="text-right">
-							{{c.createdAt|date('d/m/Y H:i')}}
-						</td>
 
-						<td class="text-right">{{c.totalCommande}}€</td>
-						<td>
-							{% if c.payeeLe is null%}
+	<h1 class="text-center">
+		<i class="fa-solid fa-list-check"></i>Mes commandes en cours</h1>
+	<p class="text-center">{{ commandes|length }}
+		commandes enregistrées</p>
+
+	<div class="status-scan-tickets">
+		<a href="{{ path('app_commandes_liste') }}" class="btn btn-sm {{ status is null ? 'btn-primary' : 'btn-outline-primary' }}">
+			Toutes
+		</a>
+		<a href="{{ path('app_commandes_liste', {status: 'scanne'}) }}" class="btn btn-sm {{ status == 'scanne' ? 'btn-success' : 'btn-outline-success' }}">
+			✅ Scannées
+		</a>
+		<a href="{{ path('app_commandes_liste', {status: 'non-scanne'}) }}" class="btn btn-sm {{ status == 'non-scanne' ? 'btn-warning' : 'btn-outline-warning' }}">
+			⏳ Non scannées
+		</a>
+	</div>
+
+	<table>
+		<thead>
+			<th>Référence</th>
+			<th>Date</th>
+			<th>Total</th>
+			<th>Paiement</th>
+			<th>Status ticket</th>
+			<th></th>
+		</thead>
+		<tbody>
+			{% for c in commandes %}
+				<tr>
+					<td>
+						<a href="{{path('app_commandes_paiement',{id:c.id})}}">
+							<i class="fa-solid fa-folder-open"></i>
+							{{c.reference}}</a>
+					</td>
+					<td class="text-right">
+						{{c.createdAt|date('d/m/Y H:i')}}
+					</td>
+
+					<td class="text-right">{{c.totalCommande}}€</td>
+					<td>
+						{% if c.payeeLe is null%}
 							<div class="row">
 								<a href="{{path('app_mock-payment',{id:c.id})}}" class="btn btn-primary">
 									<i class="fa-regular fa-credit-card"></i>Procéder au paiement</a>
 								<a href="#" class="btn btn-warning">
-									<i class="fa-regular fa-trash-can"></i>Annuler cette commande</a>							
+									<i class="fa-regular fa-trash-can"></i>Annuler cette commande</a>
 							</div>
-							{% else %}
-								<p class="text-green">
-									<i class="fa-regular fa-circle-check"></i>Payée le
-									{{c.payeeLe|date('d-m-Y à H:i:s')}}</p>
-							{% endif %}
-						</td>
+						{% else %}
+							<p class="text-green">
+								<i class="fa-regular fa-circle-check"></i>Payée le
+								{{c.payeeLe|date('d-m-Y à H:i:s')}}</p>
+						{% endif %}
+					</td>
+					<td>
+						{% if c.dateScan %}
+							<span class="badge bg-success">
+								✅ Scanné le
+								{{ c.dateScan|date('d/m/Y H:i') }}
+								{% if c.scannedBy %}
+									par
+									{{ c.scannedBy.nom }}
+								{% endif %}
+							</span>
+						{% else %}
+							<span class="badge bg-warning text-dark">⏳ Non scanné</span>
+						{% endif %}
+					</td>
+					<td>
+						{% if c.ticket.id is defined %}
+							<a href="{{path('app_tickets_show',{id:c.ticket.id,commande:c.id})}}" class="btn btn-primary">
+								<i class="fa-solid fa-folder-open"></i>
+							</a>
 
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-
+						{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
 
 {% endblock %}
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/css/filters.css')}}">
 {% endblock %}

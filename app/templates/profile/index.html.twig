@@ -6,17 +6,20 @@
 
 {% block body %}
 
-	<h1>Profil de
+	<h1>
+		<i class="fa-regular fa-address-card"></i>Profil de
 		{{ app.user.nickname }}</h1>
 	<p>Email :
 		{{ app.user.email }}</p>
 	<p>Rôle :
 		{{ app.user.roles|join(', ') }}</p>
+	<a href="{{path('app_commandes_liste')}}" class="btn btn-primary">
+		<i class="fa-solid fa-table-list"></i>Voir mes commandes et tickets</a>
 
-		{% if app.user.is2FAEnabled %}
-    <p>Le 2FA est activé sur votre compte.</p>
-    <a href="{{ path('app_2fa_disable') }}" class="btn btn-danger">Désactiver le 2FA</a>
-{% endif %}
+	{% if app.user.is2FAEnabled %}
+		<p>L'authentification à double facteur est activée sur votre compte.</p>
+		{# <a href="{{ path('app_2fa_disable') }}" class="btn btn-danger">Désactiver le 2FA</a> #}
+	{% endif %}
 
 
 {% endblock %}

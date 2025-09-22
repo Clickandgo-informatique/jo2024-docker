@@ -100,84 +100,164 @@ class __TwigTemplate_3acf7bd93f321a65d9820f15d9528645 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        yield "\t
-\t\t<h1 class=\"text-center\"><i class=\"fa-solid fa-list-check\"></i>Mes commandes en cours</h1>
-\t\t<p class=\"text-center\">";
-        // line 8
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["commandes"]) || array_key_exists("commandes", $context) ? $context["commandes"] : (function () { throw new RuntimeError('Variable "commandes" does not exist.', 8, $this->source); })())), "html", null, true);
-        yield " commandes enregistrées</p>
-\t\t<table>
-\t\t\t<thead>
-\t\t\t\t<th>Référence</th>
-\t\t\t\t<th>Date</th>
-\t\t\t\t<th>Total</th>
-\t\t\t\t<th>Etat</th>
-\t\t\t</thead>
-\t\t\t<tbody>
-\t\t\t\t";
-        // line 17
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["commandes"]) || array_key_exists("commandes", $context) ? $context["commandes"] : (function () { throw new RuntimeError('Variable "commandes" does not exist.', 17, $this->source); })()));
-        foreach ($context['_seq'] as $context["_key"] => $context["c"]) {
-            // line 18
-            yield "\t\t\t\t\t<tr>
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t<a href=\"";
-            // line 20
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commandes_paiement", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 20)]), "html", null, true);
-            yield "\"><i class=\"fa-solid fa-folder-open\"></i>";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "reference", [], "any", false, false, false, 20), "html", null, true);
-            yield "</a>
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td class=\"text-right\">
-\t\t\t\t\t\t\t";
-            // line 23
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "createdAt", [], "any", false, false, false, 23), "d/m/Y H:i"), "html", null, true);
-            yield "
-\t\t\t\t\t\t</td>
+        yield "
+\t<h1 class=\"text-center\">
+\t\t<i class=\"fa-solid fa-list-check\"></i>Mes commandes en cours</h1>
+\t<p class=\"text-center\">";
+        // line 9
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["commandes"]) || array_key_exists("commandes", $context) ? $context["commandes"] : (function () { throw new RuntimeError('Variable "commandes" does not exist.', 9, $this->source); })())), "html", null, true);
+        yield "
+\t\tcommandes enregistrées</p>
 
-\t\t\t\t\t\t<td class=\"text-right\">";
-            // line 26
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "totalCommande", [], "any", false, false, false, 26), "html", null, true);
-            yield "€</td>
-\t\t\t\t\t\t<td>
+\t<div class=\"status-scan-tickets\">
+\t\t<a href=\"";
+        // line 13
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commandes_liste");
+        yield "\" class=\"btn btn-sm ";
+        yield (((null === (isset($context["status"]) || array_key_exists("status", $context) ? $context["status"] : (function () { throw new RuntimeError('Variable "status" does not exist.', 13, $this->source); })()))) ? ("btn-primary") : ("btn-outline-primary"));
+        yield "\">
+\t\t\tToutes
+\t\t</a>
+\t\t<a href=\"";
+        // line 16
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commandes_liste", ["status" => "scanne"]);
+        yield "\" class=\"btn btn-sm ";
+        yield ((((isset($context["status"]) || array_key_exists("status", $context) ? $context["status"] : (function () { throw new RuntimeError('Variable "status" does not exist.', 16, $this->source); })()) == "scanne")) ? ("btn-success") : ("btn-outline-success"));
+        yield "\">
+\t\t\t✅ Scannées
+\t\t</a>
+\t\t<a href=\"";
+        // line 19
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commandes_liste", ["status" => "non-scanne"]);
+        yield "\" class=\"btn btn-sm ";
+        yield ((((isset($context["status"]) || array_key_exists("status", $context) ? $context["status"] : (function () { throw new RuntimeError('Variable "status" does not exist.', 19, $this->source); })()) == "non-scanne")) ? ("btn-warning") : ("btn-outline-warning"));
+        yield "\">
+\t\t\t⏳ Non scannées
+\t\t</a>
+\t</div>
+
+\t<table>
+\t\t<thead>
+\t\t\t<th>Référence</th>
+\t\t\t<th>Date</th>
+\t\t\t<th>Total</th>
+\t\t\t<th>Paiement</th>
+\t\t\t<th>Status ticket</th>
+\t\t\t<th></th>
+\t\t</thead>
+\t\t<tbody>
+\t\t\t";
+        // line 34
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["commandes"]) || array_key_exists("commandes", $context) ? $context["commandes"] : (function () { throw new RuntimeError('Variable "commandes" does not exist.', 34, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["c"]) {
+            // line 35
+            yield "\t\t\t\t<tr>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t<a href=\"";
+            // line 37
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commandes_paiement", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 37)]), "html", null, true);
+            yield "\">
+\t\t\t\t\t\t\t<i class=\"fa-solid fa-folder-open\"></i>
 \t\t\t\t\t\t\t";
-            // line 28
-            if ((null === CoreExtension::getAttribute($this->env, $this->source, $context["c"], "payeeLe", [], "any", false, false, false, 28))) {
-                // line 29
+            // line 39
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "reference", [], "any", false, false, false, 39), "html", null, true);
+            yield "</a>
+\t\t\t\t\t</td>
+\t\t\t\t\t<td class=\"text-right\">
+\t\t\t\t\t\t";
+            // line 42
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "createdAt", [], "any", false, false, false, 42), "d/m/Y H:i"), "html", null, true);
+            yield "
+\t\t\t\t\t</td>
+
+\t\t\t\t\t<td class=\"text-right\">";
+            // line 45
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "totalCommande", [], "any", false, false, false, 45), "html", null, true);
+            yield "€</td>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t";
+            // line 47
+            if ((null === CoreExtension::getAttribute($this->env, $this->source, $context["c"], "payeeLe", [], "any", false, false, false, 47))) {
+                // line 48
                 yield "\t\t\t\t\t\t\t<div class=\"row\">
 \t\t\t\t\t\t\t\t<a href=\"";
-                // line 30
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_mock-payment", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 30)]), "html", null, true);
+                // line 49
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_mock-payment", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 49)]), "html", null, true);
                 yield "\" class=\"btn btn-primary\">
 \t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-credit-card\"></i>Procéder au paiement</a>
 \t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-warning\">
-\t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-trash-can\"></i>Annuler cette commande</a>\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-trash-can\"></i>Annuler cette commande</a>
 \t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t";
+\t\t\t\t\t\t";
             } else {
-                // line 36
-                yield "\t\t\t\t\t\t\t\t<p class=\"text-green\">
-\t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-circle-check\"></i>Payée le
-\t\t\t\t\t\t\t\t\t";
-                // line 38
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "payeeLe", [], "any", false, false, false, 38), "d-m-Y à H:i:s"), "html", null, true);
+                // line 55
+                yield "\t\t\t\t\t\t\t<p class=\"text-green\">
+\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-circle-check\"></i>Payée le
+\t\t\t\t\t\t\t\t";
+                // line 57
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "payeeLe", [], "any", false, false, false, 57), "d-m-Y à H:i:s"), "html", null, true);
                 yield "</p>
-\t\t\t\t\t\t\t";
+\t\t\t\t\t\t";
             }
-            // line 40
-            yield "\t\t\t\t\t\t</td>
+            // line 59
+            yield "\t\t\t\t\t</td>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t";
+            // line 61
+            if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["c"], "dateScan", [], "any", false, false, false, 61)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                // line 62
+                yield "\t\t\t\t\t\t\t<span class=\"badge bg-success\">
+\t\t\t\t\t\t\t\t✅ Scanné le
+\t\t\t\t\t\t\t\t";
+                // line 64
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "dateScan", [], "any", false, false, false, 64), "d/m/Y H:i"), "html", null, true);
+                yield "
+\t\t\t\t\t\t\t\t";
+                // line 65
+                if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["c"], "scannedBy", [], "any", false, false, false, 65)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+                    // line 66
+                    yield "\t\t\t\t\t\t\t\t\tpar
+\t\t\t\t\t\t\t\t\t";
+                    // line 67
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["c"], "scannedBy", [], "any", false, false, false, 67), "nom", [], "any", false, false, false, 67), "html", null, true);
+                    yield "
+\t\t\t\t\t\t\t\t";
+                }
+                // line 69
+                yield "\t\t\t\t\t\t\t</span>
+\t\t\t\t\t\t";
+            } else {
+                // line 71
+                yield "\t\t\t\t\t\t\t<span class=\"badge bg-warning text-dark\">⏳ Non scanné</span>
+\t\t\t\t\t\t";
+            }
+            // line 73
+            yield "\t\t\t\t\t</td>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t";
+            // line 75
+            if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["c"], "ticket", [], "any", false, true, false, 75), "id", [], "any", true, true, false, 75)) {
+                // line 76
+                yield "\t\t\t\t\t\t\t<a href=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_tickets_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["c"], "ticket", [], "any", false, false, false, 76), "id", [], "any", false, false, false, 76), "commande" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 76)]), "html", null, true);
+                yield "\" class=\"btn btn-primary\">
+\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-folder-open\"></i>
+\t\t\t\t\t\t\t</a>
 
-\t\t\t\t\t</tr>
-\t\t\t\t";
+\t\t\t\t\t\t";
+            }
+            // line 81
+            yield "\t\t\t\t\t</td>
+\t\t\t\t</tr>
+\t\t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['c'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 44
-        yield "\t\t\t</tbody>
-\t\t</table>
-
+        // line 84
+        yield "\t\t</tbody>
+\t</table>
 
 
 ";
@@ -190,7 +270,7 @@ class __TwigTemplate_3acf7bd93f321a65d9820f15d9528645 extends Template
         yield from [];
     }
 
-    // line 50
+    // line 89
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -203,9 +283,13 @@ class __TwigTemplate_3acf7bd93f321a65d9820f15d9528645 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 51
+        // line 90
         yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/table.css"), "html", null, true);
+        yield "\">
+\t<link rel=\"stylesheet\" href=\"";
+        // line 91
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/filters.css"), "html", null, true);
         yield "\">
 ";
         
@@ -238,7 +322,7 @@ class __TwigTemplate_3acf7bd93f321a65d9820f15d9528645 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  207 => 51,  194 => 50,  178 => 44,  169 => 40,  164 => 38,  160 => 36,  151 => 30,  148 => 29,  146 => 28,  141 => 26,  135 => 23,  127 => 20,  123 => 18,  119 => 17,  107 => 8,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
+        return array (  292 => 91,  287 => 90,  274 => 89,  259 => 84,  251 => 81,  242 => 76,  240 => 75,  236 => 73,  232 => 71,  228 => 69,  223 => 67,  220 => 66,  218 => 65,  214 => 64,  210 => 62,  208 => 61,  204 => 59,  199 => 57,  195 => 55,  186 => 49,  183 => 48,  181 => 47,  176 => 45,  170 => 42,  164 => 39,  159 => 37,  155 => 35,  151 => 34,  131 => 19,  123 => 16,  115 => 13,  108 => 9,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -248,52 +332,92 @@ class __TwigTemplate_3acf7bd93f321a65d9820f15d9528645 extends Template
 \tMes commandes en cours
 {% endblock %}
 {% block body %}
-\t
-\t\t<h1 class=\"text-center\"><i class=\"fa-solid fa-list-check\"></i>Mes commandes en cours</h1>
-\t\t<p class=\"text-center\">{{ commandes|length }} commandes enregistrées</p>
-\t\t<table>
-\t\t\t<thead>
-\t\t\t\t<th>Référence</th>
-\t\t\t\t<th>Date</th>
-\t\t\t\t<th>Total</th>
-\t\t\t\t<th>Etat</th>
-\t\t\t</thead>
-\t\t\t<tbody>
-\t\t\t\t{% for c in commandes %}
-\t\t\t\t\t<tr>
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t<a href=\"{{path('app_commandes_paiement',{id:c.id})}}\"><i class=\"fa-solid fa-folder-open\"></i>{{c.reference}}</a>
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td class=\"text-right\">
-\t\t\t\t\t\t\t{{c.createdAt|date('d/m/Y H:i')}}
-\t\t\t\t\t\t</td>
 
-\t\t\t\t\t\t<td class=\"text-right\">{{c.totalCommande}}€</td>
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t{% if c.payeeLe is null%}
+\t<h1 class=\"text-center\">
+\t\t<i class=\"fa-solid fa-list-check\"></i>Mes commandes en cours</h1>
+\t<p class=\"text-center\">{{ commandes|length }}
+\t\tcommandes enregistrées</p>
+
+\t<div class=\"status-scan-tickets\">
+\t\t<a href=\"{{ path('app_commandes_liste') }}\" class=\"btn btn-sm {{ status is null ? 'btn-primary' : 'btn-outline-primary' }}\">
+\t\t\tToutes
+\t\t</a>
+\t\t<a href=\"{{ path('app_commandes_liste', {status: 'scanne'}) }}\" class=\"btn btn-sm {{ status == 'scanne' ? 'btn-success' : 'btn-outline-success' }}\">
+\t\t\t✅ Scannées
+\t\t</a>
+\t\t<a href=\"{{ path('app_commandes_liste', {status: 'non-scanne'}) }}\" class=\"btn btn-sm {{ status == 'non-scanne' ? 'btn-warning' : 'btn-outline-warning' }}\">
+\t\t\t⏳ Non scannées
+\t\t</a>
+\t</div>
+
+\t<table>
+\t\t<thead>
+\t\t\t<th>Référence</th>
+\t\t\t<th>Date</th>
+\t\t\t<th>Total</th>
+\t\t\t<th>Paiement</th>
+\t\t\t<th>Status ticket</th>
+\t\t\t<th></th>
+\t\t</thead>
+\t\t<tbody>
+\t\t\t{% for c in commandes %}
+\t\t\t\t<tr>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t<a href=\"{{path('app_commandes_paiement',{id:c.id})}}\">
+\t\t\t\t\t\t\t<i class=\"fa-solid fa-folder-open\"></i>
+\t\t\t\t\t\t\t{{c.reference}}</a>
+\t\t\t\t\t</td>
+\t\t\t\t\t<td class=\"text-right\">
+\t\t\t\t\t\t{{c.createdAt|date('d/m/Y H:i')}}
+\t\t\t\t\t</td>
+
+\t\t\t\t\t<td class=\"text-right\">{{c.totalCommande}}€</td>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t{% if c.payeeLe is null%}
 \t\t\t\t\t\t\t<div class=\"row\">
 \t\t\t\t\t\t\t\t<a href=\"{{path('app_mock-payment',{id:c.id})}}\" class=\"btn btn-primary\">
 \t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-credit-card\"></i>Procéder au paiement</a>
 \t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-warning\">
-\t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-trash-can\"></i>Annuler cette commande</a>\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-trash-can\"></i>Annuler cette commande</a>
 \t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t{% else %}
-\t\t\t\t\t\t\t\t<p class=\"text-green\">
-\t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-circle-check\"></i>Payée le
-\t\t\t\t\t\t\t\t\t{{c.payeeLe|date('d-m-Y à H:i:s')}}</p>
-\t\t\t\t\t\t\t{% endif %}
-\t\t\t\t\t\t</td>
+\t\t\t\t\t\t{% else %}
+\t\t\t\t\t\t\t<p class=\"text-green\">
+\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-circle-check\"></i>Payée le
+\t\t\t\t\t\t\t\t{{c.payeeLe|date('d-m-Y à H:i:s')}}</p>
+\t\t\t\t\t\t{% endif %}
+\t\t\t\t\t</td>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t{% if c.dateScan %}
+\t\t\t\t\t\t\t<span class=\"badge bg-success\">
+\t\t\t\t\t\t\t\t✅ Scanné le
+\t\t\t\t\t\t\t\t{{ c.dateScan|date('d/m/Y H:i') }}
+\t\t\t\t\t\t\t\t{% if c.scannedBy %}
+\t\t\t\t\t\t\t\t\tpar
+\t\t\t\t\t\t\t\t\t{{ c.scannedBy.nom }}
+\t\t\t\t\t\t\t\t{% endif %}
+\t\t\t\t\t\t\t</span>
+\t\t\t\t\t\t{% else %}
+\t\t\t\t\t\t\t<span class=\"badge bg-warning text-dark\">⏳ Non scanné</span>
+\t\t\t\t\t\t{% endif %}
+\t\t\t\t\t</td>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t{% if c.ticket.id is defined %}
+\t\t\t\t\t\t\t<a href=\"{{path('app_tickets_show',{id:c.ticket.id,commande:c.id})}}\" class=\"btn btn-primary\">
+\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-folder-open\"></i>
+\t\t\t\t\t\t\t</a>
 
-\t\t\t\t\t</tr>
-\t\t\t\t{% endfor %}
-\t\t\t</tbody>
-\t\t</table>
-
+\t\t\t\t\t\t{% endif %}
+\t\t\t\t\t</td>
+\t\t\t\t</tr>
+\t\t\t{% endfor %}
+\t\t</tbody>
+\t</table>
 
 
 {% endblock %}
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{asset('assets/css/table.css')}}\">
+\t<link rel=\"stylesheet\" href=\"{{asset('assets/css/filters.css')}}\">
 {% endblock %}
 ", "commandes/index.html.twig", "/var/www/symfony/templates/commandes/index.html.twig");
     }

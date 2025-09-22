@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // 👉 mettre à jour l'URL AVANT de toucher à l'UI
             if (push) history.pushState({ url }, "", url);
 
-            // pas besoin de resyncUI ici : les cases reflètent déjà l’action de l’utilisateur
             updateBadge();
         } catch (err) {
             console.error("fetchAndInject error:", err);
@@ -120,16 +119,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const fab = document.getElementById("filtersFAB");
     const drawer = document.getElementById("filtersDrawer");
     const closeDrawer = document.getElementById("closeFilters");
+    const overlay = document.getElementById("drawerOverlay");
+
+    function openDrawer() {
+        drawer.classList.add("open");
+        if (overlay) overlay.style.display = "block";
+    }
+
+    function closeDrawerFn() {
+        drawer.classList.remove("open");
+        if (overlay) overlay.style.display = "none";
+    }
 
     if (fab && drawer) {
         fab.addEventListener("click", () => {
-            console.log("filtersFAB clicqué");
-            drawer.classList.add("open");
+            console.log("filtersFAB cliqué");
+            openDrawer();
         });
     }
     if (closeDrawer && drawer) {
-        closeDrawer.addEventListener("click", () => {
-            drawer.classList.remove("open");
-        });
+        closeDrawer.addEventListener("click", closeDrawerFn);
+    }
+    if (overlay && drawer) {
+        overlay.addEventListener("click", closeDrawerFn);
     }
 });

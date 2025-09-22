@@ -12,13 +12,16 @@ body {
     line-height: 1.6;
 }
 main {
-    display: block; /* au lieu de flex */
+    display: flex;
+    flex-direction: column;
     width: 97%;
     margin-top: var(--header-height, 100px); /* navbar + subnav */
     padding: 20px;
     position: relative;
     transition: margin-top 0.2s ease;
-    z-index: 1; /* inférieur à la sidebar */
+    z-index: 1; /* inférieur à la sidebar */    
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -173,16 +176,4 @@ ul {
 }
 .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(6px, -6px);
-}
-.navbar {
-    outline: 2px solid red;
-}
-.subnav-container {
-    outline: 2px solid green;
-}
-.sidebar {
-    outline: 2px solid blue;
-}
-main {
-    outline: 2px solid orange;
 }

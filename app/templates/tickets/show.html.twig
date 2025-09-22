@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block body %}
+	<a href="{{ path('app_commandes_liste') }}" class="btn btn-primary">
+		<i class="fa-solid fa-list"></i>Retour à mes commandes</a>
 	<h1>Votre ticket</h1>
+	<p>Gardez soigneusement ce ticket avec vous, il vous sera demandé à la caisse.</p>
 
 	<p>
 		<strong>Commande :</strong>
@@ -25,5 +28,4 @@
 		<strong>Hash :</strong>
 		{{ ticket.payloadHash }}</p>
 
-	<a href="{{ path('app_main') }}">Retour à l'accueil</a>
 {% endblock %}

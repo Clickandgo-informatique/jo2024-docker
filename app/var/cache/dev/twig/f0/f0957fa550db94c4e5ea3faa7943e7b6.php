@@ -102,45 +102,46 @@ class __TwigTemplate_e431d9535928e322ba4e5753436b688a extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 8
-        yield "\t<h1>Votre ticket</h1>
+        yield "\t<a href=\"";
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commandes_liste");
+        yield "\" class=\"btn btn-primary\">
+\t\t<i class=\"fa-solid fa-list\"></i>Retour à mes commandes</a>
+\t<h1>Votre ticket</h1>
+\t<p>Gardez soigneusement ce ticket avec vous, il vous sera demandé à la caisse.</p>
 
 \t<p>
 \t\t<strong>Commande :</strong>
 \t\t";
-        // line 12
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["commande"]) || array_key_exists("commande", $context) ? $context["commande"] : (function () { throw new RuntimeError('Variable "commande" does not exist.', 12, $this->source); })()), "reference", [], "any", false, false, false, 12), "html", null, true);
+        // line 15
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["commande"]) || array_key_exists("commande", $context) ? $context["commande"] : (function () { throw new RuntimeError('Variable "commande" does not exist.', 15, $this->source); })()), "reference", [], "any", false, false, false, 15), "html", null, true);
         yield "</p>
 \t<p>
 \t\t<strong>Payée le :</strong>
 \t\t";
-        // line 15
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["commande"]) || array_key_exists("commande", $context) ? $context["commande"] : (function () { throw new RuntimeError('Variable "commande" does not exist.', 15, $this->source); })()), "payeeLe", [], "any", false, false, false, 15), "d/m/Y H:i"), "html", null, true);
+        // line 18
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["commande"]) || array_key_exists("commande", $context) ? $context["commande"] : (function () { throw new RuntimeError('Variable "commande" does not exist.', 18, $this->source); })()), "payeeLe", [], "any", false, false, false, 18), "d/m/Y H:i"), "html", null, true);
         yield "</p>
 
 \t<div class=\"qr-code\">
 \t\t";
-        // line 18
-        yield CoreExtension::getAttribute($this->env, $this->source, (isset($context["ticket"]) || array_key_exists("ticket", $context) ? $context["ticket"] : (function () { throw new RuntimeError('Variable "ticket" does not exist.', 18, $this->source); })()), "qrCodePath", [], "any", false, false, false, 18);
+        // line 21
+        yield CoreExtension::getAttribute($this->env, $this->source, (isset($context["ticket"]) || array_key_exists("ticket", $context) ? $context["ticket"] : (function () { throw new RuntimeError('Variable "ticket" does not exist.', 21, $this->source); })()), "qrCodePath", [], "any", false, false, false, 21);
         yield "
 \t</div>
 
 \t<p>
 \t\t<strong>Clé du ticket :</strong>
 \t\t";
-        // line 23
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ticket"]) || array_key_exists("ticket", $context) ? $context["ticket"] : (function () { throw new RuntimeError('Variable "ticket" does not exist.', 23, $this->source); })()), "ticketKey", [], "any", false, false, false, 23), "html", null, true);
+        // line 26
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ticket"]) || array_key_exists("ticket", $context) ? $context["ticket"] : (function () { throw new RuntimeError('Variable "ticket" does not exist.', 26, $this->source); })()), "ticketKey", [], "any", false, false, false, 26), "html", null, true);
         yield "</p>
 \t<p>
 \t\t<strong>Hash :</strong>
 \t\t";
-        // line 26
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ticket"]) || array_key_exists("ticket", $context) ? $context["ticket"] : (function () { throw new RuntimeError('Variable "ticket" does not exist.', 26, $this->source); })()), "payloadHash", [], "any", false, false, false, 26), "html", null, true);
+        // line 29
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ticket"]) || array_key_exists("ticket", $context) ? $context["ticket"] : (function () { throw new RuntimeError('Variable "ticket" does not exist.', 29, $this->source); })()), "payloadHash", [], "any", false, false, false, 29), "html", null, true);
         yield "</p>
 
-\t<a href=\"";
-        // line 28
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_main");
-        yield "\">Retour à l'accueil</a>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -172,7 +173,7 @@ class __TwigTemplate_e431d9535928e322ba4e5753436b688a extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  142 => 28,  137 => 26,  131 => 23,  123 => 18,  117 => 15,  111 => 12,  105 => 8,  92 => 7,  79 => 4,  64 => 3,  41 => 1,);
+        return array (  142 => 29,  136 => 26,  128 => 21,  122 => 18,  116 => 15,  105 => 8,  92 => 7,  79 => 4,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -184,7 +185,10 @@ class __TwigTemplate_e431d9535928e322ba4e5753436b688a extends Template
 {% endblock %}
 
 {% block body %}
+\t<a href=\"{{ path('app_commandes_liste') }}\" class=\"btn btn-primary\">
+\t\t<i class=\"fa-solid fa-list\"></i>Retour à mes commandes</a>
 \t<h1>Votre ticket</h1>
+\t<p>Gardez soigneusement ce ticket avec vous, il vous sera demandé à la caisse.</p>
 
 \t<p>
 \t\t<strong>Commande :</strong>
@@ -204,7 +208,6 @@ class __TwigTemplate_e431d9535928e322ba4e5753436b688a extends Template
 \t\t<strong>Hash :</strong>
 \t\t{{ ticket.payloadHash }}</p>
 
-\t<a href=\"{{ path('app_main') }}\">Retour à l'accueil</a>
 {% endblock %}
 ", "tickets/show.html.twig", "/var/www/symfony/templates/tickets/show.html.twig");
     }

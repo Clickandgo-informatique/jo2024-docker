@@ -103,34 +103,38 @@ class __TwigTemplate_e815b733521096220283d46ef354225b extends Template
 
         // line 8
         yield "
-\t<h1>Profil de
+\t<h1>
+\t\t<i class=\"fa-regular fa-address-card\"></i>Profil de
 \t\t";
-        // line 10
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 10, $this->source); })()), "user", [], "any", false, false, false, 10), "nickname", [], "any", false, false, false, 10), "html", null, true);
+        // line 11
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 11, $this->source); })()), "user", [], "any", false, false, false, 11), "nickname", [], "any", false, false, false, 11), "html", null, true);
         yield "</h1>
 \t<p>Email :
 \t\t";
-        // line 12
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 12, $this->source); })()), "user", [], "any", false, false, false, 12), "email", [], "any", false, false, false, 12), "html", null, true);
+        // line 13
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 13, $this->source); })()), "user", [], "any", false, false, false, 13), "email", [], "any", false, false, false, 13), "html", null, true);
         yield "</p>
 \t<p>Rôle :
 \t\t";
-        // line 14
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::join(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 14, $this->source); })()), "user", [], "any", false, false, false, 14), "roles", [], "any", false, false, false, 14), ", "), "html", null, true);
+        // line 15
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::join(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 15, $this->source); })()), "user", [], "any", false, false, false, 15), "roles", [], "any", false, false, false, 15), ", "), "html", null, true);
         yield "</p>
-
-\t\t";
+\t<a href=\"";
         // line 16
-        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 16, $this->source); })()), "user", [], "any", false, false, false, 16), "is2FAEnabled", [], "any", false, false, false, 16)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 17
-            yield "    <p>Le 2FA est activé sur votre compte.</p>
-    <a href=\"";
-            // line 18
-            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_2fa_disable");
-            yield "\" class=\"btn btn-danger\">Désactiver le 2FA</a>
-";
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commandes_liste");
+        yield "\" class=\"btn btn-primary\">
+\t\t<i class=\"fa-solid fa-table-list\"></i>Voir mes commandes et tickets</a>
+
+\t";
+        // line 19
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 19, $this->source); })()), "user", [], "any", false, false, false, 19), "is2FAEnabled", [], "any", false, false, false, 19)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 20
+            yield "\t\t<p>L'authentification à double facteur est activée sur votre compte.</p>
+\t\t";
+            // line 22
+            yield "\t";
         }
-        // line 20
+        // line 23
         yield "
 
 ";
@@ -164,7 +168,7 @@ class __TwigTemplate_e815b733521096220283d46ef354225b extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  134 => 20,  129 => 18,  126 => 17,  124 => 16,  119 => 14,  114 => 12,  109 => 10,  105 => 8,  92 => 7,  79 => 4,  64 => 3,  41 => 1,);
+        return array (  138 => 23,  135 => 22,  132 => 20,  130 => 19,  124 => 16,  120 => 15,  115 => 13,  110 => 11,  105 => 8,  92 => 7,  79 => 4,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -177,19 +181,23 @@ class __TwigTemplate_e815b733521096220283d46ef354225b extends Template
 
 {% block body %}
 
-\t<h1>Profil de
+\t<h1>
+\t\t<i class=\"fa-regular fa-address-card\"></i>Profil de
 \t\t{{ app.user.nickname }}</h1>
 \t<p>Email :
 \t\t{{ app.user.email }}</p>
 \t<p>Rôle :
 \t\t{{ app.user.roles|join(', ') }}</p>
+\t<a href=\"{{path('app_commandes_liste')}}\" class=\"btn btn-primary\">
+\t\t<i class=\"fa-solid fa-table-list\"></i>Voir mes commandes et tickets</a>
 
-\t\t{% if app.user.is2FAEnabled %}
-    <p>Le 2FA est activé sur votre compte.</p>
-    <a href=\"{{ path('app_2fa_disable') }}\" class=\"btn btn-danger\">Désactiver le 2FA</a>
-{% endif %}
+\t{% if app.user.is2FAEnabled %}
+\t\t<p>L'authentification à double facteur est activée sur votre compte.</p>
+\t\t{# <a href=\"{{ path('app_2fa_disable') }}\" class=\"btn btn-danger\">Désactiver le 2FA</a> #}
+\t{% endif %}
 
 
-{% endblock %}", "profile/index.html.twig", "/var/www/symfony/templates/profile/index.html.twig");
+{% endblock %}
+", "profile/index.html.twig", "/var/www/symfony/templates/profile/index.html.twig");
     }
 }

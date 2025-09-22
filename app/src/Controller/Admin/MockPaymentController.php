@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Commandes;
 use App\Entity\Tickets;
+use App\Repository\TicketsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PragmaRX\Google2FAQRCode\Google2FA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,5 +56,14 @@ class MockPaymentController extends AbstractController
             'commande' => $commande,
             'ticket' => $ticket,
         ]);
+    }
+    //Afficher un ticket
+    #[Route('/tickets/{id}', name: 'app_tickets_show')]
+    public function showTicket(string $id, TicketsRepository $ticketsRepo): Response
+    {
+        $ticket = $ticketsRepo->find($id);
+        $commande = $ticket->getCommande();
+
+        return $this->render('tickets/show.html.twig', compact('ticket', 'commande'));
     }
 }

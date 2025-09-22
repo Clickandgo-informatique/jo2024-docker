@@ -28,13 +28,6 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 # Copier le reste du projet
 COPY ./app ./
 
-# Compiler le cache Symfony
-RUN APP_ENV=prod APP_DEBUG=0 composer dump-autoload --optimize \
-    && php bin/console cache:clear --env=prod \
-    && php bin/console cache:warmup --env=prod
-
----
-
 # Étape 2 : Image finale légère
 FROM php:8.3-fpm
 

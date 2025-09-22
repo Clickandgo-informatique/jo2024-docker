@@ -180,6 +180,6 @@ class __TwigTemplate_086d7da755d73ef82eaffcb1edaf2f0e extends Template
     <button>{{ options.button }}</button>
 
 </form>
-", "@KnpPaginator/Pagination/filtration.html.twig", "/var/www/symfony/vendor/knplabs/knp-paginator-bundle/templates/Pagination/filtration.html.twig");
+", "@KnpPaginator/Pagination/filtration.html.twig", "/home/clavi/jo2024-docker/app/vendor/knplabs/knp-paginator-bundle/templates/Pagination/filtration.html.twig");
     }
 }

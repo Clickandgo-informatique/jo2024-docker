@@ -621,6 +621,6 @@ class __TwigTemplate_a21911fa6d536b9618bbba4b50c68da0 extends Template
     {% endif %}
 
 {% endblock %}
-", "@WebProfiler/Profiler/results.html.twig", "/var/www/symfony/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/results.html.twig");
+", "@WebProfiler/Profiler/results.html.twig", "/home/clavi/jo2024-docker/app/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/results.html.twig");
     }
 }

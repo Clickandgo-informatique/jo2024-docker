@@ -1136,6 +1136,6 @@ $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBl
     {%- set force_error = true -%}
     {{- block('form_row') -}}
 {%- endblock datetime_row %}
-", "bootstrap_base_layout.html.twig", "/var/www/symfony/vendor/symfony/twig-bridge/Resources/views/Form/bootstrap_base_layout.html.twig");
+", "bootstrap_base_layout.html.twig", "/home/clavi/jo2024-docker/app/vendor/symfony/twig-bridge/Resources/views/Form/bootstrap_base_layout.html.twig");
     }
 }

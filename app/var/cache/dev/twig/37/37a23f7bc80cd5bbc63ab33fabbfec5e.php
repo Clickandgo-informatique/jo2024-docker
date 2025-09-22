@@ -253,6 +253,6 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
 \t\t</div>
 \t</article>
 {% endfor %}
-", "_partials/_catalogue-offres-clients.html.twig", "/var/www/symfony/templates/_partials/_catalogue-offres-clients.html.twig");
+", "_partials/_catalogue-offres-clients.html.twig", "/home/clavi/jo2024-docker/app/templates/_partials/_catalogue-offres-clients.html.twig");
     }
 }

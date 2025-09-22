@@ -759,6 +759,6 @@ class __TwigTemplate_75cbf9408336c1b5f57b375a38f5e956 extends Template
         </div>
     </div>
 {% endmacro %}
-", "@WebProfiler/Collector/cache.html.twig", "/var/www/symfony/vendor/symfony/web-profiler-bundle/Resources/views/Collector/cache.html.twig");
+", "@WebProfiler/Collector/cache.html.twig", "/home/clavi/jo2024-docker/app/vendor/symfony/web-profiler-bundle/Resources/views/Collector/cache.html.twig");
     }
 }

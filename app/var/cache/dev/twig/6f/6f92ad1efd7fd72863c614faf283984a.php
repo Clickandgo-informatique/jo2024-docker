@@ -209,6 +209,6 @@ class __TwigTemplate_278924589cb3ace73d26aa422d72c05e extends Template
 \t\t{{ ticket.payloadHash }}</p>
 
 {% endblock %}
-", "tickets/show.html.twig", "/var/www/symfony/templates/tickets/show.html.twig");
+", "tickets/show.html.twig", "/home/clavi/jo2024-docker/app/templates/tickets/show.html.twig");
     }
 }

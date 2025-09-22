@@ -220,6 +220,6 @@ class __TwigTemplate_db9f24bb36bcebc7cd1bd15461c2dded extends Template
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/subnav.css') }}\">
 {% endblock %}
-", "_partials/_subnav.html.twig", "/var/www/symfony/templates/_partials/_subnav.html.twig");
+", "_partials/_subnav.html.twig", "/home/clavi/jo2024-docker/app/templates/_partials/_subnav.html.twig");
     }
 }

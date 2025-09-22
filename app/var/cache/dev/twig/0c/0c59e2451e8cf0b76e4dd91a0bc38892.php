@@ -144,6 +144,6 @@ class __TwigTemplate_409d42b173e250b740dedac470c57377 extends Template
 \t<h1 class=\"text-center\">Bienvenue sur le site de Réservations de tickets des Jeux Olympiques Paris 2024</h1>
 {% endblock %}
 
-", "main/index.html.twig", "/var/www/symfony/templates/main/index.html.twig");
+", "main/index.html.twig", "/home/clavi/jo2024-docker/app/templates/main/index.html.twig");
     }
 }

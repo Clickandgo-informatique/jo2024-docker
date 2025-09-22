@@ -327,6 +327,6 @@ class __TwigTemplate_63c0c0469037c26d9d0c5fd89a2f0928 extends Template
         {{- form_rest(form) -}}
     </table>
 {%- endblock form_widget_compound -%}
-", "form_table_layout.html.twig", "/var/www/symfony/vendor/symfony/twig-bridge/Resources/views/Form/form_table_layout.html.twig");
+", "form_table_layout.html.twig", "/home/clavi/jo2024-docker/app/vendor/symfony/twig-bridge/Resources/views/Form/form_table_layout.html.twig");
     }
 }

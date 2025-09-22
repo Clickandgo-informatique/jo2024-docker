@@ -1985,6 +1985,6 @@ $context["voter_detail"], "vote", [], "array", false, false, false, 577) == Twig
         </div>
     {% endif %}
 {% endblock %}
-", "@Security/Collector/security.html.twig", "/var/www/symfony/vendor/symfony/security-bundle/Resources/views/Collector/security.html.twig");
+", "@Security/Collector/security.html.twig", "/home/clavi/jo2024-docker/app/vendor/symfony/security-bundle/Resources/views/Collector/security.html.twig");
     }
 }

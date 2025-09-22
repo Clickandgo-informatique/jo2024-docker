@@ -242,6 +242,6 @@ class __TwigTemplate_29756431ce3b9d9aa21f101cda1a8617 extends Template
 {% block javascripts %}
 \t<script type=\"module\" src=\"{{asset('assets/js/cart.js')}}\"></script>
 {% endblock %}
-", "cart/index.html.twig", "/var/www/symfony/templates/cart/index.html.twig");
+", "cart/index.html.twig", "/home/clavi/jo2024-docker/app/templates/cart/index.html.twig");
     }
 }

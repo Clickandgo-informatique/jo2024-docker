@@ -111,6 +111,6 @@ class __TwigTemplate_adf1125069117add714ec04971ec6e04 extends Template
         <link rel=\"next\" href=\"{{ path(route, knp_pagination_query(query, next, options)) }}\" />
     {% endif %}
 {% endif %}
-", "@KnpPaginator/Pagination/rel_links.html.twig", "/var/www/symfony/vendor/knplabs/knp-paginator-bundle/templates/Pagination/rel_links.html.twig");
+", "@KnpPaginator/Pagination/rel_links.html.twig", "/home/clavi/jo2024-docker/app/vendor/knplabs/knp-paginator-bundle/templates/Pagination/rel_links.html.twig");
     }
 }

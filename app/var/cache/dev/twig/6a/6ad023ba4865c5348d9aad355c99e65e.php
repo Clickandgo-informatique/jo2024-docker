@@ -145,6 +145,6 @@ class __TwigTemplate_3e62550727f79f41a296170e4ec94754 extends Template
 \t<h1 class=\"text-center\">Administration</h1>
 \t<p class=\"text-center\">Bienvenue dans la zone d'administration.</p>
 {% endblock %}
-", "admin/index.html.twig", "/var/www/symfony/templates/admin/index.html.twig");
+", "admin/index.html.twig", "/home/clavi/jo2024-docker/app/templates/admin/index.html.twig");
     }
 }

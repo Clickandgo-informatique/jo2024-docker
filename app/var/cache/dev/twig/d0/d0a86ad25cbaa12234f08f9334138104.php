@@ -203,6 +203,6 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/sidebar.css') }}\">
 {% endblock %}
-", "_partials/_sidebar.html.twig", "/var/www/symfony/templates/_partials/_sidebar.html.twig");
+", "_partials/_sidebar.html.twig", "/home/clavi/jo2024-docker/app/templates/_partials/_sidebar.html.twig");
     }
 }

@@ -16,3 +16,15 @@ c1a404,172.18.0.1,GET,http://127.0.0.1:8080/catalogue-offres-clients,1758535031,
 d492e1,172.18.0.1,GET,http://127.0.0.1:8080/catalogue-offres-clients,1758535031,,500,request
 26bc9d,172.18.0.1,GET,http://127.0.0.1:8080/,1758536958,745a4e,500,request
 745a4e,172.18.0.1,GET,http://127.0.0.1:8080/,1758536958,,500,request
+21bebf,172.18.0.1,GET,http://127.0.0.1:8080/,1758537298,e94b9e,500,request
+e94b9e,172.18.0.1,GET,http://127.0.0.1:8080/,1758537298,,500,request
+1a9e6d,172.18.0.1,GET,http://127.0.0.1:8080/,1758537301,045a92,500,request
+045a92,172.18.0.1,GET,http://127.0.0.1:8080/,1758537301,,500,request
+3024b1,172.18.0.1,GET,http://127.0.0.1:8080/,1758537320,051f9e,500,request
+051f9e,172.18.0.1,GET,http://127.0.0.1:8080/,1758537320,,500,request
+696480,172.18.0.1,GET,http://127.0.0.1:8080/,1758537581,595bad,500,request
+595bad,172.18.0.1,GET,http://127.0.0.1:8080/,1758537581,,500,request
+a44da1,172.18.0.1,GET,http://127.0.0.1:8080/index.php/?db=jo2024&route=%2Fdatabase%2Fstructure,1758537630,56814b,500,request
+56814b,172.18.0.1,GET,http://127.0.0.1:8080/index.php/?db=jo2024&route=%2Fdatabase%2Fstructure,1758537630,,500,request
+320464,172.18.0.1,GET,http://127.0.0.1:8080/index.php/?db=jo2024&route=%2Fdatabase%2Fstructure,1758537633,52bf63,500,request
+52bf63,172.18.0.1,GET,http://127.0.0.1:8080/index.php/?db=jo2024&route=%2Fdatabase%2Fstructure,1758537633,,500,request

@@ -689,7 +689,6 @@
         <argument key="cache.validator" type="service" id="cache.validator" on-invalid="ignore_uninitialized"/>
         <argument key="cache.serializer" type="service" id="cache.serializer" on-invalid="ignore_uninitialized"/>
         <argument key="cache.property_info" type="service" id="cache.property_info" on-invalid="ignore_uninitialized"/>
-        <argument key="cache.asset_mapper" type="service" id="cache.asset_mapper" on-invalid="ignore_uninitialized"/>
         <argument key="http_client.transport" type="service" id="http_client.transport" on-invalid="ignore_uninitialized"/>
         <argument key="http_client" type="service" id=".debug.http_client" on-invalid="ignore_uninitialized"/>
         <argument key="mailer.message_logger_listener" type="service" id="mailer.message_logger_listener" on-invalid="ignore_uninitialized"/>
@@ -737,9 +736,6 @@
           <argument>reset</argument>
         </argument>
         <argument key="cache.property_info" type="collection">
-          <argument>reset</argument>
-        </argument>
-        <argument key="cache.asset_mapper" type="collection">
           <argument>reset</argument>
         </argument>
         <argument key="http_client.transport" type="collection">
@@ -979,7 +975,6 @@
         <argument>cache.validator</argument>
         <argument>cache.serializer</argument>
         <argument>cache.property_info</argument>
-        <argument>cache.asset_mapper</argument>
         <argument>cache.validator_expression_language</argument>
         <argument>cache.doctrine.orm.default.result</argument>
         <argument>cache.doctrine.orm.default.query</argument>
@@ -1027,7 +1022,6 @@
         <argument>cache.validator</argument>
         <argument>cache.serializer</argument>
         <argument>cache.property_info</argument>
-        <argument>cache.asset_mapper</argument>
         <argument>cache.validator_expression_language</argument>
         <argument>cache.doctrine.orm.default.result</argument>
         <argument>cache.doctrine.orm.default.query</argument>
@@ -1052,7 +1046,6 @@
         <argument>cache.validator</argument>
         <argument>cache.serializer</argument>
         <argument>cache.property_info</argument>
-        <argument>cache.asset_mapper</argument>
         <argument>cache.validator_expression_language</argument>
         <argument>cache.doctrine.orm.default.result</argument>
         <argument>cache.doctrine.orm.default.query</argument>
@@ -1492,12 +1485,6 @@
       <argument type="service" id="cache.property_info.recorder_inner"/>
       <argument type="service" id="profiler.is_disabled_state_checker" on-invalid="ignore"/>
     </service>
-    <service id="cache.asset_mapper" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
-      <tag name="cache.pool"/>
-      <tag name="kernel.reset" method="reset"/>
-      <argument type="service" id="cache.asset_mapper.recorder_inner"/>
-      <argument type="service" id="profiler.is_disabled_state_checker" on-invalid="ignore"/>
-    </service>
     <service id="cache.adapter.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" abstract="true">
       <tag name="cache.pool" clearer="cache.system_clearer" reset="reset"/>
       <tag name="monolog.logger" channel="cache"/>
@@ -1617,7 +1604,6 @@
         <argument key="cache.validator" type="service" id="cache.validator" on-invalid="ignore_uninitialized"/>
         <argument key="cache.serializer" type="service" id="cache.serializer" on-invalid="ignore_uninitialized"/>
         <argument key="cache.property_info" type="service" id="cache.property_info" on-invalid="ignore_uninitialized"/>
-        <argument key="cache.asset_mapper" type="service" id="cache.asset_mapper" on-invalid="ignore_uninitialized"/>
         <argument key="cache.validator_expression_language" type="service" id="cache.validator_expression_language" on-invalid="ignore_uninitialized"/>
         <argument key="cache.security_expression_language" type="service" id="cache.security_expression_language" on-invalid="ignore_uninitialized"/>
         <argument key="cache.security_is_granted_attribute_expression_language" type="service" id="cache.security_is_granted_attribute_expression_language" on-invalid="ignore_uninitialized"/>
@@ -1633,7 +1619,6 @@
         <argument key="cache.validator" type="service" id="cache.validator" on-invalid="ignore_uninitialized"/>
         <argument key="cache.serializer" type="service" id="cache.serializer" on-invalid="ignore_uninitialized"/>
         <argument key="cache.property_info" type="service" id="cache.property_info" on-invalid="ignore_uninitialized"/>
-        <argument key="cache.asset_mapper" type="service" id="cache.asset_mapper" on-invalid="ignore_uninitialized"/>
         <argument key="cache.validator_expression_language" type="service" id="cache.validator_expression_language" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.default.result" type="service" id="cache.doctrine.orm.default.result" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.default.query" type="service" id="cache.doctrine.orm.default.query" on-invalid="ignore_uninitialized"/>
@@ -1645,7 +1630,7 @@
     </service>
     <service id="identity_translator" class="Symfony\Component\Translation\IdentityTranslator"/>
     <service id="assets.packages" class="Symfony\Component\Asset\Packages">
-      <argument type="service" id="asset_mapper.asset_package"/>
+      <argument type="service" id="assets._default_package"/>
       <argument type="tagged_iterator" tag="assets.package" index-by="package" default-index-method="getDefaultPackageName" default-priority-method="getDefaultPackagePriority"/>
     </service>
     <service id="assets.empty_package" class="Symfony\Component\Asset\Package">
@@ -1684,233 +1669,10 @@
       <argument type="service" id=".debug.http_client" on-invalid="null"/>
       <argument>false</argument>
     </service>
-    <service id="asset_mapper" class="Symfony\Component\AssetMapper\AssetMapper">
-      <argument type="service" id="asset_mapper.repository"/>
-      <argument type="service" id="asset_mapper.cached_mapped_asset_factory"/>
-      <argument type="service" id="asset_mapper.compiled_asset_mapper_config_reader"/>
-    </service>
-    <service id="asset_mapper.cached_mapped_asset_factory" class="Symfony\Component\AssetMapper\Factory\CachedMappedAssetFactory">
-      <tag name="container.decorator" id="asset_mapper.mapped_asset_factory" inner="asset_mapper.cached_mapped_asset_factory.inner"/>
-      <argument type="service" id="asset_mapper.cached_mapped_asset_factory.inner"/>
-      <argument>/var/www/symfony/var/cache/dev/asset_mapper</argument>
-      <argument>true</argument>
-    </service>
-    <service id="asset_mapper.repository" class="Symfony\Component\AssetMapper\AssetMapperRepository">
-      <argument type="collection">
-        <argument key="assets/"></argument>
-      </argument>
-      <argument>/var/www/symfony</argument>
-      <argument type="collection"/>
-      <argument>true</argument>
-      <argument>true</argument>
-    </service>
-    <service id="asset_mapper.public_assets_path_resolver" class="Symfony\Component\AssetMapper\Path\PublicAssetsPathResolver">
-      <argument>/assets/</argument>
-    </service>
-    <service id="asset_mapper.local_public_assets_filesystem" class="Symfony\Component\AssetMapper\Path\LocalPublicAssetsFilesystem">
-      <argument>/var/www/symfony/public</argument>
-    </service>
-    <service id="asset_mapper.compiled_asset_mapper_config_reader" class="Symfony\Component\AssetMapper\CompiledAssetMapperConfigReader">
-      <argument>/var/www/symfony/public/assets</argument>
-    </service>
-    <service id="asset_mapper.asset_package" class="Symfony\Component\AssetMapper\MapperAwareAssetPackage">
-      <tag name="container.decorator" id="assets._default_package" inner="asset_mapper.asset_package.inner"/>
-      <argument type="service" id="asset_mapper.asset_package.inner"/>
-      <argument type="service" id="asset_mapper"/>
-    </service>
-    <service id="asset_mapper.dev_server_subscriber" class="Symfony\Component\AssetMapper\AssetMapperDevServerSubscriber">
-      <tag name="kernel.event_subscriber"/>
-      <tag name="container.hot_path"/>
-      <tag name="container.hot_path"/>
-      <argument type="service" id="asset_mapper"/>
-      <argument>/assets/</argument>
-      <argument type="collection"/>
-      <argument type="service" id="cache.asset_mapper"/>
-      <argument type="service" id="profiler" on-invalid="null"/>
-    </service>
-    <service id="asset_mapper.command.compile" class="Symfony\Component\AssetMapper\Command\AssetMapperCompileCommand">
-      <tag name="console.command"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="asset_mapper.compiled_asset_mapper_config_reader"/>
-      <argument type="service" id="asset_mapper"/>
-      <argument type="service" id="asset_mapper.importmap.generator"/>
-      <argument type="service" id="asset_mapper.local_public_assets_filesystem"/>
-      <argument>/var/www/symfony</argument>
-      <argument>true</argument>
-      <argument type="service" id="debug.event_dispatcher" on-invalid="null"/>
-      <call method="setName">
-        <argument>asset-map:compile</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Compile all mapped assets and writes them to the final public output directory</argument>
-      </call>
-    </service>
-    <service id="asset_mapper.command.debug" class="Symfony\Component\AssetMapper\Command\DebugAssetMapperCommand">
-      <tag name="console.command"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="asset_mapper"/>
-      <argument type="service" id="asset_mapper.repository"/>
-      <argument>/var/www/symfony</argument>
-      <call method="setName">
-        <argument>debug:asset-map</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Output all mapped assets</argument>
-      </call>
-    </service>
-    <service id="asset_mapper_compiler" class="Symfony\Component\AssetMapper\AssetMapperCompiler">
-      <argument type="tagged_iterator" tag="asset_mapper.compiler"/>
-      <argument type="service_closure" id="asset_mapper"/>
-    </service>
-    <service id="asset_mapper.compiler.css_asset_url_compiler" class="Symfony\Component\AssetMapper\Compiler\CssAssetUrlCompiler">
-      <tag name="asset_mapper.compiler"/>
-      <tag name="monolog.logger" channel="asset_mapper"/>
-      <argument>strict</argument>
-      <argument type="service" id="logger"/>
-    </service>
-    <service id="asset_mapper.compiler.source_mapping_urls_compiler" class="Symfony\Component\AssetMapper\Compiler\SourceMappingUrlsCompiler">
-      <tag name="asset_mapper.compiler"/>
-    </service>
-    <service id="asset_mapper.compiler.javascript_import_path_compiler" class="Symfony\Component\AssetMapper\Compiler\JavaScriptImportPathCompiler">
-      <tag name="asset_mapper.compiler"/>
-      <tag name="monolog.logger" channel="asset_mapper"/>
-      <argument type="service" id="asset_mapper.importmap.config_reader"/>
-      <argument>strict</argument>
-      <argument type="service" id="logger"/>
-    </service>
-    <service id="asset_mapper.importmap.config_reader" class="Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader">
-      <argument>/var/www/symfony/importmap.php</argument>
-      <argument type="service" id="asset_mapper.importmap.remote_package_storage"/>
-    </service>
-    <service id="asset_mapper.importmap.manager" class="Symfony\Component\AssetMapper\ImportMap\ImportMapManager">
-      <argument type="service" id="asset_mapper"/>
-      <argument type="service" id="asset_mapper.importmap.config_reader"/>
-      <argument type="service" id="asset_mapper.importmap.remote_package_downloader"/>
-      <argument type="service" id="asset_mapper.importmap.resolver"/>
-    </service>
-    <service id="asset_mapper.importmap.generator" class="Symfony\Component\AssetMapper\ImportMap\ImportMapGenerator">
-      <argument type="service" id="asset_mapper"/>
-      <argument type="service" id="asset_mapper.compiled_asset_mapper_config_reader"/>
-      <argument type="service" id="asset_mapper.importmap.config_reader"/>
-    </service>
-    <service id="asset_mapper.importmap.remote_package_storage" class="Symfony\Component\AssetMapper\ImportMap\RemotePackageStorage">
-      <argument>/var/www/symfony/assets/vendor</argument>
-    </service>
-    <service id="asset_mapper.importmap.remote_package_downloader" class="Symfony\Component\AssetMapper\ImportMap\RemotePackageDownloader">
-      <argument type="service" id="asset_mapper.importmap.remote_package_storage"/>
-      <argument type="service" id="asset_mapper.importmap.config_reader"/>
-      <argument type="service" id="asset_mapper.importmap.resolver"/>
-    </service>
-    <service id="asset_mapper.importmap.version_checker" class="Symfony\Component\AssetMapper\ImportMap\ImportMapVersionChecker">
-      <argument type="service" id="asset_mapper.importmap.config_reader"/>
-      <argument type="service" id="asset_mapper.importmap.remote_package_downloader"/>
-    </service>
-    <service id="asset_mapper.importmap.resolver" class="Symfony\Component\AssetMapper\ImportMap\Resolver\JsDelivrEsmResolver">
-      <argument type="service" id=".debug.http_client"/>
-    </service>
-    <service id="asset_mapper.importmap.renderer" class="Symfony\Component\AssetMapper\ImportMap\ImportMapRenderer">
-      <argument type="service" id="asset_mapper.importmap.generator"/>
-      <argument type="service" id="assets.packages" on-invalid="null"/>
-      <argument>UTF-8</argument>
-      <argument>es-module-shims</argument>
-      <argument type="collection"/>
-      <argument type="service" id="request_stack"/>
-    </service>
-    <service id="asset_mapper.importmap.auditor" class="Symfony\Component\AssetMapper\ImportMap\ImportMapAuditor">
-      <argument type="service" id="asset_mapper.importmap.config_reader"/>
-      <argument type="service" id=".debug.http_client"/>
-    </service>
-    <service id="asset_mapper.importmap.update_checker" class="Symfony\Component\AssetMapper\ImportMap\ImportMapUpdateChecker">
-      <argument type="service" id="asset_mapper.importmap.config_reader"/>
-      <argument type="service" id=".debug.http_client"/>
-    </service>
-    <service id="asset_mapper.importmap.command.require" class="Symfony\Component\AssetMapper\Command\ImportMapRequireCommand">
-      <tag name="console.command"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="asset_mapper.importmap.manager"/>
-      <argument type="service" id="asset_mapper.importmap.version_checker"/>
-      <argument>/var/www/symfony</argument>
-      <call method="setName">
-        <argument>importmap:require</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Require JavaScript packages</argument>
-      </call>
-    </service>
-    <service id="asset_mapper.importmap.command.remove" class="Symfony\Component\AssetMapper\Command\ImportMapRemoveCommand">
-      <tag name="console.command"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="asset_mapper.importmap.manager"/>
-      <call method="setName">
-        <argument>importmap:remove</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Remove JavaScript packages</argument>
-      </call>
-    </service>
-    <service id="asset_mapper.importmap.command.update" class="Symfony\Component\AssetMapper\Command\ImportMapUpdateCommand">
-      <tag name="console.command"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="asset_mapper.importmap.manager"/>
-      <argument type="service" id="asset_mapper.importmap.version_checker"/>
-      <call method="setName">
-        <argument>importmap:update</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Update JavaScript packages to their latest versions</argument>
-      </call>
-    </service>
-    <service id="asset_mapper.importmap.command.install" class="Symfony\Component\AssetMapper\Command\ImportMapInstallCommand">
-      <tag name="console.command"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="asset_mapper.importmap.remote_package_downloader"/>
-      <argument>/var/www/symfony</argument>
-      <call method="setName">
-        <argument>importmap:install</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Download all assets that should be downloaded</argument>
-      </call>
-    </service>
-    <service id="asset_mapper.importmap.command.audit" class="Symfony\Component\AssetMapper\Command\ImportMapAuditCommand">
-      <tag name="console.command"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="asset_mapper.importmap.auditor"/>
-      <call method="setName">
-        <argument>importmap:audit</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Check for security vulnerability advisories for dependencies</argument>
-      </call>
-    </service>
-    <service id="asset_mapper.importmap.command.outdated" class="Symfony\Component\AssetMapper\Command\ImportMapOutdatedCommand">
-      <tag name="console.command"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="asset_mapper.importmap.update_checker"/>
-      <call method="setName">
-        <argument>importmap:outdated</argument>
-      </call>
-      <call method="setDescription">
-        <argument>List outdated JavaScript packages and their latest versions</argument>
-      </call>
-    </service>
-    <service id="asset_mapper.compressor.brotli" class="Symfony\Component\AssetMapper\Compressor\BrotliCompressor"/>
-    <service id="asset_mapper.compressor.zstandard" class="Symfony\Component\AssetMapper\Compressor\ZstandardCompressor"/>
-    <service id="asset_mapper.compressor.gzip" class="Symfony\Component\AssetMapper\Compressor\GzipCompressor"/>
-    <service id="asset_mapper.compressor" class="Symfony\Component\AssetMapper\Compressor\ChainCompressor">
-      <argument>null</argument>
-      <argument type="service" id="logger"/>
-    </service>
-    <service id="asset_mapper.assets.command.compress" class="Symfony\Component\AssetMapper\Command\CompressAssetsCommand">
-      <tag name="console.command"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="asset_mapper.compressor"/>
-      <call method="setName">
-        <argument>assets:compress</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Pre-compresses files to serve through a web server</argument>
-      </call>
+    <service id="assets._default_package" class="Symfony\Component\Asset\PathPackage">
+      <argument></argument>
+      <argument type="service" id="assets.empty_version_strategy"/>
+      <argument type="service" id="assets.context"/>
     </service>
     <service id="http_client.transport" class="Symfony\Contracts\HttpClient\HttpClientInterface">
       <tag name="monolog.logger" channel="http_client"/>
@@ -2959,22 +2721,6 @@
           <argument>onConsoleError</argument>
         </argument>
         <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.request</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="asset_mapper.dev_server_subscriber"/>
-          <argument>onKernelRequest</argument>
-        </argument>
-        <argument>35</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.response</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="asset_mapper.dev_server_subscriber"/>
-          <argument>onKernelResponse</argument>
-        </argument>
-        <argument>2048</argument>
       </call>
       <call method="addListener">
         <argument>Symfony\Component\Mailer\Event\MessageEvent</argument>
@@ -4311,10 +4057,6 @@
         <argument type="service" id="cache.property_info"/>
       </call>
       <call method="addInstance">
-        <argument>cache.asset_mapper</argument>
-        <argument type="service" id="cache.asset_mapper"/>
-      </call>
-      <call method="addInstance">
         <argument>cache.validator_expression_language</argument>
         <argument type="service" id="cache.validator_expression_language"/>
       </call>
@@ -4930,9 +4672,6 @@
         <argument type="service" id="twig.extension.form"/>
       </call>
       <call method="addExtension">
-        <argument type="service" id="twig.extension.importmap"/>
-      </call>
-      <call method="addExtension">
         <argument type="service" id="twig.extension.logout_url"/>
       </call>
       <call method="addExtension">
@@ -5133,7 +4872,7 @@
       <argument>,</argument>
     </service>
     <service id="twig.runtime_loader" class="Twig\RuntimeLoader\ContainerRuntimeLoader">
-      <argument type="service" id=".service_locator.ASvf07y"/>
+      <argument type="service" id=".service_locator.mHARe9h"/>
     </service>
     <service id="twig.error_renderer.html" class="Symfony\Bridge\Twig\ErrorRenderer\TwigErrorRenderer">
       <argument type="service" id="twig"/>
@@ -5209,13 +4948,6 @@
     <service id="twig.mime_body_renderer" class="Symfony\Bridge\Twig\Mime\BodyRenderer">
       <argument key="0" type="service" id="twig"/>
       <argument key="localeSwitcher" type="service" id="translation.locale_switcher" on-invalid="ignore"/>
-    </service>
-    <service id="twig.runtime.importmap" class="Symfony\Bridge\Twig\Extension\ImportMapRuntime">
-      <tag name="twig.runtime"/>
-      <argument type="service" id="asset_mapper.importmap.renderer"/>
-    </service>
-    <service id="twig.extension.importmap" class="Symfony\Bridge\Twig\Extension\ImportMapExtension">
-      <tag name="twig.extension"/>
     </service>
     <service id="doctrine.migrations.dependency_factory" class="Doctrine\Migrations\DependencyFactory" constructor="fromEntityManager">
       <argument type="service" id="doctrine.migrations.configuration_loader"/>
@@ -8293,16 +8025,6 @@
       </argument>
       <factory function="current"/>
     </service>
-    <service id="asset_mapper.cached_mapped_asset_factory.inner" class="Symfony\Component\AssetMapper\Factory\MappedAssetFactory">
-      <argument type="service" id="asset_mapper.public_assets_path_resolver"/>
-      <argument type="service" id="asset_mapper_compiler"/>
-      <argument>/var/www/symfony/assets/vendor</argument>
-    </service>
-    <service id="asset_mapper.asset_package.inner" class="Symfony\Component\Asset\PathPackage">
-      <argument></argument>
-      <argument type="service" id="assets.empty_version_strategy"/>
-      <argument type="service" id="assets.context"/>
-    </service>
     <service id="debug.event_dispatcher.inner" class="Symfony\Component\EventDispatcher\EventDispatcher"/>
     <service id="debug.controller_resolver.inner" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver">
       <argument type="service" id="service_container"/>
@@ -8637,69 +8359,6 @@
       <argument>false</argument>
       <argument type="service_closure" id="console.command.error_dumper"/>
     </service>
-    <service id=".asset_mapper.command.compile.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>asset-map:compile</argument>
-      <argument type="collection"/>
-      <argument>Compile all mapped assets and writes them to the final public output directory</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="asset_mapper.command.compile"/>
-    </service>
-    <service id=".asset_mapper.command.debug.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>debug:asset-map</argument>
-      <argument type="collection"/>
-      <argument>Output all mapped assets</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="asset_mapper.command.debug"/>
-    </service>
-    <service id=".asset_mapper.importmap.command.require.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>importmap:require</argument>
-      <argument type="collection"/>
-      <argument>Require JavaScript packages</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="asset_mapper.importmap.command.require"/>
-    </service>
-    <service id=".asset_mapper.importmap.command.remove.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>importmap:remove</argument>
-      <argument type="collection"/>
-      <argument>Remove JavaScript packages</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="asset_mapper.importmap.command.remove"/>
-    </service>
-    <service id=".asset_mapper.importmap.command.update.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>importmap:update</argument>
-      <argument type="collection"/>
-      <argument>Update JavaScript packages to their latest versions</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="asset_mapper.importmap.command.update"/>
-    </service>
-    <service id=".asset_mapper.importmap.command.install.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>importmap:install</argument>
-      <argument type="collection"/>
-      <argument>Download all assets that should be downloaded</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="asset_mapper.importmap.command.install"/>
-    </service>
-    <service id=".asset_mapper.importmap.command.audit.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>importmap:audit</argument>
-      <argument type="collection"/>
-      <argument>Check for security vulnerability advisories for dependencies</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="asset_mapper.importmap.command.audit"/>
-    </service>
-    <service id=".asset_mapper.importmap.command.outdated.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>importmap:outdated</argument>
-      <argument type="collection"/>
-      <argument>List outdated JavaScript packages and their latest versions</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="asset_mapper.importmap.command.outdated"/>
-    </service>
-    <service id=".asset_mapper.assets.command.compress.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>assets:compress</argument>
-      <argument type="collection"/>
-      <argument>Pre-compresses files to serve through a web server</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="asset_mapper.assets.command.compress"/>
-    </service>
     <service id=".console.command.mailer_test.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>mailer:test</argument>
       <argument type="collection"/>
@@ -9022,7 +8681,7 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.yqt109r"/>
+      <argument type="service" id=".service_locator.2mNbf0G"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -9059,15 +8718,6 @@
         <argument key="secrets:decrypt-to-local">console.command.secrets_decrypt_to_local</argument>
         <argument key="secrets:encrypt-from-local">console.command.secrets_encrypt_from_local</argument>
         <argument key="error:dump">console.command.error_dumper</argument>
-        <argument key="asset-map:compile">asset_mapper.command.compile</argument>
-        <argument key="debug:asset-map">asset_mapper.command.debug</argument>
-        <argument key="importmap:require">asset_mapper.importmap.command.require</argument>
-        <argument key="importmap:remove">asset_mapper.importmap.command.remove</argument>
-        <argument key="importmap:update">asset_mapper.importmap.command.update</argument>
-        <argument key="importmap:install">asset_mapper.importmap.command.install</argument>
-        <argument key="importmap:audit">asset_mapper.importmap.command.audit</argument>
-        <argument key="importmap:outdated">asset_mapper.importmap.command.outdated</argument>
-        <argument key="assets:compress">asset_mapper.assets.command.compress</argument>
         <argument key="mailer:test">console.command.mailer_test</argument>
         <argument key="doctrine:database:create">doctrine.database_create_command</argument>
         <argument key="doctrine:database:drop">doctrine.database_drop_command</argument>
@@ -9136,7 +8786,7 @@
         <argument key="make:webhook">maker.auto_command.make_webhook</argument>
       </argument>
     </service>
-    <service id=".service_locator.yqt109r" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.2mNbf0G" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
@@ -9174,15 +8824,6 @@
         <argument key="console.command.secrets_decrypt_to_local" type="service_closure" id=".console.command.secrets_decrypt_to_local.lazy"/>
         <argument key="console.command.secrets_encrypt_from_local" type="service_closure" id=".console.command.secrets_encrypt_from_local.lazy"/>
         <argument key="console.command.error_dumper" type="service_closure" id=".console.command.error_dumper.lazy"/>
-        <argument key="asset_mapper.command.compile" type="service_closure" id=".asset_mapper.command.compile.lazy"/>
-        <argument key="asset_mapper.command.debug" type="service_closure" id=".asset_mapper.command.debug.lazy"/>
-        <argument key="asset_mapper.importmap.command.require" type="service_closure" id=".asset_mapper.importmap.command.require.lazy"/>
-        <argument key="asset_mapper.importmap.command.remove" type="service_closure" id=".asset_mapper.importmap.command.remove.lazy"/>
-        <argument key="asset_mapper.importmap.command.update" type="service_closure" id=".asset_mapper.importmap.command.update.lazy"/>
-        <argument key="asset_mapper.importmap.command.install" type="service_closure" id=".asset_mapper.importmap.command.install.lazy"/>
-        <argument key="asset_mapper.importmap.command.audit" type="service_closure" id=".asset_mapper.importmap.command.audit.lazy"/>
-        <argument key="asset_mapper.importmap.command.outdated" type="service_closure" id=".asset_mapper.importmap.command.outdated.lazy"/>
-        <argument key="asset_mapper.assets.command.compress" type="service_closure" id=".asset_mapper.assets.command.compress.lazy"/>
         <argument key="console.command.mailer_test" type="service_closure" id=".console.command.mailer_test.lazy"/>
         <argument key="doctrine.database_create_command" type="service_closure" id="doctrine.database_create_command"/>
         <argument key="doctrine.database_drop_command" type="service_closure" id="doctrine.database_drop_command"/>
@@ -9289,14 +8930,6 @@
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
-    <service id="cache.asset_mapper.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
-      <argument>erY1Q+UXgs</argument>
-      <argument>0</argument>
-      <argument>%container.build_id%</argument>
-      <argument>/var/www/symfony/var/cache/dev/pools/system</argument>
-      <argument type="service" id="logger" on-invalid="ignore"/>
-      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
-    </service>
     <service id="cache.validator_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <argument>at-aX50CvM</argument>
       <argument>0</argument>
@@ -9339,13 +8972,12 @@
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
-    <service id=".service_locator.ASvf07y" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.mHARe9h" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="Symfony\Bridge\Twig\Extension\CsrfRuntime" type="service_closure" id="twig.runtime.security_csrf"/>
         <argument key="Symfony\Bridge\Twig\Extension\HttpKernelRuntime" type="service_closure" id="twig.runtime.httpkernel"/>
         <argument key="Symfony\Component\Form\FormRenderer" type="service_closure" id="twig.form.renderer"/>
-        <argument key="Symfony\Bridge\Twig\Extension\ImportMapRuntime" type="service_closure" id="twig.runtime.importmap"/>
         <argument key="Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime" type="service_closure" id="Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime"/>
       </argument>
     </service>
@@ -9382,10 +9014,6 @@
     <service id="Symfony\Contracts\Cache\TagAwareCacheInterface" alias="cache.app.taggable"/>
     <service id="Symfony\Contracts\Translation\TranslatorInterface" alias="translator.data_collector"/>
     <service id="Symfony\Component\Asset\Packages" alias="assets.packages"/>
-    <service id="Symfony\Component\AssetMapper\AssetMapperInterface" alias="asset_mapper"/>
-    <service id="asset_mapper.http_client" alias=".debug.http_client"/>
-    <service id="Symfony\Component\AssetMapper\ImportMap\ImportMapManager" alias="asset_mapper.importmap.manager"/>
-    <service id="Symfony\Component\AssetMapper\Compressor\CompressorInterface" alias="asset_mapper.compressor"/>
     <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias=".debug.http_client"/>
     <service id="mailer" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
@@ -9488,8 +9116,6 @@
     <service id="validator" alias="debug.validator"/>
     <service id="http_client" alias=".debug.http_client"/>
     <service id=".debug.http_client.inner" alias="http_client.uri_template"/>
-    <service id="asset_mapper.mapped_asset_factory" alias="asset_mapper.cached_mapped_asset_factory"/>
-    <service id="assets._default_package" alias="asset_mapper.asset_package"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
     <service id="controller_resolver" alias="debug.controller_resolver"/>
     <service id="argument_resolver" alias="debug.argument_resolver"/>

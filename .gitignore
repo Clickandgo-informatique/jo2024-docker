@@ -16,3 +16,16 @@
 /node_modules/
 /public/build/
 /public/bundles/
+
+# --- Docker ---
+/db_data/
+/node_modules/
+/vendor/
+/var/
+
+# --- OS / IDE ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

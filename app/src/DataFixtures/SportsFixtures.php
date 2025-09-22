@@ -41,6 +41,10 @@ class SportsFixtures extends Fixture
             $sport->setSlug($this->slugger->slug(strtolower($sport->getIntitule())));
             $sport->setEmoji($item['emoji']);
             $sport->setPictogramme($item['pictogramme']);
+            
+            $this->addReference('sport_' . $sport->getSlug(), $sport);
+
+
 
             $manager->persist($sport);
         }

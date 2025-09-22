@@ -1,0 +1,12 @@
+@startuml
+(*) --> "Page d'accueil"
+--> "Visiteur clique sur 'Sports'"
+--> "Affichage liste"
+if "Filtrer ?" then
+  -->[Oui] "Appliquer filtre"
+  --> "Afficher résultats filtrés"
+else
+  -->[Non] "Afficher tous les sports"
+endif
+--> (*)
+@enduml

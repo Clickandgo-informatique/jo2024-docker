@@ -6,7 +6,7 @@
     grid-template-columns: 280px 1fr; /* sidebar + résultats */
     gap: 2rem;
     align-items: start;
-    width:100%;
+    width: 100%;
 }
 
 @media (max-width: 992px) {
@@ -173,6 +173,7 @@
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     height: 100%;
+    max-width: 300px;
 }
 
 .offer-card:hover {
@@ -184,16 +185,20 @@
 .offer-image img {
     width: 100%;
     height: 180px;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
 }
-
+.offer-date {
+    margin: 5px;
+    color: darkgray;
+}
 /* Contenu */
 .offer-content {
     padding: 15px;
     flex: 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .offer-title {
@@ -201,6 +206,7 @@
     font-weight: bold;
     margin-bottom: 10px;
     color: #333;
+    text-align: center;
 }
 
 .offer-description {
@@ -211,22 +217,27 @@
 }
 
 .offer-meta {
+    display: flex;
     font-size: 0.85rem;
-    color: #777;
-    margin-bottom: 12px;
+    color: #777;   
+    flex-direction: column;
 }
 
 .offer-price {
     font-weight: bold;
+    font-size: 1.5rem;
     color: #e74c3c;
-    margin-right: 10px;
+    text-align: center;
+    margin: 5px;
 }
 
-.offer-date,
 .offer-category {
-    margin-right: 10px;
+    height: 40px;
+    background-color: #531eff;
+    width: 100%;
+    color: #ffff;
+    padding: 10px;
 }
-
 /* Lien bouton */
 .offer-link {
     align-self: flex-start;
@@ -250,7 +261,8 @@
     display: none;
 }
 .offer-sports {
-    margin-top: 0.5rem;
+    margin: 0.5rem;
+    text-align: center;
 }
 
 .sport-list {

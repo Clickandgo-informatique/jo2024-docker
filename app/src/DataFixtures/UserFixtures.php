@@ -24,10 +24,10 @@ class UserFixtures extends Fixture
 
         $admin
             ->setNickname('admin')
-            ->setPassword($this->passwordHasher->hashPassword($admin, 'Admin!447'))
+            ->setPassword($this->passwordHasher->hashPassword($admin, 'Admin-jo2024!'))
             ->setEmail('admin@jo2024.fr')
             ->setRoles(['ROLE_ADMIN'])
-             ->setCreatedAt(new \DateTimeImmutable());
+            ->setCreatedAt(new \DateTimeImmutable());
 
         $manager->persist($admin);
 
@@ -37,9 +37,9 @@ class UserFixtures extends Fixture
             $user = new Users();
             $user->setNickname($this->faker->username())
                 ->setEmail($this->faker->email())
-                ->setPassword($this->passwordHasher->hashPassword($user, 'Jo2024!'))
+                ->setPassword($this->passwordHasher->hashPassword($user, 'User-jo2024!'))
                 ->setRoles(['ROLE_USER'])
-                 ->setCreatedAt(new \DateTimeImmutable());
+                ->setCreatedAt(new \DateTimeImmutable());
             $manager->persist($user);
         }
         $manager->flush();

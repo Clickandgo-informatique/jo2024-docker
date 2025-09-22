@@ -21,7 +21,7 @@ class Offres
     #[ORM\Column(length: 255)]
     private ?string $intitule = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $prix = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -80,6 +80,9 @@ class Offres
     #[ORM\JoinTable(name: 'offres_sports')]
     private Collection $sports;
 
+    #[ORM\Column(type: 'json')]
+    private array $lieux = [];
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -105,12 +108,12 @@ class Offres
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrix(): ?int
     {
         return $this->prix;
     }
 
-    public function setPrix(float $prix): static
+    public function setPrix(int $prix): static
     {
         $this->prix = $prix;
         return $this;
@@ -330,6 +333,17 @@ class Offres
             $sport->removeOffre($this); // synchro côté Sports
         }
 
+        return $this;
+    }
+
+    public function getLieux(): array
+    {
+        return $this->lieux;
+    }
+
+    public function setLieux(array $lieux): static
+    {
+        $this->lieux = $lieux;
         return $this;
     }
 }

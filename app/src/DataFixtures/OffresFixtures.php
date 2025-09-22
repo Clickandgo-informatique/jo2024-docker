@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\CategoriesOffres;
+use App\Entity\Offres;
 use App\Entity\Sports;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -14,47 +15,75 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class OffresFixtures extends Fixture implements DependentFixtureInterface
 {
     private Generator $faker;
-    private $slugger;
+    private SluggerInterface $slugger;
+
     public function __construct(SluggerInterface $slugger)
     {
         $this->faker = Factory::create('fr_FR');
         $this->slugger = $slugger;
     }
+
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
+        // Remonter à app/
+        $appDir = dirname(__DIR__, 2);
 
-        $sports = $manager->getRepository(Sports::class)->findAll();
+        // Construire le chemin complet
+        $jsonPath = $appDir . '/public/json-data/sports-paris2024.json';
+
+        // Lecture du fichier
+        $jsonContent = file_get_contents($jsonPath);
+
+        // Décoder en tableau associatif
+        $data = json_decode($jsonContent, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \RuntimeException("Erreur JSON : " . json_last_error_msg());
+        }
+
+        // Récupérer les catégories d'offres
         $categoriesOffres = $manager->getRepository(CategoriesOffres::class)->findAll();
 
-        for ($i = 0; $i < 50; $i++) {
-            $offre = new \App\Entity\Offres();
+        $i = 0;
+        foreach ($data[0]['data'] as $item) {
+            $slug = $item['slug'];
+
+            // Récupérer le sport via repository ou via référence si définie dans SportsFixtures
+            $sport = $manager->getRepository(Sports::class)->findOneBy(['slug' => $slug]);
+            if (!$sport && $this->hasReference('sport_' . $slug,Sports::class)) {
+                $sport = $this->getReference('sport_' . $slug,Sports::class);
+            }
+
+            if (!$sport) {
+                trigger_error(sprintf('⚠️ Sport introuvable pour le slug "%s". Offre ignorée.', $slug), E_USER_WARNING);
+                continue;
+            }
+
+            $offre = new Offres();
             $offre
                 ->setCode($this->faker->unique()->bothify('OFF###??'))
                 ->setIntitule("Intitulé de l'offre " . ($i + 1))
-                ->setSlug($this->slugger->slug(strtolower($offre->getIntitule())))
+                ->setSlug($slug)
                 ->setDescription("Description de l'offre " . ($i + 1))
                 ->setPrix($this->faker->numberBetween(100, 350))
-                ->setDateDebut($this->faker->dateTimeBetween('-1 years', 'now'))
-                ->setDateFin($this->faker->dateTimeBetween('now', '+6 months'))
+                ->setDateDebut(new \DateTime($item['dateDebut']))
+                ->setDateFin(new \DateTime($item['dateFin']))
                 ->setNbrAdultes($this->faker->numberBetween(1, 2))
                 ->setNbrEnfants($this->faker->numberBetween(1, 6))
-                ->setIsLocked($this->faker->boolean($i - 2))
-
-                //On récupère une référence à la catégorie d'offre
+                ->setIsLocked($this->faker->boolean())
+                ->setLieux($item['lieux'])
+                ->addSport($sport)
                 ->setCategorie($this->faker->randomElement($categoriesOffres))
-                ->setIsPublished(true);
+                ->setIsPublished(true)
+                ->setCreatedAt(new \DateTimeImmutable());
 
-            // Associer entre 1 et 3 sports au hasard
-            $randomSports = $faker->randomElements($sports, $faker->numberBetween(1, 3));
-            foreach ($randomSports as $sport) {
-                $offre->addSport($sport);
-            }
-            $offre->setCreatedAt(new \DateTimeImmutable());
             $manager->persist($offre);
+            $i++;
         }
+
         $manager->flush();
     }
+
     public function getDependencies(): array
     {
         return [

@@ -1,0 +1,21 @@
+@startuml
+class Sport {
+  - id: int
+  - slug: string
+  - sport: string
+  - pictogramme: string
+  - emoji: string
+  - dateDebut: datetime
+  - dateFin: datetime
+  - type: string
+  - lieux: json
+}
+
+class Lieu {
+  - id: int
+  - nom: string
+  - adresse: string
+}
+
+Sport "1" -- "*" Lieu : se déroule à
+@enduml

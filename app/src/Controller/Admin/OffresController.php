@@ -48,6 +48,7 @@ final class OffresController extends AbstractController
         CategoriesOffresRepository $categoriesOffresRepo,
         SportsRepository $sportRepo
     ): Response {
+
         $categoriesOffres = $categoriesOffresRepo->findBy([], ['nom' => 'ASC']);
         $sports = $sportRepo->findSportsInOffres();
 

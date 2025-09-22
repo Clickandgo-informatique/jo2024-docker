@@ -100,6 +100,8 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
             foreach ($context['_seq'] as $context["_key"] => $context["sport"]) {
                 // line 23
                 yield "\t\t\t\t\t\t<li class=\"sport-items\">";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "emoji", [], "any", false, false, false, 23), "html", null, true);
+                yield "&nbsp;";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "intitule", [], "any", false, false, false, 23), "html", null, true);
                 yield "</li>
 \t\t\t\t\t";
@@ -114,32 +116,52 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
 \t\t\t<div class=\"offer-meta\">
 \t\t\t\t";
             // line 29
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", true, true, false, 29)) {
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateDebut", [], "any", true, true, false, 29)) {
                 // line 30
+                yield "\t\t\t\t\t<span class=\"offer-date\">Du
+\t\t\t\t\t\t";
+                // line 31
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateDebut", [], "any", false, false, false, 31), "d/m/Y"), "html", null, true);
+                yield " au ";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateFin", [], "any", false, false, false, 31), "d/m/Y"), "html", null, true);
+                yield "</span>
+\t\t\t\t";
+            }
+            // line 33
+            yield "\t\t\t\t<div class=\"offer-emplacement\">
+\t\t\t\t";
+            // line 34
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "lieux", [], "any", false, false, false, 34));
+            foreach ($context['_seq'] as $context["_key"] => $context["lieu"]) {
+                // line 35
+                yield "\t\t\t\t\t<span>";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["lieu"], "html", null, true);
+                yield "</span>
+\t\t\t\t";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_key'], $context['lieu'], $context['_parent']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 37
+            yield "\t\t\t\t</div>
+\t\t\t\t";
+            // line 38
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", true, true, false, 38)) {
+                // line 39
                 yield "\t\t\t\t\t<span class=\"offer-price\">";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", false, false, false, 30), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", false, false, false, 39), "html", null, true);
                 yield "
 \t\t\t\t\t\t€</span>
 \t\t\t\t";
             }
-            // line 33
-            yield "\t\t\t\t";
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateDebut", [], "any", true, true, false, 33)) {
-                // line 34
-                yield "\t\t\t\t\t<span class=\"offer-date\">À partir du
-\t\t\t\t\t\t";
-                // line 35
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateDebut", [], "any", false, false, false, 35), "d/m/Y"), "html", null, true);
-                yield "</span>
-\t\t\t\t";
-            }
-            // line 37
+            // line 42
             yield "\t\t\t</div>
 \t\t</div>
 \t\t<div class=\"offer-footer\">
 \t\t<a href=\"";
-            // line 40
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_add", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "id", [], "any", false, false, false, 40)]), "html", null, true);
+            // line 45
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_add", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "id", [], "any", false, false, false, 45)]), "html", null, true);
             yield "\" class=\"btn btn-primary btn-add-cart\"><i class=\"fa-solid fa-cart-plus\"></i>Ajouter au panier</a>
 \t\t</div>
 \t</article>
@@ -178,7 +200,7 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  142 => 40,  137 => 37,  132 => 35,  129 => 34,  126 => 33,  119 => 30,  117 => 29,  111 => 25,  102 => 23,  98 => 22,  91 => 17,  84 => 14,  82 => 13,  74 => 11,  72 => 10,  66 => 8,  60 => 6,  58 => 5,  55 => 4,  51 => 3,  48 => 2,);
+        return array (  164 => 45,  159 => 42,  152 => 39,  150 => 38,  147 => 37,  138 => 35,  134 => 34,  131 => 33,  124 => 31,  121 => 30,  119 => 29,  113 => 25,  102 => 23,  98 => 22,  91 => 17,  84 => 14,  82 => 13,  74 => 11,  72 => 10,  66 => 8,  60 => 6,  58 => 5,  55 => 4,  51 => 3,  48 => 2,);
     }
 
     public function getSourceContext(): Source
@@ -205,19 +227,24 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
 \t\t\t<div class=\"offer-sports\">
 \t\t\t\t<ul class=\"sport-list\">\t\t
 \t\t\t\t\t{% for sport in offre.sports %}
-\t\t\t\t\t\t<li class=\"sport-items\">{{sport.intitule}}</li>
+\t\t\t\t\t\t<li class=\"sport-items\">{{sport.emoji}}&nbsp;{{sport.intitule}}</li>
 \t\t\t\t\t{% endfor %}
 \t\t\t\t</ul>
 \t\t\t</div>
 
 \t\t\t<div class=\"offer-meta\">
+\t\t\t\t{% if offre.dateDebut is defined %}
+\t\t\t\t\t<span class=\"offer-date\">Du
+\t\t\t\t\t\t{{ offre.dateDebut|date('d/m/Y') }} au {{ offre.dateFin|date('d/m/Y') }}</span>
+\t\t\t\t{% endif %}
+\t\t\t\t<div class=\"offer-emplacement\">
+\t\t\t\t{% for lieu in offre.lieux %}
+\t\t\t\t\t<span>{{lieu}}</span>
+\t\t\t\t{% endfor %}
+\t\t\t\t</div>
 \t\t\t\t{% if offre.prix is defined %}
 \t\t\t\t\t<span class=\"offer-price\">{{ offre.prix }}
 \t\t\t\t\t\t€</span>
-\t\t\t\t{% endif %}
-\t\t\t\t{% if offre.dateDebut is defined %}
-\t\t\t\t\t<span class=\"offer-date\">À partir du
-\t\t\t\t\t\t{{ offre.dateDebut|date('d/m/Y') }}</span>
 \t\t\t\t{% endif %}
 \t\t\t</div>
 \t\t</div>

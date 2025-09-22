@@ -1,0 +1,8 @@
+@startuml
+actor "Visiteur" as V
+
+V --> (Consulter la liste des sports)
+V --> (Filtrer par type de sport)
+V --> (Afficher détail d'un sport)
+
+@enduml

@@ -1,14 +1,15 @@
+version: "3.9"
+
 services:
   php:
     build:
-      context: .                     # on prend toute la racine du projet
+      context: .                     # racine du projet
       dockerfile: docker/php/Dockerfile
     container_name: jo2024-docker_php
     working_dir: /var/www/symfony
     volumes:
       - ./app:/var/www/symfony
-      - ./.env:/var/www/symfony/.env:ro
-      - ./.env.local:/var/www/symfony/.env.local:ro
+      - ./.env.docker.local:/var/www/symfony/.env.local:ro
     networks:
       - symfony
 
@@ -19,8 +20,7 @@ services:
       - "8080:80"
     volumes:
       - ./app:/var/www/symfony
-      - ./.env:/var/www/symfony/.env:ro
-      - ./.env.local:/var/www/symfony/.env.local:ro
+      - ./.env.docker.local:/var/www/symfony/.env.local:ro
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - symfony

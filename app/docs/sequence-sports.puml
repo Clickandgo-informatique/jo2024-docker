@@ -1,0 +1,10 @@
+@startuml
+Visiteur -> "FrontController" : GET /sports
+"FrontController" -> "SportController" : index()
+"SportController" -> "SportRepository" : findAll()
+"SportRepository" -> "Base de données" : SELECT * FROM sports
+"Base de données" --> "SportRepository" : Résultats
+"SportRepository" --> "SportController" : Liste<Sport>
+"SportController" -> "Twig" : render('sports/index.html.twig')
+"Twig" --> Visiteur : HTML
+@enduml

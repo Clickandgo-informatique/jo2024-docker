@@ -20,19 +20,24 @@
 			<div class="offer-sports">
 				<ul class="sport-list">		
 					{% for sport in offre.sports %}
-						<li class="sport-items">{{sport.intitule}}</li>
+						<li class="sport-items">{{sport.emoji}}&nbsp;{{sport.intitule}}</li>
 					{% endfor %}
 				</ul>
 			</div>
 
 			<div class="offer-meta">
+				{% if offre.dateDebut is defined %}
+					<span class="offer-date">Du
+						{{ offre.dateDebut|date('d/m/Y') }} au {{ offre.dateFin|date('d/m/Y') }}</span>
+				{% endif %}
+				<div class="offer-emplacement">
+				{% for lieu in offre.lieux %}
+					<span>{{lieu}}</span>
+				{% endfor %}
+				</div>
 				{% if offre.prix is defined %}
 					<span class="offer-price">{{ offre.prix }}
 						€</span>
-				{% endif %}
-				{% if offre.dateDebut is defined %}
-					<span class="offer-date">À partir du
-						{{ offre.dateDebut|date('d/m/Y') }}</span>
 				{% endif %}
 			</div>
 		</div>

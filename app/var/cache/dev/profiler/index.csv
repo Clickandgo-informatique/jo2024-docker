@@ -14,3 +14,5 @@ faef66,172.18.0.1,GET,http://127.0.0.1:8080/,1758507338,,200,request
 84b736,172.18.0.1,GET,http://127.0.0.1:8080/,1758535026,,200,request
 c1a404,172.18.0.1,GET,http://127.0.0.1:8080/catalogue-offres-clients,1758535031,d492e1,500,request
 d492e1,172.18.0.1,GET,http://127.0.0.1:8080/catalogue-offres-clients,1758535031,,500,request
+26bc9d,172.18.0.1,GET,http://127.0.0.1:8080/,1758536958,745a4e,500,request
+745a4e,172.18.0.1,GET,http://127.0.0.1:8080/,1758536958,,500,request

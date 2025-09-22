@@ -419,3 +419,5 @@ b9f16b,172.18.0.1,GET,http://127.0.0.1:8080/tickets/5,1758499995,9beaed,500,requ
 24d0d5,172.18.0.1,GET,http://127.0.0.1:8080/tickets/4?commande=4,1758500155,,200,request
 8d3323,172.18.0.1,GET,http://127.0.0.1:8080/commandes/liste,1758500161,,200,request
 303eb8,172.18.0.1,GET,http://127.0.0.1:8080/tickets/5?commande=6,1758500163,,200,request
+213852,172.18.0.1,GET,http://127.0.0.1:8080/tickets/5?commande=6,1758500637,,200,request
+25dedf,172.18.0.1,GET,http://127.0.0.1:8080/commandes/liste,1758500640,,200,request

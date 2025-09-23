@@ -1,0 +1,10 @@
+[
+  {
+    "name": "OVH",
+    "host": "ssh.cluster011.hosting.ovh.net",
+    "port": 22,
+    "username": "clickandug",
+    "root": "/homez.530/clickandug/jo2024-docker",
+    "privateKeyPath": "~/.ssh/id_rsa"
+  }
+]

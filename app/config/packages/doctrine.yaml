@@ -23,10 +23,6 @@ doctrine:
         controller_resolver:
             auto_mapping: false
 
-    fixtures:
-        purger:
-            purge_mode: delete   # 👈 force DELETE au lieu de TRUNCATE
-
 when@test:
     doctrine:
         dbal:

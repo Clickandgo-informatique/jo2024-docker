@@ -1,3 +1,14 @@
+## Le projet a été mis en ligne ici :
+
+https://app.reservations-jo2024.clickandgo-informatique.com
+
+Vous pouvez le tester en tant qu'administrateur avec
+
+pseudo : adminjo2024
+
+password : Admin-jo2024!
+
+
 # Installation du projet Symfony avec Docker
 
 Ce document décrit les étapes nécessaires pour installer et lancer l’environnement Docker du projet Symfony **JO2024**.

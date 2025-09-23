@@ -4,3 +4,7 @@ c69183,172.18.0.1,GET,http://127.0.0.1:8080/offres/sports/aviron%2Cboccia%2Cbocc
 d176fb,172.18.0.1,GET,http://127.0.0.1:8080/login,1758637104,,200,request
 5a0ef4,172.18.0.1,POST,http://127.0.0.1:8080/login,1758637127,,302,request
 81ef34,172.18.0.1,GET,http://127.0.0.1:8080/2fa/setup,1758637127,,200,request
+161748,172.18.0.1,GET,http://127.0.0.1:8080/2fa/setup,1758637925,,200,request
+4630ed,172.18.0.1,GET,http://127.0.0.1:8080/2fa/setup,1758638494,,200,request
+a933e8,172.18.0.1,GET,http://127.0.0.1:8080/,1758653340,,200,request
+d25809,172.18.0.1,GET,http://127.0.0.1:8080/catalogue-offres-clients,1758653343,,200,request

@@ -1,37 +1,38 @@
-# Symfony env files
-.env
-.env.local
-.env.*.local
-.env.prod.local
-/.env.local
-/.env.local.php
-/.env.*.local
-/.env.prod.local
-/.env
+# ------------------------------
+# Fichiers dotenv / environnements
+# ------------------------------
+# Ne pas versionner les fichiers sensibles
+app/.env
+app/.env.local
+app/.env.prod.local
+app/.env.test.local
+app/.env.*.local
 
-# Symfony cache, logs, sessions
-/var/
+# ------------------------------
+# Dossier vendor et dépendances
+# ------------------------------
+app/vendor/
+# Docker dependencies (si présentes)
+docker/
 
-# Vendors
-/vendor/
+# ------------------------------
+# Cache et logs Symfony
+# ------------------------------
+app/var/
+app/var/cache/
+app/var/log/
+app/var/sessions/
 
-# PHPUnit
-/.phpunit.result.cache
-
-# Frontend stuff
-/node_modules/
-/public/build/
-/public/bundles/
-
-# --- Docker ---
-/db_data/
-/node_modules/
-/vendor/
-/var/
-
-# --- OS / IDE ---
-.DS_Store
-Thumbs.db
+# ------------------------------
+# IDE et fichiers systèmes
+# ------------------------------
 .idea/
-.vscode/
+*.iml
 *.swp
+*.DS_Store
+*.vscode/
+
+# ------------------------------
+# Docker Compose override / config
+# ------------------------------
+docker-compose.override.yml

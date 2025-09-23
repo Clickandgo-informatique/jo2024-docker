@@ -382,6 +382,6 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
     <script src=\"{{ asset('assets/js/filters.js') }}\"></script>
 {% endblock %}
 
-", "offres/catalogue-offres-clients.html.twig", "/home/clavi/jo2024-docker/app/templates/offres/catalogue-offres-clients.html.twig");
+", "offres/catalogue-offres-clients.html.twig", "/var/www/symfony/templates/offres/catalogue-offres-clients.html.twig");
     }
 }

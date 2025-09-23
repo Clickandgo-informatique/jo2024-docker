@@ -1,5 +1,6 @@
-a90c58,172.18.0.1,GET,http://127.0.0.1:8080/,1758623608,,200,request
-703135,172.18.0.1,GET,http://127.0.0.1:8080/catalogue-offres-clients,1758623611,,200,request
-1f4491,172.18.0.1,GET,http://127.0.0.1:8080/,1758627837,,200,request
-075993,172.18.0.1,GET,http://127.0.0.1:8080/login,1758627840,,200,request
-0122bb,172.18.0.1,GET,http://127.0.0.1:8080/login,1758632767,,200,request
+7f2c58,172.18.0.1,GET,http://127.0.0.1:8080/offres/sports/boccia,1758637078,,200,request
+c69183,172.18.0.1,GET,http://127.0.0.1:8080/offres/sports/aviron%2Cboccia%2Cboccia,1758637081,,200,request
+3d27bf,172.18.0.1,GET,http://127.0.0.1:8080/offres/sports/aviron%2Cbasket-fauteuil-roulant%2Cboccia%2Cboccia,1758637082,,200,request
+d176fb,172.18.0.1,GET,http://127.0.0.1:8080/login,1758637104,,200,request
+5a0ef4,172.18.0.1,POST,http://127.0.0.1:8080/login,1758637127,,302,request
+81ef34,172.18.0.1,GET,http://127.0.0.1:8080/2fa/setup,1758637127,,200,request

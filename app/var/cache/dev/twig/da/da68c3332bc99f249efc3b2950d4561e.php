@@ -329,6 +329,6 @@ showFlashbag(\"{{ message|e('js') }}\", \"{{ label }}\", 4000, \"top-right\");{%
 \t\t\t\t<script src=\"{{ asset('assets/js/sidebar.js') }}\"></script>
 \t\t\t</body>
 \t\t</html>
-", "base.html.twig", "/home/clavi/jo2024-docker/app/templates/base.html.twig");
+", "base.html.twig", "/var/www/symfony/templates/base.html.twig");
     }
 }

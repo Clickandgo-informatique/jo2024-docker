@@ -319,6 +319,6 @@ class __TwigTemplate_7d8521f7477cde3fed6f38bd6441ced1 extends Template
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/form.css') }}\">
 {% endblock %}
-", "admin/offres/edit.html.twig", "/home/clavi/jo2024-docker/app/templates/admin/offres/edit.html.twig");
+", "admin/offres/edit.html.twig", "/var/www/symfony/templates/admin/offres/edit.html.twig");
     }
 }

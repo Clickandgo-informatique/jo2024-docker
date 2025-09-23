@@ -265,6 +265,6 @@ class __TwigTemplate_993e4c734178ba671fda499254dc648c extends Template
 \t\t<p>Mot de passe oublié ? <a href=\"{{ path('forgotten_password') }}\">Réinitialiser</a></p>
 \t</form>
 {% endblock %}
-", "security/login.html.twig", "/home/clavi/jo2024-docker/app/templates/security/login.html.twig");
+", "security/login.html.twig", "/var/www/symfony/templates/security/login.html.twig");
     }
 }

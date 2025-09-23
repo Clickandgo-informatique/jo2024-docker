@@ -255,6 +255,6 @@ class __TwigTemplate_efabb10962dc3799bd9de2076843f0ae extends Template
 \t\t{% endif %}
 \t</tr>
 </tfoot></table>
-", "_partials/_cart-items.html.twig", "/home/clavi/jo2024-docker/app/templates/_partials/_cart-items.html.twig");
+", "_partials/_cart-items.html.twig", "/var/www/symfony/templates/_partials/_cart-items.html.twig");
     }
 }

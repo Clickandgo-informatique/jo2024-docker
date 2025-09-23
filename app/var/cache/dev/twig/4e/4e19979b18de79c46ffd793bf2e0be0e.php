@@ -224,6 +224,6 @@ class __TwigTemplate_c756f467a2c7cbb96cf5e68fb12e8e15 extends Template
 {% endblock %}
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/form.css') }}\">
-{% endblock %}", "registration/register.html.twig", "/home/clavi/jo2024-docker/app/templates/registration/register.html.twig");
+{% endblock %}", "registration/register.html.twig", "/var/www/symfony/templates/registration/register.html.twig");
     }
 }

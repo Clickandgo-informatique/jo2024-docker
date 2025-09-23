@@ -165,6 +165,6 @@ class __TwigTemplate_519dbc4f8ebeb174bc0f87f1b05d993b extends Template
 {% block javascripts %}
 \t<script type=\"module\" src=\"{{asset('assets/js/filters.js')}}\"></script>
 {% endblock %}
-", "_partials/_sports-filter.html.twig", "/home/clavi/jo2024-docker/app/templates/_partials/_sports-filter.html.twig");
+", "_partials/_sports-filter.html.twig", "/var/www/symfony/templates/_partials/_sports-filter.html.twig");
     }
 }

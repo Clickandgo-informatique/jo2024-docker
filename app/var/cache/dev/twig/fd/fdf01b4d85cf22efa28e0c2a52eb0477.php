@@ -202,6 +202,6 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{asset('assets/css/form.css')}}\">
 {% endblock %}
-", "security/2fa_verify.html.twig", "/home/clavi/jo2024-docker/app/templates/security/2fa_verify.html.twig");
+", "security/2fa_verify.html.twig", "/var/www/symfony/templates/security/2fa_verify.html.twig");
     }
 }

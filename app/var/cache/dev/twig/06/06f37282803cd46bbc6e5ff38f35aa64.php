@@ -104,6 +104,6 @@ class __TwigTemplate_9762e0ae2e6fcc0d194b9544b8f21ba1 extends Template
     </div>
 {% endif %}
 
-", "_partials/_pagination-offres.html.twig", "/home/clavi/jo2024-docker/app/templates/_partials/_pagination-offres.html.twig");
+", "_partials/_pagination-offres.html.twig", "/var/www/symfony/templates/_partials/_pagination-offres.html.twig");
     }
 }

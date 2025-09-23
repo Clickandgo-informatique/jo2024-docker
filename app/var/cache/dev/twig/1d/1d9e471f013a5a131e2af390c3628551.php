@@ -222,6 +222,6 @@ class __TwigTemplate_ff0e6f7afba24f957b9e2aa7d593cd24 extends Template
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/navbar.css') }}\">
 {% endblock %}
-", "_partials/_navbar.html.twig", "/home/clavi/jo2024-docker/app/templates/_partials/_navbar.html.twig");
+", "_partials/_navbar.html.twig", "/var/www/symfony/templates/_partials/_navbar.html.twig");
     }
 }

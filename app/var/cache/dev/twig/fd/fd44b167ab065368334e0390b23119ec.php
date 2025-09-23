@@ -232,6 +232,6 @@ class __TwigTemplate_140d68e4fd3c82775da88ba5d02d2cdf extends Template
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{asset('assets/css/form.css')}}\">
 {% endblock %}
-", "admin/sports/sports-form.html.twig", "/home/clavi/jo2024-docker/app/templates/admin/sports/sports-form.html.twig");
+", "admin/sports/sports-form.html.twig", "/var/www/symfony/templates/admin/sports/sports-form.html.twig");
     }
 }

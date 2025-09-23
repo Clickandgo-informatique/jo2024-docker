@@ -162,6 +162,6 @@ class __TwigTemplate_ca273f5d4c0191311fb6912786b4ba46 extends Template
         {{ form_end(requestPassForm) }}
     </section>
 {% endblock %}
-", "security/reset_password_request.html.twig", "/home/clavi/jo2024-docker/app/templates/security/reset_password_request.html.twig");
+", "security/reset_password_request.html.twig", "/var/www/symfony/templates/security/reset_password_request.html.twig");
     }
 }

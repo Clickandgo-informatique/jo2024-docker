@@ -1635,6 +1635,6 @@ array_key_exists("type", $context)) ? (Twig\Extension\CoreExtension::default((is
     {%- endif -%}
     {{- parent() -}}
 {%- endblock form_help %}
-", "bootstrap_5_layout.html.twig", "/home/clavi/jo2024-docker/app/vendor/symfony/twig-bridge/Resources/views/Form/bootstrap_5_layout.html.twig");
+", "bootstrap_5_layout.html.twig", "/var/www/symfony/vendor/symfony/twig-bridge/Resources/views/Form/bootstrap_5_layout.html.twig");
     }
 }

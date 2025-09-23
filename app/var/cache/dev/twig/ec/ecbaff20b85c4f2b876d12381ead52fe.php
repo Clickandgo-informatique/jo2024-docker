@@ -227,6 +227,6 @@ class __TwigTemplate_015f59ea72700ed99e954ab1ae34843f extends Template
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{asset('assets/css/form.css')}}\">
 {% endblock %}
-", "admin/utilisateurs/user-form.html.twig", "/home/clavi/jo2024-docker/app/templates/admin/utilisateurs/user-form.html.twig");
+", "admin/utilisateurs/user-form.html.twig", "/var/www/symfony/templates/admin/utilisateurs/user-form.html.twig");
     }
 }

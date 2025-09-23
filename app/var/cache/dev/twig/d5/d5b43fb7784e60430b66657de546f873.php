@@ -222,6 +222,6 @@ class __TwigTemplate_a71dd864ffd94d9bb08b665737b4d781 extends Template
 \t\t<script type=\"module\" src=\"{{asset('assets/js/checkGoogle2FA.js')}}\"></script>
 \t{% endblock %}
 {% endblock %}
-", "security/google_authenticator.html.twig", "/home/clavi/jo2024-docker/app/templates/security/google_authenticator.html.twig");
+", "security/google_authenticator.html.twig", "/var/www/symfony/templates/security/google_authenticator.html.twig");
     }
 }

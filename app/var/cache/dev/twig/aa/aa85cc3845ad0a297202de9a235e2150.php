@@ -115,6 +115,6 @@ class __TwigTemplate_05567076814b1a85111913f48549b020 extends Template
 \t\t<a href=\"{{path('app_offres-par-categories',{slug:cat.slug})}}\" class=\"categorie-offres-item\" data-url=\"/offres-par-categorie/{{cat.slug}}\">{{cat.nom}}</a>
 \t{% endfor %}
 </div>
-", "_partials/_categories-offres.html.twig", "/home/clavi/jo2024-docker/app/templates/_partials/_categories-offres.html.twig");
+", "_partials/_categories-offres.html.twig", "/var/www/symfony/templates/_partials/_categories-offres.html.twig");
     }
 }

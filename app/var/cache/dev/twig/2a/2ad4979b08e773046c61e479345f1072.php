@@ -263,6 +263,6 @@ class __TwigTemplate_bd478c8eb62440370db9eb207a717ad6 extends Template
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{asset('assets/css/table.css')}}\">
 {% endblock %}
-", "admin/sports/index.html.twig", "/home/clavi/jo2024-docker/app/templates/admin/sports/index.html.twig");
+", "admin/sports/index.html.twig", "/var/www/symfony/templates/admin/sports/index.html.twig");
     }
 }

@@ -198,6 +198,6 @@ class __TwigTemplate_e19209f782d9ed58ebe9bb310bb71d07 extends Template
 
 
 {% endblock %}
-", "profile/index.html.twig", "/home/clavi/jo2024-docker/app/templates/profile/index.html.twig");
+", "profile/index.html.twig", "/var/www/symfony/templates/profile/index.html.twig");
     }
 }

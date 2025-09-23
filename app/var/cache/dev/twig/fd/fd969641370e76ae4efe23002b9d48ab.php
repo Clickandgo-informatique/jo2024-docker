@@ -836,6 +836,6 @@ class __TwigTemplate_4d41f92133a8561f848a31b64a144854 extends Template
         {% endif %}
     </div>
 {% endblock %}
-", "@WebProfiler/Collector/command.html.twig", "/home/clavi/jo2024-docker/app/vendor/symfony/web-profiler-bundle/Resources/views/Collector/command.html.twig");
+", "@WebProfiler/Collector/command.html.twig", "/var/www/symfony/vendor/symfony/web-profiler-bundle/Resources/views/Collector/command.html.twig");
     }
 }

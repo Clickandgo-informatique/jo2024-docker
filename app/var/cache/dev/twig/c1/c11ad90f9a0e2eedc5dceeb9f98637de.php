@@ -419,6 +419,6 @@ class __TwigTemplate_d1ad0b7fb4224b132b1dcc1f1c64ae8f extends Template
 \t<link rel=\"stylesheet\" href=\"{{asset('assets/css/table.css')}}\">
 \t<link rel=\"stylesheet\" href=\"{{asset('assets/css/filters.css')}}\">
 {% endblock %}
-", "commandes/index.html.twig", "/home/clavi/jo2024-docker/app/templates/commandes/index.html.twig");
+", "commandes/index.html.twig", "/var/www/symfony/templates/commandes/index.html.twig");
     }
 }

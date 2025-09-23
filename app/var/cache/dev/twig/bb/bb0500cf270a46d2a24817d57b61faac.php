@@ -99,6 +99,6 @@ class __TwigTemplate_2e29b6a9a50665bcd47114a10ed1df27 extends Template
 <p>Pour activer votre compte, veuillez cliquer sur le lien suivant :</p>
 <p><a href=\"{{ absolute_url(path('verify_user', {token: token})) }}\">Lien</a></p>{{token}}
 <p>Merci</p>
-", "emails/register-confirmation.html.twig", "/home/clavi/jo2024-docker/app/templates/emails/register-confirmation.html.twig");
+", "emails/register-confirmation.html.twig", "/var/www/symfony/templates/emails/register-confirmation.html.twig");
     }
 }

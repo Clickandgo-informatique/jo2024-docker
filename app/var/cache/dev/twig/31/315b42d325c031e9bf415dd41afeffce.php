@@ -108,6 +108,6 @@ class __TwigTemplate_baf465609b014d93258d48cd91e228a4 extends Template
 
 <p>Cordialement,</p>
 
-<p>L'équipe de gestion des réservations JO2024</p>", "emails/password_reset.html.twig", "/home/clavi/jo2024-docker/app/templates/emails/password_reset.html.twig");
+<p>L'équipe de gestion des réservations JO2024</p>", "emails/password_reset.html.twig", "/var/www/symfony/templates/emails/password_reset.html.twig");
     }
 }

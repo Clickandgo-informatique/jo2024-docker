@@ -161,6 +161,6 @@ class __TwigTemplate_3a036854b67358e51f7a9079e2e2ec28 extends Template
       
         <button type=\"submit\"class=\"btn btn-primary\"><i class=\"fa-solid fa-paper-plane\"></i>Envoyer</button>
     {{ form_end(resetPassForm) }}
-{% endblock %}", "security/reset_password.html.twig", "/home/clavi/jo2024-docker/app/templates/security/reset_password.html.twig");
+{% endblock %}", "security/reset_password.html.twig", "/var/www/symfony/templates/security/reset_password.html.twig");
     }
 }

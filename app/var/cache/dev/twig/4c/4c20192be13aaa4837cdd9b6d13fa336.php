@@ -157,6 +157,6 @@ class __TwigTemplate_d44fad8c6f6a1e974613e6690b63e6d1 extends Template
         {% include '_partials/_pagination-offres.html.twig' with { 'offres': offres } only %}
     </div>
 {% endif %}
-", "_partials/_catalogue-offres-ajax-wrapper.html.twig", "/home/clavi/jo2024-docker/app/templates/_partials/_catalogue-offres-ajax-wrapper.html.twig");
+", "_partials/_catalogue-offres-ajax-wrapper.html.twig", "/var/www/symfony/templates/_partials/_catalogue-offres-ajax-wrapper.html.twig");
     }
 }

@@ -13,6 +13,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity(fields: ['nom'], message: 'Il existe déjà une catégorie d\'offre avec ce nom')]
 class CategoriesOffres
 {
+    #[ORM\Column(type: 'boolean')]
+    private $isTest = false;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

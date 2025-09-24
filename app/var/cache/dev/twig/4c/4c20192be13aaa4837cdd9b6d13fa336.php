@@ -63,7 +63,7 @@ class __TwigTemplate_d44fad8c6f6a1e974613e6690b63e6d1 extends Template
     Affichage <strong>";
         // line 10
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["start"]) || array_key_exists("start", $context) ? $context["start"] : (function () { throw new RuntimeError('Variable "start" does not exist.', 10, $this->source); })()), "html", null, true);
-        yield "–";
+        yield " à ";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["end"]) || array_key_exists("end", $context) ? $context["end"] : (function () { throw new RuntimeError('Variable "end" does not exist.', 10, $this->source); })()), "html", null, true);
         yield "</strong>
     sur <strong>";
@@ -141,7 +141,7 @@ class __TwigTemplate_d44fad8c6f6a1e974613e6690b63e6d1 extends Template
 
 {# Compteur au-dessus de la grille #}
 <div class=\"offres-counter\">
-    Affichage <strong>{{ start }}–{{ end }}</strong>
+    Affichage <strong>{{ start }} à {{ end }}</strong>
     sur <strong>{{ total }}</strong>
     offre{{ total > 1 ? 's' : '' }}
 </div>

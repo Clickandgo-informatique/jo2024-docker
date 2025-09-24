@@ -5,6 +5,8 @@
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    min-height: 100vh; /* prend au moins 100% de la hauteur de l'écran */ 
+    max-width: fit-content;
 }
 
 /* Bloc individuel de filtre (carte) */
@@ -68,12 +70,6 @@
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
-}
-
-.sports-checkboxes {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
 }
 
 /* Option individuelle */
@@ -151,12 +147,6 @@
     color: #333;
     text-decoration: underline;
 }
-/* Grille des offres */
-.offers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
 /* Bloc global */
 .filter-block {
     padding: 16px;
@@ -177,7 +167,6 @@
     color: #333;
 }
 
-/* Grille des cases */
 .sports-checkboxes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

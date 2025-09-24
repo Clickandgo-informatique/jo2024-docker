@@ -20,8 +20,9 @@
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 18px;
-    display: flex;
+    font-size: 2rem;
+    font-weight: bold;
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: 1200;
@@ -43,6 +44,7 @@
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE/Edge */
     white-space: nowrap;
+    justify-content: center;
 }
 
 .subnav::-webkit-scrollbar {
@@ -78,4 +80,10 @@
     font-size: 0.8rem;
     color: #fff;
     word-break: keep-all;
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .subnav-arrow {
+        display: flex;
+    }
 }

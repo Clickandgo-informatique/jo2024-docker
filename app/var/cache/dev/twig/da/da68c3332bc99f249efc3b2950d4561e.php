@@ -52,92 +52,94 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
 <html lang=\"fr\">
 \t<head>
 \t\t<meta charset=\"UTF-8\">
+\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
 \t\t<title>
 \t\t\t";
-        // line 6
-        yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
         // line 8
+        yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
+        // line 10
         yield "\t\t</title>
 
 \t\t";
-        // line 11
+        // line 13
         yield "\t\t<link rel=\"icon\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("favicon.svg"), "html", null, true);
         yield "\" type=\"image/svg+xml\">
 \t\t<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"";
-        // line 12
+        // line 14
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("favicon-32.png"), "html", null, true);
         yield "\">
 \t\t<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"";
-        // line 13
+        // line 15
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("favicon-16.png"), "html", null, true);
         yield "\">
 \t\t<link
 \t\trel=\"apple-touch-icon\" href=\"";
-        // line 15
+        // line 17
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("favicon-32.png"), "html", null, true);
         yield "\">
 
 \t\t";
-        // line 18
+        // line 20
         yield "\t\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/flashbag.css"), "html", null, true);
         yield "\">
 \t\t<link rel=\"stylesheet\" href=\"";
-        // line 19
+        // line 21
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/styles.css"), "html", null, true);
         yield "\">
 \t\t<link
 \t\trel=\"stylesheet\" href=\"";
-        // line 21
+        // line 23
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/pagination.css"), "html", null, true);
         yield "\">
 
 \t\t";
-        // line 24
+        // line 26
         yield "\t\t<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css\" integrity=\"sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"/> ";
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
-        // line 25
+        // line 27
         yield "\t\t</head>
 
 \t\t<body>
 \t\t\t";
-        // line 28
+        // line 30
         yield Twig\Extension\CoreExtension::include($this->env, $context, "_partials/_navbar.html.twig");
         yield "
 \t\t\t";
-        // line 29
+        // line 31
         yield Twig\Extension\CoreExtension::include($this->env, $context, "_partials/_subnav.html.twig");
         yield "
 
 \t\t\t";
-        // line 31
+        // line 33
         if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 32
+            // line 34
             yield "\t\t\t\t";
             yield Twig\Extension\CoreExtension::include($this->env, $context, "_partials/_sidebar.html.twig");
             yield "
 \t\t\t";
         }
-        // line 34
+        // line 36
         yield "
 \t\t\t";
-        // line 36
+        // line 38
         yield "\t\t\t<script src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/flashbags.js"), "html", null, true);
         yield "\"></script>
 \t\t\t<script>
 \t\t\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {
 ";
-        // line 39
+        // line 41
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 39, $this->source); })()), "flashes", [], "any", false, false, false, 39));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 41, $this->source); })()), "flashes", [], "any", false, false, false, 41));
         foreach ($context['_seq'] as $context["label"] => $context["messages"]) {
-            // line 40
+            // line 42
             $context['_parent'] = $context;
             $context['_seq'] = CoreExtension::ensureTraversable($context["messages"]);
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 41
+                // line 43
                 yield "showFlashbag(\"";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["message"], "js"), "html", null, true);
                 yield "\", \"";
@@ -151,23 +153,23 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['label'], $context['messages'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 43
+        // line 45
         yield "});
 \t\t\t</script>
 
 \t\t\t<main id=\"main\"> ";
-        // line 46
+        // line 48
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 47
+        // line 49
         yield "\t\t\t\t</main>
 
 \t\t\t\t";
-        // line 50
+        // line 52
         yield "\t\t\t\t<script type=\"module\" src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/main.js"), "html", null, true);
         yield "\"></script>
 \t\t\t\t<script src=\"";
-        // line 51
+        // line 53
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/sidebar.js"), "html", null, true);
         yield "\"></script>
 \t\t\t</body>
@@ -182,7 +184,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield from [];
     }
 
-    // line 6
+    // line 8
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -206,7 +208,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield from [];
     }
 
-    // line 24
+    // line 26
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -228,7 +230,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield from [];
     }
 
-    // line 46
+    // line 48
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -271,7 +273,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  232 => 46,  210 => 24,  186 => 6,  171 => 51,  166 => 50,  162 => 47,  160 => 46,  155 => 43,  141 => 41,  137 => 40,  133 => 39,  126 => 36,  123 => 34,  117 => 32,  115 => 31,  110 => 29,  106 => 28,  101 => 25,  98 => 24,  93 => 21,  88 => 19,  83 => 18,  78 => 15,  73 => 13,  69 => 12,  64 => 11,  60 => 8,  58 => 6,  51 => 1,);
+        return array (  234 => 48,  212 => 26,  188 => 8,  173 => 53,  168 => 52,  164 => 49,  162 => 48,  157 => 45,  143 => 43,  139 => 42,  135 => 41,  128 => 38,  125 => 36,  119 => 34,  117 => 33,  112 => 31,  108 => 30,  103 => 27,  100 => 26,  95 => 23,  90 => 21,  85 => 20,  80 => 17,  75 => 15,  71 => 14,  66 => 13,  62 => 10,  60 => 8,  51 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -280,6 +282,8 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
 <html lang=\"fr\">
 \t<head>
 \t\t<meta charset=\"UTF-8\">
+\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
 \t\t<title>
 \t\t\t{% block title %}JO 2024
 \t\t\t{% endblock %}

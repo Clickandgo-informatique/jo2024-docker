@@ -1,4 +1,5 @@
-<nav class="navbar">
+<nav
+	class="navbar">
 	<!-- Bouton hamburger -->
 	<button class="hamburger" id="menuToggle">
 		<span></span>
@@ -13,25 +14,32 @@
 
 	<!-- Liens navbar -->
 	<div class="navbar-links" id="navbarLinks">
-		<a class="navbar-link" href="{{ path('app_main') }}">
-			<i class="fa-solid fa-house"></i> Accueil
-		</a>
+		<div class="main-links">
+			<a class="navbar-link" href="{{ path('app_main') }}">
+				<i class="fa-solid fa-house"></i>
+				Accueil
+			</a>
 
-		<a href="{{ path('app_offres_catalogue') }}" class="navbar-link">
-			<i class="fa-solid fa-clipboard-list"></i> Catalogue offres
-		</a>
+			<a href="{{ path('app_offres_catalogue') }}" class="navbar-link">
+				<i class="fa-solid fa-clipboard-list"></i>
+				Catalogue offres
+			</a>
+		</div>
 
 		<div class="connexion">
 			{% if not app.user %}
 				<a class="navbar-link" href="{{ path('app_login') }}">
-					<i class="fa fa-sign-in" aria-hidden="true"></i> Se connecter
+					<i class="fa fa-sign-in" aria-hidden="true"></i>
+					Se connecter
 				</a>
 				<a class="navbar-link" href="{{ path('app_register') }}">
-					<i class="fa fa-user-plus" aria-hidden="true"></i> S'inscrire
+					<i class="fa fa-user-plus" aria-hidden="true"></i>
+					S'inscrire
 				</a>
 			{% else %}
 				<a class="navbar-link" href="{{ path('app_logout') }}">
-					<i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion
+					<i class="fa fa-sign-out" aria-hidden="true"></i>
+					Déconnexion
 				</a>
 			{% endif %}
 		</div>

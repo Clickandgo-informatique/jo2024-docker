@@ -33,9 +33,11 @@
 		<div class="results-column">
 			<div class="results-header">
 				<span id="resultsCount">
-					{{ offres.getTotalItemCount }}
-					offre
-					{% if offres.getTotalItemCount > 1 %}s
+					{{ offres.getTotalItemCount }}&nbsp;
+					{% if offres.getTotalItemCount > 1 %}
+						offres
+					{% else %}
+						offre
 					{% endif %}
 				</span>
 			</div>
@@ -73,7 +75,6 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/filters.css') }}">
 {% endblock %}
 {% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('assets/js/filters.js') }}"></script>
+	{{ parent() }}
+	<script src="{{ asset('assets/js/filters.js') }}"></script>
 {% endblock %}
-

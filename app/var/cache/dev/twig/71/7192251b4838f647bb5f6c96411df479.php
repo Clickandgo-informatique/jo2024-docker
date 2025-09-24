@@ -156,29 +156,33 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
 \t\t\t\t\t";
         // line 36
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["offres"]) || array_key_exists("offres", $context) ? $context["offres"] : (function () { throw new RuntimeError('Variable "offres" does not exist.', 36, $this->source); })()), "getTotalItemCount", [], "any", false, false, false, 36), "html", null, true);
-        yield "
-\t\t\t\t\toffre
+        yield "&nbsp;
 \t\t\t\t\t";
-        // line 38
-        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["offres"]) || array_key_exists("offres", $context) ? $context["offres"] : (function () { throw new RuntimeError('Variable "offres" does not exist.', 38, $this->source); })()), "getTotalItemCount", [], "any", false, false, false, 38) > 1)) {
-            yield "s
+        // line 37
+        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["offres"]) || array_key_exists("offres", $context) ? $context["offres"] : (function () { throw new RuntimeError('Variable "offres" does not exist.', 37, $this->source); })()), "getTotalItemCount", [], "any", false, false, false, 37) > 1)) {
+            // line 38
+            yield "\t\t\t\t\t\toffres
+\t\t\t\t\t";
+        } else {
+            // line 40
+            yield "\t\t\t\t\t\toffre
 \t\t\t\t\t";
         }
-        // line 40
+        // line 42
         yield "\t\t\t\t</span>
 \t\t\t</div>
 
 \t\t\t<div id=\"results\" class=\"ajax-reloaded-data\">
 \t\t\t\t";
-        // line 44
-        yield from $this->load("_partials/_catalogue-offres-ajax-wrapper.html.twig", 44)->unwrap()->yield(CoreExtension::toArray(["offres" => (isset($context["offres"]) || array_key_exists("offres", $context) ? $context["offres"] : (function () { throw new RuntimeError('Variable "offres" does not exist.', 44, $this->source); })())]));
-        // line 45
+        // line 46
+        yield from $this->load("_partials/_catalogue-offres-ajax-wrapper.html.twig", 46)->unwrap()->yield(CoreExtension::toArray(["offres" => (isset($context["offres"]) || array_key_exists("offres", $context) ? $context["offres"] : (function () { throw new RuntimeError('Variable "offres" does not exist.', 46, $this->source); })())]));
+        // line 47
         yield "\t\t\t</div>
 \t\t</div>
 \t</div>
 
 \t";
-        // line 50
+        // line 52
         yield "\t<button id=\"filtersFAB\" class=\"btn-filter-mobile\" title=\"Filtrer\">
 \t\t<i class=\"fas fa-filter\"></i>
 \t</button>
@@ -190,14 +194,14 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
 \t\t</div>
 \t\t<div class=\"drawer-content\">
 \t\t\t";
-        // line 60
-        yield from $this->load("_partials/_categories-offres.html.twig", 60)->unwrap()->yield(CoreExtension::toArray(["categoriesOffres" => (isset($context["categoriesOffres"]) || array_key_exists("categoriesOffres", $context) ? $context["categoriesOffres"] : (function () { throw new RuntimeError('Variable "categoriesOffres" does not exist.', 60, $this->source); })())]));
-        // line 61
+        // line 62
+        yield from $this->load("_partials/_categories-offres.html.twig", 62)->unwrap()->yield(CoreExtension::toArray(["categoriesOffres" => (isset($context["categoriesOffres"]) || array_key_exists("categoriesOffres", $context) ? $context["categoriesOffres"] : (function () { throw new RuntimeError('Variable "categoriesOffres" does not exist.', 62, $this->source); })())]));
+        // line 63
         yield "\t\t\t";
-        yield from $this->load("_partials/_sports-filter.html.twig", 61)->unwrap()->yield(CoreExtension::toArray(["sports" =>         // line 62
-(isset($context["sports"]) || array_key_exists("sports", $context) ? $context["sports"] : (function () { throw new RuntimeError('Variable "sports" does not exist.', 62, $this->source); })()), "selectedSlugs" =>         // line 63
-(isset($context["selectedSlugs"]) || array_key_exists("selectedSlugs", $context) ? $context["selectedSlugs"] : (function () { throw new RuntimeError('Variable "selectedSlugs" does not exist.', 63, $this->source); })())]));
-        // line 65
+        yield from $this->load("_partials/_sports-filter.html.twig", 63)->unwrap()->yield(CoreExtension::toArray(["sports" =>         // line 64
+(isset($context["sports"]) || array_key_exists("sports", $context) ? $context["sports"] : (function () { throw new RuntimeError('Variable "sports" does not exist.', 64, $this->source); })()), "selectedSlugs" =>         // line 65
+(isset($context["selectedSlugs"]) || array_key_exists("selectedSlugs", $context) ? $context["selectedSlugs"] : (function () { throw new RuntimeError('Variable "selectedSlugs" does not exist.', 65, $this->source); })())]));
+        // line 67
         yield "\t\t</div>
 \t</div>
 \t<div id=\"drawerOverlay\" class=\"drawer-overlay\" style=\"display:none;\"></div>
@@ -211,7 +215,7 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
         yield from [];
     }
 
-    // line 70
+    // line 72
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -224,16 +228,16 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 71
+        // line 73
         yield "\t";
         yield from $this->yieldParentBlock("stylesheets", $context, $blocks);
         yield "
 \t<link rel=\"stylesheet\" href=\"";
-        // line 72
+        // line 74
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/catalogue-offres.css"), "html", null, true);
         yield "\">
 \t<link rel=\"stylesheet\" href=\"";
-        // line 73
+        // line 75
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/filters.css"), "html", null, true);
         yield "\">
 ";
@@ -246,7 +250,7 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
         yield from [];
     }
 
-    // line 75
+    // line 77
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -259,12 +263,12 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 76
-        yield "    ";
+        // line 78
+        yield "\t";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
-    <script src=\"";
-        // line 77
+\t<script src=\"";
+        // line 79
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/filters.js"), "html", null, true);
         yield "\"></script>
 ";
@@ -298,7 +302,7 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  268 => 77,  263 => 76,  250 => 75,  237 => 73,  233 => 72,  228 => 71,  215 => 70,  201 => 65,  199 => 63,  198 => 62,  196 => 61,  194 => 60,  182 => 50,  176 => 45,  174 => 44,  168 => 40,  163 => 38,  158 => 36,  153 => 33,  148 => 29,  146 => 27,  145 => 26,  144 => 25,  138 => 21,  128 => 17,  120 => 16,  117 => 15,  113 => 14,  107 => 10,  103 => 7,  90 => 6,  66 => 3,  43 => 1,);
+        return array (  272 => 79,  267 => 78,  254 => 77,  241 => 75,  237 => 74,  232 => 73,  219 => 72,  205 => 67,  203 => 65,  202 => 64,  200 => 63,  198 => 62,  186 => 52,  180 => 47,  178 => 46,  172 => 42,  168 => 40,  164 => 38,  162 => 37,  158 => 36,  153 => 33,  148 => 29,  146 => 27,  145 => 26,  144 => 25,  138 => 21,  128 => 17,  120 => 16,  117 => 15,  113 => 14,  107 => 10,  103 => 7,  90 => 6,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -338,9 +342,11 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
 \t\t<div class=\"results-column\">
 \t\t\t<div class=\"results-header\">
 \t\t\t\t<span id=\"resultsCount\">
-\t\t\t\t\t{{ offres.getTotalItemCount }}
-\t\t\t\t\toffre
-\t\t\t\t\t{% if offres.getTotalItemCount > 1 %}s
+\t\t\t\t\t{{ offres.getTotalItemCount }}&nbsp;
+\t\t\t\t\t{% if offres.getTotalItemCount > 1 %}
+\t\t\t\t\t\toffres
+\t\t\t\t\t{% else %}
+\t\t\t\t\t\toffre
 \t\t\t\t\t{% endif %}
 \t\t\t\t</span>
 \t\t\t</div>
@@ -378,10 +384,9 @@ class __TwigTemplate_3b4a65fdc83e358ce1c375fb468a5fbf extends Template
 \t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/filters.css') }}\">
 {% endblock %}
 {% block javascripts %}
-    {{ parent() }}
-    <script src=\"{{ asset('assets/js/filters.js') }}\"></script>
+\t{{ parent() }}
+\t<script src=\"{{ asset('assets/js/filters.js') }}\"></script>
 {% endblock %}
-
 ", "offres/catalogue-offres-clients.html.twig", "/var/www/symfony/templates/offres/catalogue-offres-clients.html.twig");
     }
 }

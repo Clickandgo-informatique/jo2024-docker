@@ -153,23 +153,35 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['label'], $context['messages'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 45
+        // line 44
         yield "});
 \t\t\t</script>
 
-\t\t\t<main id=\"main\"> ";
+\t\t\t";
         // line 48
+        yield "\t\t\t";
+        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 49
+            yield "\t\t\t\t<button id=\"sidebarToggle\"><i class=\"fa-solid fa-cog\"></i></button>
+\t\t\t";
+        }
+        // line 51
+        yield "\t\t\t<main id=\"main\" class=\"";
+        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            yield "shifted";
+        }
+        yield "\"> ";
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 49
+        // line 52
         yield "\t\t\t\t</main>
 
 \t\t\t\t";
-        // line 52
+        // line 55
         yield "\t\t\t\t<script type=\"module\" src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/main.js"), "html", null, true);
         yield "\"></script>
 \t\t\t\t<script src=\"";
-        // line 53
+        // line 56
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/sidebar.js"), "html", null, true);
         yield "\"></script>
 \t\t\t</body>
@@ -230,7 +242,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield from [];
     }
 
-    // line 48
+    // line 51
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -273,7 +285,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  234 => 48,  212 => 26,  188 => 8,  173 => 53,  168 => 52,  164 => 49,  162 => 48,  157 => 45,  143 => 43,  139 => 42,  135 => 41,  128 => 38,  125 => 36,  119 => 34,  117 => 33,  112 => 31,  108 => 30,  103 => 27,  100 => 26,  95 => 23,  90 => 21,  85 => 20,  80 => 17,  75 => 15,  71 => 14,  66 => 13,  62 => 10,  60 => 8,  51 => 1,);
+        return array (  246 => 51,  224 => 26,  200 => 8,  185 => 56,  180 => 55,  176 => 52,  169 => 51,  165 => 49,  162 => 48,  157 => 44,  143 => 43,  139 => 42,  135 => 41,  128 => 38,  125 => 36,  119 => 34,  117 => 33,  112 => 31,  108 => 30,  103 => 27,  100 => 26,  95 => 23,  90 => 21,  85 => 20,  80 => 17,  75 => 15,  71 => 14,  66 => 13,  62 => 10,  60 => 8,  51 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -320,12 +332,15 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
 \t\t\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {
 {% for label, messages in app.flashes %}
 {% for message in messages %}
-showFlashbag(\"{{ message|e('js') }}\", \"{{ label }}\", 4000, \"top-right\");{% endfor %}
-{% endfor %}
+showFlashbag(\"{{ message|e('js') }}\", \"{{ label }}\", 4000, \"top-right\");{% endfor %}{% endfor %}
 });
 \t\t\t</script>
 
-\t\t\t<main id=\"main\"> {% block body %}{% endblock %}
+\t\t\t{# Bouton toggle toujours visible en haut à gauche #}
+\t\t\t{% if is_granted('ROLE_ADMIN') %}
+\t\t\t\t<button id=\"sidebarToggle\"><i class=\"fa-solid fa-cog\"></i></button>
+\t\t\t{% endif %}
+\t\t\t<main id=\"main\" class=\"{% if is_granted('ROLE_ADMIN') %}shifted{% endif %}\"> {% block body %}{% endblock %}
 \t\t\t\t</main>
 
 \t\t\t\t{# Scripts #}

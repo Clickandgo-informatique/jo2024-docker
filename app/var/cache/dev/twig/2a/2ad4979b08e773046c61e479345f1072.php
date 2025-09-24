@@ -75,7 +75,7 @@ class __TwigTemplate_bd478c8eb62440370db9eb207a717ad6 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
         // line 3
-        yield "\tListe des sports
+        yield "    Liste des sports
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -101,62 +101,67 @@ class __TwigTemplate_bd478c8eb62440370db9eb207a717ad6 extends Template
 
         // line 6
         yield "
-\t<H1 class=\"text-center\">Liste des sports sportives</H1>
-\t<a href=\"";
+<h1 class=\"text-center\">Liste des disciplines sportives</h1>
+<a href=\"";
         // line 8
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sports_new");
-        yield "\">
-\t\t<i class=\"fa-solid fa-circle-plus\"></i>Ajouter une discipline sportive</a>
-\t<table>
+        yield "\" class=\"btn btn-primary\">
+    <i class=\"fa-solid fa-circle-plus\"></i> Ajouter une discipline sportive
+</a>
 
-\t\t<thead>
-\t\t\t<th></th>
-\t\t\t<th></th>
-\t\t\t<th>intitulé</th>
-\t\t</thead>
-\t\t<tbody>
+<div class=\"table-container\">
+    <div class=\"table-header flex\">
+        <div class=\"cell flex-1\">Modifier</div>
+        <div class=\"cell flex-1\">Supprimer</div>
+        <div class=\"cell flex-3\">Intitulé</div>
+    </div>
 
-\t\t\t";
+    ";
         // line 19
         $context['_parent'] = $context;
         $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sports"]) || array_key_exists("sports", $context) ? $context["sports"] : (function () { throw new RuntimeError('Variable "sports" does not exist.', 19, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["d"]) {
             // line 20
-            yield "\t\t\t\t<tr>
-\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t<a href=\"";
+            yield "        <div class=\"table-row flex\">
+            <div class=\"cell flex-1 text-center\">
+                <a href=\"";
             // line 22
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sports_edit", ["slug" => CoreExtension::getAttribute($this->env, $this->source, $context["d"], "slug", [], "any", false, false, false, 22)]), "html", null, true);
-            yield "\">
-\t\t\t\t\t\t\t<i class=\"fa-solid fa-pen-to-square\"></i>
-\t\t\t\t\t\t</a>
-\t\t\t\t\t</td>
-\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t<a href=\"#\">
-\t\t\t\t\t\t\t<i class=\"fa-solid fa-trash-can\"></i>
-\t\t\t\t\t\t</a>
-\t\t\t\t\t</td>
-\t\t\t\t\t<td>";
+            yield "\" class=\"btn btn-open\">
+                    <i class=\"fa-solid fa-pen-to-square\"></i>
+                </a>
+            </div>
+            <div class=\"cell flex-1 text-center\">
+                <a href=\"#\" class=\"btn btn-delete\">
+                    <i class=\"fa-solid fa-trash-can\"></i>
+                </a>
+            </div>
+            <div class=\"cell flex-3\">";
             // line 31
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["d"], "emoji", [], "any", false, false, false, 31), "html", null, true);
+            yield " ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["d"], "intitule", [], "any", false, false, false, 31), "html", null, true);
-            yield "</td>
-\t\t\t\t</tr>
-\t\t\t";
+            yield "</div>
+        </div>
+    ";
             $context['_iterated'] = true;
         }
         // line 33
         if (!$context['_iterated']) {
             // line 34
-            yield "\t\t\t\t<p>Il n'existe encore aucune discipline sportive enregistrée dans la base.</p>
-\t\t\t";
+            yield "        <div class=\"table-row flex\">
+            <div class=\"cell\" style=\"flex:1 1 100%;\" colspan=\"3\">
+                Il n'existe encore aucune discipline sportive enregistrée dans la base.
+            </div>
+        </div>
+    ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['d'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 36
-        yield "\t\t</tbody>
-\t</table>
+        // line 40
+        yield "</div>
 
 ";
         
@@ -168,7 +173,7 @@ class __TwigTemplate_bd478c8eb62440370db9eb207a717ad6 extends Template
         yield from [];
     }
 
-    // line 40
+    // line 44
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -181,10 +186,48 @@ class __TwigTemplate_bd478c8eb62440370db9eb207a717ad6 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 41
-        yield "\t<link rel=\"stylesheet\" href=\"";
+        // line 45
+        yield "<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/table.css"), "html", null, true);
         yield "\">
+<style>
+/* Container global */
+.table-container {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Flex row */
+.flex {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem 0;
+}
+
+/* Cellules */
+.cell {
+    padding: 0.5rem;
+}
+
+/* Largeurs flex */
+.flex-1 { flex: 1; }
+.flex-2 { flex: 2; }
+.flex-3 { flex: 3; }
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+    .flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cell {
+        width: 100%;
+        padding-left: 0;
+        text-align: left;
+    }
+}
+</style>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -216,52 +259,94 @@ class __TwigTemplate_bd478c8eb62440370db9eb207a717ad6 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  185 => 41,  172 => 40,  158 => 36,  151 => 34,  149 => 33,  142 => 31,  130 => 22,  126 => 20,  121 => 19,  107 => 8,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
+        return array (  190 => 45,  177 => 44,  164 => 40,  153 => 34,  151 => 33,  142 => 31,  130 => 22,  126 => 20,  121 => 19,  107 => 8,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 {% block title %}
-\tListe des sports
+    Liste des sports
 {% endblock %}
 {% block body %}
 
-\t<H1 class=\"text-center\">Liste des sports sportives</H1>
-\t<a href=\"{{path('app_sports_new')}}\">
-\t\t<i class=\"fa-solid fa-circle-plus\"></i>Ajouter une discipline sportive</a>
-\t<table>
+<h1 class=\"text-center\">Liste des disciplines sportives</h1>
+<a href=\"{{ path('app_sports_new') }}\" class=\"btn btn-primary\">
+    <i class=\"fa-solid fa-circle-plus\"></i> Ajouter une discipline sportive
+</a>
 
-\t\t<thead>
-\t\t\t<th></th>
-\t\t\t<th></th>
-\t\t\t<th>intitulé</th>
-\t\t</thead>
-\t\t<tbody>
+<div class=\"table-container\">
+    <div class=\"table-header flex\">
+        <div class=\"cell flex-1\">Modifier</div>
+        <div class=\"cell flex-1\">Supprimer</div>
+        <div class=\"cell flex-3\">Intitulé</div>
+    </div>
 
-\t\t\t{% for d in sports %}
-\t\t\t\t<tr>
-\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t<a href=\"{{path('app_sports_edit',{slug:d.slug})}}\">
-\t\t\t\t\t\t\t<i class=\"fa-solid fa-pen-to-square\"></i>
-\t\t\t\t\t\t</a>
-\t\t\t\t\t</td>
-\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t<a href=\"#\">
-\t\t\t\t\t\t\t<i class=\"fa-solid fa-trash-can\"></i>
-\t\t\t\t\t\t</a>
-\t\t\t\t\t</td>
-\t\t\t\t\t<td>{{d.intitule}}</td>
-\t\t\t\t</tr>
-\t\t\t{% else %}
-\t\t\t\t<p>Il n'existe encore aucune discipline sportive enregistrée dans la base.</p>
-\t\t\t{% endfor %}
-\t\t</tbody>
-\t</table>
+    {% for d in sports %}
+        <div class=\"table-row flex\">
+            <div class=\"cell flex-1 text-center\">
+                <a href=\"{{ path('app_sports_edit', {slug:d.slug}) }}\" class=\"btn btn-open\">
+                    <i class=\"fa-solid fa-pen-to-square\"></i>
+                </a>
+            </div>
+            <div class=\"cell flex-1 text-center\">
+                <a href=\"#\" class=\"btn btn-delete\">
+                    <i class=\"fa-solid fa-trash-can\"></i>
+                </a>
+            </div>
+            <div class=\"cell flex-3\">{{ d.emoji }} {{ d.intitule }}</div>
+        </div>
+    {% else %}
+        <div class=\"table-row flex\">
+            <div class=\"cell\" style=\"flex:1 1 100%;\" colspan=\"3\">
+                Il n'existe encore aucune discipline sportive enregistrée dans la base.
+            </div>
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
+
 {% block stylesheets %}
-\t<link rel=\"stylesheet\" href=\"{{asset('assets/css/table.css')}}\">
+<link rel=\"stylesheet\" href=\"{{ asset('assets/css/table.css') }}\">
+<style>
+/* Container global */
+.table-container {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Flex row */
+.flex {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem 0;
+}
+
+/* Cellules */
+.cell {
+    padding: 0.5rem;
+}
+
+/* Largeurs flex */
+.flex-1 { flex: 1; }
+.flex-2 { flex: 2; }
+.flex-3 { flex: 3; }
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+    .flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cell {
+        width: 100%;
+        padding-left: 0;
+        text-align: left;
+    }
+}
+</style>
 {% endblock %}
 ", "admin/sports/index.html.twig", "/var/www/symfony/templates/admin/sports/index.html.twig");
     }

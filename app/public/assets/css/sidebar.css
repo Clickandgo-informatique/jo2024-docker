@@ -9,12 +9,13 @@
     color: white;
     padding: 15px;
     overflow-y: auto;
-    z-index: 4000; /* sous la navbar mais au-dessus du main */
-    display: none;
+    transform: translateX(0); /* position ouverte par défaut */
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); /* animation smooth */
 }
 
-.sidebar.open {
-    display: block;
+/* Sidebar fermée */
+.sidebar:not(.open) {
+    transform: translateX(-250px); /* cachée */
 }
 
 /* Liens dans la sidebar */
@@ -27,6 +28,34 @@
 
 .sidebar a:hover {
     background: #333;
+}
+
+/* Bouton toggle attaché au bord droit de la sidebar */
+#sidebarToggle {
+    position: fixed; /* fixe par rapport à la fenêtre */
+    top: 100px; /* ajustable pour aligner avec la sidebar */
+    left: 250px; /* bord droit de la sidebar ouverte */
+    width: 40px;
+    height: 40px;
+    background: #222;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    z-index: 4500;
+    transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1); /* même vitesse que la sidebar */
+}
+
+/* Déplacer le toggle quand la sidebar est fermée */
+.sidebar:not(.open) ~ #sidebarToggle {
+    left: 0; /* visible à gauche si sidebar fermée */
+}
+
+@media (max-width: 767px) {
+    #sidebarToggle {
+        display: none; /* cacher en mobile si nécessaire */
+    }
 }
 
 /* Bouton de fermeture (optionnel en desktop) */
@@ -42,8 +71,8 @@
 /* Décalage du main quand sidebar ouverte en desktop */
 @media (min-width: 768px) {
     #main.shifted {
-        margin-left: 250px;
-        transition: margin-left 0.3s ease;
+        transform: translateX(250px); /* glissement smooth du main */
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); /* même timing que sidebar */
     }
 }
 
@@ -52,7 +81,12 @@
     .sidebar {
         position: relative;
         width: 100%;
-        height: auto;    
+        height: auto;
         margin-top: var(--header-height, 100px); /* collée sous navbar+subnav */
+        transform: translateX(0); /* pas de translation en mobile */
+    }
+
+    #main.shifted {
+        transform: none; /* pas de glissement en mobile */
     }
 }

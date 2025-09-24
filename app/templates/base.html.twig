@@ -40,12 +40,15 @@
 				document.addEventListener("DOMContentLoaded", function () {
 {% for label, messages in app.flashes %}
 {% for message in messages %}
-showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfor %}
-{% endfor %}
+showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfor %}{% endfor %}
 });
 			</script>
 
-			<main id="main"> {% block body %}{% endblock %}
+			{# Bouton toggle toujours visible en haut à gauche #}
+			{% if is_granted('ROLE_ADMIN') %}
+				<button id="sidebarToggle">☰</button>
+			{% endif %}
+			<main id="main" class="{% if is_granted('ROLE_ADMIN') %}shifted{% endif %}"> {% block body %}{% endblock %}
 				</main>
 
 				{# Scripts #}

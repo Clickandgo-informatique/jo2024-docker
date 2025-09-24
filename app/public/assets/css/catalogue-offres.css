@@ -176,7 +176,8 @@
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     height: 100%;
-    max-width: 300px;
+    min-width: 300px;
+    max-width: 400px;
 }
 
 .offer-card:hover {
@@ -303,8 +304,8 @@
         grid-template-columns: 1fr;
         justify-items: center;
     }
-    .offers-grid{
-          justify-items: center;
+    .offers-grid {
+        justify-items: center;
     }
 }
 

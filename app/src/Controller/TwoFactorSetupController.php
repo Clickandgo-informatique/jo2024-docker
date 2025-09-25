@@ -18,14 +18,14 @@ class TwoFactorSetupController extends AbstractController
         EntityManagerInterface $em,
         TOTPService $totpService
     ): Response {
-        /** @var Users $user */
+        /** @var Users|null $user */
         $user = $this->getUser();
 
         if (!$user) {
             return $this->redirectToRoute('app_login');
         }
 
-        // On doit avoir un secret (généré dans l'authenticator)
+        // Vérifie que le secret existe
         if (!$user->getGoogle2FASecret()) {
             $this->addFlash('error', 'Aucun secret trouvé pour cet utilisateur.');
             return $this->redirectToRoute('app_login');
@@ -37,12 +37,12 @@ class TwoFactorSetupController extends AbstractController
             $code = $request->request->get('code');
 
             if ($totpService->checkCode($user, $code)) {
-                // Activation validée
                 $user->setIs2FAEnabled(true);
                 $em->persist($user);
                 $em->flush();
 
                 $this->addFlash('success', 'Double authentification activée avec succès ✅');
+
                 return $this->redirectToRoute('app_main');
             }
 

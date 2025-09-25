@@ -429,6 +429,9 @@
       <tag name="doctrine.fixture.orm"/>
       <argument type="service" id="slugger"/>
     </service>
+    <service id="App\DataFixtures\CommandesFixtures" class="App\DataFixtures\CommandesFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+    </service>
     <service id="App\DataFixtures\OffresFixtures" class="App\DataFixtures\OffresFixtures" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
       <argument type="service" id="slugger"/>
@@ -437,7 +440,7 @@
       <tag name="doctrine.fixture.orm"/>
       <argument type="service" id="slugger"/>
     </service>
-    <service id="App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" autoconfigure="true">
+    <service id="App\DataFixtures\UsersFixtures" class="App\DataFixtures\UsersFixtures" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
       <argument type="service" id="security.user_password_hasher"/>
     </service>
@@ -472,6 +475,12 @@
     <service id="App\Entity\Users" class="App\Entity\Users" autowire="true" autoconfigure="true">
       <tag name="container.excluded" source="because it's a Doctrine entity"/>
       <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
+    <service id="App\EventListener\PostLoginRedirectListener" class="App\EventListener\PostLoginRedirectListener" autowire="true" autoconfigure="true">
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="router.default"/>
+      <argument type="service" id="security.token_storage"/>
     </service>
     <service id="App\Form\CategoriesOffresFormType" class="App\Form\CategoriesOffresFormType" autowire="true" autoconfigure="true">
       <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
@@ -561,7 +570,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.zmpuKfq"/>
+      <argument type="service" id=".service_locator.dmts8gh"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -2539,6 +2548,14 @@
       <argument type="service" id=".virtual_request_stack" on-invalid="null"/>
       <argument type="service" id="profiler.is_disabled_state_checker" on-invalid="null"/>
       <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="App\EventListener\PostLoginRedirectListener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
         <argument>kernel.response</argument>
         <argument type="collection">
           <argument type="service_closure" id="security.csrf.same_origin_token_manager"/>
@@ -3056,7 +3073,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.zmpuKfq"/>
+      <argument type="service" id=".service_locator.dmts8gh"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -6268,6 +6285,10 @@
             <argument key="groups" type="collection"/>
           </argument>
           <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\CommandesFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
+          <argument type="collection">
             <argument key="fixture" type="service" id="App\DataFixtures\OffresFixtures"/>
             <argument key="groups" type="collection"/>
           </argument>
@@ -6276,7 +6297,7 @@
             <argument key="groups" type="collection"/>
           </argument>
           <argument type="collection">
-            <argument key="fixture" type="service" id="App\DataFixtures\UserFixtures"/>
+            <argument key="fixture" type="service" id="App\DataFixtures\UsersFixtures"/>
             <argument key="groups" type="collection"/>
           </argument>
         </argument>
@@ -6461,12 +6482,14 @@
     <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\CategoriesOffresFixtures" class="App\DataFixtures\CategoriesOffresFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\CategoriesOffresFixtures" class="App\DataFixtures\CategoriesOffresFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\CommandesFixtures" class="App\DataFixtures\CommandesFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\CommandesFixtures" class="App\DataFixtures\CommandesFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\OffresFixtures" class="App\DataFixtures\OffresFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\OffresFixtures" class="App\DataFixtures\OffresFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\SportsFixtures" class="App\DataFixtures\SportsFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\SportsFixtures" class="App\DataFixtures\SportsFixtures" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\UsersFixtures" class="App\DataFixtures\UsersFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\UsersFixtures" class="App\DataFixtures\UsersFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\CategoriesOffres.0.App\Entity\CategoriesOffres" class="App\Entity\CategoriesOffres" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Entity\CategoriesOffres" class="App\Entity\CategoriesOffres" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\Commandes.0.App\Entity\Commandes" class="App\Entity\Commandes" autowire="true" abstract="true"/>
@@ -7312,29 +7335,30 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.CkoZCuq" method="withContext"/>
     </service>
-    <service id=".service_locator.MpNKTxy" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.xqSD.N7" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="offre" type="service_closure" id=".errored..service_locator.MpNKTxy.App\Entity\Offres"/>
+        <argument key="offre" type="service_closure" id=".errored..service_locator.xqSD.N7.App\Entity\Offres"/>
+        <argument key="offresRepo" type="service_closure" id="App\Repository\OffresRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.MpNKTxy.App\Controller\CartController::add()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.xqSD.N7.App\Controller\CartController::add()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\CartController::add()"/>
       <argument>App\Controller\CartController::add()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.MpNKTxy" method="withContext"/>
+      <factory service=".service_locator.xqSD.N7" method="withContext"/>
     </service>
-    <service id=".service_locator.MpNKTxy.App\Controller\CartController::remove()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.CkoZCuq.App\Controller\CartController::remove()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\CartController::remove()"/>
       <argument>App\Controller\CartController::remove()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.MpNKTxy" method="withContext"/>
+      <factory service=".service_locator.CkoZCuq" method="withContext"/>
     </service>
-    <service id=".service_locator.MpNKTxy.App\Controller\CartController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\CartController::delete()"/>
-      <argument>App\Controller\CartController::delete()</argument>
+    <service id=".service_locator.CkoZCuq.App\Controller\CartController::count()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CartController::count()"/>
+      <argument>App\Controller\CartController::count()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.MpNKTxy" method="withContext"/>
+      <factory service=".service_locator.CkoZCuq" method="withContext"/>
     </service>
     <service id=".service_locator.8D3K43m" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -7479,7 +7503,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.g9vD4Q0" method="withContext"/>
     </service>
-    <service id=".service_locator.zmpuKfq" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.dmts8gh" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
@@ -7504,9 +7528,9 @@
         <argument key="App\Controller\Admin\UsersController::index" type="service_closure" id=".service_locator.DbNBHcb.App\Controller\Admin\UsersController::index()"/>
         <argument key="App\Controller\Admin\UsersController::edit" type="service_closure" id=".service_locator.PMSD29P.App\Controller\Admin\UsersController::edit()"/>
         <argument key="App\Controller\CartController::index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::index()"/>
-        <argument key="App\Controller\CartController::add" type="service_closure" id=".service_locator.MpNKTxy.App\Controller\CartController::add()"/>
-        <argument key="App\Controller\CartController::remove" type="service_closure" id=".service_locator.MpNKTxy.App\Controller\CartController::remove()"/>
-        <argument key="App\Controller\CartController::delete" type="service_closure" id=".service_locator.MpNKTxy.App\Controller\CartController::delete()"/>
+        <argument key="App\Controller\CartController::add" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\CartController::add()"/>
+        <argument key="App\Controller\CartController::remove" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::remove()"/>
+        <argument key="App\Controller\CartController::count" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::count()"/>
         <argument key="App\Controller\CommandesController::index" type="service_closure" id=".service_locator.8D3K43m.App\Controller\CommandesController::index()"/>
         <argument key="App\Controller\CommandesController::liste" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::liste()"/>
         <argument key="App\Controller\CommandesController::payerCommande" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::payerCommande()"/>
@@ -7538,9 +7562,9 @@
         <argument key="App\Controller\Admin\UsersController:index" type="service_closure" id=".service_locator.DbNBHcb.App\Controller\Admin\UsersController::index()"/>
         <argument key="App\Controller\Admin\UsersController:edit" type="service_closure" id=".service_locator.PMSD29P.App\Controller\Admin\UsersController::edit()"/>
         <argument key="App\Controller\CartController:index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::index()"/>
-        <argument key="App\Controller\CartController:add" type="service_closure" id=".service_locator.MpNKTxy.App\Controller\CartController::add()"/>
-        <argument key="App\Controller\CartController:remove" type="service_closure" id=".service_locator.MpNKTxy.App\Controller\CartController::remove()"/>
-        <argument key="App\Controller\CartController:delete" type="service_closure" id=".service_locator.MpNKTxy.App\Controller\CartController::delete()"/>
+        <argument key="App\Controller\CartController:add" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\CartController::add()"/>
+        <argument key="App\Controller\CartController:remove" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::remove()"/>
+        <argument key="App\Controller\CartController:count" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::count()"/>
         <argument key="App\Controller\CommandesController:index" type="service_closure" id=".service_locator.8D3K43m.App\Controller\CommandesController::index()"/>
         <argument key="App\Controller\CommandesController:liste" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::liste()"/>
         <argument key="App\Controller\CommandesController:payerCommande" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::payerCommande()"/>
@@ -8111,8 +8135,8 @@
     <service id=".errored..service_locator.9_8CXPB.App\Entity\Commandes" class="App\Entity\Commandes">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.9_8CXPB&quot;: it needs an instance of &quot;App\Entity\Commandes&quot; but this type has been excluded because it's a Doctrine entity."/>
     </service>
-    <service id=".errored..service_locator.MpNKTxy.App\Entity\Offres" class="App\Entity\Offres">
-      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.MpNKTxy&quot;: it needs an instance of &quot;App\Entity\Offres&quot; but this type has been excluded because it's a Doctrine entity."/>
+    <service id=".errored..service_locator.xqSD.N7.App\Entity\Offres" class="App\Entity\Offres">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.xqSD.N7&quot;: it needs an instance of &quot;App\Entity\Offres&quot; but this type has been excluded because it's a Doctrine entity."/>
     </service>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
@@ -9108,7 +9132,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.zmpuKfq"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.dmts8gh"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
@@ -9143,7 +9167,7 @@
     <service id=".service_locator.fLh50AN" alias=".service_locator.DbNBHcb"/>
     <service id=".service_locator.5sEnNUx" alias=".service_locator.PMSD29P"/>
     <service id=".service_locator.8I..1ax" alias=".service_locator.CkoZCuq"/>
-    <service id=".service_locator.d4F_buK" alias=".service_locator.MpNKTxy"/>
+    <service id=".service_locator.JLKo9jm" alias=".service_locator.xqSD.N7"/>
     <service id=".service_locator.ZSMSGBp" alias=".service_locator.8D3K43m"/>
     <service id=".service_locator.Js0Hwmu" alias=".service_locator.aSQ66kB"/>
     <service id=".service_locator.q.RsORg" alias=".service_locator.dLKjkD4"/>

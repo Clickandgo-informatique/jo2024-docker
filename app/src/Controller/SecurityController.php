@@ -23,10 +23,6 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, TOTPService $totpService, SessionInterface $session): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
         // Obtenir l'erreur de connexion s'il y en a une
         $error = $authenticationUtils->getLastAuthenticationError();
         // Obtenir le dernier nom d'utilisateur saisi par l'utilisateur
@@ -40,7 +36,7 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
-
+    //On redirige vers la régénération du mot de passe et on envoie un mail de confirmation 
     #[Route(path: '/mot-de-passe-oublie', name: 'forgotten_password')]
     public function forgottenPassword(
         Request $request,
@@ -100,10 +96,10 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    // Vérifier le token et permettre à l'utilisateur de réinitialiser son mot de passe
     #[Route(path: '/mot-de-passe-oublie/{token}', name: 'reset_password')]
     public function resetPassword(string $token, JWTService $jwt, UsersRepository $usersRepo, EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
-        // Vérifier le token et permettre à l'utilisateur de réinitialiser son mot de passe
 
         // On vérifie si le token est valide (cohérent, pas expiré et signature correcte)
         if ($jwt->isValid($token) && !$jwt->isExpired($token) && $jwt->check($token, $this->getParameter('app.jwtsecret'))) {

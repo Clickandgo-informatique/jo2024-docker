@@ -1,0 +1,48 @@
+@startuml
+title Flux 2FA Symfony
+
+start
+
+:Page de login;
+if (Utilisateur valide ?) then (Non)
+  :Retour page login;
+  stop
+else (Oui)
+  if (2FA activée ?) then (Non)
+    :Connexion normale vers app_main;
+    stop
+  else (Oui)
+    :Redirection vers page 2FA verify;
+    if (Code 2FA correct ?) then (Non)
+      :Rester sur page 2FA verify;
+    else (Oui)
+      :Authentifie complètement l'utilisateur;
+      if (ROLE_ADMIN ?) then (Oui)
+        :Redirection vers app_admin_index;
+      else (Non)
+        :Redirection vers app_main;
+      endif
+    endif
+  endif
+endif
+
+' Partie Setup 2FA
+:Page /2fa/setup;
+if (Utilisateur connecté ?) then (Non)
+  :Retour page login;
+else (Oui)
+  if (Secret 2FA présent ?) then (Non)
+    :Retour page login;
+  else (Oui)
+    :Affiche QR code et formulaire;
+    if (Code 2FA validé ?) then (Non)
+      :Rester sur setup 2FA;
+    else (Oui)
+      :Active 2FA pour l'utilisateur;
+      :Redirection vers app_main;
+    endif
+  endif
+endif
+
+stop
+@enduml

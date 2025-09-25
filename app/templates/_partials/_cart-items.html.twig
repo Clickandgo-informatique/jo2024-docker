@@ -1,56 +1,67 @@
-{# Affichage du nombre d'articles dans le panier (Ajax) #}
-<div class="cart-total-items text-center">
-	{% if totalItems >0 %}
-		<span class="cart-items">{{totalItems}}</span>
-		article(s) dans le panier
-	{% else %}
-		<span class="cart-items ">Aucun article dans le panier</span>
-	{% endif %}
-</div>
-{# Fin affichage du nombre d'articles dans le panier (Ajax) #}
-<table>
-	<thead>
-		<tr>
-			<th>Offre</th>
-			<th>Prix</th>
-			<th></th>
-			<th>Total</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for element in data %}
-			<tr>
-				<td>{{element.offre.intitule}}</td>
-				<td class="text-right">{{element.offre.prix}}€</td>
+<div
+	class="ajax-reloaded-data">
+	{# Affichage du nombre d'articles dans le panier #}
+	<div class="cart-total-items text-center">
+		{% if totalItems > 0 %}
+			<span class="cart-items">{{ totalItems }}</span>
+			article(s) dans le panier
+		{% else %}
+			<span class="cart-items">Aucun article dans le panier</span>
+		{% endif %}
+	</div>
 
-				<td class="wrapper-quantite">
-					<a href="{{path('app_cart_remove',{id:element.offre.id})}}" class="btn btn-warning text-decoration-none btn-remove-from-cart" data-url="/cart/remove/{{element.offre.id}}">&minus;</a>
-					<span class="text-right quantite">{{element.quantite}}</span>
-					<a href="{{path('app_cart_add',{id:element.offre.id})}}" class="btn btn-success text-decoration-none btn-add-to-cart" data-url="/cart/add/{{element.offre.id}}">&plus;</a>
-				</td>
-				<td class="text-right">{{element.quantite * element.offre.prix}}€</td>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Offre</th>
+				<th>Prix</th>
+				<th>Quantité</th>
+				<th>Total</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for element in data %}
+				<tr>
+					<td>{{ element.offre.intitule }}</td>
+					<td class="text-right">{{ element.offre.prix }}€</td>
+					<td class="text-center">
+						<div class="wrapper-quantite">
+							<a href="{{ path('app_cart_remove', {'id': element.offre.id}) }}" class="btn btn-warning btn-remove-from-cart" data-url="{{ path('app_cart_remove', {'id': element.offre.id}) }}" data-method="POST">-</a>
+
+							<span class="quantite">{{ element.quantite }}</span>
+
+							<a href="{{ path('app_cart_add', {'id': element.offre.id}) }}" class="btn btn-success btn-add-to-cart" data-url="{{ path('app_cart_add', {'id': element.offre.id}) }}" data-method="POST">+</a>
+						</div>
+					</td>
+					<td class="text-right">{{ element.quantite * element.offre.prix }}€</td>
+					<td class="text-center">
+						<a href="{{ path('app_cart_remove', {'id': element.offre.id}) }}" class="btn btn-danger btn-delete-from-cart" data-url="{{ path('app_cart_remove', {'id': element.offre.id}) }}" data-method="POST">
+							<i class="fa-solid fa-trash-can"></i>
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5" class="text-center">Votre panier est vide</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3">Total</td>
+				<td class="text-right">{{ total }}€</td>
 				<td>
-					<a href="{{path('app_cart_delete',{id:element.offre.id})}}" class="btn btn-danger btn-delete-from-cart" data-url="/cart/delete/{{element.offre.id}}">
-						<i class="fa-solid fa-trash-can"></i>
-					</a>
+					{# {% if total > 0 %}
+															                        <a href="{{ path('app_cart_empty') }}"
+															                           class="btn btn-danger btn-empty-cart"
+															                           data-url="{{ path('app_cart_empty') }}"
+															                           data-method="POST">
+															                           <i class="fa-solid fa-cart-shopping"></i> Vider le panier
+															                        </a>
+															                    {% endif %} #}
 				</td>
 			</tr>
-		</td>
-	</tbody>
-{% else %}
-	<tr>
-		<td colspan="5">Votre panier est vide</td>
-	</tr>
-{% endfor %}
-<tfoot>
-	<tr>
-		<td colspan="3">Total</td>
-		<td class="text-right">{{total}}€</td>{# Affichage du bouton de vidage de panier seulement si le total est > 0 #}{% if total>0 %}
-			<td>
-				<a href="{{path('app_cart_empty_cart')}}" class="btn btn-danger btn-empty-cart" data-url="/cart/cart-empty-cart">
-					<i class="fa-solid fa-cart-shopping"></i>Vider le panier</a>
-			</td>
-		{% endif %}
-	</tr>
-</tfoot></table>
+		</tfoot>
+	</table>
+</div>

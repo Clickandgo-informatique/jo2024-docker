@@ -1,4 +1,3 @@
-<!-- Subnav avec flèches -->
 <div class="subnav-container">
 	<button class="subnav-arrow" id="subnavLeft">‹</button>
 
@@ -12,29 +11,35 @@
 			<div class="user-options">
 				<div class="profile">
 					<a class="nav-link" href="{{ path('app_profile_index') }}">
-						<i class="fa-regular fa-address-card" aria-hidden="true"></i>
+						<i class="fa-regular fa-address-card"></i>
 						Mon profil
 					</a>
 				</div>
-				<div class="cart">
-					<a href="{{ path('app_cart_index') }}">
-						<i class="fa-solid fa-basket-shopping"></i>
-						Mon panier
-					</a>
-				</div>
-			</div>
 
-			{% if is_granted('ROLE_ADMIN') %}
-				<a class="nav-link" href="{{ path('app_admin_index') }}">
-					<i class="fa fa-cog" aria-hidden="true"></i>
-					Administration
-				</a>
-			{% endif %}
+				{% if is_granted('ROLE_ADMIN') %}
+					<a class="nav-link" href="{{ path('app_admin_index') }}">
+						<i class="fa fa-cog"></i>
+						Administration
+					</a>
+				{% endif %}
+			</div>
 		{% else %}
 			<p class="text-center not-connected">
 				Bonjour visiteur, vous n'êtes pas encore connecté(e).
 			</p>
 		{% endif %}
+		
+		{# Affichage du panier même sans connexion #}
+		<div class="cart">
+			<a href="{{ path('app_cart_index') }}" class="cart-button">
+				<span class="cart-icon-wrapper">
+					<i class="fa-solid fa-basket-shopping cart-icon"></i>
+					<span id="cart-count" class="cart-badge">{{ totalItems|default(0) }}</span>
+				</span>
+				<span class="cart-label">Mon panier</span>
+			</a>
+		</div>
+
 	</div>
 
 	<button class="subnav-arrow" id="subnavRight">›</button>

@@ -1,84 +1,43 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-    Liste des sports
+	Liste des sports
 {% endblock %}
 {% block body %}
 
-<h1 class="text-center">Liste des disciplines sportives</h1>
-<a href="{{ path('app_sports_new') }}" class="btn btn-primary">
-    <i class="fa-solid fa-circle-plus"></i> Ajouter une discipline sportive
-</a>
+	<H1 class="text-center">Liste des disciplines sportives</H1>
+	<a href="{{path('app_sports_new')}}" class="btn btn-primary">
+		<i class="fa-solid fa-circle-plus"></i>Ajouter une discipline sportive</a>
+	<table>
+		<thead>
+			<th></th>
+			<th>Intitulé</th>
+			<th></th>
+		</thead>
+		<tbody>
 
-<div class="table-container">
-    <div class="table-header flex">
-        <div class="cell flex-1">Modifier</div>
-        <div class="cell flex-1">Supprimer</div>
-        <div class="cell flex-3">Intitulé</div>
-    </div>
+			{% for d in sports %}
+				<tr>
+					<td class="cell-actions text-center">
+						<a href="{{path('app_sports_edit',{slug:d.slug})}}" class="btn-action btn-open ">
+							<i class="fa-solid fa-pen-to-square"></i>
+						</a>
 
-    {% for d in sports %}
-        <div class="table-row flex">
-            <div class="cell flex-1 text-center">
-                <a href="{{ path('app_sports_edit', {slug:d.slug}) }}" class="btn btn-open">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </a>
-            </div>
-            <div class="cell flex-1 text-center">
-                <a href="#" class="btn btn-delete">
-                    <i class="fa-solid fa-trash-can"></i>
-                </a>
-            </div>
-            <div class="cell flex-3">{{ d.emoji }} {{ d.intitule }}</div>
-        </div>
-    {% else %}
-        <div class="table-row flex">
-            <div class="cell" style="flex:1 1 100%;" colspan="3">
-                Il n'existe encore aucune discipline sportive enregistrée dans la base.
-            </div>
-        </div>
-    {% endfor %}
-</div>
+					</td>
+					<td>{{ d.emoji }}
+						{{d.intitule}}</td>
+					<td>
+						<a href="#" class="btn-action btn-delete ">
+							<i class="fa-solid fa-trash-can"></i>
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<p>Il n'existe encore aucune discipline sportive enregistrée dans la base.</p>
+			{% endfor %}
+		</tbody>
+	</table>
 
 {% endblock %}
-
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('assets/css/table.css') }}">
-<style>
-/* Container global */
-.table-container {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-/* Flex row */
-.flex {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding: 0.5rem 0;
-}
-
-/* Cellules */
-.cell {
-    padding: 0.5rem;
-}
-
-/* Largeurs flex */
-.flex-1 { flex: 1; }
-.flex-2 { flex: 2; }
-.flex-3 { flex: 3; }
-
-/* Responsive mobile */
-@media (max-width: 768px) {
-    .flex {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .cell {
-        width: 100%;
-        padding-left: 0;
-        text-align: left;
-    }
-}
-</style>
+	<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">
 {% endblock %}

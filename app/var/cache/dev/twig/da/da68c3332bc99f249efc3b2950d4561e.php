@@ -162,7 +162,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield "\t\t\t";
         if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
             // line 49
-            yield "\t\t\t\t<button id=\"sidebarToggle\"><i class=\"fa-solid fa-cog\"></i></button>
+            yield "\t\t\t\t<button id=\"sidebarToggle\">☰</button>
 \t\t\t";
         }
         // line 51
@@ -338,7 +338,7 @@ showFlashbag(\"{{ message|e('js') }}\", \"{{ label }}\", 4000, \"top-right\");{%
 
 \t\t\t{# Bouton toggle toujours visible en haut à gauche #}
 \t\t\t{% if is_granted('ROLE_ADMIN') %}
-\t\t\t\t<button id=\"sidebarToggle\"><i class=\"fa-solid fa-cog\"></i></button>
+\t\t\t\t<button id=\"sidebarToggle\">☰</button>
 \t\t\t{% endif %}
 \t\t\t<main id=\"main\" class=\"{% if is_granted('ROLE_ADMIN') %}shifted{% endif %}\"> {% block body %}{% endblock %}
 \t\t\t\t</main>

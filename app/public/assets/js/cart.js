@@ -1,41 +1,46 @@
-const buttons = document.querySelectorAll(".btn");
-const btnAddItem = document.querySelector(".btn-add-to-cart");
-const btnRemoveItem = document.querySelector(".btn-remove-from-cart");
-const reloadedContent = document.querySelector(".ajax-reloaded-data");
-const cartItems = document.querySelector(".cart-items");
+window.addEventListener("DOMContentLoaded", () => {
+    const cartBadge = document.getElementById("cart-count");
+    const reloadedContent = document.querySelector(".ajax-reloaded-data");
 
-let url = "";
-
-//Recherche du bouton apellant la fonction (délégation)
-buttons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-        //On vérifie qu'il s'agît bien d'un bouton
-        //de requête Ajax
-        if (e.target.dataset.url) {
-            e.preventDefault();
-            url = e.target.dataset.url;
-        } else {
-            return;
+    function updateCartCount(newCount) {
+        if (cartBadge) {
+            cartBadge.textContent = newCount;
+            cartBadge.style.display = newCount > 0 ? "inline-block" : "none";
         }
-        //On éxécute la requête
-        fetchCartData(url);
+        // Ajout de l’animation
+        cartBadge.classList.add("animate");
+        setTimeout(() => {
+            cartBadge.classList.remove("animate");
+        }, 300);
+    }
+
+    async function fetchCartData(url, method = "GET") {
+        try {
+            const res = await fetch(url, {
+                method,
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+            });
+            const data = await res.json();
+            // console.log("Nombre d'articles dans le panier :", data.cartCount);
+            if (data.success) {
+                if (typeof data.cartCount !== "undefined")
+                    updateCartCount(data.cartCount);
+                if (data.html && reloadedContent)
+                    reloadedContent.innerHTML = data.html;
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    // Initialisation
+    fetchCartData("/cart/count", "GET");
+
+    // Délégation sur tous les boutons add/remove
+    document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".btn[data-url]");
+        if (!btn) return;
+        e.preventDefault();
+        fetchCartData(btn.dataset.url, btn.dataset.method || "POST");
     });
 });
-
-const fetchCartData = async (url) => {
-    let loading = true;
-    try {
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {
-                "X-Requested-With": "XMLHttpRequest",
-            },
-        });
-        reloadedContent.innerHTML = await response.text();
-       
-    } catch (error) {
-        console.log(error);
-    } finally {
-        loading = false;
-    }
-};

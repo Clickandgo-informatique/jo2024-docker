@@ -176,7 +176,8 @@
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     height: 100%;
-    width:400px;
+    max-width: 300px;
+    width: 97%;
 }
 
 .offer-card:hover {
@@ -255,6 +256,10 @@
 
 .offer-link:hover {
     background: #0056b3;
+}
+.offer-footer {
+    display: flex;
+    justify-content: center;
 }
 .btn-add-cart {
     margin-top: auto;

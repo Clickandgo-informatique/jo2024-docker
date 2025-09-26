@@ -42,7 +42,7 @@
 {% for message in messages %}
 showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfor %}{% endfor %}
 });
-			</script>
+			</script>		
 
 			{# Bouton toggle toujours visible en haut à gauche #}
 			{% if is_granted('ROLE_ADMIN') %}
@@ -54,5 +54,7 @@ showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfo
 				{# Scripts #}
 				<script type="module" src="{{ asset('assets/js/main.js') }}"></script>
 				<script src="{{ asset('assets/js/sidebar.js') }}"></script>
+				{% block javascripts %}{% endblock %}
+
 			</body>
 		</html>

@@ -35,6 +35,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
             'title' => [$this, 'block_title'],
             'stylesheets' => [$this, 'block_stylesheets'],
             'body' => [$this, 'block_body'],
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -155,7 +156,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 44
         yield "});
-\t\t\t</script>
+\t\t\t</script>\t\t
 
 \t\t\t";
         // line 48
@@ -184,6 +185,11 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         // line 56
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/sidebar.js"), "html", null, true);
         yield "\"></script>
+\t\t\t\t";
+        // line 57
+        yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
+        // line 58
+        yield "
 \t\t\t</body>
 \t\t</html>
 ";
@@ -264,6 +270,28 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield from [];
     }
 
+    // line 57
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_javascripts(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
     /**
      * @codeCoverageIgnore
      */
@@ -285,7 +313,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  246 => 51,  224 => 26,  200 => 8,  185 => 56,  180 => 55,  176 => 52,  169 => 51,  165 => 49,  162 => 48,  157 => 44,  143 => 43,  139 => 42,  135 => 41,  128 => 38,  125 => 36,  119 => 34,  117 => 33,  112 => 31,  108 => 30,  103 => 27,  100 => 26,  95 => 23,  90 => 21,  85 => 20,  80 => 17,  75 => 15,  71 => 14,  66 => 13,  62 => 10,  60 => 8,  51 => 1,);
+        return array (  274 => 57,  252 => 51,  230 => 26,  206 => 8,  192 => 58,  190 => 57,  186 => 56,  181 => 55,  177 => 52,  170 => 51,  166 => 49,  163 => 48,  158 => 44,  144 => 43,  140 => 42,  136 => 41,  129 => 38,  126 => 36,  120 => 34,  118 => 33,  113 => 31,  109 => 30,  104 => 27,  101 => 26,  96 => 23,  91 => 21,  86 => 20,  81 => 17,  76 => 15,  72 => 14,  67 => 13,  63 => 10,  61 => 8,  52 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -334,7 +362,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
 {% for message in messages %}
 showFlashbag(\"{{ message|e('js') }}\", \"{{ label }}\", 4000, \"top-right\");{% endfor %}{% endfor %}
 });
-\t\t\t</script>
+\t\t\t</script>\t\t
 
 \t\t\t{# Bouton toggle toujours visible en haut à gauche #}
 \t\t\t{% if is_granted('ROLE_ADMIN') %}
@@ -346,6 +374,8 @@ showFlashbag(\"{{ message|e('js') }}\", \"{{ label }}\", 4000, \"top-right\");{%
 \t\t\t\t{# Scripts #}
 \t\t\t\t<script type=\"module\" src=\"{{ asset('assets/js/main.js') }}\"></script>
 \t\t\t\t<script src=\"{{ asset('assets/js/sidebar.js') }}\"></script>
+\t\t\t\t{% block javascripts %}{% endblock %}
+
 \t\t\t</body>
 \t\t</html>
 ", "base.html.twig", "/var/www/symfony/templates/base.html.twig");

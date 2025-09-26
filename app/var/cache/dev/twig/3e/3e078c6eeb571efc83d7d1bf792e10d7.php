@@ -45,124 +45,79 @@ class __TwigTemplate_efabb10962dc3799bd9de2076843f0ae extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "_partials/_cart-items.html.twig"));
 
         // line 1
-        yield "<div
-\tclass=\"ajax-reloaded-data\">
-\t";
-        // line 4
-        yield "\t<div class=\"cart-total-items text-center\">
-\t\t";
-        // line 5
-        if (((isset($context["totalItems"]) || array_key_exists("totalItems", $context) ? $context["totalItems"] : (function () { throw new RuntimeError('Variable "totalItems" does not exist.', 5, $this->source); })()) > 0)) {
-            // line 6
-            yield "\t\t\t<span class=\"cart-items\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalItems"]) || array_key_exists("totalItems", $context) ? $context["totalItems"] : (function () { throw new RuntimeError('Variable "totalItems" does not exist.', 6, $this->source); })()), "html", null, true);
-            yield "</span>
-\t\t\tarticle(s) dans le panier
-\t\t";
+        if (Twig\Extension\CoreExtension::testEmpty((isset($context["data"]) || array_key_exists("data", $context) ? $context["data"] : (function () { throw new RuntimeError('Variable "data" does not exist.', 1, $this->source); })()))) {
+            // line 2
+            yield "    <p class=\"cart-empty\">Votre panier est vide.</p>
+";
         } else {
-            // line 9
-            yield "\t\t\t<span class=\"cart-items\">Aucun article dans le panier</span>
-\t\t";
-        }
-        // line 11
-        yield "\t</div>
+            // line 4
+            yield "<div class=\"cart-grid\">
+    <div class=\"cart-header\">Produit</div>
+    <div class=\"cart-header\">Quantité</div>
+    <div class=\"cart-header\">Prix total</div>
+    <div class=\"cart-header\"></div>
 
-\t<table class=\"table table-striped\">
-\t\t<thead>
-\t\t\t<tr>
-\t\t\t\t<th>Offre</th>
-\t\t\t\t<th>Prix</th>
-\t\t\t\t<th>Quantité</th>
-\t\t\t\t<th>Total</th>
-\t\t\t\t<th>Actions</th>
-\t\t\t</tr>
-\t\t</thead>
-\t\t<tbody>
-\t\t\t";
-        // line 24
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["data"]) || array_key_exists("data", $context) ? $context["data"] : (function () { throw new RuntimeError('Variable "data" does not exist.', 24, $this->source); })()));
-        $context['_iterated'] = false;
-        foreach ($context['_seq'] as $context["_key"] => $context["element"]) {
-            // line 25
-            yield "\t\t\t\t<tr>
-\t\t\t\t\t<td>";
-            // line 26
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["element"], "offre", [], "any", false, false, false, 26), "intitule", [], "any", false, false, false, 26), "html", null, true);
-            yield "</td>
-\t\t\t\t\t<td class=\"text-right\">";
+    ";
+            // line 10
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["data"]) || array_key_exists("data", $context) ? $context["data"] : (function () { throw new RuntimeError('Variable "data" does not exist.', 10, $this->source); })()));
+            foreach ($context['_seq'] as $context["_key"] => $context["item"]) {
+                // line 11
+                yield "        <div class=\"cart-product\">";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 11), "intitule", [], "any", false, false, false, 11), "html", null, true);
+                yield "</div>
+        <div class=\"cart-quantity\">
+            <div class=\"quantity-control\">
+                <button class=\"decrease btn btn-primary btn-qty\" data-url=\"";
+                // line 14
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_update", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 14), "id", [], "any", false, false, false, 14)]), "html", null, true);
+                yield "\" data-method=\"POST\">-</button>
+                <input type=\"text\" class=\"quantity-input\" value=\"";
+                // line 15
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "quantite", [], "any", false, false, false, 15), "html", null, true);
+                yield "\" data-url=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_update", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 15), "id", [], "any", false, false, false, 15)]), "html", null, true);
+                yield "\">
+                <button class=\"increase btn btn-primary btn-qty\" data-url=\"";
+                // line 16
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_update", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 16), "id", [], "any", false, false, false, 16)]), "html", null, true);
+                yield "\" data-method=\"POST\">+</button>
+            </div>
+        </div>
+        <div class=\"cart-total\">";
+                // line 19
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "total", [], "any", false, false, false, 19), 2, ",", " "), "html", null, true);
+                yield " €</div>
+        <div class=\"cart-actions\">
+            <button class=\"remove-item btn\" data-url=\"";
+                // line 21
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_remove", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 21), "id", [], "any", false, false, false, 21)]), "html", null, true);
+                yield "\" data-method=\"POST\">Supprimer</button>
+        </div>
+    ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_key'], $context['item'], $context['_parent']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 24
+            yield "</div>
+
+<div class=\"cart-summary\">
+    <div class=\"summary-items\">Total articles : ";
             // line 27
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["element"], "offre", [], "any", false, false, false, 27), "prix", [], "any", false, false, false, 27), "html", null, true);
-            yield "€</td>
-\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t<div class=\"wrapper-quantite\">
-\t\t\t\t\t\t\t<a href=\"";
-            // line 30
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_remove", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["element"], "offre", [], "any", false, false, false, 30), "id", [], "any", false, false, false, 30)]), "html", null, true);
-            yield "\" class=\"btn btn-warning btn-remove-from-cart\" data-url=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_remove", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["element"], "offre", [], "any", false, false, false, 30), "id", [], "any", false, false, false, 30)]), "html", null, true);
-            yield "\" data-method=\"POST\">-</a>
-
-\t\t\t\t\t\t\t<span class=\"quantite\">";
-            // line 32
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["element"], "quantite", [], "any", false, false, false, 32), "html", null, true);
-            yield "</span>
-
-\t\t\t\t\t\t\t<a href=\"";
-            // line 34
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_add", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["element"], "offre", [], "any", false, false, false, 34), "id", [], "any", false, false, false, 34)]), "html", null, true);
-            yield "\" class=\"btn btn-success btn-add-to-cart\" data-url=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_add", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["element"], "offre", [], "any", false, false, false, 34), "id", [], "any", false, false, false, 34)]), "html", null, true);
-            yield "\" data-method=\"POST\">+</a>
-\t\t\t\t\t\t</div>
-\t\t\t\t\t</td>
-\t\t\t\t\t<td class=\"text-right\">";
-            // line 37
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, $context["element"], "quantite", [], "any", false, false, false, 37) * CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["element"], "offre", [], "any", false, false, false, 37), "prix", [], "any", false, false, false, 37)), "html", null, true);
-            yield "€</td>
-\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t<a href=\"";
-            // line 39
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_remove", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["element"], "offre", [], "any", false, false, false, 39), "id", [], "any", false, false, false, 39)]), "html", null, true);
-            yield "\" class=\"btn btn-danger btn-delete-from-cart\" data-url=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_remove", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["element"], "offre", [], "any", false, false, false, 39), "id", [], "any", false, false, false, 39)]), "html", null, true);
-            yield "\" data-method=\"POST\">
-\t\t\t\t\t\t\t<i class=\"fa-solid fa-trash-can\"></i>
-\t\t\t\t\t\t</a>
-\t\t\t\t\t</td>
-\t\t\t\t</tr>
-\t\t\t";
-            $context['_iterated'] = true;
-        }
-        // line 44
-        if (!$context['_iterated']) {
-            // line 45
-            yield "\t\t\t\t<tr>
-\t\t\t\t\t<td colspan=\"5\" class=\"text-center\">Votre panier est vide</td>
-\t\t\t\t</tr>
-\t\t\t";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['element'], $context['_parent'], $context['_iterated']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 49
-        yield "\t\t</tbody>
-\t\t<tfoot>
-\t\t\t<tr>
-\t\t\t\t<td colspan=\"3\">Total</td>
-\t\t\t\t<td class=\"text-right\">";
-        // line 53
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["total"]) || array_key_exists("total", $context) ? $context["total"] : (function () { throw new RuntimeError('Variable "total" does not exist.', 53, $this->source); })()), "html", null, true);
-        yield "€</td>
-\t\t\t\t<td>
-\t\t\t\t\t";
-        // line 63
-        yield "\t\t\t\t</td>
-\t\t\t</tr>
-\t\t</tfoot>
-\t</table>
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalItems"]) || array_key_exists("totalItems", $context) ? $context["totalItems"] : (function () { throw new RuntimeError('Variable "totalItems" does not exist.', 27, $this->source); })()), "html", null, true);
+            yield "</div>
+    <div class=\"summary-total\">Total panier : ";
+            // line 28
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["total"]) || array_key_exists("total", $context) ? $context["total"] : (function () { throw new RuntimeError('Variable "total" does not exist.', 28, $this->source); })()), 2, ",", " "), "html", null, true);
+            yield " €</div>
+    <button id=\"clear-cart\" class=\"btn\" data-url=\"";
+            // line 29
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_clear");
+            yield "\" data-method=\"POST\">Vider le panier</button>
 </div>
 ";
+        }
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
@@ -193,78 +148,42 @@ class __TwigTemplate_efabb10962dc3799bd9de2076843f0ae extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  160 => 63,  155 => 53,  149 => 49,  140 => 45,  138 => 44,  126 => 39,  121 => 37,  113 => 34,  108 => 32,  101 => 30,  95 => 27,  91 => 26,  88 => 25,  83 => 24,  68 => 11,  64 => 9,  57 => 6,  55 => 5,  52 => 4,  48 => 1,);
+        return array (  116 => 29,  112 => 28,  108 => 27,  103 => 24,  94 => 21,  89 => 19,  83 => 16,  77 => 15,  73 => 14,  66 => 11,  62 => 10,  54 => 4,  50 => 2,  48 => 1,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("<div
-\tclass=\"ajax-reloaded-data\">
-\t{# Affichage du nombre d'articles dans le panier #}
-\t<div class=\"cart-total-items text-center\">
-\t\t{% if totalItems > 0 %}
-\t\t\t<span class=\"cart-items\">{{ totalItems }}</span>
-\t\t\tarticle(s) dans le panier
-\t\t{% else %}
-\t\t\t<span class=\"cart-items\">Aucun article dans le panier</span>
-\t\t{% endif %}
-\t</div>
+        return new Source("{% if data is empty %}
+    <p class=\"cart-empty\">Votre panier est vide.</p>
+{% else %}
+<div class=\"cart-grid\">
+    <div class=\"cart-header\">Produit</div>
+    <div class=\"cart-header\">Quantité</div>
+    <div class=\"cart-header\">Prix total</div>
+    <div class=\"cart-header\"></div>
 
-\t<table class=\"table table-striped\">
-\t\t<thead>
-\t\t\t<tr>
-\t\t\t\t<th>Offre</th>
-\t\t\t\t<th>Prix</th>
-\t\t\t\t<th>Quantité</th>
-\t\t\t\t<th>Total</th>
-\t\t\t\t<th>Actions</th>
-\t\t\t</tr>
-\t\t</thead>
-\t\t<tbody>
-\t\t\t{% for element in data %}
-\t\t\t\t<tr>
-\t\t\t\t\t<td>{{ element.offre.intitule }}</td>
-\t\t\t\t\t<td class=\"text-right\">{{ element.offre.prix }}€</td>
-\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t<div class=\"wrapper-quantite\">
-\t\t\t\t\t\t\t<a href=\"{{ path('app_cart_remove', {'id': element.offre.id}) }}\" class=\"btn btn-warning btn-remove-from-cart\" data-url=\"{{ path('app_cart_remove', {'id': element.offre.id}) }}\" data-method=\"POST\">-</a>
-
-\t\t\t\t\t\t\t<span class=\"quantite\">{{ element.quantite }}</span>
-
-\t\t\t\t\t\t\t<a href=\"{{ path('app_cart_add', {'id': element.offre.id}) }}\" class=\"btn btn-success btn-add-to-cart\" data-url=\"{{ path('app_cart_add', {'id': element.offre.id}) }}\" data-method=\"POST\">+</a>
-\t\t\t\t\t\t</div>
-\t\t\t\t\t</td>
-\t\t\t\t\t<td class=\"text-right\">{{ element.quantite * element.offre.prix }}€</td>
-\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t<a href=\"{{ path('app_cart_remove', {'id': element.offre.id}) }}\" class=\"btn btn-danger btn-delete-from-cart\" data-url=\"{{ path('app_cart_remove', {'id': element.offre.id}) }}\" data-method=\"POST\">
-\t\t\t\t\t\t\t<i class=\"fa-solid fa-trash-can\"></i>
-\t\t\t\t\t\t</a>
-\t\t\t\t\t</td>
-\t\t\t\t</tr>
-\t\t\t{% else %}
-\t\t\t\t<tr>
-\t\t\t\t\t<td colspan=\"5\" class=\"text-center\">Votre panier est vide</td>
-\t\t\t\t</tr>
-\t\t\t{% endfor %}
-\t\t</tbody>
-\t\t<tfoot>
-\t\t\t<tr>
-\t\t\t\t<td colspan=\"3\">Total</td>
-\t\t\t\t<td class=\"text-right\">{{ total }}€</td>
-\t\t\t\t<td>
-\t\t\t\t\t{# {% if total > 0 %}
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                        <a href=\"{{ path('app_cart_empty') }}\"
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                           class=\"btn btn-danger btn-empty-cart\"
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                           data-url=\"{{ path('app_cart_empty') }}\"
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                           data-method=\"POST\">
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                           <i class=\"fa-solid fa-cart-shopping\"></i> Vider le panier
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                        </a>
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                    {% endif %} #}
-\t\t\t\t</td>
-\t\t\t</tr>
-\t\t</tfoot>
-\t</table>
+    {% for item in data %}
+        <div class=\"cart-product\">{{ item.offre.intitule }}</div>
+        <div class=\"cart-quantity\">
+            <div class=\"quantity-control\">
+                <button class=\"decrease btn btn-primary btn-qty\" data-url=\"{{ path('panier_update', {'id': item.offre.id}) }}\" data-method=\"POST\">-</button>
+                <input type=\"text\" class=\"quantity-input\" value=\"{{ item.quantite }}\" data-url=\"{{ path('panier_update', {'id': item.offre.id}) }}\">
+                <button class=\"increase btn btn-primary btn-qty\" data-url=\"{{ path('panier_update', {'id': item.offre.id}) }}\" data-method=\"POST\">+</button>
+            </div>
+        </div>
+        <div class=\"cart-total\">{{ item.total|number_format(2, ',', ' ') }} €</div>
+        <div class=\"cart-actions\">
+            <button class=\"remove-item btn\" data-url=\"{{ path('panier_remove', {'id': item.offre.id}) }}\" data-method=\"POST\">Supprimer</button>
+        </div>
+    {% endfor %}
 </div>
+
+<div class=\"cart-summary\">
+    <div class=\"summary-items\">Total articles : {{ totalItems }}</div>
+    <div class=\"summary-total\">Total panier : {{ total|number_format(2, ',', ' ') }} €</div>
+    <button id=\"clear-cart\" class=\"btn\" data-url=\"{{ path('panier_clear') }}\" data-method=\"POST\">Vider le panier</button>
+</div>
+{% endif %}
 ", "_partials/_cart-items.html.twig", "/var/www/symfony/templates/_partials/_cart-items.html.twig");
     }
 }

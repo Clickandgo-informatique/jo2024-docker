@@ -366,13 +366,6 @@
         <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\Admin\UsersController"/>
       </call>
     </service>
-    <service id="App\Controller\CartController" class="App\Controller\CartController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\CartController"/>
-      </call>
-    </service>
     <service id="App\Controller\CommandesController" class="App\Controller\CommandesController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -385,6 +378,13 @@
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\MainController"/>
+      </call>
+    </service>
+    <service id="App\Controller\PanierController" class="App\Controller\PanierController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\PanierController"/>
       </call>
     </service>
     <service id="App\Controller\Profile\ProfileController" class="App\Controller\Profile\ProfileController" public="true" autowire="true" autoconfigure="true">
@@ -570,7 +570,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.dmts8gh"/>
+      <argument type="service" id=".service_locator.P0SeuaK"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3073,7 +3073,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.dmts8gh"/>
+      <argument type="service" id=".service_locator.P0SeuaK"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -6450,9 +6450,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\UsersController" class="App\Controller\Admin\UsersController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\UsersController" class="App\Controller\Admin\UsersController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\UsersController" class="App\Controller\Admin\UsersController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CartController" class="App\Controller\CartController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CartController" class="App\Controller\CartController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\CartController" class="App\Controller\CartController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CommandesController" class="App\Controller\CommandesController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CommandesController" class="App\Controller\CommandesController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CommandesController" class="App\Controller\CommandesController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6460,6 +6457,9 @@
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MainController" class="App\Controller\MainController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\MainController.0.App\Controller\MainController" class="App\Controller\MainController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\MainController" class="App\Controller\MainController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PanierController" class="App\Controller\PanierController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PanierController" class="App\Controller\PanierController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\PanierController" class="App\Controller\PanierController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Profile\ProfileController" class="App\Controller\Profile\ProfileController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Profile\ProfileController" class="App\Controller\Profile\ProfileController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\Profile\ProfileController.0.App\Controller\Profile\ProfileController" class="App\Controller\Profile\ProfileController" autowire="true" abstract="true"/>
@@ -7323,43 +7323,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.PMSD29P" method="withContext"/>
     </service>
-    <service id=".service_locator.CkoZCuq" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="offresRepo" type="service_closure" id="App\Repository\OffresRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.CkoZCuq.App\Controller\CartController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\CartController::index()"/>
-      <argument>App\Controller\CartController::index()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.CkoZCuq" method="withContext"/>
-    </service>
-    <service id=".service_locator.xqSD.N7" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="offre" type="service_closure" id=".errored..service_locator.xqSD.N7.App\Entity\Offres"/>
-        <argument key="offresRepo" type="service_closure" id="App\Repository\OffresRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.xqSD.N7.App\Controller\CartController::add()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\CartController::add()"/>
-      <argument>App\Controller\CartController::add()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.xqSD.N7" method="withContext"/>
-    </service>
-    <service id=".service_locator.CkoZCuq.App\Controller\CartController::remove()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\CartController::remove()"/>
-      <argument>App\Controller\CartController::remove()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.CkoZCuq" method="withContext"/>
-    </service>
-    <service id=".service_locator.CkoZCuq.App\Controller\CartController::count()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\CartController::count()"/>
-      <argument>App\Controller\CartController::count()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.CkoZCuq" method="withContext"/>
-    </service>
     <service id=".service_locator.8D3K43m" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7390,6 +7353,49 @@
       <argument>App\Controller\CommandesController::payerCommande()</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.aSQ66kB" method="withContext"/>
+    </service>
+    <service id=".service_locator.CkoZCuq" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="offresRepo" type="service_closure" id="App\Repository\OffresRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.CkoZCuq.App\Controller\PanierController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PanierController::index()"/>
+      <argument>App\Controller\PanierController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CkoZCuq" method="withContext"/>
+    </service>
+    <service id=".service_locator.xqSD.N7" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="offre" type="service_closure" id=".errored..service_locator.xqSD.N7.App\Entity\Offres"/>
+        <argument key="offresRepo" type="service_closure" id="App\Repository\OffresRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.xqSD.N7.App\Controller\PanierController::add()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PanierController::add()"/>
+      <argument>App\Controller\PanierController::add()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.xqSD.N7" method="withContext"/>
+    </service>
+    <service id=".service_locator.xqSD.N7.App\Controller\PanierController::remove()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PanierController::remove()"/>
+      <argument>App\Controller\PanierController::remove()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.xqSD.N7" method="withContext"/>
+    </service>
+    <service id=".service_locator.xqSD.N7.App\Controller\PanierController::update()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PanierController::update()"/>
+      <argument>App\Controller\PanierController::update()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.xqSD.N7" method="withContext"/>
+    </service>
+    <service id=".service_locator.CkoZCuq.App\Controller\PanierController::clear()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PanierController::clear()"/>
+      <argument>App\Controller\PanierController::clear()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CkoZCuq" method="withContext"/>
     </service>
     <service id=".service_locator.dLKjkD4" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -7464,31 +7470,21 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.HSu_Dni" method="withContext"/>
     </service>
-    <service id=".service_locator.htGrwuj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.227u.HS" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="userRepository" type="service_closure" id="App\Repository\UsersRepository"/>
         <argument key="totpService" type="service_closure" id="App\Service\TOTPService"/>
         <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="userAuthenticator" type="service_closure" id="security.user_authenticator"/>
+        <argument key="authenticator" type="service_closure" id="App\Security\LoginFormAuthenticator"/>
       </argument>
     </service>
-    <service id=".service_locator.htGrwuj.App\Controller\TwoFactorController::verify()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.227u.HS.App\Controller\TwoFactorController::verify()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\TwoFactorController::verify()"/>
       <argument>App\Controller\TwoFactorController::verify()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.htGrwuj" method="withContext"/>
-    </service>
-    <service id=".service_locator.4l6F4PT" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="totpService" type="service_closure" id="App\Service\TOTPService"/>
-      </argument>
-    </service>
-    <service id=".service_locator.4l6F4PT.App\Controller\TwoFactorController::setup()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\TwoFactorController::setup()"/>
-      <argument>App\Controller\TwoFactorController::setup()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.4l6F4PT" method="withContext"/>
+      <factory service=".service_locator.227u.HS" method="withContext"/>
     </service>
     <service id=".service_locator.g9vD4Q0" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -7503,7 +7499,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.g9vD4Q0" method="withContext"/>
     </service>
-    <service id=".service_locator.dmts8gh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.P0SeuaK" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
@@ -7527,20 +7523,20 @@
         <argument key="App\Controller\Admin\SportsController::edit" type="service_closure" id=".service_locator.F4iHO.j.App\Controller\Admin\SportsController::edit()"/>
         <argument key="App\Controller\Admin\UsersController::index" type="service_closure" id=".service_locator.DbNBHcb.App\Controller\Admin\UsersController::index()"/>
         <argument key="App\Controller\Admin\UsersController::edit" type="service_closure" id=".service_locator.PMSD29P.App\Controller\Admin\UsersController::edit()"/>
-        <argument key="App\Controller\CartController::index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::index()"/>
-        <argument key="App\Controller\CartController::add" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\CartController::add()"/>
-        <argument key="App\Controller\CartController::remove" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::remove()"/>
-        <argument key="App\Controller\CartController::count" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::count()"/>
         <argument key="App\Controller\CommandesController::index" type="service_closure" id=".service_locator.8D3K43m.App\Controller\CommandesController::index()"/>
         <argument key="App\Controller\CommandesController::liste" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::liste()"/>
         <argument key="App\Controller\CommandesController::payerCommande" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::payerCommande()"/>
+        <argument key="App\Controller\PanierController::index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\PanierController::index()"/>
+        <argument key="App\Controller\PanierController::add" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::add()"/>
+        <argument key="App\Controller\PanierController::remove" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::remove()"/>
+        <argument key="App\Controller\PanierController::update" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::update()"/>
+        <argument key="App\Controller\PanierController::clear" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\PanierController::clear()"/>
         <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.dLKjkD4.App\Controller\RegistrationController::register()"/>
         <argument key="App\Controller\RegistrationController::verifUser" type="service_closure" id=".service_locator.pdcOAbz.App\Controller\RegistrationController::verifUser()"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.nZLJKBD.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\SecurityController::forgottenPassword" type="service_closure" id=".service_locator.B8RgYjV.App\Controller\SecurityController::forgottenPassword()"/>
         <argument key="App\Controller\SecurityController::resetPassword" type="service_closure" id=".service_locator.HSu_Dni.App\Controller\SecurityController::resetPassword()"/>
-        <argument key="App\Controller\TwoFactorController::verify" type="service_closure" id=".service_locator.htGrwuj.App\Controller\TwoFactorController::verify()"/>
-        <argument key="App\Controller\TwoFactorController::setup" type="service_closure" id=".service_locator.4l6F4PT.App\Controller\TwoFactorController::setup()"/>
+        <argument key="App\Controller\TwoFactorController::verify" type="service_closure" id=".service_locator.227u.HS.App\Controller\TwoFactorController::verify()"/>
         <argument key="App\Controller\TwoFactorSetupController::setup" type="service_closure" id=".service_locator.g9vD4Q0.App\Controller\TwoFactorSetupController::setup()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
@@ -7561,20 +7557,20 @@
         <argument key="App\Controller\Admin\SportsController:edit" type="service_closure" id=".service_locator.F4iHO.j.App\Controller\Admin\SportsController::edit()"/>
         <argument key="App\Controller\Admin\UsersController:index" type="service_closure" id=".service_locator.DbNBHcb.App\Controller\Admin\UsersController::index()"/>
         <argument key="App\Controller\Admin\UsersController:edit" type="service_closure" id=".service_locator.PMSD29P.App\Controller\Admin\UsersController::edit()"/>
-        <argument key="App\Controller\CartController:index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::index()"/>
-        <argument key="App\Controller\CartController:add" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\CartController::add()"/>
-        <argument key="App\Controller\CartController:remove" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::remove()"/>
-        <argument key="App\Controller\CartController:count" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\CartController::count()"/>
         <argument key="App\Controller\CommandesController:index" type="service_closure" id=".service_locator.8D3K43m.App\Controller\CommandesController::index()"/>
         <argument key="App\Controller\CommandesController:liste" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::liste()"/>
         <argument key="App\Controller\CommandesController:payerCommande" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::payerCommande()"/>
+        <argument key="App\Controller\PanierController:index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\PanierController::index()"/>
+        <argument key="App\Controller\PanierController:add" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::add()"/>
+        <argument key="App\Controller\PanierController:remove" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::remove()"/>
+        <argument key="App\Controller\PanierController:update" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::update()"/>
+        <argument key="App\Controller\PanierController:clear" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\PanierController::clear()"/>
         <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.dLKjkD4.App\Controller\RegistrationController::register()"/>
         <argument key="App\Controller\RegistrationController:verifUser" type="service_closure" id=".service_locator.pdcOAbz.App\Controller\RegistrationController::verifUser()"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.nZLJKBD.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\SecurityController:forgottenPassword" type="service_closure" id=".service_locator.B8RgYjV.App\Controller\SecurityController::forgottenPassword()"/>
         <argument key="App\Controller\SecurityController:resetPassword" type="service_closure" id=".service_locator.HSu_Dni.App\Controller\SecurityController::resetPassword()"/>
-        <argument key="App\Controller\TwoFactorController:verify" type="service_closure" id=".service_locator.htGrwuj.App\Controller\TwoFactorController::verify()"/>
-        <argument key="App\Controller\TwoFactorController:setup" type="service_closure" id=".service_locator.4l6F4PT.App\Controller\TwoFactorController::setup()"/>
+        <argument key="App\Controller\TwoFactorController:verify" type="service_closure" id=".service_locator.227u.HS.App\Controller\TwoFactorController::verify()"/>
         <argument key="App\Controller\TwoFactorSetupController:setup" type="service_closure" id=".service_locator.g9vD4Q0.App\Controller\TwoFactorSetupController::setup()"/>
       </argument>
     </service>
@@ -7845,12 +7841,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.ZyP9f7K" method="withContext"/>
     </service>
-    <service id=".service_locator.ZyP9f7K.App\Controller\CartController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\CartController"/>
-      <argument>App\Controller\CartController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
-    </service>
     <service id=".service_locator.ZyP9f7K.App\Controller\CommandesController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\CommandesController"/>
       <argument>App\Controller\CommandesController</argument>
@@ -7860,6 +7850,12 @@
     <service id=".service_locator.ZyP9f7K.App\Controller\MainController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\MainController"/>
       <argument>App\Controller\MainController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
+    </service>
+    <service id=".service_locator.ZyP9f7K.App\Controller\PanierController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PanierController"/>
+      <argument>App\Controller\PanierController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.ZyP9f7K" method="withContext"/>
     </service>
@@ -8069,9 +8065,9 @@
           <argument>App\Controller\Admin\OffresController</argument>
           <argument>App\Controller\Admin\SportsController</argument>
           <argument>App\Controller\Admin\UsersController</argument>
-          <argument>App\Controller\CartController</argument>
           <argument>App\Controller\CommandesController</argument>
           <argument>App\Controller\MainController</argument>
+          <argument>App\Controller\PanierController</argument>
           <argument>App\Controller\Profile\ProfileController</argument>
           <argument>App\Controller\RegistrationController</argument>
           <argument>App\Controller\SecurityController</argument>
@@ -9132,7 +9128,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.dmts8gh"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.P0SeuaK"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
@@ -9166,17 +9162,16 @@
     <service id=".service_locator.AngRB8O" alias=".service_locator.F4iHO.j"/>
     <service id=".service_locator.fLh50AN" alias=".service_locator.DbNBHcb"/>
     <service id=".service_locator.5sEnNUx" alias=".service_locator.PMSD29P"/>
-    <service id=".service_locator.8I..1ax" alias=".service_locator.CkoZCuq"/>
-    <service id=".service_locator.JLKo9jm" alias=".service_locator.xqSD.N7"/>
     <service id=".service_locator.ZSMSGBp" alias=".service_locator.8D3K43m"/>
     <service id=".service_locator.Js0Hwmu" alias=".service_locator.aSQ66kB"/>
+    <service id=".service_locator.8I..1ax" alias=".service_locator.CkoZCuq"/>
+    <service id=".service_locator.JLKo9jm" alias=".service_locator.xqSD.N7"/>
     <service id=".service_locator.q.RsORg" alias=".service_locator.dLKjkD4"/>
     <service id=".service_locator.J2hEB0_" alias=".service_locator.pdcOAbz"/>
     <service id=".service_locator.snjOFYV" alias=".service_locator.nZLJKBD"/>
     <service id=".service_locator.M8sKSOW" alias=".service_locator.B8RgYjV"/>
     <service id=".service_locator.6eQV6Mf" alias=".service_locator.HSu_Dni"/>
-    <service id=".service_locator.ZJFiG6I" alias=".service_locator.htGrwuj"/>
-    <service id=".service_locator.tH2u4lc" alias=".service_locator.4l6F4PT"/>
+    <service id=".service_locator.QGUPsEv" alias=".service_locator.227u.HS"/>
     <service id=".service_locator.80wjB7A" alias=".service_locator.g9vD4Q0"/>
     <service id=".service_locator.YoE4GGP" alias=".service_locator.ZyP9f7K"/>
   </services>

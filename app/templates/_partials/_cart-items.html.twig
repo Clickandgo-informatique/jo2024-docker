@@ -1,67 +1,31 @@
-<div
-	class="ajax-reloaded-data">
-	{# Affichage du nombre d'articles dans le panier #}
-	<div class="cart-total-items text-center">
-		{% if totalItems > 0 %}
-			<span class="cart-items">{{ totalItems }}</span>
-			article(s) dans le panier
-		{% else %}
-			<span class="cart-items">Aucun article dans le panier</span>
-		{% endif %}
-	</div>
+{% if data is empty %}
+    <p class="cart-empty">Votre panier est vide.</p>
+{% else %}
+<div class="cart-grid">
+    <div class="cart-header">Produit</div>
+    <div class="cart-header">Quantité</div>
+    <div class="cart-header">Prix total</div>
+    <div class="cart-header"></div>
 
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Offre</th>
-				<th>Prix</th>
-				<th>Quantité</th>
-				<th>Total</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for element in data %}
-				<tr>
-					<td>{{ element.offre.intitule }}</td>
-					<td class="text-right">{{ element.offre.prix }}€</td>
-					<td class="text-center">
-						<div class="wrapper-quantite">
-							<a href="{{ path('app_cart_remove', {'id': element.offre.id}) }}" class="btn btn-warning btn-remove-from-cart" data-url="{{ path('app_cart_remove', {'id': element.offre.id}) }}" data-method="POST">-</a>
-
-							<span class="quantite">{{ element.quantite }}</span>
-
-							<a href="{{ path('app_cart_add', {'id': element.offre.id}) }}" class="btn btn-success btn-add-to-cart" data-url="{{ path('app_cart_add', {'id': element.offre.id}) }}" data-method="POST">+</a>
-						</div>
-					</td>
-					<td class="text-right">{{ element.quantite * element.offre.prix }}€</td>
-					<td class="text-center">
-						<a href="{{ path('app_cart_remove', {'id': element.offre.id}) }}" class="btn btn-danger btn-delete-from-cart" data-url="{{ path('app_cart_remove', {'id': element.offre.id}) }}" data-method="POST">
-							<i class="fa-solid fa-trash-can"></i>
-						</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5" class="text-center">Votre panier est vide</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="3">Total</td>
-				<td class="text-right">{{ total }}€</td>
-				<td>
-					{# {% if total > 0 %}
-															                        <a href="{{ path('app_cart_empty') }}"
-															                           class="btn btn-danger btn-empty-cart"
-															                           data-url="{{ path('app_cart_empty') }}"
-															                           data-method="POST">
-															                           <i class="fa-solid fa-cart-shopping"></i> Vider le panier
-															                        </a>
-															                    {% endif %} #}
-				</td>
-			</tr>
-		</tfoot>
-	</table>
+    {% for item in data %}
+        <div class="cart-product">{{ item.offre.intitule }}</div>
+        <div class="cart-quantity">
+            <div class="quantity-control">
+                <button class="decrease btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">-</button>
+                <input type="text" class="quantity-input" value="{{ item.quantite }}" data-url="{{ path('panier_update', {'id': item.offre.id}) }}">
+                <button class="increase btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">+</button>
+            </div>
+        </div>
+        <div class="cart-total">{{ item.total|number_format(2, ',', ' ') }} €</div>
+        <div class="cart-actions">
+            <button class="remove-item btn" data-url="{{ path('panier_remove', {'id': item.offre.id}) }}" data-method="POST">Supprimer</button>
+        </div>
+    {% endfor %}
 </div>
+
+<div class="cart-summary">
+    <div class="summary-items">Total articles : {{ totalItems }}</div>
+    <div class="summary-total">Total panier : {{ total|number_format(2, ',', ' ') }} €</div>
+    <button id="clear-cart" class="btn" data-url="{{ path('panier_clear') }}" data-method="POST">Vider le panier</button>
+</div>
+{% endif %}

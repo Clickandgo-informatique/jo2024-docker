@@ -102,7 +102,7 @@ class __TwigTemplate_db9f24bb36bcebc7cd1bd15461c2dded extends Template
         yield "\t\t<div class=\"cart\">
 \t\t\t<a href=\"";
         // line 34
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_index");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_index");
         yield "\" class=\"cart-button\">
 \t\t\t\t<span class=\"cart-icon-wrapper\">
 \t\t\t\t\t<i class=\"fa-solid fa-basket-shopping cart-icon\"></i>
@@ -217,7 +217,7 @@ class __TwigTemplate_db9f24bb36bcebc7cd1bd15461c2dded extends Template
 \t\t
 \t\t{# Affichage du panier même sans connexion #}
 \t\t<div class=\"cart\">
-\t\t\t<a href=\"{{ path('app_cart_index') }}\" class=\"cart-button\">
+\t\t\t<a href=\"{{ path('panier_index') }}\" class=\"cart-button\">
 \t\t\t\t<span class=\"cart-icon-wrapper\">
 \t\t\t\t\t<i class=\"fa-solid fa-basket-shopping cart-icon\"></i>
 \t\t\t\t\t<span id=\"cart-count\" class=\"cart-badge\">{{ totalItems|default(0) }}</span>

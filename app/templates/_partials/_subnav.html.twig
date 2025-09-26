@@ -31,7 +31,7 @@
 		
 		{# Affichage du panier même sans connexion #}
 		<div class="cart">
-			<a href="{{ path('app_cart_index') }}" class="cart-button">
+			<a href="{{ path('panier_index') }}" class="cart-button">
 				<span class="cart-icon-wrapper">
 					<i class="fa-solid fa-basket-shopping cart-icon"></i>
 					<span id="cart-count" class="cart-badge">{{ totalItems|default(0) }}</span>

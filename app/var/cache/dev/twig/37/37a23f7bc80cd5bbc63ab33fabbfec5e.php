@@ -32,6 +32,7 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
         $this->parent = false;
 
         $this->blocks = [
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -92,7 +93,7 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
 
 \t\t<div class=\"offer-content\">
 \t\t\t<div class=\"offer-sports\">
-\t\t\t\t<ul class=\"sport-list\">\t\t
+\t\t\t\t<ul class=\"sport-list\">
 \t\t\t\t\t";
             // line 22
             $context['_parent'] = $context;
@@ -122,47 +123,54 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
 \t\t\t\t\t\t";
                 // line 31
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateDebut", [], "any", false, false, false, 31), "d/m/Y"), "html", null, true);
-                yield " au ";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateFin", [], "any", false, false, false, 31), "d/m/Y"), "html", null, true);
+                yield "
+\t\t\t\t\t\tau
+\t\t\t\t\t\t";
+                // line 33
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateFin", [], "any", false, false, false, 33), "d/m/Y"), "html", null, true);
                 yield "</span>
 \t\t\t\t";
             }
-            // line 33
+            // line 35
             yield "\t\t\t\t<div class=\"offer-emplacement\">
-\t\t\t\t";
-            // line 34
+\t\t\t\t\t";
+            // line 36
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "lieux", [], "any", false, false, false, 34));
+            $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "lieux", [], "any", false, false, false, 36));
             foreach ($context['_seq'] as $context["_key"] => $context["lieu"]) {
-                // line 35
-                yield "\t\t\t\t\t<span>";
+                // line 37
+                yield "\t\t\t\t\t\t<span>";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["lieu"], "html", null, true);
                 yield "</span>
-\t\t\t\t";
+\t\t\t\t\t";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['lieu'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 37
+            // line 39
             yield "\t\t\t\t</div>
 \t\t\t\t";
-            // line 38
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", true, true, false, 38)) {
-                // line 39
+            // line 40
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", true, true, false, 40)) {
+                // line 41
                 yield "\t\t\t\t\t<span class=\"offer-price\">";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", false, false, false, 39), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", false, false, false, 41), "html", null, true);
                 yield "
 \t\t\t\t\t\t€</span>
 \t\t\t\t";
             }
-            // line 42
+            // line 44
             yield "\t\t\t</div>
 \t\t</div>
 \t\t<div class=\"offer-footer\">
-\t\t<a href=\"";
-            // line 45
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_cart_add", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "id", [], "any", false, false, false, 45)]), "html", null, true);
-            yield "\" class=\"btn btn-primary btn-add-cart\"><i class=\"fa-solid fa-cart-plus\"></i>Ajouter au panier</a>
+\t\t\t<form method=\"POST\" action=\"";
+            // line 47
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_add", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "id", [], "any", false, false, false, 47)]), "html", null, true);
+            yield "\">
+\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\">
+\t\t\t\t\t<i class=\"fa-solid fa-basket-shopping cart-icon\"></i>Ajouter au panier</button>
+\t\t\t</form>
+
 \t\t</div>
 \t</article>
 ";
@@ -170,11 +178,39 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['offre'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 55
+        yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        yield from [];
+    }
+
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_javascripts(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        // line 56
+        yield "\t<script src=";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/cart.js"), "html", null, true);
+        yield "></script>
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
         yield from [];
     }
@@ -200,7 +236,7 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  164 => 45,  159 => 42,  152 => 39,  150 => 38,  147 => 37,  138 => 35,  134 => 34,  131 => 33,  124 => 31,  121 => 30,  119 => 29,  113 => 25,  102 => 23,  98 => 22,  91 => 17,  84 => 14,  82 => 13,  74 => 11,  72 => 10,  66 => 8,  60 => 6,  58 => 5,  55 => 4,  51 => 3,  48 => 2,);
+        return array (  205 => 56,  182 => 55,  168 => 47,  163 => 44,  156 => 41,  154 => 40,  151 => 39,  142 => 37,  138 => 36,  135 => 35,  130 => 33,  125 => 31,  122 => 30,  120 => 29,  114 => 25,  103 => 23,  99 => 22,  92 => 17,  85 => 14,  83 => 13,  75 => 11,  73 => 10,  67 => 8,  61 => 6,  59 => 5,  56 => 4,  52 => 3,  49 => 2,);
     }
 
     public function getSourceContext(): Source
@@ -225,7 +261,7 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
 
 \t\t<div class=\"offer-content\">
 \t\t\t<div class=\"offer-sports\">
-\t\t\t\t<ul class=\"sport-list\">\t\t
+\t\t\t\t<ul class=\"sport-list\">
 \t\t\t\t\t{% for sport in offre.sports %}
 \t\t\t\t\t\t<li class=\"sport-items\">{{sport.emoji}}&nbsp;{{sport.intitule}}</li>
 \t\t\t\t\t{% endfor %}
@@ -235,12 +271,14 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
 \t\t\t<div class=\"offer-meta\">
 \t\t\t\t{% if offre.dateDebut is defined %}
 \t\t\t\t\t<span class=\"offer-date\">Du
-\t\t\t\t\t\t{{ offre.dateDebut|date('d/m/Y') }} au {{ offre.dateFin|date('d/m/Y') }}</span>
+\t\t\t\t\t\t{{ offre.dateDebut|date('d/m/Y') }}
+\t\t\t\t\t\tau
+\t\t\t\t\t\t{{ offre.dateFin|date('d/m/Y') }}</span>
 \t\t\t\t{% endif %}
 \t\t\t\t<div class=\"offer-emplacement\">
-\t\t\t\t{% for lieu in offre.lieux %}
-\t\t\t\t\t<span>{{lieu}}</span>
-\t\t\t\t{% endfor %}
+\t\t\t\t\t{% for lieu in offre.lieux %}
+\t\t\t\t\t\t<span>{{lieu}}</span>
+\t\t\t\t\t{% endfor %}
 \t\t\t\t</div>
 \t\t\t\t{% if offre.prix is defined %}
 \t\t\t\t\t<span class=\"offer-price\">{{ offre.prix }}
@@ -249,10 +287,17 @@ class __TwigTemplate_259b994389174ea6ace970c90196e7d0 extends Template
 \t\t\t</div>
 \t\t</div>
 \t\t<div class=\"offer-footer\">
-\t\t<a href=\"{{path('app_cart_add',{id:offre.id})}}\" class=\"btn btn-primary btn-add-cart\"><i class=\"fa-solid fa-cart-plus\"></i>Ajouter au panier</a>
+\t\t\t<form method=\"POST\" action=\"{{ path('panier_add', {'id': offre.id}) }}\">
+\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\">
+\t\t\t\t\t<i class=\"fa-solid fa-basket-shopping cart-icon\"></i>Ajouter au panier</button>
+\t\t\t</form>
+
 \t\t</div>
 \t</article>
 {% endfor %}
+{% block javascripts %}
+\t<script src={{asset('assets/js/cart.js')}}></script>
+{% endblock %}
 ", "_partials/_catalogue-offres-clients.html.twig", "/var/www/symfony/templates/_partials/_catalogue-offres-clients.html.twig");
     }
 }

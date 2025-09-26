@@ -1,48 +1,82 @@
 @startuml
-title Flux 2FA Symfony
+title Flux 2FA Symfony - Version finale avec légende
+
+skinparam activity {
+  FontName Arial
+  FontSize 12
+  ArrowColor #333333
+  BackgroundColor #F0F8FF
+  BorderColor #4682B4
+}
 
 start
 
-:Page de login;
-if (Utilisateur valide ?) then (Non)
-  :Retour page login;
+' ======================
+' Login
+' ======================
+:📝 Page de login;
+
+if (🔑 Utilisateur valide ?) then (Non)
+  ->[red] :❌ Retour page login;
   stop
 else (Oui)
   if (2FA activée ?) then (Non)
-    :Connexion normale vers app_main;
+    ->[yellow] :✅ Connexion normale vers app_main;
     stop
   else (Oui)
-    :Redirection vers page 2FA verify;
-    if (Code 2FA correct ?) then (Non)
-      :Rester sur page 2FA verify;
-    else (Oui)
-      :Authentifie complètement l'utilisateur;
-      if (ROLE_ADMIN ?) then (Oui)
-        :Redirection vers app_admin_index;
-      else (Non)
-        :Redirection vers app_main;
-      endif
-    endif
+    ->[yellow] :🔒 Redirection vers page 2FA verify;
   endif
 endif
 
-' Partie Setup 2FA
-:Page /2fa/setup;
+' ======================
+' 2FA Verify
+' ======================
+if (Code 2FA correct ?) then (Non)
+  ->[red] :❌ Rester sur page 2FA verify;
+else (Oui)
+  ->[yellow] :👤 Authentifie complètement l'utilisateur;
+  if (ROLE_ADMIN ?) then (Oui)
+    ->[green] :🛡️ Redirection vers app_admin_index;
+  else (Non)
+    ->[yellow] :🏠 Redirection vers app_main;
+  endif
+endif
+
+' ======================
+' Setup 2FA
+' ======================
+:⚙️ Page /2fa/setup;
+
 if (Utilisateur connecté ?) then (Non)
-  :Retour page login;
+  ->[red] :❌ Retour page login;
 else (Oui)
   if (Secret 2FA présent ?) then (Non)
-    :Retour page login;
+    ->[red] :❌ Retour page login;
   else (Oui)
-    :Affiche QR code et formulaire;
+    ->[yellow] :📷 Affiche QR code et formulaire;
     if (Code 2FA validé ?) then (Non)
-      :Rester sur setup 2FA;
+      ->[red] :❌ Rester sur setup 2FA;
     else (Oui)
-      :Active 2FA pour l'utilisateur;
-      :Redirection vers app_main;
+      ->[yellow] :✅ Active 2FA pour l'utilisateur;
+      ->[yellow] :🏠 Redirection vers app_main;
     endif
   endif
 endif
 
 stop
+
+' ======================
+' Légende
+' ======================
+legend right
+  🔑 = Vérification des identifiants
+  🔒 = Vérification code 2FA
+  🛡️ = Redirection admin
+  🏠 = Redirection utilisateur
+  ⚙️ = Setup 2FA
+  📷 = QR code affiché
+  ✅ = Succès
+  ❌ = Erreur / retour
+endlegend
+
 @enduml

@@ -24,12 +24,12 @@ return [
         '/admin/sports' => [[['_route' => 'app_sports_index', '_controller' => 'App\\Controller\\Admin\\SportsController::index'], null, null, null, false, false, null]],
         '/admin/sports/ajout' => [[['_route' => 'app_sports_new', '_controller' => 'App\\Controller\\Admin\\SportsController::new'], null, null, null, false, false, null]],
         '/admin/utilisateurs' => [[['_route' => 'app_utilisateurs_index', '_controller' => 'App\\Controller\\Admin\\UsersController::index'], null, null, null, true, false, null]],
-        '/cart' => [[['_route' => 'app_cart_index', '_controller' => 'App\\Controller\\CartController::index'], null, null, null, true, false, null]],
-        '/cart/count' => [[['_route' => 'app_cart_count', '_controller' => 'App\\Controller\\CartController::count'], null, ['GET' => 0], null, false, false, null]],
-        '/cart/empty' => [[['_route' => 'app_cart_empty', '_controller' => 'App\\Controller\\CartController::emptyCart'], null, ['POST' => 0], null, false, false, null]],
         '/commandes/ajout' => [[['_route' => 'app_commandes_ajout', '_controller' => 'App\\Controller\\CommandesController::index'], null, null, null, false, false, null]],
         '/commandes/liste' => [[['_route' => 'app_commandes_liste', '_controller' => 'App\\Controller\\CommandesController::liste'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'app_main', '_controller' => 'App\\Controller\\MainController::index'], null, null, null, false, false, null]],
+        '/panier' => [[['_route' => 'panier_index', '_controller' => 'App\\Controller\\PanierController::index'], null, ['GET' => 0], null, false, false, null]],
+        '/panier/clear' => [[['_route' => 'panier_clear', '_controller' => 'App\\Controller\\PanierController::clear'], null, ['POST' => 0], null, false, false, null]],
+        '/panier/count' => [[['_route' => 'panier_count', '_controller' => 'App\\Controller\\PanierController::count'], null, ['GET' => 0], null, false, false, null]],
         '/profil' => [[['_route' => 'app_profile_index', '_controller' => 'App\\Controller\\Profile\\ProfileController::index'], null, null, null, true, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
@@ -74,14 +74,13 @@ return [
                     .'|\\-par\\-categorie/([^/]++)(*:501)'
                     .'|/sports(?:/([^/]++))?(*:530)'
                 .')'
-                .'|/c(?'
-                    .'|art/(?'
-                        .'|add/([^/]++)(*:563)'
-                        .'|remove/([^/]++)(*:586)'
-                    .')'
-                    .'|ommandes/mock/payment/([^/]++)(*:625)'
+                .'|/commandes/mock/payment/([^/]++)(*:571)'
+                .'|/panier/(?'
+                    .'|add/([^/]++)(*:602)'
+                    .'|remove/([^/]++)(*:625)'
+                    .'|update/([^/]++)(*:648)'
                 .')'
-                .'|/verif/([^/]++)(*:649)'
+                .'|/verif/([^/]++)(*:672)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -103,10 +102,11 @@ return [
         458 => [[['_route' => 'app_tickets_show', '_controller' => 'App\\Controller\\Admin\\MockPaymentController::showTicket'], ['id'], null, null, false, true, null]],
         501 => [[['_route' => 'app_offres-par-categories', '_controller' => 'App\\Controller\\Admin\\OffresController::filterByCategorie'], ['slug'], null, null, false, true, null]],
         530 => [[['_route' => 'app_offres_filter', 'slugs' => null, '_controller' => 'App\\Controller\\Admin\\OffresController::filterBySportsSlugs'], ['slugs'], null, null, false, true, null]],
-        563 => [[['_route' => 'app_cart_add', '_controller' => 'App\\Controller\\CartController::add'], ['id'], ['POST' => 0], null, false, true, null]],
-        586 => [[['_route' => 'app_cart_remove', '_controller' => 'App\\Controller\\CartController::remove'], ['id'], ['POST' => 0], null, false, true, null]],
-        625 => [[['_route' => 'app_commandes_paiement', '_controller' => 'App\\Controller\\CommandesController::payerCommande'], ['id'], null, null, false, true, null]],
-        649 => [
+        571 => [[['_route' => 'app_commandes_paiement', '_controller' => 'App\\Controller\\CommandesController::payerCommande'], ['id'], null, null, false, true, null]],
+        602 => [[['_route' => 'panier_add', '_controller' => 'App\\Controller\\PanierController::add'], ['id'], ['POST' => 0], null, false, true, null]],
+        625 => [[['_route' => 'panier_remove', '_controller' => 'App\\Controller\\PanierController::remove'], ['id'], ['POST' => 0], null, false, true, null]],
+        648 => [[['_route' => 'panier_update', '_controller' => 'App\\Controller\\PanierController::update'], ['id'], ['POST' => 0], null, false, true, null]],
+        672 => [
             [['_route' => 'verify_user', '_controller' => 'App\\Controller\\RegistrationController::verifUser'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

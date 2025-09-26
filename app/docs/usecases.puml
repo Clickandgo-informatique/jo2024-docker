@@ -1,11 +1,13 @@
-@startuml
-actor "Visiteur" as V
-actor "Admin" as A
+@startuml sports
+
+left to right direction
+actor "Visiteur" as V #LightBlue
+actor "Admin" as A #Green
 
 V --> (Consulter liste des sports)
 V --> (Filtrer par type : Olympiques / Paralympiques)
 V --> (Afficher détail d'un sport)
 V --> (Rechercher un lieu)
-A --> (Ajouter / Modifier un sport)
+A --> (Ajouter / Modifier / Supprimer un sport)
 A --> (Gérer les lieux)
 @enduml

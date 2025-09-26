@@ -10,8 +10,13 @@
 		<i class="fa-solid fa-cart-shopping"></i>Mon panier</h1>
 
 	{# Lignes panier :Contenu requête dynamique en Ajax #}
-	<div class="ajax-reloaded-data">
-		{{include('_partials/_cart-items.html.twig')}}
+	<div id="cart-container">
+		{% include '_partials/_cart-items.html.twig' with {
+        panier: panier,
+        data: data,
+        totalItems: totalItems,
+        total: total
+    } %}
 	</div>
 	{# Fin contenu requête Ajax #}
 
@@ -19,8 +24,9 @@
 		<i class="fa-solid fa-circle-check"></i>Valider le panier</a>
 
 {% endblock %}
-{% block stylesheets %}<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">
+{% block stylesheets %}<link rel="stylesheet" href="{{asset('assets/css/cart.css')}}">
 {% endblock %}
 {% block javascripts %}
-	<script type="module" src="{{asset('assets/js/cart.js')}}"></script>
+	<script src="{{ asset('assets/js/cart.js') }}"></script>
+
 {% endblock %}

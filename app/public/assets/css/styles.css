@@ -53,14 +53,16 @@ h1 {
 .text-green {
     color: darkgreen;
 }
-.btn {
+.btn, button.btn {
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
     color: #fff;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 10px;
-    display: block;
+    margin: 10px;   
     width: fit-content;
 }
 img {

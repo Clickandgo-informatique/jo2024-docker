@@ -570,7 +570,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.P0SeuaK"/>
+      <argument type="service" id=".service_locator.Rpb4HIe"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3073,7 +3073,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.P0SeuaK"/>
+      <argument type="service" id=".service_locator.Rpb4HIe"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -7298,17 +7298,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.F4iHO.j" method="withContext"/>
     </service>
-    <service id=".service_locator.DbNBHcb" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.5eYgb7E" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="usersRepo" type="service_closure" id="App\Repository\UsersRepository"/>
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
       </argument>
     </service>
-    <service id=".service_locator.DbNBHcb.App\Controller\Admin\UsersController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.5eYgb7E.App\Controller\Admin\UsersController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Admin\UsersController::index()"/>
       <argument>App\Controller\Admin\UsersController::index()</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.DbNBHcb" method="withContext"/>
+      <factory service=".service_locator.5eYgb7E" method="withContext"/>
     </service>
     <service id=".service_locator.PMSD29P" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -7499,7 +7500,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.g9vD4Q0" method="withContext"/>
     </service>
-    <service id=".service_locator.P0SeuaK" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Rpb4HIe" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
@@ -7521,7 +7522,7 @@
         <argument key="App\Controller\Admin\SportsController::index" type="service_closure" id=".service_locator.6BXpqYw.App\Controller\Admin\SportsController::index()"/>
         <argument key="App\Controller\Admin\SportsController::new" type="service_closure" id=".service_locator.zuLlZtR.App\Controller\Admin\SportsController::new()"/>
         <argument key="App\Controller\Admin\SportsController::edit" type="service_closure" id=".service_locator.F4iHO.j.App\Controller\Admin\SportsController::edit()"/>
-        <argument key="App\Controller\Admin\UsersController::index" type="service_closure" id=".service_locator.DbNBHcb.App\Controller\Admin\UsersController::index()"/>
+        <argument key="App\Controller\Admin\UsersController::index" type="service_closure" id=".service_locator.5eYgb7E.App\Controller\Admin\UsersController::index()"/>
         <argument key="App\Controller\Admin\UsersController::edit" type="service_closure" id=".service_locator.PMSD29P.App\Controller\Admin\UsersController::edit()"/>
         <argument key="App\Controller\CommandesController::index" type="service_closure" id=".service_locator.8D3K43m.App\Controller\CommandesController::index()"/>
         <argument key="App\Controller\CommandesController::liste" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::liste()"/>
@@ -7555,7 +7556,7 @@
         <argument key="App\Controller\Admin\SportsController:index" type="service_closure" id=".service_locator.6BXpqYw.App\Controller\Admin\SportsController::index()"/>
         <argument key="App\Controller\Admin\SportsController:new" type="service_closure" id=".service_locator.zuLlZtR.App\Controller\Admin\SportsController::new()"/>
         <argument key="App\Controller\Admin\SportsController:edit" type="service_closure" id=".service_locator.F4iHO.j.App\Controller\Admin\SportsController::edit()"/>
-        <argument key="App\Controller\Admin\UsersController:index" type="service_closure" id=".service_locator.DbNBHcb.App\Controller\Admin\UsersController::index()"/>
+        <argument key="App\Controller\Admin\UsersController:index" type="service_closure" id=".service_locator.5eYgb7E.App\Controller\Admin\UsersController::index()"/>
         <argument key="App\Controller\Admin\UsersController:edit" type="service_closure" id=".service_locator.PMSD29P.App\Controller\Admin\UsersController::edit()"/>
         <argument key="App\Controller\CommandesController:index" type="service_closure" id=".service_locator.8D3K43m.App\Controller\CommandesController::index()"/>
         <argument key="App\Controller\CommandesController:liste" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::liste()"/>
@@ -9128,7 +9129,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.P0SeuaK"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.Rpb4HIe"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
@@ -9160,7 +9161,7 @@
     <service id=".service_locator.enIWVGs" alias=".service_locator.iVreUIc"/>
     <service id=".service_locator.hpyoGKV" alias=".service_locator.6BXpqYw"/>
     <service id=".service_locator.AngRB8O" alias=".service_locator.F4iHO.j"/>
-    <service id=".service_locator.fLh50AN" alias=".service_locator.DbNBHcb"/>
+    <service id=".service_locator.w8n3SQw" alias=".service_locator.5eYgb7E"/>
     <service id=".service_locator.5sEnNUx" alias=".service_locator.PMSD29P"/>
     <service id=".service_locator.ZSMSGBp" alias=".service_locator.8D3K43m"/>
     <service id=".service_locator.Js0Hwmu" alias=".service_locator.aSQ66kB"/>

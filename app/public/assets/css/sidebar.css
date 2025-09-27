@@ -33,7 +33,7 @@
 /* Bouton toggle attaché au bord droit de la sidebar */
 #sidebarToggle {
     position: fixed; /* fixe par rapport à la fenêtre */
-    top: 100px; /* ajustable pour aligner avec la sidebar */
+    top: var(--header-height, 100px); /* démarre sous navbar + subnav */
     left: 250px; /* bord droit de la sidebar ouverte */
     width: 40px;
     height: 40px;

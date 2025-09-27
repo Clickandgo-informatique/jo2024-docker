@@ -1,7 +1,7 @@
 {# _partials/_pagination-offres.html.twig #}
 
 {% if offres is defined and offres|length > 0 %}
-    <div class="d-flex justify-content-center mt-4 pagination">
+    <div class="pagination">
         {{ knp_pagination_render(offres) }}
     </div>
 {% endif %}

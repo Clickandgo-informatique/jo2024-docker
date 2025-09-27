@@ -94,7 +94,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
         yield "
 \t<form method=\"post\">
 \t\t<caption>
-\t\t\t<h2 class=\"text-center\">Vérification 2FA</h2>
+\t\t\t<h1 class=\"text-center\">Vérification à double facteur</h1>
 \t\t</caption>
 \t\t<label for=\"code\">Code Google Authenticator</label>
 \t\t<input
@@ -183,7 +183,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
 
 \t<form method=\"post\">
 \t\t<caption>
-\t\t\t<h2 class=\"text-center\">Vérification 2FA</h2>
+\t\t\t<h1 class=\"text-center\">Vérification à double facteur</h1>
 \t\t</caption>
 \t\t<label for=\"code\">Code Google Authenticator</label>
 \t\t<input

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Form\UserFormType;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,20 @@ class UsersController extends AbstractController
 {
     //Liste des utilisateurs par ordre ascendant
     #[Route('/', '_index')]
-    public function index(UsersRepository $usersRepo): Response
+    public function index(UsersRepository $usersRepo, PaginatorInterface $paginator, Request $request): Response
     {
-        $utilisateurs = $usersRepo->findBy([], ['nickname' => 'ASC']);
+        $data = $usersRepo->createQueryBuilder('u')
+            ->orderBy('u.nickname', 'ASC')
+            ->getQuery();
 
-        return $this->render('admin/utilisateurs/index.html.twig', compact('utilisateurs'));
+        $utilisateurs = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            12
+        );
+   
+
+        return $this->render('admin/utilisateurs/index.html.twig', ['utilisateurs' => $utilisateurs]);
     }
 
     //Modification d'un utilisateur

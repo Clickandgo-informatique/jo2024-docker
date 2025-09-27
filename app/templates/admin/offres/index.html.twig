@@ -12,7 +12,7 @@
 	{# Compteur offres et pages #}
 
 	{# {% set start = (offres.currentPageNumber - 1) * offres.itemNumberPerPage + 1 %}
-								{% set end = (offres.currentPageNumber * offres.itemNumberPerPage) > offres.getTotalItemCount ? offres.getTotalItemCount : (offres.currentPageNumber * offres.itemNumberPerPage) %} #}
+									{% set end = (offres.currentPageNumber * offres.itemNumberPerPage) > offres.getTotalItemCount ? offres.getTotalItemCount : (offres.currentPageNumber * offres.itemNumberPerPage) %} #}
 	<div
 		class="current-range">{# Afficher {{ start }} à {{ end }} sur {{ offres.getTotalItemCount }} #}
 	</div>

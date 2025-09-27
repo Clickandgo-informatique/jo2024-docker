@@ -32,7 +32,7 @@ class UsersFixtures extends Fixture
         $manager->persist($admin);
 
         //Création d'utilisateurs factices
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
 
             $user = new Users();
             $user->setNickname($this->faker->username())

@@ -290,7 +290,7 @@ class __TwigTemplate_f4b171965ffda6fa17e55f6a66205627 extends Template
 \t{# Compteur offres et pages #}
 
 \t{# {% set start = (offres.currentPageNumber - 1) * offres.itemNumberPerPage + 1 %}
-\t\t\t\t\t\t\t\t{% set end = (offres.currentPageNumber * offres.itemNumberPerPage) > offres.getTotalItemCount ? offres.getTotalItemCount : (offres.currentPageNumber * offres.itemNumberPerPage) %} #}
+\t\t\t\t\t\t\t\t\t{% set end = (offres.currentPageNumber * offres.itemNumberPerPage) > offres.getTotalItemCount ? offres.getTotalItemCount : (offres.currentPageNumber * offres.itemNumberPerPage) %} #}
 \t<div
 \t\tclass=\"current-range\">{# Afficher {{ start }} à {{ end }} sur {{ offres.getTotalItemCount }} #}
 \t</div>

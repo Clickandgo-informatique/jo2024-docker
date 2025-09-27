@@ -50,7 +50,7 @@ class __TwigTemplate_9762e0ae2e6fcc0d194b9544b8f21ba1 extends Template
         // line 3
         if ((array_key_exists("offres", $context) && (Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["offres"]) || array_key_exists("offres", $context) ? $context["offres"] : (function () { throw new RuntimeError('Variable "offres" does not exist.', 3, $this->source); })())) > 0))) {
             // line 4
-            yield "    <div class=\"d-flex justify-content-center mt-4 pagination\">
+            yield "    <div class=\"pagination\">
         ";
             // line 5
             yield $this->env->getRuntime('Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime')->render($this->env, (isset($context["offres"]) || array_key_exists("offres", $context) ? $context["offres"] : (function () { throw new RuntimeError('Variable "offres" does not exist.', 5, $this->source); })()));
@@ -99,7 +99,7 @@ class __TwigTemplate_9762e0ae2e6fcc0d194b9544b8f21ba1 extends Template
         return new Source("{# _partials/_pagination-offres.html.twig #}
 
 {% if offres is defined and offres|length > 0 %}
-    <div class=\"d-flex justify-content-center mt-4 pagination\">
+    <div class=\"pagination\">
         {{ knp_pagination_render(offres) }}
     </div>
 {% endif %}

@@ -1,31 +1,35 @@
 {% if data is empty %}
-    <p class="cart-empty">Votre panier est vide.</p>
+	<p class="cart-empty">Votre panier est vide.</p>
 {% else %}
-<div class="cart-grid">
-    <div class="cart-header">Produit</div>
-    <div class="cart-header">Quantité</div>
-    <div class="cart-header">Prix total</div>
-    <div class="cart-header"></div>
+	<div class="cart-grid">
+		<div class="cart-header text-left">Produit</div>
+		<div class="cart-header text-center">Quantité</div>
+		<div class="cart-header text-right">Prix total</div>
+		<div class="cart-header"></div>
 
-    {% for item in data %}
-        <div class="cart-product">{{ item.offre.intitule }}</div>
-        <div class="cart-quantity">
-            <div class="quantity-control">
-                <button class="decrease btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">-</button>
-                <input type="text" class="quantity-input" value="{{ item.quantite }}" data-url="{{ path('panier_update', {'id': item.offre.id}) }}">
-                <button class="increase btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">+</button>
-            </div>
-        </div>
-        <div class="cart-total">{{ item.total|number_format(2, ',', ' ') }} €</div>
-        <div class="cart-actions">
-            <button class="remove-item btn" data-url="{{ path('panier_remove', {'id': item.offre.id}) }}" data-method="POST">Supprimer</button>
-        </div>
-    {% endfor %}
-</div>
+		{% for item in data %}
+			<div class="cart-product text-left">{{ item.offre.intitule }}</div>
+			<div class="cart-quantity text-center">
+				<div class="quantity-control">
+					<button class="decrease btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">-</button>
+					<input type="text" class="quantity-input" value="{{ item.quantite }}" data-url="{{ path('panier_update', {'id': item.offre.id}) }}">
+					<button class="increase btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">+</button>
+				</div>
+			</div>
+			<div class="cart-total text-right">{{ item.total|number_format(2, ',', ' ') }}
+				€</div>
+			<div class="cart-actions text-center">
+				<button class="remove-item btn btn-danger" data-url="{{ path('panier_remove', {'id': item.offre.id}) }}" data-method="POST"><i class="fa-solid fa-trash-can"></i></button>
+			</div>
+		{% endfor %}
+	</div>
 
-<div class="cart-summary">
-    <div class="summary-items">Total articles : {{ totalItems }}</div>
-    <div class="summary-total">Total panier : {{ total|number_format(2, ',', ' ') }} €</div>
-    <button id="clear-cart" class="btn" data-url="{{ path('panier_clear') }}" data-method="POST">Vider le panier</button>
-</div>
+	<div class="cart-summary">
+		<div class="summary-items">Total articles :
+			{{ totalItems }}</div>
+		<div class="summary-total">Total panier :
+			{{ total|number_format(2, ',', ' ') }}
+			€</div>
+		<button id="clear-cart" class="btn btn-warning" data-url="{{ path('panier_clear') }}" data-method="POST"><i class="fa-solid fa-shopping-basket"></i>Vider le panier</button>
+	</div>
 {% endif %}

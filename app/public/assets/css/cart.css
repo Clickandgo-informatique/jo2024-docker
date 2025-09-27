@@ -1,21 +1,8 @@
-.cart-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.cart-header {
-    font-weight: bold;
-    padding: 10px 0;
-}
-
 .cart-product,
 .cart-quantity,
 .cart-total,
 .cart-actions {
-    padding: 10px 0;
+    padding: 10px;
     width: 100%;
 }
 
@@ -30,6 +17,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     width: 100%;
 }
 
@@ -45,15 +33,6 @@
     border-radius: 4px;
     height: 30px;
     flex-shrink: 0;
-}
-
-.cart-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    padding-top: 10px;
-    border-top: 2px solid #ccc;
 }
 .cart-empty {
     text-align: center;
@@ -75,3 +54,4 @@
 .summary-total {
     font-weight: bold;
 }
+

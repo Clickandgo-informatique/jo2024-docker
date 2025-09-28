@@ -570,7 +570,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.Rpb4HIe"/>
+      <argument type="service" id=".service_locator.TxMHLbz"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3073,7 +3073,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.Rpb4HIe"/>
+      <argument type="service" id=".service_locator.TxMHLbz"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -7471,22 +7471,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.HSu_Dni" method="withContext"/>
     </service>
-    <service id=".service_locator.227u.HS" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="userRepository" type="service_closure" id="App\Repository\UsersRepository"/>
-        <argument key="totpService" type="service_closure" id="App\Service\TOTPService"/>
-        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="userAuthenticator" type="service_closure" id="security.user_authenticator"/>
-        <argument key="authenticator" type="service_closure" id="App\Security\LoginFormAuthenticator"/>
-      </argument>
-    </service>
-    <service id=".service_locator.227u.HS.App\Controller\TwoFactorController::verify()" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\TwoFactorController::verify()"/>
-      <argument>App\Controller\TwoFactorController::verify()</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.227u.HS" method="withContext"/>
-    </service>
     <service id=".service_locator.g9vD4Q0" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7500,7 +7484,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.g9vD4Q0" method="withContext"/>
     </service>
-    <service id=".service_locator.Rpb4HIe" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.TxMHLbz" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
@@ -7537,7 +7521,6 @@
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.nZLJKBD.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\SecurityController::forgottenPassword" type="service_closure" id=".service_locator.B8RgYjV.App\Controller\SecurityController::forgottenPassword()"/>
         <argument key="App\Controller\SecurityController::resetPassword" type="service_closure" id=".service_locator.HSu_Dni.App\Controller\SecurityController::resetPassword()"/>
-        <argument key="App\Controller\TwoFactorController::verify" type="service_closure" id=".service_locator.227u.HS.App\Controller\TwoFactorController::verify()"/>
         <argument key="App\Controller\TwoFactorSetupController::setup" type="service_closure" id=".service_locator.g9vD4Q0.App\Controller\TwoFactorSetupController::setup()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.zHyJIs5.kernel::loadRoutes()"/>
@@ -7571,7 +7554,6 @@
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.nZLJKBD.App\Controller\SecurityController::login()"/>
         <argument key="App\Controller\SecurityController:forgottenPassword" type="service_closure" id=".service_locator.B8RgYjV.App\Controller\SecurityController::forgottenPassword()"/>
         <argument key="App\Controller\SecurityController:resetPassword" type="service_closure" id=".service_locator.HSu_Dni.App\Controller\SecurityController::resetPassword()"/>
-        <argument key="App\Controller\TwoFactorController:verify" type="service_closure" id=".service_locator.227u.HS.App\Controller\TwoFactorController::verify()"/>
         <argument key="App\Controller\TwoFactorSetupController:setup" type="service_closure" id=".service_locator.g9vD4Q0.App\Controller\TwoFactorSetupController::setup()"/>
       </argument>
     </service>
@@ -9129,7 +9111,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.Rpb4HIe"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.TxMHLbz"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
@@ -9172,7 +9154,6 @@
     <service id=".service_locator.snjOFYV" alias=".service_locator.nZLJKBD"/>
     <service id=".service_locator.M8sKSOW" alias=".service_locator.B8RgYjV"/>
     <service id=".service_locator.6eQV6Mf" alias=".service_locator.HSu_Dni"/>
-    <service id=".service_locator.QGUPsEv" alias=".service_locator.227u.HS"/>
     <service id=".service_locator.80wjB7A" alias=".service_locator.g9vD4Q0"/>
     <service id=".service_locator.YoE4GGP" alias=".service_locator.ZyP9f7K"/>
   </services>

@@ -1,4 +1,5 @@
 <?php
+// PanierController.php
 
 namespace App\Controller;
 
@@ -17,27 +18,23 @@ class PanierController extends AbstractController
     #[Route('', name: 'index', methods: ['GET'])]
     public function index(Request $request, SessionInterface $session, OffresRepository $offresRepo): Response|JsonResponse
     {
-        // Permet de gérer un éventuel appel AJAX direct vers /panier
         return $this->renderCart($session, $offresRepo, $request);
     }
 
-//Ajouter une offre
-#[Route('/add/{id}', name: 'add', methods: ['POST'])]
-public function add(Offres $offre, SessionInterface $session, OffresRepository $offresRepo, Request $request): Response|JsonResponse
-{
-    $panier = $session->get('panier', []);
-    $id = $offre->getId();
-    $panier[$id] = ($panier[$id] ?? 0) + 1;
-    $session->set('panier', $panier);
+    #[Route('/add/{id}', name: 'add', methods: ['POST'])]
+    public function add(Offres $offre, SessionInterface $session, OffresRepository $offresRepo, Request $request): Response|JsonResponse
+    {
+        $panier = $session->get('panier', []);
+        $id = $offre->getId();
+        $panier[$id] = ($panier[$id] ?? 0) + 1;
+        $session->set('panier', $panier);
 
-    if ($request->isXmlHttpRequest()) {
-        return $this->renderCart($session, $offresRepo, $request);
+        if ($request->isXmlHttpRequest()) {
+            return $this->renderCart($session, $offresRepo, $request);
+        }
+
+        return $this->redirectToRoute('panier_index');
     }
-
-    // Redirection simple, sans modification de quantité
-    return $this->redirectToRoute('panier_index');
-}
-
 
     #[Route('/remove/{id}', name: 'remove', methods: ['POST'])]
     public function remove(Offres $offre, SessionInterface $session, OffresRepository $offresRepo, Request $request): Response|JsonResponse
@@ -82,7 +79,6 @@ public function add(Offres $offre, SessionInterface $session, OffresRepository $
         ]);
     }
 
-    // Méthode interne pour afficher le panier (HTML ou JSON)
     private function renderCart(SessionInterface $session, OffresRepository $offresRepo, ?Request $request): Response|JsonResponse
     {
         $panier = $session->get('panier', []);
@@ -145,5 +141,27 @@ public function add(Offres $offre, SessionInterface $session, OffresRepository $
         }
 
         return $total;
+    }
+
+    #[Route('/valider', name: 'validate', methods: ['POST'])]
+    public function validateCart(SessionInterface $session): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user || !$session->get('2fa_passed', false)) {
+            $this->addFlash('error', 'Vous devez passer la double authentification avant de valider le panier.');
+            return $this->redirectToRoute('2fa_verify');
+        }
+
+        $panier = $session->get('panier', []);
+        if (empty($panier)) {
+            $this->addFlash('warning', 'Votre panier est vide.');
+            return $this->redirectToRoute('panier_index');
+        }
+
+        $session->remove('panier');
+        $this->addFlash('success', 'Votre panier a été validé avec succès.');
+
+        return $this->redirectToRoute('panier_index');
     }
 }

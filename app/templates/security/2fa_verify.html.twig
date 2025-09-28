@@ -1,31 +1,35 @@
+{# 2fa_verify.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Validation de la double authentification{% endblock %}
+{% block title %}Validation de la double authentification
+{% endblock %}
 
 {% block body %}
-    <h2>Validation de la double authentification</h2>
+	<h2>Validation de la double authentification</h2>
 
-    {% if qrCode %}
-        <p>Scannez ce QR Code avec votre application d'authentification si nécessaire :</p>
-        <img class="qrCode" src="{{ qrCode }}" alt="QR Code 2FA">
-    {% endif %}
+	{% if user.google2FASecret %}
+		<p>Scannez ce QR Code avec votre application d'authentification si nécessaire :</p>
+		<img class="qrCode" src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl={{ user.google2FASecret|url_encode }}" alt="QR Code 2FA">
+	{% endif %}
 
-    <p>Entrez le code généré par votre application pour vous connecter :</p>
+	<p>Entrez le code généré par votre application pour vous connecter :</p>
 
-    <form method="post">
-        <input type="text" name="code" maxlength="6" required placeholder="Code à 6 chiffres">
-        <button type="submit" class="btn btn-primary">
-            <i class="fa-solid fa-check"></i> Valider
-        </button>
-    </form>
+	<form method="POST" action="{{ path('2fa_check') }}" id="form-2fa">
+		<label for="totp_code">Code à 6 chiffres :</label>
+		<input type="text" id="totp_code" name="totp_code" maxlength="6" required placeholder="Code à 6 chiffres" pattern="\d{6}">
+		<button type="submit" class="btn btn-primary">
+			<i class="fa-solid fa-check"></i>
+			Valider
+		</button>
+	</form>
 
-    {% for label, messages in app.flashes %}
-        {% for msg in messages %}
-            <div class="flash-{{ label }}">{{ msg }}</div>
-        {% endfor %}
-    {% endfor %}
+	{% for label, messages in app.flashes %}
+		{% for msg in messages %}
+			<div class="flash-{{ label }}">{{ msg }}</div>
+		{% endfor %}
+	{% endfor %}
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
 {% endblock %}

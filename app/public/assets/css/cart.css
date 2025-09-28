@@ -18,15 +18,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 100%;
 }
 
 .quantity-control button:hover {
     background-color: #e0e0e0;
 }
 
-.quantity-control input {
-    width: 50px;
+.quantity-input {
+    width: 50px !important;
     text-align: center;
     margin: 0 5px;
     border: 1px solid #ccc;
@@ -54,4 +53,3 @@
 .summary-total {
     font-weight: bold;
 }
-

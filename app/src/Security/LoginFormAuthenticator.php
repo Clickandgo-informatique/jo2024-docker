@@ -1,4 +1,5 @@
 <?php
+// LoginFormAuthenticator.php
 
 namespace App\Security;
 
@@ -58,7 +59,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
         // Sinon, passage obligatoire par la vérification OTP
         $request->getSession()->set('2fa:userId', $user->getId());
-        return new RedirectResponse($this->router->generate('app_2fa_verify'));
+        return new RedirectResponse($this->router->generate('2fa_verify'));
     }
 
     protected function getLoginUrl(Request $request): string

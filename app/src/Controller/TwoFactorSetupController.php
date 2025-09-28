@@ -25,12 +25,9 @@ class TwoFactorSetupController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        // Génération du secret si inexistant
         if (!$user->getGoogle2FASecret()) {
-            $secret = $totpService->generateSecret();
-            $user->setGoogle2FASecret($secret);
-            $em->persist($user);
-            $em->flush();
+            $this->addFlash('error', 'Aucun secret trouvé pour cet utilisateur.');
+            return $this->redirectToRoute('app_main');
         }
 
         $qrCode = $totpService->getQRCode($user);
@@ -44,7 +41,6 @@ class TwoFactorSetupController extends AbstractController
                 $em->flush();
 
                 $this->addFlash('success', 'Double authentification activée avec succès ✅');
-
                 return $this->redirectToRoute('app_main');
             }
 
@@ -52,7 +48,6 @@ class TwoFactorSetupController extends AbstractController
         }
 
         return $this->render('security/setup_2fa.html.twig', [
-            'user' => $user,
             'qrCode' => $qrCode,
         ]);
     }

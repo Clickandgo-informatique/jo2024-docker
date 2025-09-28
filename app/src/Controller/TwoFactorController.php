@@ -40,7 +40,6 @@ class TwoFactorController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        // Génération du QR Code pour affichage
         $qrCode = null;
         if ($user->getGoogle2FASecret()) {
             $qrCode = $totpService->getQRCode($user);
@@ -54,14 +53,12 @@ class TwoFactorController extends AbstractController
                 $session->set('2fa_verified', true);
                 $session->remove('2fa:userId');
 
-                // Authentifie complètement l’utilisateur
                 $response = $userAuthenticator->authenticateUser(
                     $user,
                     $authenticator,
                     $request
                 );
 
-                // Si "remember device", ajoute le cookie
                 if ($request->request->get('remember_device')) {
                     $token = bin2hex(random_bytes(32));
                     $user->setTrustedToken($token);
@@ -73,12 +70,9 @@ class TwoFactorController extends AbstractController
                     );
                 }
 
-                // Redirection selon rôle
-                if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
-                    return $this->redirectToRoute('app_admin_index');
-                }
-
-                return $this->redirectToRoute('app_main');
+                return in_array('ROLE_ADMIN', $user->getRoles(), true)
+                    ? $this->redirectToRoute('app_admin_index')
+                    : $this->redirectToRoute('app_main');
             }
 
             $this->addFlash('error', 'Code incorrect ❌');

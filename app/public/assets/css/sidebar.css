@@ -1,92 +1,111 @@
-/* Sidebar admin */
-.sidebar {
+/* sidebar.css */
+
+/* Conteneur principal de la sidebar */
+#sidebar {
     position: fixed;
-    top: var(--header-height, 100px); /* démarre sous navbar + subnav */
+    top: 0; /* ajusté dynamiquement via JS */
     left: 0;
     width: 250px;
-    height: calc(100% - var(--header-height, 100px)); /* occupe le reste */
-    background: #222;
-    color: white;
-    padding: 15px;
+    height: calc(100vh - var(--header-height, 0px));
+    background-color: #1a1a1a;
+    color: #fff;
     overflow-y: auto;
-    transform: translateX(0); /* position ouverte par défaut */
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); /* animation smooth */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Sidebar fermée */
-.sidebar:not(.open) {
-    transform: translateX(-250px); /* cachée */
+/* Sidebar ouverte */
+#sidebar.open {
+    transform: translateX(0);
 }
 
-/* Liens dans la sidebar */
-.sidebar a {
+/* Liens de la sidebar */
+#sidebar a {
     display: block;
+    padding: 12px 20px;
     color: #fff;
-    padding: 10px;
     text-decoration: none;
-}
-
-.sidebar a:hover {
-    background: #333;
-}
-
-/* Bouton toggle attaché au bord droit de la sidebar */
-#sidebarToggle {
-    position: fixed; /* fixe par rapport à la fenêtre */
-    top: var(--header-height, 100px); /* démarre sous navbar + subnav */
-    left: 250px; /* bord droit de la sidebar ouverte */
-    width: 40px;
-    height: 40px;
-    background: #222;
-    color: #fff;
-    border: none;
-    font-size: 20px;
+    transition: background 0.2s ease;
     cursor: pointer;
-    border-radius: 0 5px 5px 0;
-    z-index: 4500;
-    transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1); /* même vitesse que la sidebar */
 }
 
-/* Déplacer le toggle quand la sidebar est fermée */
-.sidebar:not(.open) ~ #sidebarToggle {
-    left: 0; /* visible à gauche si sidebar fermée */
+#sidebar a:hover {
+    background-color: #333;
 }
 
-@media (max-width: 767px) {
-    #sidebarToggle {
-        display: none; /* cacher en mobile si nécessaire */
-    }
-}
-
-/* Bouton de fermeture (optionnel en desktop) */
+/* Bouton de fermeture interne (desktop) */
 #sidebarClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-    margin-bottom: 10px;
 }
 
-/* Décalage du main quand sidebar ouverte en desktop */
-@media (min-width: 768px) {
-    #main.shifted {
-        transform: translateX(250px); /* glissement smooth du main */
-        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); /* même timing que sidebar */
-    }
+/* Décalage main seulement quand sidebar ouverte sur desktop */
+#main.shifted {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
 }
 
-/* En mobile, la sidebar devient un bloc sous le header */
-@media (max-width: 767px) {
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        margin-top: var(--header-height, 100px); /* collée sous navbar+subnav */
-        transform: translateX(0); /* pas de translation en mobile */
-    }
+/* Overlay pour mobile */
+#menuOverlay {
+    position: fixed;
+    top: 0; /* ajusté dynamiquement via JS */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    z-index: 900;
+}
 
-    #main.shifted {
-        transform: none; /* pas de glissement en mobile */
-    }
+#menuOverlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+/* Hamburger attaché au côté droit de la sidebar */
+#sidebarToggle {
+    position: fixed;
+    top: 0; /* ajusté dynamiquement via JS */
+    left: 0;
+    width: 40px;
+    height: 40px;
+    z-index: 1100;
+    font-size: 24px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, top 0.3s ease, background 0.3s ease;
+}
+
+#sidebarToggle.active {
+    background-color: #333;
+}
+
+/* Scrollbar custom */
+#sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+    background: #222;
 }

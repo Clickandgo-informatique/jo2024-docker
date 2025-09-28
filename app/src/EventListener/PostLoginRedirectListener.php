@@ -2,6 +2,7 @@
 
 namespace App\EventListener;
 
+use App\Entity\Users;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
@@ -18,26 +19,40 @@ class PostLoginRedirectListener
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
-
-        // Vérifie que c’est la route par défaut après login
-        if ($request->get('_route') !== 'app_main') {
-            return;
-        }
-
         $token = $this->tokenStorage->getToken();
+
         if (!$token) {
             return;
         }
 
         $user = $token->getUser();
-        if (!$user) {
+        if (!$user || !method_exists($user, 'getRoles')) {
             return;
         }
 
-        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+        $session = $request->getSession();
+        if (!$session) {
+            return;
+        }
+
+        // ✅ Si l'utilisateur a activé la 2FA dans son compte, marque la session
+        // uniquement si elle n'est pas déjà validée pour cette session
+
+        $user = $token->getUser();
+        if (!$user instanceof Users) {
+            return; // on ne fait rien si ce n'est pas un utilisateur de notre entité
+        }
+
+        if ($user->is2FAEnabled() && !$session->has('2fa_verified')) {
+            $session->set('2fa_verified', false); // par défaut non validée
+        }
+
+        // 🔹 Redirection des admins vers le dashboard admin après login
+        // uniquement si la route visitée est app_main
+        if ($request->get('_route') === 'app_main' && in_array('ROLE_ADMIN', $user->getRoles(), true)) {
             $response = new RedirectResponse($this->router->generate('app_admin_index'));
             $event->setResponse($response);
         }

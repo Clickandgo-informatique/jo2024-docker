@@ -68,3 +68,6 @@ reset-db:
 # Tests
 test:
 	docker exec -it $(PROJECT_NAME)_php php bin/phpunit
+
+ovh:
+	ssh clickandug@ssh.cluster011.hosting.ovh.net

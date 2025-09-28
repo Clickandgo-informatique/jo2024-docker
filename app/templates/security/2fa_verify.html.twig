@@ -1,29 +1,31 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Validation de la double authentification{% endblock %}
+
 {% block body %}
+    <h2>Validation de la double authentification</h2>
 
+    {% if qrCode %}
+        <p>Scannez ce QR Code avec votre application d'authentification si nécessaire :</p>
+        <img class="qrCode" src="{{ qrCode }}" alt="QR Code 2FA">
+    {% endif %}
 
-	{% for message in app.flashes('error') %}
-		<div class="error">{{ message }}</div>
-	{% endfor %}
+    <p>Entrez le code généré par votre application pour vous connecter :</p>
 
-	<form method="post">
-		<caption>
-			<h1 class="text-center">Vérification à double facteur</h1>
-		</caption>
-		<label for="code">Code Google Authenticator</label>
-		<input
-		type="text" name="code" id="code" maxlength="6" required>
+    <form method="post">
+        <input type="text" name="code" maxlength="6" required placeholder="Code à 6 chiffres">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-check"></i> Valider
+        </button>
+    </form>
 
-		{# Affichage du "se souvenir de moi sur cet appareil" #}
-		<div>
-			<input type="checkbox" id="remember_device" name="remember_device" placeholder="Saisissez le code à 6 chiffres">
-			<label for="remember_device">Se souvenir de moi sur cet appareil</label>
-		</div>
-
-		<button type="submit" class="btn btn-primary">
-			<i class="fa-solid fa-check"></i>Vérifier</button>
-	</form>
+    {% for label, messages in app.flashes %}
+        {% for msg in messages %}
+            <div class="flash-{{ label }}">{{ msg }}</div>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
+
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('assets/css/form.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
 {% endblock %}

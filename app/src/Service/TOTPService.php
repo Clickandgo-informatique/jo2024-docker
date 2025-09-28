@@ -22,18 +22,25 @@ class TOTPService
     }
 
     public function getQRCode(Users $user, int $size = 200): string
-    {
-        $appName = 'reservations-jo-2024';
+{
+    $appName = 'reservations-jo-2024';
 
-        $qrCodeUrl = $this->google2FA->getQRCodeUrl(
-            $appName,
-            $user->getEmail(),
-            $user->getGoogle2FASecret()
-        );
+    // Génère l'URI TOTP
+    $otpUri = $this->google2FA->getQRCodeUrl(
+        $appName,
+        $user->getEmail(),
+        $user->getGoogle2FASecret()
+    );
 
-        $writer = new Writer(new GDLibRenderer($size));
-        return 'data:image/png;base64,' . base64_encode($writer->writeString($qrCodeUrl));
-    }
+    // Génération du QR Code en image PNG
+    $renderer = new GDLibRenderer($size);
+    $writer = new Writer($renderer);
+
+    $pngString = $writer->writeString($otpUri);
+
+    return 'data:image/png;base64,' . base64_encode($pngString);
+}
+
 
     public function verifyCode(Users $user, string $code): bool
     {

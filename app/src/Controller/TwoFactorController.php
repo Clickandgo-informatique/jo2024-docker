@@ -35,11 +35,23 @@ class TwoFactorController extends AbstractController
         /** @var Users $user */
         $user = $userRepository->find($userId);
 
+        if (!$user) {
+            $session->remove('2fa:userId');
+            return $this->redirectToRoute('app_login');
+        }
+
+        // Génération du QR Code pour affichage
+        $qrCode = null;
+        if ($user->getGoogle2FASecret()) {
+            $qrCode = $totpService->getQRCode($user);
+        }
+
         if ($request->isMethod('POST')) {
             $code = $request->request->get('code');
 
             if ($totpService->verifyCode($user, $code)) {
-                // Supprime l’ID temporaire de la session 2FA
+                // ✅ 2FA validé pour cette session
+                $session->set('2fa_verified', true);
                 $session->remove('2fa:userId');
 
                 // Authentifie complètement l’utilisateur
@@ -61,14 +73,20 @@ class TwoFactorController extends AbstractController
                     );
                 }
 
-                // ⚠ Ici, on ne redirige pas selon rôle directement
-                // La redirection admin sera gérée par le listener post-auth
-                return $response;
+                // Redirection selon rôle
+                if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+                    return $this->redirectToRoute('app_admin_index');
+                }
+
+                return $this->redirectToRoute('app_main');
             }
 
             $this->addFlash('error', 'Code incorrect ❌');
         }
 
-        return $this->render('security/2fa_verify.html.twig');
+        return $this->render('security/2fa_verify.html.twig', [
+            'user' => $user,
+            'qrCode' => $qrCode,
+        ]);
     }
 }

@@ -51,147 +51,151 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         // line 1
         yield "<!DOCTYPE html>
 <html lang=\"fr\">
-\t<head>
-\t\t<meta charset=\"UTF-8\">
-\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
 
-\t\t<title>
-\t\t\t";
-        // line 8
+    <title>";
+        // line 7
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
-        // line 10
-        yield "\t\t</title>
+        yield "</title>
 
-\t\t";
-        // line 13
-        yield "\t\t<link rel=\"icon\" href=\"";
+    ";
+        // line 10
+        yield "    <link rel=\"icon\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("favicon.svg"), "html", null, true);
         yield "\" type=\"image/svg+xml\">
-\t\t<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"";
-        // line 14
+    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"";
+        // line 11
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("favicon-32.png"), "html", null, true);
         yield "\">
-\t\t<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"";
-        // line 15
+    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"";
+        // line 12
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("favicon-16.png"), "html", null, true);
         yield "\">
-\t\t<link
-\t\trel=\"apple-touch-icon\" href=\"";
-        // line 17
+    <link rel=\"apple-touch-icon\" href=\"";
+        // line 13
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("favicon-32.png"), "html", null, true);
         yield "\">
 
-\t\t";
-        // line 20
-        yield "\t\t<link rel=\"stylesheet\" href=\"";
+    ";
+        // line 16
+        yield "    <link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/flashbag.css"), "html", null, true);
         yield "\">
-\t\t<link rel=\"stylesheet\" href=\"";
-        // line 21
+    <link rel=\"stylesheet\" href=\"";
+        // line 17
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/styles.css"), "html", null, true);
         yield "\">
-\t\t<link
-\t\trel=\"stylesheet\" href=\"";
-        // line 23
+    <link rel=\"stylesheet\" href=\"";
+        // line 18
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/pagination.css"), "html", null, true);
         yield "\">
-
-\t\t";
-        // line 26
-        yield "\t\t<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css\" integrity=\"sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"/> ";
+    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css\" integrity=\"sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"/>
+    ";
+        // line 20
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
-        // line 27
-        yield "\t\t</head>
+        // line 21
+        yield "</head>
 
-\t\t<body>
-\t\t\t";
-        // line 30
+<body class=\"";
+        // line 23
+        if (($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN") && CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 23, $this->source); })()), "request", [], "any", false, false, false, 23), "getSession", [], "method", false, false, false, 23), "get", ["2fa_verified"], "method", false, false, false, 23))) {
+            yield "admin";
+        }
+        yield "\">
+
+    ";
+        // line 26
+        yield "    ";
         yield Twig\Extension\CoreExtension::include($this->env, $context, "_partials/_navbar.html.twig");
         yield "
-\t\t\t";
-        // line 31
+    ";
+        // line 27
         yield Twig\Extension\CoreExtension::include($this->env, $context, "_partials/_subnav.html.twig");
         yield "
 
-\t\t\t";
-        // line 33
-        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 34
-            yield "\t\t\t\t";
+    ";
+        // line 30
+        yield "    ";
+        if (($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN") && CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 30, $this->source); })()), "request", [], "any", false, false, false, 30), "getSession", [], "method", false, false, false, 30), "get", ["2fa_verified"], "method", false, false, false, 30))) {
+            // line 31
+            yield "        ";
             yield Twig\Extension\CoreExtension::include($this->env, $context, "_partials/_sidebar.html.twig");
             yield "
-\t\t\t";
+        <button id=\"sidebarToggle\" class=\"sidebar-toggle\">☰</button>
+        <div id=\"menuOverlay\" class=\"menu-overlay\"></div>
+    ";
         }
-        // line 36
+        // line 35
         yield "
-\t\t\t";
+    ";
+        // line 37
+        yield "    <main id=\"main\" class=\"";
+        if (($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN") && CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 37, $this->source); })()), "request", [], "any", false, false, false, 37), "getSession", [], "method", false, false, false, 37), "get", ["2fa_verified"], "method", false, false, false, 37))) {
+            yield "shifted";
+        }
+        yield "\">
+        ";
         // line 38
-        yield "\t\t\t<script src=\"";
+        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
+        // line 39
+        yield "    </main>
+
+    ";
+        // line 42
+        yield "    <script src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/flashbags.js"), "html", null, true);
         yield "\"></script>
-\t\t\t<script>
-\t\t\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {
-";
-        // line 41
+    <script>
+        document.addEventListener(\"DOMContentLoaded\", function () {
+            ";
+        // line 45
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 41, $this->source); })()), "flashes", [], "any", false, false, false, 41));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 45, $this->source); })()), "flashes", [], "any", false, false, false, 45));
         foreach ($context['_seq'] as $context["label"] => $context["messages"]) {
-            // line 42
+            // line 46
+            yield "                ";
             $context['_parent'] = $context;
             $context['_seq'] = CoreExtension::ensureTraversable($context["messages"]);
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 43
-                yield "showFlashbag(\"";
+                // line 47
+                yield "                    showFlashbag(\"";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["message"], "js"), "html", null, true);
                 yield "\", \"";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["label"], "html", null, true);
-                yield "\", 4000, \"top-right\");";
+                yield "\", 4000, \"top-right\");
+                ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['message'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 49
+            yield "            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['label'], $context['messages'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 44
-        yield "});
-\t\t\t</script>\t\t
+        // line 50
+        yield "        });
+    </script>
 
-\t\t\t";
-        // line 48
-        yield "\t\t\t";
-        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 49
-            yield "\t\t\t\t<button id=\"sidebarToggle\">☰</button>
-\t\t\t";
-        }
-        // line 51
-        yield "\t\t\t<main id=\"main\" class=\"";
-        if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            yield "shifted";
-        }
-        yield "\"> ";
-        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 52
-        yield "\t\t\t\t</main>
-
-\t\t\t\t";
-        // line 55
-        yield "\t\t\t\t<script type=\"module\" src=\"";
+    ";
+        // line 54
+        yield "    <script type=\"module\" src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/main.js"), "html", null, true);
         yield "\"></script>
-\t\t\t\t<script src=\"";
-        // line 56
+    <script src=\"";
+        // line 55
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/sidebar.js"), "html", null, true);
         yield "\"></script>
-\t\t\t\t";
-        // line 57
+    ";
+        // line 56
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
-        // line 58
+        // line 57
         yield "
-\t\t\t</body>
-\t\t</html>
+</body>
+</html>
 ";
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -202,7 +206,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield from [];
     }
 
-    // line 8
+    // line 7
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -215,8 +219,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "JO 2024
-\t\t\t";
+        yield "JO 2024";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -226,7 +229,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield from [];
     }
 
-    // line 26
+    // line 20
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -248,7 +251,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield from [];
     }
 
-    // line 51
+    // line 38
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -270,7 +273,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
         yield from [];
     }
 
-    // line 57
+    // line 56
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -313,71 +316,70 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  274 => 57,  252 => 51,  230 => 26,  206 => 8,  192 => 58,  190 => 57,  186 => 56,  181 => 55,  177 => 52,  170 => 51,  166 => 49,  163 => 48,  158 => 44,  144 => 43,  140 => 42,  136 => 41,  129 => 38,  126 => 36,  120 => 34,  118 => 33,  113 => 31,  109 => 30,  104 => 27,  101 => 26,  96 => 23,  91 => 21,  86 => 20,  81 => 17,  76 => 15,  72 => 14,  67 => 13,  63 => 10,  61 => 8,  52 => 1,);
+        return array (  277 => 56,  255 => 38,  233 => 20,  210 => 7,  196 => 57,  194 => 56,  190 => 55,  185 => 54,  180 => 50,  174 => 49,  163 => 47,  158 => 46,  154 => 45,  147 => 42,  143 => 39,  141 => 38,  134 => 37,  131 => 35,  123 => 31,  120 => 30,  115 => 27,  110 => 26,  103 => 23,  99 => 21,  97 => 20,  92 => 18,  88 => 17,  83 => 16,  78 => 13,  74 => 12,  70 => 11,  65 => 10,  60 => 7,  52 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("<!DOCTYPE html>
 <html lang=\"fr\">
-\t<head>
-\t\t<meta charset=\"UTF-8\">
-\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
 
-\t\t<title>
-\t\t\t{% block title %}JO 2024
-\t\t\t{% endblock %}
-\t\t</title>
+    <title>{% block title %}JO 2024{% endblock %}</title>
 
-\t\t{# Favicons #}
-\t\t<link rel=\"icon\" href=\"{{ asset('favicon.svg') }}\" type=\"image/svg+xml\">
-\t\t<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"{{ asset('favicon-32.png') }}\">
-\t\t<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"{{ asset('favicon-16.png') }}\">
-\t\t<link
-\t\trel=\"apple-touch-icon\" href=\"{{ asset('favicon-32.png') }}\">
+    {# Favicons #}
+    <link rel=\"icon\" href=\"{{ asset('favicon.svg') }}\" type=\"image/svg+xml\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"{{ asset('favicon-32.png') }}\">
+    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"{{ asset('favicon-16.png') }}\">
+    <link rel=\"apple-touch-icon\" href=\"{{ asset('favicon-32.png') }}\">
 
-\t\t{# Styles de base #}
-\t\t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/flashbag.css') }}\">
-\t\t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/styles.css') }}\">
-\t\t<link
-\t\trel=\"stylesheet\" href=\"{{ asset('assets/css/pagination.css') }}\">
+    {# Styles #}
+    <link rel=\"stylesheet\" href=\"{{ asset('assets/css/flashbag.css') }}\">
+    <link rel=\"stylesheet\" href=\"{{ asset('assets/css/styles.css') }}\">
+    <link rel=\"stylesheet\" href=\"{{ asset('assets/css/pagination.css') }}\">
+    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css\" integrity=\"sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"/>
+    {% block stylesheets %}{% endblock %}
+</head>
 
-\t\t{# Font Awesome CDN #}
-\t\t<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css\" integrity=\"sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"/> {% block stylesheets %}{% endblock %}
-\t\t</head>
+<body class=\"{% if is_granted('ROLE_ADMIN') and app.request.getSession().get('2fa_verified') %}admin{% endif %}\">
 
-\t\t<body>
-\t\t\t{{ include('_partials/_navbar.html.twig') }}
-\t\t\t{{ include('_partials/_subnav.html.twig') }}
+    {# Navbar et subnav visibles pour tous #}
+    {{ include('_partials/_navbar.html.twig') }}
+    {{ include('_partials/_subnav.html.twig') }}
 
-\t\t\t{% if is_granted('ROLE_ADMIN') %}
-\t\t\t\t{{ include('_partials/_sidebar.html.twig') }}
-\t\t\t{% endif %}
+    {# Sidebar et toggle visibles uniquement si admin et 2FA validé #}
+    {% if is_granted('ROLE_ADMIN') and app.request.getSession().get('2fa_verified') %}
+        {{ include('_partials/_sidebar.html.twig') }}
+        <button id=\"sidebarToggle\" class=\"sidebar-toggle\">☰</button>
+        <div id=\"menuOverlay\" class=\"menu-overlay\"></div>
+    {% endif %}
 
-\t\t\t{# Flashbags #}
-\t\t\t<script src=\"{{ asset('assets/js/flashbags.js') }}\"></script>
-\t\t\t<script>
-\t\t\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {
-{% for label, messages in app.flashes %}
-{% for message in messages %}
-showFlashbag(\"{{ message|e('js') }}\", \"{{ label }}\", 4000, \"top-right\");{% endfor %}{% endfor %}
-});
-\t\t\t</script>\t\t
+    {# Contenu principal toujours visible #}
+    <main id=\"main\" class=\"{% if is_granted('ROLE_ADMIN') and app.request.getSession().get('2fa_verified') %}shifted{% endif %}\">
+        {% block body %}{% endblock %}
+    </main>
 
-\t\t\t{# Bouton toggle toujours visible en haut à gauche #}
-\t\t\t{% if is_granted('ROLE_ADMIN') %}
-\t\t\t\t<button id=\"sidebarToggle\">☰</button>
-\t\t\t{% endif %}
-\t\t\t<main id=\"main\" class=\"{% if is_granted('ROLE_ADMIN') %}shifted{% endif %}\"> {% block body %}{% endblock %}
-\t\t\t\t</main>
+    {# Flashbags #}
+    <script src=\"{{ asset('assets/js/flashbags.js') }}\"></script>
+    <script>
+        document.addEventListener(\"DOMContentLoaded\", function () {
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    showFlashbag(\"{{ message|e('js') }}\", \"{{ label }}\", 4000, \"top-right\");
+                {% endfor %}
+            {% endfor %}
+        });
+    </script>
 
-\t\t\t\t{# Scripts #}
-\t\t\t\t<script type=\"module\" src=\"{{ asset('assets/js/main.js') }}\"></script>
-\t\t\t\t<script src=\"{{ asset('assets/js/sidebar.js') }}\"></script>
-\t\t\t\t{% block javascripts %}{% endblock %}
+    {# Scripts principaux #}
+    <script type=\"module\" src=\"{{ asset('assets/js/main.js') }}\"></script>
+    <script src=\"{{ asset('assets/js/sidebar.js') }}\"></script>
+    {% block javascripts %}{% endblock %}
 
-\t\t\t</body>
-\t\t</html>
+</body>
+</html>
 ", "base.html.twig", "/var/www/symfony/templates/base.html.twig");
     }
 }

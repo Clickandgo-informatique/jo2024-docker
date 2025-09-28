@@ -25,10 +25,12 @@ class TwoFactorSetupController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        // Vérifie que le secret existe
+        // Génération du secret si inexistant
         if (!$user->getGoogle2FASecret()) {
-            $this->addFlash('error', 'Aucun secret trouvé pour cet utilisateur.');
-            return $this->redirectToRoute('app_login');
+            $secret = $totpService->generateSecret();
+            $user->setGoogle2FASecret($secret);
+            $em->persist($user);
+            $em->flush();
         }
 
         $qrCode = $totpService->getQRCode($user);
@@ -50,6 +52,7 @@ class TwoFactorSetupController extends AbstractController
         }
 
         return $this->render('security/setup_2fa.html.twig', [
+            'user' => $user,
             'qrCode' => $qrCode,
         ]);
     }

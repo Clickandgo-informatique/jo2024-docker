@@ -216,4 +216,20 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    // src/Entity/Users.php
+
+    //Vérification double facteur sans persistence en base
+
+    private bool $isTwoFactorVerified = false;
+
+    public function isTwoFactorVerified(): bool
+    {
+        return $this->isTwoFactorVerified;
+    }
+
+    public function setIsTwoFactorVerified(bool $verified): self
+    {
+        $this->isTwoFactorVerified = $verified;
+        return $this;
+    }
 }

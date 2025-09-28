@@ -1,60 +1,59 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title>
-			{% block title %}JO 2024
-			{% endblock %}
-		</title>
+    <title>{% block title %}JO 2024{% endblock %}</title>
 
-		{# Favicons #}
-		<link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-		<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
-		<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}">
-		<link
-		rel="apple-touch-icon" href="{{ asset('favicon-32.png') }}">
+    {# Favicons #}
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon-32.png') }}">
 
-		{# Styles de base #}
-		<link rel="stylesheet" href="{{ asset('assets/css/flashbag.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
-		<link
-		rel="stylesheet" href="{{ asset('assets/css/pagination.css') }}">
+    {# Styles #}
+    <link rel="stylesheet" href="{{ asset('assets/css/flashbag.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pagination.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    {% block stylesheets %}{% endblock %}
+</head>
 
-		{# Font Awesome CDN #}
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/> {% block stylesheets %}{% endblock %}
-		</head>
+<body class="{% if is_granted('ROLE_ADMIN') and app.request.getSession().get('2fa_verified') %}admin{% endif %}">
 
-		<body>
-			{{ include('_partials/_navbar.html.twig') }}
-			{{ include('_partials/_subnav.html.twig') }}
+    {# Navbar et subnav visibles pour tous #}
+    {{ include('_partials/_navbar.html.twig') }}
+    {{ include('_partials/_subnav.html.twig') }}
 
-			{% if is_granted('ROLE_ADMIN') %}
-				{{ include('_partials/_sidebar.html.twig') }}
-			{% endif %}
+    {# Sidebar et toggle visibles uniquement si admin et 2FA validé #}
+    {% if is_granted('ROLE_ADMIN') and app.request.getSession().get('2fa_verified') %}
+        {{ include('_partials/_sidebar.html.twig') }}
+        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+        <div id="menuOverlay" class="menu-overlay"></div>
+    {% endif %}
 
-			{# Flashbags #}
-			<script src="{{ asset('assets/js/flashbags.js') }}"></script>
-			<script>
-				document.addEventListener("DOMContentLoaded", function () {
-{% for label, messages in app.flashes %}
-{% for message in messages %}
-showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfor %}{% endfor %}
-});
-			</script>		
+    {# Contenu principal toujours visible #}
+    <main id="main" class="{% if is_granted('ROLE_ADMIN') and app.request.getSession().get('2fa_verified') %}shifted{% endif %}">
+        {% block body %}{% endblock %}
+    </main>
 
-			{# Bouton toggle toujours visible en haut à gauche #}
-			{% if is_granted('ROLE_ADMIN') %}
-				<button id="sidebarToggle">☰</button>
-			{% endif %}
-			<main id="main" class="{% if is_granted('ROLE_ADMIN') %}shifted{% endif %}"> {% block body %}{% endblock %}
-				</main>
+    {# Flashbags #}
+    <script src="{{ asset('assets/js/flashbags.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");
+                {% endfor %}
+            {% endfor %}
+        });
+    </script>
 
-				{# Scripts #}
-				<script type="module" src="{{ asset('assets/js/main.js') }}"></script>
-				<script src="{{ asset('assets/js/sidebar.js') }}"></script>
-				{% block javascripts %}{% endblock %}
+    {# Scripts principaux #}
+    <script type="module" src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/sidebar.js') }}"></script>
+    {% block javascripts %}{% endblock %}
 
-			</body>
-		</html>
+</body>
+</html>

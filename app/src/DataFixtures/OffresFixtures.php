@@ -44,14 +44,15 @@ class OffresFixtures extends Fixture implements DependentFixtureInterface
         // Récupérer les catégories d'offres
         $categoriesOffres = $manager->getRepository(CategoriesOffres::class)->findAll();
 
-        $i = 0;
+        $i = 0;       
+
         foreach ($data[0]['data'] as $item) {
             $slug = $item['slug'];
 
             // Récupérer le sport via repository ou via référence si définie dans SportsFixtures
             $sport = $manager->getRepository(Sports::class)->findOneBy(['slug' => $slug]);
-            if (!$sport && $this->hasReference('sport_' . $slug,Sports::class)) {
-                $sport = $this->getReference('sport_' . $slug,Sports::class);
+            if (!$sport && $this->hasReference('sport_' . $slug, Sports::class)) {
+                $sport = $this->getReference('sport_' . $slug, Sports::class);
             }
 
             if (!$sport) {
@@ -75,6 +76,8 @@ class OffresFixtures extends Fixture implements DependentFixtureInterface
                 ->addSport($sport)
                 ->setCategorie($this->faker->randomElement($categoriesOffres))
                 ->setIsPublished(true)
+                // sélectionne que 5 offres à mettre en avant sur la page d'accueil
+                ->setIsPromoted($this->faker->boolean(5))
                 ->setCreatedAt(new \DateTimeImmutable());
 
             $manager->persist($offre);

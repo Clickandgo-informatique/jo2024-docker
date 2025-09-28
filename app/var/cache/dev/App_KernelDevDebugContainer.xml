@@ -570,7 +570,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.TxMHLbz"/>
+      <argument type="service" id=".service_locator.SWEuSuo"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3073,7 +3073,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.TxMHLbz"/>
+      <argument type="service" id=".service_locator.SWEuSuo"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -7361,6 +7361,12 @@
         <argument key="offresRepo" type="service_closure" id="App\Repository\OffresRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.CkoZCuq.App\Controller\MainController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MainController::index()"/>
+      <argument>App\Controller\MainController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CkoZCuq" method="withContext"/>
+    </service>
     <service id=".service_locator.CkoZCuq.App\Controller\PanierController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\PanierController::index()"/>
       <argument>App\Controller\PanierController::index()</argument>
@@ -7484,7 +7490,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.g9vD4Q0" method="withContext"/>
     </service>
-    <service id=".service_locator.TxMHLbz" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.SWEuSuo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
@@ -7511,6 +7517,7 @@
         <argument key="App\Controller\CommandesController::index" type="service_closure" id=".service_locator.8D3K43m.App\Controller\CommandesController::index()"/>
         <argument key="App\Controller\CommandesController::liste" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::liste()"/>
         <argument key="App\Controller\CommandesController::payerCommande" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::payerCommande()"/>
+        <argument key="App\Controller\MainController::index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\MainController::index()"/>
         <argument key="App\Controller\PanierController::index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\PanierController::index()"/>
         <argument key="App\Controller\PanierController::add" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::add()"/>
         <argument key="App\Controller\PanierController::remove" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::remove()"/>
@@ -7544,6 +7551,7 @@
         <argument key="App\Controller\CommandesController:index" type="service_closure" id=".service_locator.8D3K43m.App\Controller\CommandesController::index()"/>
         <argument key="App\Controller\CommandesController:liste" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::liste()"/>
         <argument key="App\Controller\CommandesController:payerCommande" type="service_closure" id=".service_locator.aSQ66kB.App\Controller\CommandesController::payerCommande()"/>
+        <argument key="App\Controller\MainController:index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\MainController::index()"/>
         <argument key="App\Controller\PanierController:index" type="service_closure" id=".service_locator.CkoZCuq.App\Controller\PanierController::index()"/>
         <argument key="App\Controller\PanierController:add" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::add()"/>
         <argument key="App\Controller\PanierController:remove" type="service_closure" id=".service_locator.xqSD.N7.App\Controller\PanierController::remove()"/>
@@ -9111,7 +9119,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.TxMHLbz"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.SWEuSuo"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>

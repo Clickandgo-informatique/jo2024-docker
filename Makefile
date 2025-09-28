@@ -48,6 +48,9 @@ cache-clear:
 migrate:
 	docker exec -it $(PROJECT_NAME)_php php bin/console doctrine:migrations:migrate --no-interaction
 
+migration:
+	docker exec -it $(PROJECT_NAME)_php php bin/console make:migration --no-interaction
+
 fixtures:
 	docker exec -it $(PROJECT_NAME)_php php bin/console doctrine:fixtures:load --no-interaction
 

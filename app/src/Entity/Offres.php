@@ -56,6 +56,8 @@ class Offres
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
+    #[ORM\Column]
+    private ?bool $isPromoted = false;
 
     /**
      * @var Collection<int, Images>
@@ -344,6 +346,26 @@ class Offres
     public function setLieux(array $lieux): static
     {
         $this->lieux = $lieux;
+        return $this;
+    }
+
+    /**
+     * Get the value of isPromoted
+     */ 
+    public function getIsPromoted()
+    {
+        return $this->isPromoted;
+    }
+
+    /**
+     * Set the value of isPromoted
+     *
+     * @return  self
+     */ 
+    public function setIsPromoted($isPromoted)
+    {
+        $this->isPromoted = $isPromoted;
+
         return $this;
     }
 }

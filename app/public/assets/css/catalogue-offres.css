@@ -302,6 +302,25 @@
 .offres-counter {
     text-align: center;
 }
+.last-offers {
+    color: var(--primary-color);
+}
+/* Version sur la page d'accueil (promotions) */
+.promotions-wrapper {
+    display: flex;
+    max-width: 800px;
+}
+.promotions {
+    padding: 10px;
+    display: grid;
+    overflow-x: scroll;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    width: 100%;
+    & .offer-card {
+        width: 300px;
+    }
+}
 @media (max-width: 576px) {
     .catalogue-layout {
         grid-template-columns: 1fr;

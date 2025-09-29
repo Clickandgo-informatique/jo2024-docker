@@ -1,162 +1,45 @@
-/* ----- Subnav Container ----- */
 .subnav-container {
-    position: fixed;
-    top: var(--navbar-height, 60px);
-    left: 0;
-    right: 0;
-    background: #531eff;
     display: flex;
-    align-items: center;
-    z-index: 4500;
-    min-height: 40px;
-    padding: 5px;
-}
-
-/* ----- Flèches ----- */
-.subnav-arrow {
-    width: 30px;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 2rem;
-    font-weight: bold;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1200;
-}
-.subnav-arrow:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* ----- Subnav scroll ----- */
-.subnav {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 0 10px;
-    overflow-x: auto;
-    white-space: nowrap;
-    justify-content: center;
-}
-.subnav::-webkit-scrollbar {
-    display: none;
-}
-.subnav a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-}
-.subnav a:hover {
-    text-decoration: underline;
-}
-
-.user-options {
-    display: flex;   
-    justify-content: center;
     align-items: center;
     gap: 10px;
-}
-.connected,
-.not-connected {
-    font-size: 1rem;
-    color: #fff;
-    text-align: center;
+    overflow-x: auto;
+    background: #222;
+    padding: 10px 20px;
 }
 
-/* ----- Cart bouton ----- */
-.cart {
-    display: inline-block;
-}
-.cart-label {
-    margin-left: 5px;
-}
-/* Desktop bouton avec label */
-.cart-button {
-    position: relative;
-    display: inline-flex;
+.subnav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    gap: 6px;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    gap: 15px;
+    width: 100%;
+}
+
+.subnav .nav-link {
     color: #fff;
-    font-weight: 500;
     text-decoration: none;
+    padding: 5px 10px;
 }
 
-/* Wrapper pour icône + badge */
-.cart-icon-wrapper {
-    position: relative;
-    display: inline-block; 
-}
-
-.cart-icon {
-    font-size: 24px;    
-}
-
-/* Badge positionné sur l’icône */
-.cart-badge {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    background-color: #e74c3c;
+.subnav-arrow {
+    background: none;
+    border: none;
     color: #fff;
-    font-weight: bold;
-    font-size: 12px;
-    border-radius: 50%;
-    text-align: center;
-    pointer-events: none;
-    transition: transform 0.3s ease;
-    z-index: 2;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    font-size: 24px;
+    cursor: pointer;
 }
-
-.cart-badge.animate {
-    transform: scale(1.5);
+.connected {
+    color: var(--primary-color);
 }
-
-/* Boutons add/remove panier */
-.btn-add-to-cart,
-.btn-remove-from-cart,
-.btn-delete-from-cart {
-    text-decoration: none;
+.not-connected {
+    color: orange;
 }
-
-/* ----- FAB mobile ----- */
+/* Responsive mobile */
 @media (max-width: 768px) {
-    .cart-button {
-        width: 3.5rem;
-        height: 3.5rem;
-        padding: 0;
-        border-radius: 9999px;
-        justify-content: center;
-        position: fixed;
-        bottom: 6rem;
-        right: 1.5rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);background-color: #2563eb;
-    }
-    .cart-label {
-        display: none;
-    }
-    .cart-icon {
-        font-size: 28px;
-    }
-    .cart-badge {
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        font-size: 0.75rem;
-        top: -4px;
-        right: -4px;
-    }
-
-    /* Afficher flèches sur mobile */
-    .subnav-arrow {
-        display: flex;
+    .subnav-container {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px;
     }
 }

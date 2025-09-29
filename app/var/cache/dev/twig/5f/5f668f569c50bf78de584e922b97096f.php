@@ -38,7 +38,7 @@ class __TwigTemplate_53417f9f2a7b951d565625f9b9334c74 extends Template
 
     protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
     {
-        // line 1
+        // line 2
         return "base.html.twig";
     }
 
@@ -51,7 +51,7 @@ class __TwigTemplate_53417f9f2a7b951d565625f9b9334c74 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "security/setup_2fa.html.twig"));
 
-        $this->parent = $this->load("base.html.twig", 1);
+        $this->parent = $this->load("base.html.twig", 2);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -61,7 +61,7 @@ class __TwigTemplate_53417f9f2a7b951d565625f9b9334c74 extends Template
 
     }
 
-    // line 3
+    // line 4
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -74,7 +74,8 @@ class __TwigTemplate_53417f9f2a7b951d565625f9b9334c74 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Configuration de la double authentification";
+        yield "Configuration de la double authentification
+";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -84,7 +85,7 @@ class __TwigTemplate_53417f9f2a7b951d565625f9b9334c74 extends Template
         yield from [];
     }
 
-    // line 5
+    // line 7
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -97,54 +98,55 @@ class __TwigTemplate_53417f9f2a7b951d565625f9b9334c74 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 6
-        yield "    <h2>Configurer la double authentification</h2>
-
-    ";
         // line 8
-        if ((($tmp = (isset($context["qrCode"]) || array_key_exists("qrCode", $context) ? $context["qrCode"] : (function () { throw new RuntimeError('Variable "qrCode" does not exist.', 8, $this->source); })())) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 9
-            yield "        <p>Scannez ce QR Code avec Google Authenticator :</p>
-        <img class=\"qrCode\" src=\"";
-            // line 10
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["qrCode"]) || array_key_exists("qrCode", $context) ? $context["qrCode"] : (function () { throw new RuntimeError('Variable "qrCode" does not exist.', 10, $this->source); })()), "html", null, true);
+        yield "\t<h2>Configurer la double authentification</h2>
+
+\t";
+        // line 10
+        if ((($tmp = (isset($context["qrCode"]) || array_key_exists("qrCode", $context) ? $context["qrCode"] : (function () { throw new RuntimeError('Variable "qrCode" does not exist.', 10, $this->source); })())) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 11
+            yield "\t\t<p>Scannez ce QR Code avec Google Authenticator :</p>
+\t\t<img class=\"qrCode\" src=\"";
+            // line 12
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["qrCode"]) || array_key_exists("qrCode", $context) ? $context["qrCode"] : (function () { throw new RuntimeError('Variable "qrCode" does not exist.', 12, $this->source); })()), "html", null, true);
             yield "\" alt=\"QR Code 2FA\">
-    ";
+\t";
         }
-        // line 12
+        // line 14
         yield "
-    <p>Entrez maintenant le code généré par votre application pour valider l’activation :</p>
+\t<p>Entrez maintenant le code généré par votre application pour valider l’activation :</p>
 
-    <form method=\"post\">
-        <input type=\"text\" name=\"code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\">
-        <button type=\"submit\" class=\"btn btn-primary\">
-            <i class=\"fa-solid fa-check\"></i> Valider
-        </button>
-    </form>
+\t<form method=\"post\">
+\t\t<input type=\"text\" name=\"code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\">
+\t\t<button type=\"submit\" class=\"btn btn-primary\">
+\t\t\t<i class=\"fa-solid fa-check\"></i>
+\t\t\tValider
+\t\t</button>
+\t</form>
 
-    ";
-        // line 22
+\t";
+        // line 25
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 22, $this->source); })()), "flashes", [], "any", false, false, false, 22));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 25, $this->source); })()), "flashes", [], "any", false, false, false, 25));
         foreach ($context['_seq'] as $context["label"] => $context["messages"]) {
-            // line 23
-            yield "        ";
+            // line 26
+            yield "\t\t";
             $context['_parent'] = $context;
             $context['_seq'] = CoreExtension::ensureTraversable($context["messages"]);
             foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
-                // line 24
-                yield "            <div class=\"flash-";
+                // line 27
+                yield "\t\t\t<div class=\"flash-";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["label"], "html", null, true);
                 yield "\">";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
                 yield "</div>
-        ";
+\t\t";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 26
-            yield "    ";
+            // line 29
+            yield "\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['label'], $context['messages'], $context['_parent']);
@@ -158,7 +160,7 @@ class __TwigTemplate_53417f9f2a7b951d565625f9b9334c74 extends Template
         yield from [];
     }
 
-    // line 29
+    // line 32
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -171,8 +173,8 @@ class __TwigTemplate_53417f9f2a7b951d565625f9b9334c74 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 30
-        yield "    <link rel=\"stylesheet\" href=\"";
+        // line 33
+        yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/form.css"), "html", null, true);
         yield "\">
 ";
@@ -206,41 +208,44 @@ class __TwigTemplate_53417f9f2a7b951d565625f9b9334c74 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  175 => 30,  162 => 29,  147 => 26,  136 => 24,  131 => 23,  127 => 22,  115 => 12,  110 => 10,  107 => 9,  105 => 8,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
+        return array (  177 => 33,  164 => 32,  149 => 29,  138 => 27,  133 => 26,  129 => 25,  116 => 14,  111 => 12,  108 => 11,  106 => 10,  102 => 8,  89 => 7,  65 => 4,  42 => 2,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("{% extends 'base.html.twig' %}
+        return new Source("{# setup_2fa.html.twig #}
+{% extends 'base.html.twig' %}
 
-{% block title %}Configuration de la double authentification{% endblock %}
+{% block title %}Configuration de la double authentification
+{% endblock %}
 
 {% block body %}
-    <h2>Configurer la double authentification</h2>
+\t<h2>Configurer la double authentification</h2>
 
-    {% if qrCode %}
-        <p>Scannez ce QR Code avec Google Authenticator :</p>
-        <img class=\"qrCode\" src=\"{{ qrCode }}\" alt=\"QR Code 2FA\">
-    {% endif %}
+\t{% if qrCode %}
+\t\t<p>Scannez ce QR Code avec Google Authenticator :</p>
+\t\t<img class=\"qrCode\" src=\"{{ qrCode }}\" alt=\"QR Code 2FA\">
+\t{% endif %}
 
-    <p>Entrez maintenant le code généré par votre application pour valider l’activation :</p>
+\t<p>Entrez maintenant le code généré par votre application pour valider l’activation :</p>
 
-    <form method=\"post\">
-        <input type=\"text\" name=\"code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\">
-        <button type=\"submit\" class=\"btn btn-primary\">
-            <i class=\"fa-solid fa-check\"></i> Valider
-        </button>
-    </form>
+\t<form method=\"post\">
+\t\t<input type=\"text\" name=\"code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\">
+\t\t<button type=\"submit\" class=\"btn btn-primary\">
+\t\t\t<i class=\"fa-solid fa-check\"></i>
+\t\t\tValider
+\t\t</button>
+\t</form>
 
-    {% for label, messages in app.flashes %}
-        {% for msg in messages %}
-            <div class=\"flash-{{ label }}\">{{ msg }}</div>
-        {% endfor %}
-    {% endfor %}
+\t{% for label, messages in app.flashes %}
+\t\t{% for msg in messages %}
+\t\t\t<div class=\"flash-{{ label }}\">{{ msg }}</div>
+\t\t{% endfor %}
+\t{% endfor %}
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel=\"stylesheet\" href=\"{{ asset('assets/css/form.css') }}\">
+\t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/form.css') }}\">
 {% endblock %}
 ", "security/setup_2fa.html.twig", "/var/www/symfony/templates/security/setup_2fa.html.twig");
     }

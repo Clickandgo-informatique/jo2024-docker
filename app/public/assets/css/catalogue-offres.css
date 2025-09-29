@@ -343,6 +343,9 @@
         grid-template-columns: 1fr;
         justify-items: center;
     }
+    .promotions-wrapper {
+        width: 97%;
+    }
 }
 /* format tablettes */
 /* @media (max-width: 992px) {

@@ -32,6 +32,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         $this->parent = false;
 
         $this->blocks = [
+            'stylesheets' => [$this, 'block_stylesheets'],
         ];
     }
 
@@ -44,65 +45,77 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "_partials/_sidebar.html.twig"));
 
-        // line 2
-        yield "<div id=\"sidebar\" class=\"sidebar\">
+        // line 1
+        yield "<nav id=\"sidebar\" class=\"sidebar\">
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-users\"></i>
-\t\t\tUtilisateurs
-\t\t</div>
-\t\t<div class=\"sidebar-item-link\">
-\t\t\t<a href=\"";
-        // line 9
+\t\t\tUtilisateurs</div>
+\t\t<a href=\"";
+        // line 6
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_utilisateurs_index");
         yield "\" class=\"sidebar-link\">
-\t\t\t\t<i class=\"fa-solid fa-list\"></i>
-\t\t\t\tListe
-\t\t\t</a>
-\t\t</div>
+\t\t\t<i class=\"fa-solid fa-list\"></i>
+\t\t\tListe</a>
 \t</div>
-
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-briefcase\"></i>
-\t\t\tOffres
-\t\t</div>
-\t\t<div class=\"sidebar-item-link\">
-\t\t\t<a href=\"";
-        // line 22
+\t\t\tOffres</div>
+\t\t<a href=\"";
+        // line 14
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_offres_index");
         yield "\" class=\"sidebar-link\">
-\t\t\t\t<i class=\"fa-solid fa-list\"></i>
-\t\t\t\tListe
-\t\t\t</a>
-\t\t</div>
+\t\t\t<i class=\"fa-solid fa-list\"></i>
+\t\t\tListe</a>
 \t</div>
-
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-futbol\"></i>
-\t\t\tSports
-\t\t</div>
-\t\t<div class=\"sidebar-item-link\">
-\t\t\t<a href=\"";
-        // line 35
+\t\t\tSports</div>
+\t\t<a href=\"";
+        // line 22
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sports_index");
         yield "\" class=\"sidebar-link\">
-\t\t\t\t<i class=\"fa-solid fa-list\"></i>
-\t\t\t\tListe
-\t\t\t</a>
-\t\t</div>
+\t\t\t<i class=\"fa-solid fa-list\"></i>
+\t\t\tListe</a>
 \t</div>
-
-\t<button id=\"sidebarClose\" class=\"sidebar-close\">×</button>
-</div>
+</nav>
 
 ";
+        // line 28
+        yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        yield from [];
+    }
+
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_stylesheets(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        // line 29
+        yield "\t<link rel=\"stylesheet\" href=\"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/sidebar.css"), "html", null, true);
+        yield "\">
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
         yield from [];
     }
@@ -128,55 +141,41 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  89 => 35,  73 => 22,  57 => 9,  48 => 2,);
+        return array (  110 => 29,  87 => 28,  78 => 22,  67 => 14,  56 => 6,  49 => 1,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("{# _sidebar.html.twig #}
-<div id=\"sidebar\" class=\"sidebar\">
+        return new Source("<nav id=\"sidebar\" class=\"sidebar\">
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-users\"></i>
-\t\t\tUtilisateurs
-\t\t</div>
-\t\t<div class=\"sidebar-item-link\">
-\t\t\t<a href=\"{{ path('app_utilisateurs_index') }}\" class=\"sidebar-link\">
-\t\t\t\t<i class=\"fa-solid fa-list\"></i>
-\t\t\t\tListe
-\t\t\t</a>
-\t\t</div>
+\t\t\tUtilisateurs</div>
+\t\t<a href=\"{{ path('app_utilisateurs_index') }}\" class=\"sidebar-link\">
+\t\t\t<i class=\"fa-solid fa-list\"></i>
+\t\t\tListe</a>
 \t</div>
-
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-briefcase\"></i>
-\t\t\tOffres
-\t\t</div>
-\t\t<div class=\"sidebar-item-link\">
-\t\t\t<a href=\"{{ path('app_offres_index') }}\" class=\"sidebar-link\">
-\t\t\t\t<i class=\"fa-solid fa-list\"></i>
-\t\t\t\tListe
-\t\t\t</a>
-\t\t</div>
+\t\t\tOffres</div>
+\t\t<a href=\"{{ path('app_offres_index') }}\" class=\"sidebar-link\">
+\t\t\t<i class=\"fa-solid fa-list\"></i>
+\t\t\tListe</a>
 \t</div>
-
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-futbol\"></i>
-\t\t\tSports
-\t\t</div>
-\t\t<div class=\"sidebar-item-link\">
-\t\t\t<a href=\"{{ path('app_sports_index') }}\" class=\"sidebar-link\">
-\t\t\t\t<i class=\"fa-solid fa-list\"></i>
-\t\t\t\tListe
-\t\t\t</a>
-\t\t</div>
+\t\t\tSports</div>
+\t\t<a href=\"{{ path('app_sports_index') }}\" class=\"sidebar-link\">
+\t\t\t<i class=\"fa-solid fa-list\"></i>
+\t\t\tListe</a>
 \t</div>
+</nav>
 
-\t<button id=\"sidebarClose\" class=\"sidebar-close\">×</button>
-</div>
-
+{% block stylesheets %}
+\t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/sidebar.css') }}\">
+{% endblock %}
 ", "_partials/_sidebar.html.twig", "/var/www/symfony/templates/_partials/_sidebar.html.twig");
     }
 }

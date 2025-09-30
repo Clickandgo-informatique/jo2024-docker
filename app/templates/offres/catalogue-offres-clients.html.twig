@@ -8,12 +8,14 @@
 		class="catalogue-layout">
 		{# Colonne filtres (desktop) #}
 		<aside class="filters-column">
-			<div class="filter-block">
+			<div
+				class="filter-block">
+				{# filtre par catégories d'offre #}
 				<h5 class="filter-title">Catégories</h5>
 				<ul class="categories-list">
 					{% for cat in categoriesOffres %}
 						<li>
-							<a href="{{ path('app_offres-par-categories', { slug: cat.slug }) }}" class="filter-link {% if categorie is defined and categorie == cat.slug %}active{% endif %}">
+							<a href="{{ path('offres-par-categories', { slug: cat.slug }) }}" class="filter-link {% if categorie is defined and categorie == cat.slug %}active{% endif %}" data-url="/offres-par-categorie/{{cat.slug}}">
 								{{ cat.nom }}
 							</a>
 						</li>

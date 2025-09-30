@@ -1,5 +1,3 @@
-console.log("✅ filters.js chargé !");
-
 // public/js/filters.js
 document.addEventListener("DOMContentLoaded", () => {
     const resultsContainer =

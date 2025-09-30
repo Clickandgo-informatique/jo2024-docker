@@ -971,7 +971,6 @@ Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inl
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".service_locator.iVreUIc" to ".service_locator.iVreUIc.App\Controller\Admin\OffresController::filterBySportsSlugs()".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".service_locator.6BXpqYw" to ".service_locator.6BXpqYw.App\Controller\Admin\SportsController::index()".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".service_locator.F4iHO.j" to ".service_locator.F4iHO.j.App\Controller\Admin\SportsController::edit()".
-Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".service_locator.5eYgb7E" to ".service_locator.5eYgb7E.App\Controller\Admin\UsersController::index()".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".service_locator.PMSD29P" to ".service_locator.PMSD29P.App\Controller\Admin\UsersController::edit()".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".service_locator.8D3K43m" to ".service_locator.8D3K43m.App\Controller\CommandesController::index()".
 Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass: Inlined service ".service_locator.dLKjkD4" to ".service_locator.dLKjkD4.App\Controller\RegistrationController::register()".

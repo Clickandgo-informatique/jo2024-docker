@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const cartBadge = document.getElementById("cart-count");
     const reloadedContent = document.querySelector("#cart-container");
 
+    //Actualisation du chiffre du panier + animation
     function updateCartCount(newCount) {
         if (!cartBadge) return;
         cartBadge.textContent = newCount;

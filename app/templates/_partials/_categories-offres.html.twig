@@ -1,8 +1,8 @@
 {# _partials/_categories-offres.html.twig #}
+<h5>Filtrer par type d'offre :</h5>
 <div class="filtre-categories-offres">
-	Filtrer par type d'offre :
-	<a href="{{path('app_offres-par-categories',{slug:'toutes'})}}" class="categorie-offres-item" data-url="/offres-par-categorie/toutes">Toutes</a>
+	<a href="{{path('offres-par-categories',{slug:'toutes'})}}" class="categorie-offres-item" data-url="/offres-par-categorie/toutes">Toutes</a>
 	{% for cat in categoriesOffres %}
-		<a href="{{path('app_offres-par-categories',{slug:cat.slug})}}" class="categorie-offres-item" data-url="/offres-par-categorie/{{cat.slug}}">{{cat.nom}}</a>
+		<a href="{{path('offres-par-categories',{slug:cat.slug})}}" class="categorie-offres-item" data-url="/offres-par-categorie/{{cat.slug}}">{{cat.nom}}</a>
 	{% endfor %}
 </div>

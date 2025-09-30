@@ -32,6 +32,16 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
+    //Filtre les utilisateurs suivant plusieurs critères 
+    public function filterUsersBy(string $searchString)
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->andWhere("u.nickname Like :searchString")
+            ->setParameter('searchString', $searchString . '%')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Users[] Returns an array of Users objects

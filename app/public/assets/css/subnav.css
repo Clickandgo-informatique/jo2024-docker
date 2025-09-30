@@ -3,7 +3,8 @@
     align-items: center;
     gap: 10px;
     overflow-x: auto;
-    background: #222;
+    background: var(--primary-color);
+    box-shadow: var(--box-shadow);
     padding: 10px 20px;
 }
 
@@ -35,6 +36,7 @@
 .not-connected {
     color: orange;
 }
+.user-options{display:flex;flex-direction: row;align-items: center;justify-content: center;}
 /* Responsive mobile */
 @media (max-width: 768px) {
     .subnav-container {

@@ -45,11 +45,11 @@ class __TwigTemplate_05567076814b1a85111913f48549b020 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "_partials/_categories-offres.html.twig"));
 
         // line 2
-        yield "<div class=\"filtre-categories-offres\">
-\tFiltrer par type d'offre :
+        yield "<h5>Filtrer par type d'offre :</h5>
+<div class=\"filtre-categories-offres\">
 \t<a href=\"";
         // line 4
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_offres-par-categories", ["slug" => "toutes"]);
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("offres-par-categories", ["slug" => "toutes"]);
         yield "\" class=\"categorie-offres-item\" data-url=\"/offres-par-categorie/toutes\">Toutes</a>
 \t";
         // line 5
@@ -58,7 +58,7 @@ class __TwigTemplate_05567076814b1a85111913f48549b020 extends Template
         foreach ($context['_seq'] as $context["_key"] => $context["cat"]) {
             // line 6
             yield "\t\t<a href=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_offres-par-categories", ["slug" => CoreExtension::getAttribute($this->env, $this->source, $context["cat"], "slug", [], "any", false, false, false, 6)]), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("offres-par-categories", ["slug" => CoreExtension::getAttribute($this->env, $this->source, $context["cat"], "slug", [], "any", false, false, false, 6)]), "html", null, true);
             yield "\" class=\"categorie-offres-item\" data-url=\"/offres-par-categorie/";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["cat"], "slug", [], "any", false, false, false, 6), "html", null, true);
             yield "\">";
@@ -108,11 +108,11 @@ class __TwigTemplate_05567076814b1a85111913f48549b020 extends Template
     public function getSourceContext(): Source
     {
         return new Source("{# _partials/_categories-offres.html.twig #}
+<h5>Filtrer par type d'offre :</h5>
 <div class=\"filtre-categories-offres\">
-\tFiltrer par type d'offre :
-\t<a href=\"{{path('app_offres-par-categories',{slug:'toutes'})}}\" class=\"categorie-offres-item\" data-url=\"/offres-par-categorie/toutes\">Toutes</a>
+\t<a href=\"{{path('offres-par-categories',{slug:'toutes'})}}\" class=\"categorie-offres-item\" data-url=\"/offres-par-categorie/toutes\">Toutes</a>
 \t{% for cat in categoriesOffres %}
-\t\t<a href=\"{{path('app_offres-par-categories',{slug:cat.slug})}}\" class=\"categorie-offres-item\" data-url=\"/offres-par-categorie/{{cat.slug}}\">{{cat.nom}}</a>
+\t\t<a href=\"{{path('offres-par-categories',{slug:cat.slug})}}\" class=\"categorie-offres-item\" data-url=\"/offres-par-categorie/{{cat.slug}}\">{{cat.nom}}</a>
 \t{% endfor %}
 </div>
 ", "_partials/_categories-offres.html.twig", "/var/www/symfony/templates/_partials/_categories-offres.html.twig");

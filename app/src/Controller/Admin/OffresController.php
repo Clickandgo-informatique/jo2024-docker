@@ -82,7 +82,7 @@ final class OffresController extends AbstractController
     }
 
     // Filtrer les offres par catégorie dans le front-end (catalogue client)
-    #[Route('/offres-par-categorie/{slug}', name: 'app_offres-par-categories')]
+    #[Route('/offres-par-categorie/{slug}', name: 'offres-par-categories')]
     public function filterByCategorie(
         Request $request,
         OffresRepository $offresRepo,

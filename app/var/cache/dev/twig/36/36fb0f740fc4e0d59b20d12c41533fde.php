@@ -33,6 +33,7 @@ class __TwigTemplate_6c90a0c3b023f358dd005460b14a1da5 extends Template
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
             'stylesheets' => [$this, 'block_stylesheets'],
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -100,117 +101,39 @@ class __TwigTemplate_6c90a0c3b023f358dd005460b14a1da5 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        yield "
-\t<h1 class=\"text-center\">
+        yield "\t<h1 class=\"text-center\">
 \t\t<i class=\"fa-solid fa-users\"></i>Liste des utilisateurs</h1>
 \t";
-        // line 9
-        if ((($tmp = (isset($context["utilisateurs"]) || array_key_exists("utilisateurs", $context) ? $context["utilisateurs"] : (function () { throw new RuntimeError('Variable "utilisateurs" does not exist.', 9, $this->source); })())) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
-            // line 10
+        // line 8
+        if ((($tmp = (isset($context["utilisateurs"]) || array_key_exists("utilisateurs", $context) ? $context["utilisateurs"] : (function () { throw new RuntimeError('Variable "utilisateurs" does not exist.', 8, $this->source); })())) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 9
             yield "\t\t<form class=\"search-form\">
 \t\t\t<div class=\"search-container\">
-\t\t\t\t<input type=\"search\" class=\"search-input\" placeholder=\"Rechercher par pseudo, nom ou prénom\">
+\t\t\t\t<input type=\"search\" class=\"search-input\" data-url=\"";
+            // line 11
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_utilisateurs_rechercher");
+            yield "\">
 \t\t\t\t<button type=\"submit\" class=\"search-button\">
 \t\t\t\t\t<i class=\"fa-solid fa-magnifying-glass\"></i>
 \t\t\t\t</button>
 \t\t\t</div>
 \t\t</form>
-
-\t\t<table>
-\t\t\t<thead>
-\t\t\t\t<tr>
-\t\t\t\t\t<th></th>
-\t\t\t\t\t<th scope=\"col\">Pseudo</th>
-\t\t\t\t\t<th scope=\"col\">Email</th>
-\t\t\t\t\t<th scope=\"col\">Vérifié</th>
-\t\t\t\t\t<th scope=\"col\">Rôles</th>
-\t\t\t\t\t<th scope=\"col\">Crée le</th>
-\t\t\t\t\t<th></th>
-\t\t\t\t</tr>
-\t\t\t</thead>
-
-\t\t\t<tbody>
-\t\t\t\t";
-            // line 33
-            $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["utilisateurs"]) || array_key_exists("utilisateurs", $context) ? $context["utilisateurs"] : (function () { throw new RuntimeError('Variable "utilisateurs" does not exist.', 33, $this->source); })()));
-            foreach ($context['_seq'] as $context["_key"] => $context["u"]) {
-                // line 34
-                yield "\t\t\t\t\t<tr>
-\t\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t\t<a class=\"btn-action btn-primary btn-open\" href=\"";
-                // line 36
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_utilisateurs_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["u"], "id", [], "any", false, false, false, 36)]), "html", null, true);
-                yield "\">
-\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-pen-to-square\"></i>
-\t\t\t\t\t\t\t</a>
-\t\t\t\t\t\t</td>
-
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t<strong>";
-                // line 42
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "nickname", [], "any", false, false, false, 42), "html", null, true);
-                yield "</strong>
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td>";
-                // line 44
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "email", [], "any", false, false, false, 44), "html", null, true);
-                yield "</td>
-\t\t\t\t\t\t<td class=\"text-center\">";
-                // line 45
-                yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["u"], "isVerified", [], "any", false, false, false, 45)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ("<span class=\"text-green\"><i class=\"fa-solid fa-check\"></i>Oui</span>") : ("<span class=\"text-red\"><i class=\"fa-regular fa-circle-xmark\"></i>Non</span>"));
-                yield "
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t";
-                // line 48
-                $context['_parent'] = $context;
-                $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "roles", [], "any", false, false, false, 48));
-                foreach ($context['_seq'] as $context["_key"] => $context["r"]) {
-                    // line 49
-                    yield "\t\t\t\t\t\t\t\t";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::join($context["r"], ", "), "html", null, true);
-                    yield "
-\t\t\t\t\t\t\t";
-                }
-                $_parent = $context['_parent'];
-                unset($context['_seq'], $context['_key'], $context['r'], $context['_parent']);
-                $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 51
-                yield "\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td class=\"text-muted text-right\">";
-                // line 52
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["u"], "createdAt", [], "any", false, false, false, 52), "d-m-Y à H:i:s"), "html", null, true);
-                yield "</td>
-\t\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t\t<a class=\"btn-action btn-danger btn-delete\" href=\"#\">
-\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-trash-can\"></i>
-\t\t\t\t\t\t\t</a>
-\t\t\t\t\t\t</td>
-\t\t\t\t\t</tr>
-\t\t\t\t";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_key'], $context['u'], $context['_parent']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 60
-            yield "\t\t\t</tbody>
-\t\t</table>
-\t\t<div class=\"pagination\">
+\t\t";
+            // line 18
+            yield "\t\t<div class=\"ajax-reloaded-content\">
 \t\t\t";
-            // line 63
-            yield $this->env->getRuntime('Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime')->render($this->env, (isset($context["utilisateurs"]) || array_key_exists("utilisateurs", $context) ? $context["utilisateurs"] : (function () { throw new RuntimeError('Variable "utilisateurs" does not exist.', 63, $this->source); })()));
+            // line 19
+            yield Twig\Extension\CoreExtension::include($this->env, $context, "_partials/_users-list.html.twig");
             yield "
 \t\t</div>
-\t";
+\t\t";
+            // line 22
+            yield "\t";
         } else {
-            // line 66
+            // line 23
             yield "\t\t<p class=\"text-center\">Il n'existe encore aucun utilisateur enregistré dans la base de données</p>
 \t";
         }
-        // line 68
-        yield "
-";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -220,7 +143,7 @@ class __TwigTemplate_6c90a0c3b023f358dd005460b14a1da5 extends Template
         yield from [];
     }
 
-    // line 70
+    // line 26
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -233,14 +156,38 @@ class __TwigTemplate_6c90a0c3b023f358dd005460b14a1da5 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 71
-        yield "\t<link rel=\"stylesheet\" href=\"";
+        yield "<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/table.css"), "html", null, true);
-        yield "\">
-\t<link rel=\"stylesheet\" href=\"";
-        // line 72
+        yield "\"><link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/form.css"), "html", null, true);
         yield "\">
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 28
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_javascripts(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        // line 29
+        yield "\t<script type=\"module\" src=\"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/searchform.js"), "html", null, true);
+        yield "\"></script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -272,7 +219,7 @@ class __TwigTemplate_6c90a0c3b023f358dd005460b14a1da5 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  242 => 72,  237 => 71,  224 => 70,  212 => 68,  208 => 66,  202 => 63,  197 => 60,  183 => 52,  180 => 51,  171 => 49,  167 => 48,  161 => 45,  157 => 44,  152 => 42,  143 => 36,  139 => 34,  135 => 33,  110 => 10,  108 => 9,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
+        return array (  188 => 29,  175 => 28,  147 => 26,  134 => 23,  131 => 22,  126 => 19,  123 => 18,  114 => 11,  110 => 9,  108 => 8,  104 => 6,  91 => 5,  79 => 3,  66 => 2,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -282,73 +229,30 @@ class __TwigTemplate_6c90a0c3b023f358dd005460b14a1da5 extends Template
 \tListe des utilisateurs
 {% endblock %}
 {% block body %}
-
 \t<h1 class=\"text-center\">
 \t\t<i class=\"fa-solid fa-users\"></i>Liste des utilisateurs</h1>
 \t{% if utilisateurs %}
 \t\t<form class=\"search-form\">
 \t\t\t<div class=\"search-container\">
-\t\t\t\t<input type=\"search\" class=\"search-input\" placeholder=\"Rechercher par pseudo, nom ou prénom\">
+\t\t\t\t<input type=\"search\" class=\"search-input\" data-url=\"{{path('app_utilisateurs_rechercher')}}\">
 \t\t\t\t<button type=\"submit\" class=\"search-button\">
 \t\t\t\t\t<i class=\"fa-solid fa-magnifying-glass\"></i>
 \t\t\t\t</button>
 \t\t\t</div>
 \t\t</form>
-
-\t\t<table>
-\t\t\t<thead>
-\t\t\t\t<tr>
-\t\t\t\t\t<th></th>
-\t\t\t\t\t<th scope=\"col\">Pseudo</th>
-\t\t\t\t\t<th scope=\"col\">Email</th>
-\t\t\t\t\t<th scope=\"col\">Vérifié</th>
-\t\t\t\t\t<th scope=\"col\">Rôles</th>
-\t\t\t\t\t<th scope=\"col\">Crée le</th>
-\t\t\t\t\t<th></th>
-\t\t\t\t</tr>
-\t\t\t</thead>
-
-\t\t\t<tbody>
-\t\t\t\t{% for u in utilisateurs %}
-\t\t\t\t\t<tr>
-\t\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t\t<a class=\"btn-action btn-primary btn-open\" href=\"{{path('app_utilisateurs_edit',{id:u.id})}}\">
-\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-pen-to-square\"></i>
-\t\t\t\t\t\t\t</a>
-\t\t\t\t\t\t</td>
-
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t<strong>{{u.nickname}}</strong>
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td>{{u.email}}</td>
-\t\t\t\t\t\t<td class=\"text-center\">{{u.isVerified ? '<span class=\"text-green\"><i class=\"fa-solid fa-check\"></i>Oui</span>':'<span class=\"text-red\"><i class=\"fa-regular fa-circle-xmark\"></i>Non</span>'}}
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t{% for r in u.roles %}
-\t\t\t\t\t\t\t\t{{r|join(', ')}}
-\t\t\t\t\t\t\t{% endfor %}
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td class=\"text-muted text-right\">{{u.createdAt|date('d-m-Y à H:i:s')}}</td>
-\t\t\t\t\t\t<td class=\"text-center\">
-\t\t\t\t\t\t\t<a class=\"btn-action btn-danger btn-delete\" href=\"#\">
-\t\t\t\t\t\t\t\t<i class=\"fa-solid fa-trash-can\"></i>
-\t\t\t\t\t\t\t</a>
-\t\t\t\t\t\t</td>
-\t\t\t\t\t</tr>
-\t\t\t\t{% endfor %}
-\t\t\t</tbody>
-\t\t</table>
-\t\t<div class=\"pagination\">
-\t\t\t{{ knp_pagination_render(utilisateurs) }}
+\t\t{# Contenu requêté,en Ajax #}
+\t\t<div class=\"ajax-reloaded-content\">
+\t\t\t{{ include('_partials/_users-list.html.twig') }}
 \t\t</div>
+\t\t{# Fin contenu Ajax  #}
 \t{% else %}
 \t\t<p class=\"text-center\">Il n'existe encore aucun utilisateur enregistré dans la base de données</p>
 \t{% endif %}
-
 {% endblock %}
-{% block stylesheets %}
-\t<link rel=\"stylesheet\" href=\"{{asset('assets/css/table.css')}}\">
-\t<link rel=\"stylesheet\" href=\"{{asset('assets/css/form.css')}}\">
+{% block stylesheets %}<link rel=\"stylesheet\" href=\"{{asset('assets/css/table.css')}}\"><link rel=\"stylesheet\" href=\"{{asset('assets/css/form.css')}}\">
+{% endblock %}
+{% block javascripts %}
+\t<script type=\"module\" src=\"{{asset('assets/js/searchform.js')}}\"></script>
 {% endblock %}
 ", "admin/utilisateurs/index.html.twig", "/var/www/symfony/templates/admin/utilisateurs/index.html.twig");
     }

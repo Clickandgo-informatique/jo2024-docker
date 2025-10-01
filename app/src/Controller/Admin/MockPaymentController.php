@@ -6,64 +6,64 @@ use App\Entity\Commandes;
 use App\Entity\Tickets;
 use App\Repository\TicketsRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use PragmaRX\Google2FAQRCode\Google2FA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MockPaymentController extends AbstractController
 {
     #[Route('/mock/payment/{id}', name: 'app_mock-payment')]
     public function pay(
         Commandes $commande,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        UrlGeneratorInterface $urlGenerator
     ): Response {
-        //Si il existe une date de paiement enregistrée alors on renvoie une erreur
         if ($commande->getPayeeLe() !== null) {
             return new Response('Commande déjà payée', 400);
         }
 
-        // On simule que la commande est payée       
         $commande->setPayeeLe(new \DateTimeImmutable());
 
-        // Génération du ticket
+        // Création du ticket
         $ticket = new Tickets();
-        $ticket->setCommande($commande);
-        $ticket->setUser($commande->getUser());
+        $ticket->setCommande($commande)
+            ->setUser($commande->getUser());
 
-        $ticketKey = bin2hex(random_bytes(16));
+        $ticketKey = bin2hex(random_bytes(32)); // 64 caractères
         $ticket->setTicketKey($ticketKey);
 
         $payload = hash('sha256', $commande->getUser()->getAccountKey() . $ticketKey);
-
         $ticket->setPayloadHash($payload);
 
-        $google2fa = new Google2FA();
-        $qrCodeSvg = $google2fa->getQRCodeInline(
-            'JO2024-reservations',
-            $commande->getUser()->getEmail(),
-            $payload,
-            300
-        );
+        // URL sécurisée pour le QR code
+        $ticketUrl = $urlGenerator->generate('app_ticket_show', [
+            'ticketKey' => $ticketKey
+        ], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        $ticket->setQrCodePath($qrCodeSvg);
+        $ticket->setQrCodePath($ticketUrl);
 
         $em->persist($ticket);
         $em->flush();
 
-        // 👉 On passe le ticket à une vue Twig
         return $this->render('tickets/show.html.twig', [
             'commande' => $commande,
             'ticket' => $ticket,
         ]);
     }
-    //Afficher un ticket
-    #[Route('/tickets/{id}', name: 'app_tickets_show')]
-    public function showTicket(string $id, TicketsRepository $ticketsRepo): Response
-    {
-        $ticket = $ticketsRepo->find($id);
-        $commande = $ticket->getCommande();
 
+    // Afficher un ticket via ticketKey
+    #[Route('/ticket/{ticketKey}', name: 'app_ticket_show')]
+    public function showTicketByKey(
+        string $ticketKey,
+        TicketsRepository $ticketsRepo
+    ): Response {
+        $ticket = $ticketsRepo->findOneBy(['ticketKey' => $ticketKey]);
+        if (!$ticket) {
+            throw $this->createNotFoundException('Ticket invalide.');
+        }
+
+        $commande = $ticket->getCommande();
         return $this->render('tickets/show.html.twig', compact('ticket', 'commande'));
     }
 }

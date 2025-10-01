@@ -1,11 +1,10 @@
 table {
     border-collapse: separate;
-    border-spacing: 0; 
+    border-spacing: 0;
     border-radius: 10px;
     overflow: hidden;
     background-color: #fff;
-    box-shadow: var(--box-shadow);  
-   
+    box-shadow: var(--box-shadow);
 }
 th,
 td {
@@ -28,12 +27,57 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #ebf28e;
+    background-color: #fdffdf;
     z-index: 10;
     cursor: pointer;
     opacity: 1;
     border: 2px solid blue;
-    transform: scale(1.05);
+    transform: scaleY(1.1);
+    color: darkblue;
+    padding: 5px;
+}
+/* Sous-table */
+.sub-table {
+    width: 100%;
+    margin-top: 5px;
+    border-collapse: collapse;
+}
+.sub-table th,
+.sub-table td {
+    border: 1px solid #ccc;
+    padding: 4px;
+    font-size: 0.9em;
+}
+
+/* Accordéon */
+.accordion {
+    margin-top: 5px;
+}
+.accordion-toggle {
+    display: none;
+}
+.accordion-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+}
+.accordion-label .arrow {
+    transition: transform 0.3s ease;
+    margin-right: 5px;
+}
+.accordion-toggle:checked + .accordion-label .arrow {
+    transform: rotate(90deg);
+}
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+.accordion-toggle:checked + .accordion-label + .accordion-content {
+    max-height: 500px; /* assez pour contenir la table */
+    margin-top: 5px;
 }
 table tbody:hover tr:not(:hover) {
     opacity: 0.4; /* toutes les autres lignes deviennent transparentes */

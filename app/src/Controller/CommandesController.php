@@ -6,7 +6,9 @@ use App\Entity\Commandes;
 use App\Entity\DetailsCommandes;
 use App\Repository\CommandesRepository;
 use App\Repository\OffresRepository;
+use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,7 +70,7 @@ class CommandesController extends AbstractController
         return $this->redirectToRoute('app_commandes_liste');
     }
 
-    //Affichage de la liste commandes du client et status du scan qrcode
+    //Affichage de la liste commandes du client en front-end et status du scan qrcode
     #[Route('/liste', 'liste')]
     public function liste(CommandesRepository $commandesRepo, Request $request): Response
     {
@@ -102,7 +104,7 @@ class CommandesController extends AbstractController
     }
 
 
-    //Affichage d'une commande individuelle et paiement
+    //Affichage d'une commande individuelle et paiement (front-end)
     #[Route('/mock/payment/{id}', 'paiement')]
     public function payerCommande($id, CommandesRepository $commandesRepo): Response
     {
@@ -110,5 +112,33 @@ class CommandesController extends AbstractController
         $commande = $commandesRepo->find($id);
 
         return $this->render('commandes/show.html.twig', compact('commande'));
+    }
+
+    //Affichage de la liste des commandes client dans le backend
+    #[Route('/liste-commandes-client/{id}', methods: ['GET'], name: 'commandes-client')]
+    public function listeCommandesClient(string $id, UsersRepository $usersRepo, PaginatorInterface $paginator, Request $request): Response
+    {
+        //On cherche l'utilisateur
+        $user = $usersRepo->find($id);
+
+        //On cherche les commandes  de l'utilisateur
+        $data = $user->getCommandes();
+        $commandes = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
+
+        //On affiche la vue
+        return $this->render('commandes/liste-commandes-client.html.twig', compact('commandes'));
+    }
+    #[Route('/{id}/supprimer', name: 'supprimer', methods: ['POST'])]
+    public function supprimer($id, CommandesRepository $commandesRepo, EntityManagerInterface $em, Request $request): Response
+    {
+        $commande = $commandesRepo->find($id);
+        //on vérifie le token
+        if ($this->isCsrfTokenValid('supprimer' . $commande->getId(), $request->request->get('_token'))) {
+            $em->remove($commande);
+            $em->flush();
+
+            $this->addFlash('success', 'La commande a été supprimée de la base avec succès.');
+        }
+        return  $this->redirectToRoute('app_commandes_commandes-client');
     }
 }

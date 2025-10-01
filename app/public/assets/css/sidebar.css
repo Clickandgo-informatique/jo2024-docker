@@ -45,15 +45,9 @@
 .sidebar:not(.hidden) ~ .sidebar-toggle {
     left: 240px; /* bord droit complet */
 }
-/* Desktop main-wrapper décalé */
-@media (min-width: 769px) {
-    .main-wrapper {
-        margin-left: 240px;
-        transition: margin-left 0.3s ease;
-    }
-    .sidebar.hidden ~ .main-wrapper {
-        margin-left: 0;
-    }
+
+.sidebar.hidden ~ .main-wrapper {
+    margin-left: 0;
 }
 
 /* Mobile */

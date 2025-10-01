@@ -11,8 +11,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: none;
-    margin-left: 0 !important; /* important pour supprimer tout décalage */
 }
 
 .main-content {

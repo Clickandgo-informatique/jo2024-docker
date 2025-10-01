@@ -1,4 +1,4 @@
-<nav id="sidebar" class="sidebar">
+<aside id="sidebar" class="sidebar">
 	<div class="sidebar-item">
 		<div class="sidebar-item-title">
 			<i class="fa-solid fa-users"></i>
@@ -23,8 +23,15 @@
 			<i class="fa-solid fa-list"></i>
 			Liste</a>
 	</div>
-</nav>
+</aside>
+<!-- bouton flottant pour toggle -->
+<button id="sidebar-toggle" class="sidebar-toggle">
+	▶
+</button>
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
+{% endblock %}
+{% block javascripts %}
+	<script src="{{asset('assets/js/sidebar.js')}}" defer></script>
 {% endblock %}

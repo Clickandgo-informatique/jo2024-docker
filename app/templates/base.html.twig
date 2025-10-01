@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
-			{% block title %}JO 2024
+			{% block title %}Réservations JO 2024
 			{% endblock %}
 		</title>
 
@@ -27,39 +27,33 @@
 
 	<body class="{% if sidebarVisible %}sidebar-active{% endif %}">
 
-		<div class="app">
 
-			{% if sidebarVisible %}
-				<aside class="sidebar">
-					{{ include('_partials/_sidebar.html.twig') }}
-				</aside>
-			{% endif %}
+		{% if sidebarVisible %}
+			{{ include('_partials/_sidebar.html.twig') }}
+		{% endif %}
 
-			<div class="main-wrapper">
-				{{ include('_partials/_navbar.html.twig') }}
-				{{ include('_partials/_subnav.html.twig') }}
+		<div class="main-wrapper">
+			{{ include('_partials/_navbar.html.twig') }}
+			{{ include('_partials/_subnav.html.twig') }}
 
-				<main class="main-content"> {% block body %}{% endblock %}
-					</main>
+			<main class="main-content"> {% block body %}{% endblock %}
+				</main>
 
-					<footer class="footer">&copy; 2025 JO 2024</footer>
-				</div>
-
+				<footer class="footer">&copy; 2025 JO 2024</footer>
 			</div>
-
-			<script src="{{ asset('assets/js/flashbags.js') }}"></script>
-			<script>
-				document.addEventListener("DOMContentLoaded", function () {
-{% for label, messages in app.flashes %}
-{% for message in messages %}
-showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfor %}
-{% endfor %}
-});
-			</script>
-
-			<script type="module" src="{{ asset('assets/js/navbar.js') }}"></script>
-			<script type="module" src="{{ asset('assets/js/subnav.js') }}"></script>
-			{% block javascripts %}{% endblock %}
-
 		</body>
 	</html>
+</div>
+
+<script src="{{ asset('assets/js/flashbags.js') }}"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+{% for label, messages in app.flashes %}
+{% for message in messages %}
+showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfor %}{% endfor %}
+});
+</script>
+
+<script type="module" src="{{ asset('assets/js/navbar.js') }}"></script>
+<script type="module" src="{{ asset('assets/js/subnav.js') }}"></script>
+{% block javascripts %}{% endblock %}</body></html>

@@ -33,6 +33,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
 
         $this->blocks = [
             'stylesheets' => [$this, 'block_stylesheets'],
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -46,7 +47,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "_partials/_sidebar.html.twig"));
 
         // line 1
-        yield "<nav id=\"sidebar\" class=\"sidebar\">
+        yield "<aside id=\"sidebar\" class=\"sidebar\">
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-users\"></i>
@@ -80,11 +81,17 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
 \t\t\t<i class=\"fa-solid fa-list\"></i>
 \t\t\tListe</a>
 \t</div>
-</nav>
+</aside>
+<!-- bouton flottant pour toggle -->
+<button id=\"sidebar-toggle\" class=\"sidebar-toggle\">
+\t▶
+</button>
 
 ";
-        // line 28
+        // line 32
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
+        // line 35
+        yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
@@ -94,6 +101,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         yield from [];
     }
 
+    // line 32
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -106,10 +114,37 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 29
+        // line 33
         yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/sidebar.css"), "html", null, true);
         yield "\">
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 35
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_javascripts(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        // line 36
+        yield "\t<script src=\"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/sidebar.js"), "html", null, true);
+        yield "\" defer></script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -141,12 +176,12 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  110 => 29,  87 => 28,  78 => 22,  67 => 14,  56 => 6,  49 => 1,);
+        return array (  145 => 36,  132 => 35,  118 => 33,  105 => 32,  94 => 35,  92 => 32,  79 => 22,  68 => 14,  57 => 6,  50 => 1,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("<nav id=\"sidebar\" class=\"sidebar\">
+        return new Source("<aside id=\"sidebar\" class=\"sidebar\">
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-users\"></i>
@@ -171,10 +206,17 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
 \t\t\t<i class=\"fa-solid fa-list\"></i>
 \t\t\tListe</a>
 \t</div>
-</nav>
+</aside>
+<!-- bouton flottant pour toggle -->
+<button id=\"sidebar-toggle\" class=\"sidebar-toggle\">
+\t▶
+</button>
 
 {% block stylesheets %}
 \t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/sidebar.css') }}\">
+{% endblock %}
+{% block javascripts %}
+\t<script src=\"{{asset('assets/js/sidebar.js')}}\" defer></script>
 {% endblock %}
 ", "_partials/_sidebar.html.twig", "/var/www/symfony/templates/_partials/_sidebar.html.twig");
     }

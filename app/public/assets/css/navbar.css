@@ -13,8 +13,8 @@
 .navbar-header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;align-items: center;
-    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 .navbar-brand .logo {
     height: 40px;
@@ -22,12 +22,17 @@
 
 .navbar-links {
     display: flex;
+    flex-direction: row;
     gap: 20px;
     justify-content: center;
-    align-items: center;width:100%;
+    align-items: center;
+    width: 100%;
 }
 
 .navbar-link {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
     color: white;
     text-decoration: none;
     margin-left: 10px;

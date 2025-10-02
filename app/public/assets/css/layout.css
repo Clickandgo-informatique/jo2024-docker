@@ -17,6 +17,7 @@
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
+    transition: transform 0.3s ease;
 }
 
 /* Sidebar */

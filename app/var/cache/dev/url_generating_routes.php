@@ -18,7 +18,7 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
-    'app_admin_index' => [[], ['_controller' => 'App\\Controller\\Admin\\AdminController::index'], [], [['text', '/admin/']], [], [], []],
+    'admin_dashboard' => [[], ['_controller' => 'App\\Controller\\Admin\\AdminController::index'], [], [['text', '/admin/']], [], [], []],
     'app_categories_offres_index' => [[], ['_controller' => 'App\\Controller\\Admin\\CategoriesOffresController::index'], [], [['text', '/admin/offres/categories-offres']], [], [], []],
     'app_categories_offres_new' => [[], ['_controller' => 'App\\Controller\\Admin\\CategoriesOffresController::new'], [], [['text', '/admin/offres/categories-offres/ajout']], [], [], []],
     'app_categories_offres_edit' => [['slug'], ['_controller' => 'App\\Controller\\Admin\\CategoriesOffresController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'slug', true], ['text', '/admin/offres/categories-offres']], [], [], []],

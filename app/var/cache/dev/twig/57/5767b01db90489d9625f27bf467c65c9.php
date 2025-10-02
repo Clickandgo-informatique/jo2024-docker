@@ -157,12 +157,13 @@ class __TwigTemplate_993e4c734178ba671fda499254dc648c extends Template
         }
         // line 22
         yield "
-\t\t<h1 class=\"h3 mb-3 font-weight-normal\">Me connecter</h1>
+\t\t<h1 class=\"h3 mb-3 font-weight-normal\">
+\t\t\t<i class=\"fa-solid fa-right-to-bracket\"></i>Me connecter</h1>
 \t\t<div>
 \t\t\t<label for=\"inputNickname\">Pseudo</label>
 \t\t\t<input type=\"text\" value=\"";
-        // line 26
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["last_username"]) || array_key_exists("last_username", $context) ? $context["last_username"] : (function () { throw new RuntimeError('Variable "last_username" does not exist.', 26, $this->source); })()), "html", null, true);
+        // line 27
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["last_username"]) || array_key_exists("last_username", $context) ? $context["last_username"] : (function () { throw new RuntimeError('Variable "last_username" does not exist.', 27, $this->source); })()), "html", null, true);
         yield "\" name=\"nickname\" id=\"inputNickname\" class=\"form-control\" autocomplete=\"username\" required autofocus placeholder=\"\">
 \t\t</div>
 \t\t<div>
@@ -171,22 +172,28 @@ class __TwigTemplate_993e4c734178ba671fda499254dc648c extends Template
 \t\t</div>
 
 \t\t<input type=\"hidden\" name=\"_csrf_token\" value=\"";
-        // line 33
+        // line 34
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("authenticate"), "html", null, true);
         yield "\">
 
 \t\t<button class=\"btn btn-lg btn-primary\" type=\"submit\">
+\t\t\t<i class=\"fa-solid fa-right-to-bracket\"></i>
 \t\t\tMe connecter
 \t\t</button>
 \t\t";
-        // line 39
-        yield "\t\t<p>Pas encore inscrit(e) ? <a href=\"";
+        // line 41
+        yield "\t\t<p>Pas encore inscrit(e) ?
+\t\t\t<a href=\"";
+        // line 42
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
-        yield "\">M'inscrire</a></p>
-\t\t<p>Mot de passe oublié ? <a href=\"";
-        // line 40
+        yield "\">M'inscrire</a>
+\t\t</p>
+\t\t<p>Mot de passe oublié ?
+\t\t\t<a href=\"";
+        // line 45
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("forgotten_password");
-        yield "\">Réinitialiser le mot de passe</a></p>
+        yield "\">Réinitialiser le mot de passe</a>
+\t\t</p>
 \t</form>
 ";
         
@@ -219,7 +226,7 @@ class __TwigTemplate_993e4c734178ba671fda499254dc648c extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  188 => 40,  183 => 39,  175 => 33,  165 => 26,  159 => 22,  153 => 19,  149 => 18,  145 => 16,  143 => 15,  140 => 14,  134 => 12,  132 => 11,  129 => 10,  116 => 9,  102 => 7,  89 => 6,  65 => 4,  42 => 2,);
+        return array (  194 => 45,  188 => 42,  185 => 41,  176 => 34,  166 => 27,  159 => 22,  153 => 19,  149 => 18,  145 => 16,  143 => 15,  140 => 14,  134 => 12,  132 => 11,  129 => 10,  116 => 9,  102 => 7,  89 => 6,  65 => 4,  42 => 2,);
     }
 
     public function getSourceContext(): Source
@@ -246,7 +253,8 @@ class __TwigTemplate_993e4c734178ba671fda499254dc648c extends Template
 \t\t\t</div>
 \t\t{% endif %}
 
-\t\t<h1 class=\"h3 mb-3 font-weight-normal\">Me connecter</h1>
+\t\t<h1 class=\"h3 mb-3 font-weight-normal\">
+\t\t\t<i class=\"fa-solid fa-right-to-bracket\"></i>Me connecter</h1>
 \t\t<div>
 \t\t\t<label for=\"inputNickname\">Pseudo</label>
 \t\t\t<input type=\"text\" value=\"{{ last_username }}\" name=\"nickname\" id=\"inputNickname\" class=\"form-control\" autocomplete=\"username\" required autofocus placeholder=\"\">
@@ -259,11 +267,16 @@ class __TwigTemplate_993e4c734178ba671fda499254dc648c extends Template
 \t\t<input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('authenticate') }}\">
 
 \t\t<button class=\"btn btn-lg btn-primary\" type=\"submit\">
+\t\t\t<i class=\"fa-solid fa-right-to-bracket\"></i>
 \t\t\tMe connecter
 \t\t</button>
 \t\t{# <p><a href=\"{{ path('forgotten_password') }}\">Mot de passe oublié</a></p> #}
-\t\t<p>Pas encore inscrit(e) ? <a href=\"{{ path('app_register') }}\">M'inscrire</a></p>
-\t\t<p>Mot de passe oublié ? <a href=\"{{ path('forgotten_password') }}\">Réinitialiser le mot de passe</a></p>
+\t\t<p>Pas encore inscrit(e) ?
+\t\t\t<a href=\"{{ path('app_register') }}\">M'inscrire</a>
+\t\t</p>
+\t\t<p>Mot de passe oublié ?
+\t\t\t<a href=\"{{ path('forgotten_password') }}\">Réinitialiser le mot de passe</a>
+\t\t</p>
 \t</form>
 {% endblock %}
 ", "security/login.html.twig", "/var/www/symfony/templates/security/login.html.twig");

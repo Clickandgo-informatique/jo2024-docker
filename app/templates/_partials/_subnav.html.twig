@@ -14,7 +14,7 @@
 						Mon profil</a>
 				</div>
 				{% if is_granted('ROLE_ADMIN') %}
-					<a class="nav-link" href="{{ path('app_admin_index') }}">
+					<a class="nav-link" href="{{ path('admin_dashboard') }}">
 						<i class="fa fa-cog"></i>
 						Administration</a>
 				{% endif %}

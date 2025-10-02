@@ -30,25 +30,33 @@ class TwoFactorSetupController extends AbstractController
             return $this->redirectToRoute('app_main');
         }
 
-        $qrCode = $totpService->getQRCode($user);
+        $qrCodeSvg = $totpService->getQRCode($user);
 
         if ($request->isMethod('POST')) {
-            $code = $request->request->get('code');
+            $otp = $request->request->get('code');
 
-            if ($totpService->checkCode($user, $code)) {
+            if ($totpService->verifyCode($user, $otp)) {
                 $user->setIs2FAEnabled(true);
                 $em->persist($user);
                 $em->flush();
 
+                // ✅ 2FA validé → pose la session
+                $request->getSession()->set('2fa_passed', true);
+
                 $this->addFlash('success', 'Double authentification activée avec succès ✅');
+
+                // 🔹 Redirection selon rôle
+                if ($this->isGranted('ROLE_ADMIN')) {
+                    return $this->redirectToRoute('admin_dashboard');
+                }
                 return $this->redirectToRoute('app_main');
             }
 
-            $this->addFlash('error', 'Code invalide ❌. Veuillez réessayer.');
+            $this->addFlash('danger', 'Code invalide ❌. Veuillez réessayer.');
         }
 
         return $this->render('security/setup_2fa.html.twig', [
-            'qrCode' => $qrCode,
+            'qrCodeSvg' => $qrCodeSvg,
         ]);
     }
 }

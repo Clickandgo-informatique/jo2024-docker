@@ -15,7 +15,7 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
-        '/admin' => [[['_route' => 'app_admin_index', '_controller' => 'App\\Controller\\Admin\\AdminController::index'], null, null, null, true, false, null]],
+        '/admin' => [[['_route' => 'admin_dashboard', '_controller' => 'App\\Controller\\Admin\\AdminController::index'], null, null, null, true, false, null]],
         '/admin/offres/categories-offres' => [[['_route' => 'app_categories_offres_index', '_controller' => 'App\\Controller\\Admin\\CategoriesOffresController::index'], null, null, null, false, false, null]],
         '/admin/offres/categories-offres/ajout' => [[['_route' => 'app_categories_offres_new', '_controller' => 'App\\Controller\\Admin\\CategoriesOffresController::new'], null, null, null, false, false, null]],
         '/admin/offres' => [[['_route' => 'app_offres_index', '_controller' => 'App\\Controller\\Admin\\OffresController::index'], null, null, null, false, false, null]],

@@ -121,7 +121,39 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("2fa_check");
         yield "\" id=\"form-2fa\">
 \t\t<label for=\"totp_code\">Entrez le code généré par votre application pour vous connecter :</label>
-\t\t<input type=\"text\" id=\"totp_code\" class=\"totp_code text-center\" name=\"totp_code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\" pattern=\"\\d{6}\">
+\t\t<input
+\t\ttype=\"text\" id=\"totp_code\" class=\"totp_code text-center\" name=\"totp_code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\" pattern=\"\\d{6}\">
+\t\t
+\t\t";
+        // line 23
+        yield "\t\t";
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 23, $this->source); })()), "flashes", [], "any", false, false, false, 23));
+        foreach ($context['_seq'] as $context["label"] => $context["messages"]) {
+            // line 24
+            yield "\t\t\t";
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable($context["messages"]);
+            foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
+                // line 25
+                yield "\t\t\t\t<div class=\"flash-";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["label"], "html", null, true);
+                yield "\">";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
+                yield "</div>
+\t\t\t";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 27
+            yield "\t\t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['label'], $context['messages'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 28
+        yield "\t\t
 \t\t<p class=\"text-red\">Attention ce code change au minimum toutes les 30s !</p>
 \t\t<button type=\"submit\" class=\"btn btn-primary\">
 \t\t\t<i class=\"fa-solid fa-check\"></i>
@@ -129,33 +161,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
 \t\t</button>
 \t</form>
 
-\t";
-        // line 27
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 27, $this->source); })()), "flashes", [], "any", false, false, false, 27));
-        foreach ($context['_seq'] as $context["label"] => $context["messages"]) {
-            // line 28
-            yield "\t\t";
-            $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable($context["messages"]);
-            foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
-                // line 29
-                yield "\t\t\t<div class=\"flash-";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["label"], "html", null, true);
-                yield "\">";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["msg"], "html", null, true);
-                yield "</div>
-\t\t";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 31
-            yield "\t";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['label'], $context['messages'], $context['_parent']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
+";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -165,7 +171,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
         yield from [];
     }
 
-    // line 34
+    // line 38
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -178,7 +184,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 35
+        // line 39
         yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/form.css"), "html", null, true);
         yield "\">
@@ -213,7 +219,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  182 => 35,  169 => 34,  154 => 31,  143 => 29,  138 => 28,  134 => 27,  121 => 17,  118 => 16,  112 => 13,  108 => 11,  106 => 10,  102 => 8,  89 => 7,  65 => 4,  42 => 2,);
+        return array (  188 => 39,  175 => 38,  156 => 28,  150 => 27,  139 => 25,  134 => 24,  129 => 23,  121 => 17,  118 => 16,  112 => 13,  108 => 11,  106 => 10,  102 => 8,  89 => 7,  65 => 4,  42 => 2,);
     }
 
     public function getSourceContext(): Source
@@ -236,7 +242,16 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
 
 \t<form method=\"POST\" action=\"{{ path('2fa_check') }}\" id=\"form-2fa\">
 \t\t<label for=\"totp_code\">Entrez le code généré par votre application pour vous connecter :</label>
-\t\t<input type=\"text\" id=\"totp_code\" class=\"totp_code text-center\" name=\"totp_code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\" pattern=\"\\d{6}\">
+\t\t<input
+\t\ttype=\"text\" id=\"totp_code\" class=\"totp_code text-center\" name=\"totp_code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\" pattern=\"\\d{6}\">
+\t\t
+\t\t{# Gestion des messages d'erreur #}
+\t\t{% for label, messages in app.flashes %}
+\t\t\t{% for msg in messages %}
+\t\t\t\t<div class=\"flash-{{ label }}\">{{ msg }}</div>
+\t\t\t{% endfor %}
+\t\t{% endfor %}
+\t\t
 \t\t<p class=\"text-red\">Attention ce code change au minimum toutes les 30s !</p>
 \t\t<button type=\"submit\" class=\"btn btn-primary\">
 \t\t\t<i class=\"fa-solid fa-check\"></i>
@@ -244,11 +259,6 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
 \t\t</button>
 \t</form>
 
-\t{% for label, messages in app.flashes %}
-\t\t{% for msg in messages %}
-\t\t\t<div class=\"flash-{{ label }}\">{{ msg }}</div>
-\t\t{% endfor %}
-\t{% endfor %}
 {% endblock %}
 
 {% block stylesheets %}

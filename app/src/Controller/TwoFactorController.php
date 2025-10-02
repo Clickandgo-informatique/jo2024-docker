@@ -22,7 +22,7 @@ class TwoFactorController extends AbstractController
 
         if (!$user || !$user->is2FAEnabled()) {
             $this->addFlash('warning', '2FA non activée pour cet utilisateur.');
-            return $this->redirectToRoute('panier_index');
+            return $this->redirectToRoute('app_main');
         }
 
         // Génération du QR code via le service TOTPService
@@ -43,7 +43,7 @@ class TwoFactorController extends AbstractController
 
         if (!$user || !$user->is2FAEnabled()) {
             $this->addFlash('error', 'Utilisateur non authentifié ou 2FA non activée.');
-            return $this->redirectToRoute('panier_index');
+            return $this->redirectToRoute('app_main');
         }
 
         $code = $request->request->get('totp_code', '');
@@ -51,7 +51,12 @@ class TwoFactorController extends AbstractController
         if ($totpService->verifyCode($user, $code)) {
             $session->set('2fa_passed', true);
             $this->addFlash('success', 'Authentification 2FA réussie.');
-            return $this->redirectToRoute('panier_index');
+
+            // 🔹 Redirection selon rôle
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('admin_dashboard');
+            }
+            return $this->redirectToRoute('app_main');
         }
 
         $this->addFlash('error', 'Code 2FA invalide.');

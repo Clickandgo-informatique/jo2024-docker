@@ -75,7 +75,7 @@ class __TwigTemplate_db9f24bb36bcebc7cd1bd15461c2dded extends Template
             if ((($tmp = $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
                 // line 17
                 yield "\t\t\t\t\t<a class=\"nav-link\" href=\"";
-                yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_admin_index");
+                yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_dashboard");
                 yield "\">
 \t\t\t\t\t\t<i class=\"fa fa-cog\"></i>
 \t\t\t\t\t\tAdministration</a>
@@ -190,7 +190,7 @@ class __TwigTemplate_db9f24bb36bcebc7cd1bd15461c2dded extends Template
 \t\t\t\t\t\tMon profil</a>
 \t\t\t\t</div>
 \t\t\t\t{% if is_granted('ROLE_ADMIN') %}
-\t\t\t\t\t<a class=\"nav-link\" href=\"{{ path('app_admin_index') }}\">
+\t\t\t\t\t<a class=\"nav-link\" href=\"{{ path('admin_dashboard') }}\">
 \t\t\t\t\t\t<i class=\"fa fa-cog\"></i>
 \t\t\t\t\t\tAdministration</a>
 \t\t\t\t{% endif %}

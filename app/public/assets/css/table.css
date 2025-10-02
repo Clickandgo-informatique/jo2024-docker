@@ -32,7 +32,6 @@ tr:hover {
     cursor: pointer;
     opacity: 1;
     border: 2px solid blue;
-    transform: scaleY(1.1);
     color: darkblue;
     padding: 5px;
 }
@@ -137,6 +136,14 @@ table tbody:hover tr:not(:hover) {
     }
     tfoot {
         display: flex;
+        width: 100%;
+    }
+    .cart-product {
+        display: flex;
+        background-color: var(--primary-color);
+        margin: 0;
+        padding: 10px;
+        color: var(--text-color);
         width: 100%;
     }
 }

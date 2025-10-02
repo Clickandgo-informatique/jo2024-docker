@@ -1,30 +1,39 @@
 {# templates/_partials/_catalogue-offres-clients.html.twig #}
 
 {% for offre in offres %}
-	<article class="offer-card">
+	<article
+		class="offer-card">
+		{# Affiche la catégorie de l'offre et le nombre de personnes #}
 		{% if offre.categorie is defined %}
-			<span class="offer-category">{{ offre.categorie.nom }}</span>
+			<div class="offer-header">
+				<span class="offer-category">{{ offre.categorie.nom }}</span>
+				&nbsp;
+				{# affiche visuellement le nombre de personnes adultes et enfants #}
+				<div class="persons-number">
+					{% for i in 1..offre.nbrAdultes %}
+						<i class="fa-solid fa-person adult-icon"></i>
+					{% endfor %}
+					{% if offre.nbrEnfants>0 %}
+						<span class="add-child-plus-sign">+</span>
+						{% for i in 1..offre.nbrEnfants %}
+							<i class="fa-solid fa-child child-icon"></i>
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
 		{% endif %}
-		<h3 class="offer-title">{{ offre.intitule }}</h3>
-		<div class="offer-image">
-			{% if offre.imagePath is defined and offre.imagePath %}
-				<img src="{{ asset(offre.imagePath) }}" alt="{{ offre.intitule }}">
-			{% else %}
-				{# ✅ fallback si pas d’image, version locale #}
-				<img src="{{ asset('assets/img/no-image.png') }}" alt="Pas d’image disponible">
 
-			{% endif %}
+				{# Affiche les sports en body #}
+		<div class="offer-sports">
+			<span class="sport-emoji">{{offre.sports[0].emoji}}</span>&nbsp;<span class="sport-intitule">{{offre.sports[0].intitule}}</span>
 		</div>
 
-		<div class="offer-content">
-			<div class="offer-sports">
-				<ul class="sport-list">
-					{% for sport in offre.sports %}
-						<li class="sport-items">{{sport.emoji}}&nbsp;{{sport.intitule}}</li>
-					{% endfor %}
-				</ul>
-			</div>
 
+		{# Affiche l'image du sport / pictogramme #}
+
+
+		{# Affiche les détails de l'offre #}
+		<div class="offer-content">
 			<div class="offer-meta">
 				{% if offre.dateDebut is defined %}
 					<span class="offer-date">Du

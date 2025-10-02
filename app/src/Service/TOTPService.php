@@ -3,7 +3,9 @@
 namespace App\Service;
 
 use App\Entity\Users;
-use BaconQrCode\Renderer\GDLibRenderer;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd; // <- SVG backend
 use BaconQrCode\Writer;
 use PragmaRX\Google2FA\Google2FA;
 
@@ -22,36 +24,30 @@ class TOTPService
     }
 
     public function getQRCode(Users $user, int $size = 200): string
-{
-    $appName = 'reservations-jo-2024';
+    {
+        $otpUri = $this->google2FA->getQRCodeUrl(
+            'reservations-jo-2024',
+            $user->getEmail(),
+            $user->getGoogle2FASecret()
+        );
 
-    // Génère l'URI TOTP
-    $otpUri = $this->google2FA->getQRCodeUrl(
-        $appName,
-        $user->getEmail(),
-        $user->getGoogle2FASecret()
-    );
+        $renderer = new ImageRenderer(
+            new RendererStyle($size),
+            new SvgImageBackEnd() // <- aucun problème IDE, fonctionne partout
+        );
 
-    // Génération du QR Code en image PNG
-    $renderer = new GDLibRenderer($size);
-    $writer = new Writer($renderer);
+        $writer = new Writer($renderer);
+        $svgString = $writer->writeString($otpUri);
 
-    $pngString = $writer->writeString($otpUri);
-
-    return 'data:image/png;base64,' . base64_encode($pngString);
-}
-
+        return $svgString;
+    }
 
     public function verifyCode(Users $user, string $code): bool
     {
+        if (!$user->getGoogle2FASecret()) {
+            return false;
+        }
+
         return $this->google2FA->verifyKey($user->getGoogle2FASecret(), $code, 4);
     }
-    public function checkCode(Users $user, string $code): bool
-{
-    if (!$user->getGoogle2FASecret()) {
-        return false;
-    }
-
-    return $this->google2FA->verifyKey($user->getGoogle2FASecret(), $code);
-}
 }

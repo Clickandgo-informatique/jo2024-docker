@@ -4,7 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Users;
-use PragmaRX\Google2FA\Google2FA;
+use App\Service\TOTPService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class TwoFactorController extends AbstractController
 {
     #[Route('/verify', name: 'verify', methods: ['GET'])]
-    public function showVerify(): Response
+    public function showVerify(TOTPService $totpService): Response
     {
         /** @var Users $user */
         $user = $this->getUser();
@@ -25,15 +25,19 @@ class TwoFactorController extends AbstractController
             return $this->redirectToRoute('panier_index');
         }
 
+        // Génération du QR code via le service TOTPService
+        $qrCodeSvg = $totpService->getQRCode($user);
+
         return $this->render('security/2fa_verify.html.twig', [
             'user' => $user,
+            'qrCodeSvg' => $qrCodeSvg,
+            'totpService' => $totpService
         ]);
     }
 
     #[Route('/check', name: 'check', methods: ['POST'])]
-    public function verify(Request $request, SessionInterface $session): Response
+    public function verify(Request $request, SessionInterface $session, TOTPService $totpService): Response
     {
-      
         /** @var Users $user */
         $user = $this->getUser();
 
@@ -44,9 +48,7 @@ class TwoFactorController extends AbstractController
 
         $code = $request->request->get('totp_code', '');
 
-        $google2fa = new Google2FA();
-
-        if ($google2fa->verifyKey($user->getGoogle2FASecret(), $code)) {
+        if ($totpService->verifyCode($user, $code)) {
             $session->set('2fa_passed', true);
             $this->addFlash('success', 'Authentification 2FA réussie.');
             return $this->redirectToRoute('panier_index');

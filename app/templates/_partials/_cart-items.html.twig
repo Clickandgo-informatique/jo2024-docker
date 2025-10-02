@@ -1,53 +1,53 @@
 {# app/templates/partials/_cart-items.html.twig #}
 {% if data is empty %}
-    <p class="cart-empty">Votre panier est vide.</p>
+	<p class="cart-empty">Votre panier est vide.</p>
 {% else %}
-    <table>
-        <thead>
-            <tr>
-                <th class="cart-header text-left">Intitulé</th>
-                <th class="cart-header text-center">Quantité</th>
-                <th class="cart-header text-right">Prix total</th>
-                <th class="cart-header"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in data %}
-                <tr>
-                    <td class="cart-product text-left">{{ item.offre.intitule }}</td>
-                    <td class="quantity-control">
-                        <button type="button" class="decrease btn btn-primary btn-qty"
-                                data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">-</button>
-                        <input type="text" class="quantity-input" value="{{ item.quantite }}"
-                               data-url="{{ path('panier_update', {'id': item.offre.id}) }}">
-                        <button type="button" class="increase btn btn-primary btn-qty"
-                                data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">+</button>
-                    </td>
-                    <td class="cart-total text-right">{{ item.total|number_format(2, ',', ' ') }} €</td>
-                    <td class="cart-actions text-center">
-                        <button type="button" class="remove-item btn btn-danger"
-                                data-url="{{ path('panier_remove', {'id': item.offre.id}) }}" data-method="POST">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr class="cart-summary">
-                <td class="summary-items">Total articles : {{ totalItems }}</td>
-                <td class="summary-total">Total panier : {{ total|number_format(2, ',', ' ') }} €</td>
-                <td colspan="2">
-                    <button type="button" id="clear-cart" class="btn btn-warning"
-                            data-url="{{ path('panier_clear') }}" data-method="POST">
-                        <i class="fa-solid fa-shopping-basket"></i> Vider le panier
-                    </button>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+	<table>
+		<thead>
+			<tr>
+				<th class="cart-header text-left">Intitulé</th>
+				<th class="cart-header text-center">Quantité</th>
+				<th class="cart-header text-right">Prix total</th>
+				<th class="cart-header"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in data %}
+				<tr>					
+					<td class="cart-product text-left">{{item.offre.sports[0].emoji}} - {{ item.offre.intitule }}</td>
+					<td class="quantity-control">
+						<button type="button" class="decrease btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">-</button>
+						<input type="text" class="quantity-input" value="{{ item.quantite }}" data-url="{{ path('panier_update', {'id': item.offre.id}) }}">
+						<button type="button" class="increase btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">+</button>
+					</td>
+					<td class="cart-total text-right">{{ item.total|number_format(2, ',', ' ') }}
+						€</td>
+					<td class="cart-actions text-center">
+						<button type="button" class="remove-item btn btn-danger" data-url="{{ path('panier_remove', {'id': item.offre.id}) }}" data-method="POST">
+							<i class="fa-solid fa-trash-can"></i>
+						</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr class="cart-summary">
+				<td class="summary-items">Total articles :
+					{{ totalItems }}</td>
+				<td class="summary-total">Total panier :
+					{{ total|number_format(2, ',', ' ') }}
+					€</td>
+				<td colspan="2">
+					<button type="button" id="clear-cart" class="btn btn-warning" data-url="{{ path('panier_clear') }}" data-method="POST">
+						<i class="fa-solid fa-shopping-basket"></i>
+						Vider le panier
+					</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
 {% endif %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/table.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/table.css') }}">
 {% endblock %}

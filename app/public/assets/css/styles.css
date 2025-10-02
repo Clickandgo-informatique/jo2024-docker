@@ -126,8 +126,8 @@ img {
 .btn-action {
     padding: 5px;
     background-color: transparent;
-    border:none;
-    cursor:pointer;
+    border: none;
+    cursor: pointer;
 }
 .btn-action a {
     text-decoration: none;
@@ -177,6 +177,7 @@ ul {
     animation: spin 0.8s linear infinite;
     margin: auto;
 }
+
 /* --- Desktop styles --- */
 @media (min-width: 768px) {
     .sidebar {

@@ -106,22 +106,23 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
         if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 10, $this->source); })()), "google2FASecret", [], "any", false, false, false, 10)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
             // line 11
             yield "\t\t<p>Scannez ce QR Code avec votre application d'authentification si nécessaire :</p>
-\t\t<img class=\"qrCode\" src=\"https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=";
-            // line 12
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::urlencode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 12, $this->source); })()), "google2FASecret", [], "any", false, false, false, 12)), "html", null, true);
-            yield "\" alt=\"QR Code 2FA\">
+\t\t<div class=\"qrCode-2fa-verify\">
+\t\t\t";
+            // line 13
+            yield (isset($context["qrCodeSvg"]) || array_key_exists("qrCodeSvg", $context) ? $context["qrCodeSvg"] : (function () { throw new RuntimeError('Variable "qrCodeSvg" does not exist.', 13, $this->source); })());
+            yield "
+\t\t</div>
 \t";
         }
-        // line 14
+        // line 16
         yield "
-\t<p>Entrez le code généré par votre application pour vous connecter :</p>
-
 \t<form method=\"POST\" action=\"";
         // line 17
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("2fa_check");
         yield "\" id=\"form-2fa\">
-\t\t<label for=\"totp_code\">Code à 6 chiffres :</label>
-\t\t<input type=\"text\" id=\"totp_code\" name=\"totp_code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\" pattern=\"\\d{6}\">
+\t\t<label for=\"totp_code\">Entrez le code généré par votre application pour vous connecter :</label>
+\t\t<input type=\"text\" id=\"totp_code\" class=\"totp_code text-center\" name=\"totp_code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\" pattern=\"\\d{6}\">
+\t\t<p class=\"text-red\">Attention ce code change au minimum toutes les 30s !</p>
 \t\t<button type=\"submit\" class=\"btn btn-primary\">
 \t\t\t<i class=\"fa-solid fa-check\"></i>
 \t\t\tValider
@@ -129,16 +130,16 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
 \t</form>
 
 \t";
-        // line 26
+        // line 27
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 26, $this->source); })()), "flashes", [], "any", false, false, false, 26));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 27, $this->source); })()), "flashes", [], "any", false, false, false, 27));
         foreach ($context['_seq'] as $context["label"] => $context["messages"]) {
-            // line 27
+            // line 28
             yield "\t\t";
             $context['_parent'] = $context;
             $context['_seq'] = CoreExtension::ensureTraversable($context["messages"]);
             foreach ($context['_seq'] as $context["_key"] => $context["msg"]) {
-                // line 28
+                // line 29
                 yield "\t\t\t<div class=\"flash-";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["label"], "html", null, true);
                 yield "\">";
@@ -149,7 +150,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['msg'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 30
+            // line 31
             yield "\t";
         }
         $_parent = $context['_parent'];
@@ -164,7 +165,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
         yield from [];
     }
 
-    // line 33
+    // line 34
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -177,7 +178,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 34
+        // line 35
         yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/form.css"), "html", null, true);
         yield "\">
@@ -212,7 +213,7 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  181 => 34,  168 => 33,  153 => 30,  142 => 28,  137 => 27,  133 => 26,  121 => 17,  116 => 14,  111 => 12,  108 => 11,  106 => 10,  102 => 8,  89 => 7,  65 => 4,  42 => 2,);
+        return array (  182 => 35,  169 => 34,  154 => 31,  143 => 29,  138 => 28,  134 => 27,  121 => 17,  118 => 16,  112 => 13,  108 => 11,  106 => 10,  102 => 8,  89 => 7,  65 => 4,  42 => 2,);
     }
 
     public function getSourceContext(): Source
@@ -228,14 +229,15 @@ class __TwigTemplate_63d0ddb4845d6be31a39c2afe2f1b4d0 extends Template
 
 \t{% if user.google2FASecret %}
 \t\t<p>Scannez ce QR Code avec votre application d'authentification si nécessaire :</p>
-\t\t<img class=\"qrCode\" src=\"https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl={{ user.google2FASecret|url_encode }}\" alt=\"QR Code 2FA\">
+\t\t<div class=\"qrCode-2fa-verify\">
+\t\t\t{{ qrCodeSvg|raw }}
+\t\t</div>
 \t{% endif %}
 
-\t<p>Entrez le code généré par votre application pour vous connecter :</p>
-
 \t<form method=\"POST\" action=\"{{ path('2fa_check') }}\" id=\"form-2fa\">
-\t\t<label for=\"totp_code\">Code à 6 chiffres :</label>
-\t\t<input type=\"text\" id=\"totp_code\" name=\"totp_code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\" pattern=\"\\d{6}\">
+\t\t<label for=\"totp_code\">Entrez le code généré par votre application pour vous connecter :</label>
+\t\t<input type=\"text\" id=\"totp_code\" class=\"totp_code text-center\" name=\"totp_code\" maxlength=\"6\" required placeholder=\"Code à 6 chiffres\" pattern=\"\\d{6}\">
+\t\t<p class=\"text-red\">Attention ce code change au minimum toutes les 30s !</p>
 \t\t<button type=\"submit\" class=\"btn btn-primary\">
 \t\t\t<i class=\"fa-solid fa-check\"></i>
 \t\t\tValider

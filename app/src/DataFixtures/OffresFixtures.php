@@ -44,7 +44,7 @@ class OffresFixtures extends Fixture implements DependentFixtureInterface
         // Récupérer les catégories d'offres
         $categoriesOffres = $manager->getRepository(CategoriesOffres::class)->findAll();
 
-        $i = 0;       
+        $i = 0;
 
         foreach ($data[0]['data'] as $item) {
             $slug = $item['slug'];
@@ -63,7 +63,6 @@ class OffresFixtures extends Fixture implements DependentFixtureInterface
             $offre = new Offres();
             $offre
                 ->setCode($this->faker->unique()->bothify('OFF###??'))
-                ->setIntitule("Intitulé de l'offre " . ($i + 1))
                 ->setSlug($slug)
                 ->setDescription("Description de l'offre " . ($i + 1))
                 ->setPrix($this->faker->numberBetween(100, 350))
@@ -74,7 +73,8 @@ class OffresFixtures extends Fixture implements DependentFixtureInterface
                 ->setIsLocked($this->faker->boolean())
                 ->setLieux($item['lieux'])
                 ->addSport($sport)
-                ->setCategorie($this->faker->randomElement($categoriesOffres))
+                ->setIntitule($sport->getIntitule())
+                ->setCategorie($this->faker->randomElement($categoriesOffres))                
                 ->setIsPublished(true)
                 // sélectionne que 5 offres à mettre en avant sur la page d'accueil
                 ->setIsPromoted($this->faker->boolean(5))

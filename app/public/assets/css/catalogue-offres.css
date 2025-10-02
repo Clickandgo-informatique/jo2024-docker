@@ -236,7 +236,7 @@
 .offer-category {
     height: 40px;
     background-color: #531eff;
-    width: 100%;
+    width: 90px;
     color: #ffff;
     padding: 10px;
 }
@@ -262,15 +262,40 @@
 .btn-add-cart {
     margin-top: auto;
 }
+.persons-number {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.adult-icon {
+    color: darkblue;
+    margin-right: 1px;
+}
+.child-icon {
+    color: darkgreen;
+    margin-right: 1px;
+}
 /* Par défaut : masquer sur desktop */
 #openFilters {
     display: none;
 }
 .offer-sports {
-    margin: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
     text-align: center;
+    background-color: #ededed;
+    box-shadow: var(--box-shadow);padding: 5px;
 }
-
+.offer-emplacement{
+    padding: 5px;margin: 5px;
+}
 .sport-list {
     list-style: none; /* supprime les puces */
     padding: 0;
@@ -319,6 +344,21 @@
     & .offer-card {
         width: 300px;
     }
+}
+.sport-emoji {
+    font-size: 40px;
+}
+.sport-intitule {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+.offer-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    background-color: lightblue;
 }
 @media (max-width: 576px) {
     .catalogue-layout {

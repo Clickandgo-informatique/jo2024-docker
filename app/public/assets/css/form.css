@@ -37,7 +37,8 @@ form .btn {
 
 /* Labels classiques */
 .form-row > label,
-.form-label {
+.form-label,
+form label {
     display: block;
     font-size: 0.875rem;
     color: var(--form-muted);
@@ -78,8 +79,7 @@ select {
     font-size: 1rem;
     line-height: 1.4;
     transition: border-color var(--transition-fast),
-                box-shadow var(--transition-fast),
-                transform var(--transition-fast);
+        box-shadow var(--transition-fast), transform var(--transition-fast);
     box-shadow: none;
     width: 100%;
     box-sizing: border-box;
@@ -141,10 +141,8 @@ select {
     font-size: 1rem;
     color: var(--form-muted);
     pointer-events: none;
-    transition: transform var(--transition-fast),
-                top var(--transition-fast),
-                font-size var(--transition-fast),
-                color var(--transition-fast);
+    transition: transform var(--transition-fast), top var(--transition-fast),
+        font-size var(--transition-fast), color var(--transition-fast);
     background: transparent;
     padding: 0 0.125rem;
 }
@@ -199,7 +197,7 @@ select {
     max-width: 400px;
     border-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
     height: 45px;
 }
@@ -232,6 +230,16 @@ select {
     background: #0056b3;
 }
 
+#form-2fa .qrCode-2fa-verify {
+    width: 200px;
+    height: 200px;
+}
+#form-2fa .totp_code{
+    font-weight: bold;
+    width: 200px;
+    margin:10px auto;
+}
+
 /* ================= Responsive ================= */
 @media (max-width: 480px) {
     .search-container {
@@ -248,9 +256,15 @@ select {
 }
 
 /* ================= Utilities ================= */
-.mb-0 { margin-bottom: 0 !important; }
-.mb-1 { margin-bottom: 0.25rem !important; }
-.mt-1 { margin-top: 0.25rem !important; }
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+.mb-1 {
+    margin-bottom: 0.25rem !important;
+}
+.mt-1 {
+    margin-top: 0.25rem !important;
+}
 
 /* Symfony default error wrapper */
 ul.form-errors {

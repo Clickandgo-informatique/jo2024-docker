@@ -99,7 +99,7 @@ class __TwigTemplate_89214761daf5e2adc256f54dd1945edc extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 7
-        yield "    <h1 class=\"text-center\"><i class=\"fa-solid fa-credit-card\"></i>aiement de la commande ...</h1>
+        yield "    <h1 class=\"text-center\"><i class=\"fa-solid fa-credit-card\"></i>Paiement de la commande ...</h1>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -142,7 +142,7 @@ class __TwigTemplate_89214761daf5e2adc256f54dd1945edc extends Template
     Paiement d'une commande
 {% endblock %}
 {% block body %}
-    <h1 class=\"text-center\"><i class=\"fa-solid fa-credit-card\"></i>aiement de la commande ...</h1>
-{% endblock %}", "commandes/paiement-commandes.html.twig", "/var/www/symfony/templates/commandes/paiement-commandes.html.twig");
+    <h1 class=\"text-center\"><i class=\"fa-solid fa-credit-card\"></i>Paiement de la commande ...</h1>
+{% endblock %}", "commandes/paiement-commandes.html.twig", "/home/clavi/jo2024-docker/app/templates/commandes/paiement-commandes.html.twig");
     }
 }

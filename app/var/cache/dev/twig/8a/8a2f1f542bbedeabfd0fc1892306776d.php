@@ -37,7 +37,7 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
 
     protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
     {
-        // line 1
+        // line 2
         return "base.html.twig";
     }
 
@@ -50,7 +50,7 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "security/enable_2fa.html.twig"));
 
-        $this->parent = $this->load("base.html.twig", 1);
+        $this->parent = $this->load("base.html.twig", 2);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -60,7 +60,7 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
 
     }
 
-    // line 3
+    // line 4
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -84,7 +84,7 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
         yield from [];
     }
 
-    // line 6
+    // line 7
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -97,7 +97,7 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 7
+        // line 8
         yield "\t<h2 class=\"text-center\">Activez la double authentification</h2>
 
 \t<p>
@@ -105,8 +105,8 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
 \t</p>
 
 \t<img class=\"qrCode\" src=\"";
-        // line 13
-        yield (isset($context["qrCode"]) || array_key_exists("qrCode", $context) ? $context["qrCode"] : (function () { throw new RuntimeError('Variable "qrCode" does not exist.', 13, $this->source); })());
+        // line 14
+        yield (isset($context["qrCode"]) || array_key_exists("qrCode", $context) ? $context["qrCode"] : (function () { throw new RuntimeError('Variable "qrCode" does not exist.', 14, $this->source); })());
         yield "\" alt=\"QR Code Google Authenticator\">
 
 \t<p>
@@ -114,7 +114,7 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
 \t</p>
 
 \t<a href=\"";
-        // line 19
+        // line 20
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_main");
         yield "\" class=\"btn btn-primary\">
 \t\t<i class=\"fa-solid fa-home\"></i>Retour à l'accueil</a>
@@ -149,12 +149,13 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  118 => 19,  109 => 13,  101 => 7,  88 => 6,  64 => 3,  41 => 1,);
+        return array (  118 => 20,  109 => 14,  101 => 8,  88 => 7,  64 => 4,  41 => 2,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("{% extends 'base.html.twig' %}
+        return new Source("{# enable_2fa.html.twig #}
+{% extends 'base.html.twig' %}
 
 {% block title %}Activation de la double authentification
 {% endblock %}
@@ -175,6 +176,6 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
 \t<a href=\"{{ path('app_main') }}\" class=\"btn btn-primary\">
 \t\t<i class=\"fa-solid fa-home\"></i>Retour à l'accueil</a>
 {% endblock %}
-", "security/enable_2fa.html.twig", "/var/www/symfony/templates/security/enable_2fa.html.twig");
+", "security/enable_2fa.html.twig", "/home/clavi/jo2024-docker/app/templates/security/enable_2fa.html.twig");
     }
 }

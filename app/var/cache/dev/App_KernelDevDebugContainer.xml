@@ -359,6 +359,20 @@
         <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\Admin\SportsController"/>
       </call>
     </service>
+    <service id="App\Controller\Admin\TicketScanController" class="App\Controller\Admin\TicketScanController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\Admin\TicketScanController"/>
+      </call>
+    </service>
+    <service id="App\Controller\Admin\TicketsController" class="App\Controller\Admin\TicketsController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.ZyP9f7K.App\Controller\Admin\TicketsController"/>
+      </call>
+    </service>
     <service id="App\Controller\Admin\UsersController" class="App\Controller\Admin\UsersController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -544,6 +558,13 @@
       <argument type="service" id="router.default"/>
     </service>
     <service id="App\Service\JWTService" class="App\Service\JWTService" autowire="true" autoconfigure="true"/>
+    <service id="App\Service\PdfGenerator" class="App\Service\PdfGenerator" autowire="true" autoconfigure="true">
+      <argument type="service" id="twig"/>
+      <argument type="service" id="parameter_bag"/>
+    </service>
+    <service id="App\Service\PictureService" class="App\Service\PictureService" autowire="true" autoconfigure="true">
+      <argument type="service" id="parameter_bag"/>
+    </service>
     <service id="App\Service\SendEmailService" class="App\Service\SendEmailService" autowire="true" autoconfigure="true">
       <argument type="service" id="mailer.mailer"/>
     </service>
@@ -571,7 +592,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator._l2K44p"/>
+      <argument type="service" id=".service_locator.FkxL_rc"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3074,7 +3095,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator._l2K44p"/>
+      <argument type="service" id=".service_locator.FkxL_rc"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -6448,6 +6469,12 @@
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\SportsController" class="App\Controller\Admin\SportsController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\Admin\SportsController.0.App\Controller\Admin\SportsController" class="App\Controller\Admin\SportsController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\SportsController" class="App\Controller\Admin\SportsController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\TicketScanController" class="App\Controller\Admin\TicketScanController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\TicketScanController" class="App\Controller\Admin\TicketScanController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Admin\TicketScanController" class="App\Controller\Admin\TicketScanController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\TicketsController" class="App\Controller\Admin\TicketsController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\TicketsController" class="App\Controller\Admin\TicketsController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Admin\TicketsController" class="App\Controller\Admin\TicketsController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\UsersController" class="App\Controller\Admin\UsersController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\UsersController" class="App\Controller\Admin\UsersController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\UsersController" class="App\Controller\Admin\UsersController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7300,6 +7327,46 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.F4iHO.j" method="withContext"/>
     </service>
+    <service id=".service_locator.1fgL12P" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="ticketsRepository" type="service_closure" id="App\Repository\TicketsRepository"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="logger" type="service_closure" id="logger"/>
+      </argument>
+    </service>
+    <service id=".service_locator.1fgL12P.App\Controller\Admin\TicketScanController::verify()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\TicketScanController::verify()"/>
+      <argument>App\Controller\Admin\TicketScanController::verify()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.1fgL12P" method="withContext"/>
+    </service>
+    <service id=".service_locator..HytJ5F" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="ticketsRepo" type="service_closure" id="App\Repository\TicketsRepository"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator..HytJ5F.App\Controller\Admin\TicketsController::showTicket()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\TicketsController::showTicket()"/>
+      <argument>App\Controller\Admin\TicketsController::showTicket()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator..HytJ5F" method="withContext"/>
+    </service>
+    <service id=".service_locator.8ck1r3h" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="ticketsRepo" type="service_closure" id="App\Repository\TicketsRepository"/>
+        <argument key="pdfGenerator" type="service_closure" id="App\Service\PdfGenerator"/>
+      </argument>
+    </service>
+    <service id=".service_locator.8ck1r3h.App\Controller\Admin\TicketsController::ticketsPdf()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\TicketsController::ticketsPdf()"/>
+      <argument>App\Controller\Admin\TicketsController::ticketsPdf()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.8ck1r3h" method="withContext"/>
+    </service>
     <service id=".service_locator.5eYgb7E" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7535,7 +7602,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.g9vD4Q0" method="withContext"/>
     </service>
-    <service id=".service_locator._l2K44p" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.FkxL_rc" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
@@ -7557,6 +7624,9 @@
         <argument key="App\Controller\Admin\SportsController::index" type="service_closure" id=".service_locator.6BXpqYw.App\Controller\Admin\SportsController::index()"/>
         <argument key="App\Controller\Admin\SportsController::new" type="service_closure" id=".service_locator.zuLlZtR.App\Controller\Admin\SportsController::new()"/>
         <argument key="App\Controller\Admin\SportsController::edit" type="service_closure" id=".service_locator.F4iHO.j.App\Controller\Admin\SportsController::edit()"/>
+        <argument key="App\Controller\Admin\TicketScanController::verify" type="service_closure" id=".service_locator.1fgL12P.App\Controller\Admin\TicketScanController::verify()"/>
+        <argument key="App\Controller\Admin\TicketsController::showTicket" type="service_closure" id=".service_locator..HytJ5F.App\Controller\Admin\TicketsController::showTicket()"/>
+        <argument key="App\Controller\Admin\TicketsController::ticketsPdf" type="service_closure" id=".service_locator.8ck1r3h.App\Controller\Admin\TicketsController::ticketsPdf()"/>
         <argument key="App\Controller\Admin\UsersController::index" type="service_closure" id=".service_locator.5eYgb7E.App\Controller\Admin\UsersController::index()"/>
         <argument key="App\Controller\Admin\UsersController::edit" type="service_closure" id=".service_locator.PMSD29P.App\Controller\Admin\UsersController::edit()"/>
         <argument key="App\Controller\Admin\UsersController::rechercher" type="service_closure" id=".service_locator.5eYgb7E.App\Controller\Admin\UsersController::rechercher()"/>
@@ -7596,6 +7666,9 @@
         <argument key="App\Controller\Admin\SportsController:index" type="service_closure" id=".service_locator.6BXpqYw.App\Controller\Admin\SportsController::index()"/>
         <argument key="App\Controller\Admin\SportsController:new" type="service_closure" id=".service_locator.zuLlZtR.App\Controller\Admin\SportsController::new()"/>
         <argument key="App\Controller\Admin\SportsController:edit" type="service_closure" id=".service_locator.F4iHO.j.App\Controller\Admin\SportsController::edit()"/>
+        <argument key="App\Controller\Admin\TicketScanController:verify" type="service_closure" id=".service_locator.1fgL12P.App\Controller\Admin\TicketScanController::verify()"/>
+        <argument key="App\Controller\Admin\TicketsController:showTicket" type="service_closure" id=".service_locator..HytJ5F.App\Controller\Admin\TicketsController::showTicket()"/>
+        <argument key="App\Controller\Admin\TicketsController:ticketsPdf" type="service_closure" id=".service_locator.8ck1r3h.App\Controller\Admin\TicketsController::ticketsPdf()"/>
         <argument key="App\Controller\Admin\UsersController:index" type="service_closure" id=".service_locator.5eYgb7E.App\Controller\Admin\UsersController::index()"/>
         <argument key="App\Controller\Admin\UsersController:edit" type="service_closure" id=".service_locator.PMSD29P.App\Controller\Admin\UsersController::edit()"/>
         <argument key="App\Controller\Admin\UsersController:rechercher" type="service_closure" id=".service_locator.5eYgb7E.App\Controller\Admin\UsersController::rechercher()"/>
@@ -7881,6 +7954,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.ZyP9f7K" method="withContext"/>
     </service>
+    <service id=".service_locator.ZyP9f7K.App\Controller\Admin\TicketScanController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\TicketScanController"/>
+      <argument>App\Controller\Admin\TicketScanController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
+    </service>
+    <service id=".service_locator.ZyP9f7K.App\Controller\Admin\TicketsController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\TicketsController"/>
+      <argument>App\Controller\Admin\TicketsController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.ZyP9f7K" method="withContext"/>
+    </service>
     <service id=".service_locator.ZyP9f7K.App\Controller\Admin\UsersController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Admin\UsersController"/>
       <argument>App\Controller\Admin\UsersController</argument>
@@ -8110,6 +8195,8 @@
           <argument>App\Controller\Admin\MockPaymentController</argument>
           <argument>App\Controller\Admin\OffresController</argument>
           <argument>App\Controller\Admin\SportsController</argument>
+          <argument>App\Controller\Admin\TicketScanController</argument>
+          <argument>App\Controller\Admin\TicketsController</argument>
           <argument>App\Controller\Admin\UsersController</argument>
           <argument>App\Controller\CommandesController</argument>
           <argument>App\Controller\MainController</argument>
@@ -9174,7 +9261,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator._l2K44p"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.FkxL_rc"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
@@ -9206,6 +9293,9 @@
     <service id=".service_locator.enIWVGs" alias=".service_locator.iVreUIc"/>
     <service id=".service_locator.hpyoGKV" alias=".service_locator.6BXpqYw"/>
     <service id=".service_locator.AngRB8O" alias=".service_locator.F4iHO.j"/>
+    <service id=".service_locator.hM9Jcv8" alias=".service_locator.1fgL12P"/>
+    <service id=".service_locator.XZ6D3RQ" alias=".service_locator..HytJ5F"/>
+    <service id=".service_locator.Lj3VTee" alias=".service_locator.8ck1r3h"/>
     <service id=".service_locator.w8n3SQw" alias=".service_locator.5eYgb7E"/>
     <service id=".service_locator.5sEnNUx" alias=".service_locator.PMSD29P"/>
     <service id=".service_locator.ZSMSGBp" alias=".service_locator.8D3K43m"/>

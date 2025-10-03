@@ -240,7 +240,7 @@ class __TwigTemplate_d1ad0b7fb4224b132b1dcc1f1c64ae8f extends Template
             if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["c"], "ticket", [], "any", false, true, false, 75), "id", [], "any", true, true, false, 75)) {
                 // line 76
                 yield "\t\t\t\t\t\t\t<a href=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_tickets_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["c"], "ticket", [], "any", false, false, false, 76), "id", [], "any", false, false, false, 76), "commande" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 76)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_ticket_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["c"], "ticket", [], "any", false, false, false, 76), "id", [], "any", false, false, false, 76), "commande" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 76)]), "html", null, true);
                 yield "\" class=\"btn btn-primary\">
 \t\t\t\t\t\t\t\t<i class=\"fa-solid fa-folder-open\"></i>
 \t\t\t\t\t\t\t</a>
@@ -402,7 +402,7 @@ class __TwigTemplate_d1ad0b7fb4224b132b1dcc1f1c64ae8f extends Template
 \t\t\t\t\t</td>
 \t\t\t\t\t<td>
 \t\t\t\t\t\t{% if c.ticket.id is defined %}
-\t\t\t\t\t\t\t<a href=\"{{path('app_tickets_show',{id:c.ticket.id,commande:c.id})}}\" class=\"btn btn-primary\">
+\t\t\t\t\t\t\t<a href=\"{{path('admin_ticket_show',{id:c.ticket.id,commande:c.id})}}\" class=\"btn btn-primary\">
 \t\t\t\t\t\t\t\t<i class=\"fa-solid fa-folder-open\"></i>
 \t\t\t\t\t\t\t</a>
 

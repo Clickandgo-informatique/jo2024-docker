@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Ticket - Commande
-	{{ commande.reference }}
+	{{ ticket.commande.reference }}
 {% endblock %}
 
 {% block body %}
@@ -12,15 +12,19 @@
 
 	<p>
 		<strong>Commande :</strong>
-		{{ commande.reference }}</p>
+		{{ ticket.commande.reference }}</p>
 	<p>
 		<strong>Payée le :</strong>
-		{{ commande.payeeLe|date('d/m/Y H:i') }}</p>
+		{{ ticket.commande.payeeLe|date('d/m/Y H:i') }}</p>
 
-	<div class="qr-code">
-		{{ ticket.qrCodePath|raw }}
-	</div>
+	{% if qrCodeUrl %}
+		<div class="qr-code">
+			{{ qrCodeUrl|raw }}
+		</div>
+	{% endif %}
 
+	<a href="{{path('admin_tickets_show_pdf',{id:ticket.id})}}" class="btn btn-primary">
+		<i class="fa-solid fa-file-pdf"></i>Voir / imprimer Pdf</a>
 	<p>
 		<strong>Clé du ticket :</strong>
 		{{ ticket.ticketKey }}</p>

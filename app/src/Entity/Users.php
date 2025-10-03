@@ -65,6 +65,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->tickets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -232,6 +233,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     private bool $isTwoFactorVerified = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $used_at = null;
+
+    /**
+     * @var Collection<int, Tickets>
+     */
+    #[ORM\OneToMany(targetEntity: Tickets::class, mappedBy: 'validatedBy')]
+    private Collection $tickets;
+
     public function isTwoFactorVerified(): bool
     {
         return $this->isTwoFactorVerified;
@@ -267,6 +277,48 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $commande->setUser(null);
             }
         }
+        return $this;
+    }
+
+    public function getUsedAt(): ?\DateTimeImmutable
+    {
+        return $this->used_at;
+    }
+
+    public function setUsedAt(?\DateTimeImmutable $used_at): static
+    {
+        $this->used_at = $used_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tickets>
+     */
+    public function getTickets(): Collection
+    {
+        return $this->tickets;
+    }
+
+    public function addTicket(Tickets $ticket): static
+    {
+        if (!$this->tickets->contains($ticket)) {
+            $this->tickets->add($ticket);
+            $ticket->setValidatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTicket(Tickets $ticket): static
+    {
+        if ($this->tickets->removeElement($ticket)) {
+            // set the owning side to null (unless already changed)
+            if ($ticket->getValidatedBy() === $this) {
+                $ticket->setValidatedBy(null);
+            }
+        }
+
         return $this;
     }
 }

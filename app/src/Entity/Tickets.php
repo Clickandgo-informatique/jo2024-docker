@@ -34,12 +34,21 @@ class Tickets
     private bool $isUsed = false;
 
     #[ORM\ManyToOne(inversedBy: 'tickets')]
-    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
+    #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
     private ?Users $user = null;
 
     #[ORM\OneToOne(inversedBy: 'ticket', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Commandes $commande = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $usedAt = null;
+
+    #[ORM\ManyToOne(inversedBy: 'tickets')]
+    private ?Users $validatedBy = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $expiresAt = null;
 
     public function __construct()
     {
@@ -140,6 +149,42 @@ class Tickets
     public function setCommande(?Commandes $commande): static
     {
         $this->commande = $commande;
+        return $this;
+    }
+
+    public function getUsedAt(): ?\DateTimeImmutable
+    {
+        return $this->usedAt;
+    }
+
+    public function setUsedAt(?\DateTimeImmutable $usedAt): static
+    {
+        $this->usedAt = $usedAt;
+
+        return $this;
+    }
+
+    public function getValidatedBy(): ?Users
+    {
+        return $this->validatedBy;
+    }
+
+    public function setValidatedBy(?Users $validatedBy): static
+    {
+        $this->validatedBy = $validatedBy;
+
+        return $this;
+    }
+
+    public function getExpiresAt(): ?\DateTimeImmutable
+    {
+        return $this->expiresAt;
+    }
+
+    public function setExpiresAt(?\DateTimeImmutable $expiresAt): static
+    {
+        $this->expiresAt = $expiresAt;
+
         return $this;
     }
 }

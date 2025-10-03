@@ -49,6 +49,20 @@
 .sidebar.hidden ~ .main-wrapper {
     margin-left: 0;
 }
+.sidebar-item-title {
+    margin: 10px;
+}
+.sidebar-item {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+.sidebar-link {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 25px;
+    margin-bottom: 5px;
+}
 
 /* Mobile */
 @media (max-width: 768px) {

@@ -1,0 +1,23 @@
+{# templates/admin/tickets/scan.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Scan de tickets
+{% endblock %}
+
+{% block body %}
+<h1>Scan de tickets</h1>
+
+<div id="scanner">
+	<div id="reader" style="width:500px"></div>
+	<p>
+		<button id="start-scan">Démarrer la caméra</button>
+		<button id="stop-scan" disabled>Stop</button>
+	</p>
+	<div id="scan-result" style="margin-top:1em;font-weight:bold"></div>
+</div>
+
+<hr>
+
+<div id="manual">
+	<label for="ticketKey">Ticket (coller le ticketKey)</label>
+	<input id="ticketKey" type="text" placeholder="ticketKey..."

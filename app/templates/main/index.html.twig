@@ -6,11 +6,13 @@
 {% block body %}
 	<h1 class="text-center">Bienvenue sur le site de Réservations de tickets des Jeux Olympiques Paris 2024</h1>
 	<h2 class="text-center last-offers">Nos dernières offres :</h2>
+	{# Link au catalogue d'offres #}
 	<div class="promotions-wrapper">
 		<div class="promotions">
 			{% include('_partials/_catalogue-offres-clients.html.twig') with { 'offres': offres } only %}
 		</div>
 	</div>
+	<a href="{{path('app_offres_catalogue')}}" class="btn btn-primary"><i class="fa-solid fa-list"></i>Voir toutes les offres</a>
 {% endblock %}
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('assets/css/catalogue-offres.css')}}">

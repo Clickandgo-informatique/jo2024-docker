@@ -66,6 +66,9 @@ class Sports
     #[ORM\ManyToMany(targetEntity: Offres::class, mappedBy: 'sports')]
     private Collection $offres;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
@@ -183,6 +186,18 @@ class Sports
     public function setPictogramme($pictogramme)
     {
         $this->pictogramme = $pictogramme;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -8,6 +8,7 @@ use App\Form\OffresFormType;
 use App\Repository\CategoriesOffresRepository;
 use App\Repository\OffresRepository;
 use App\Repository\SportsRepository;
+use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class OffresController extends AbstractController
 {
-    // Liste des offres dans le backend
     #[Route('admin/offres', name: 'app_offres_index')]
     public function index(
         OffresRepository $offresRepo,
@@ -27,120 +27,86 @@ final class OffresController extends AbstractController
         PaginatorInterface $paginator
     ): Response {
         $data = $offresRepo->findBy([], ['intitule' => 'ASC']);
-
-        $offres = $paginator->paginate(
-            $data,
-            $request->query->getInt('page', 1),
-            12
-        );
+        $offres = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
 
         return $this->render('admin/offres/index.html.twig', [
             'offres' => $offres,
         ]);
     }
 
-    // Catalogue des offres de tickets pour les clients 
     #[Route('/catalogue-offres-clients', name: 'app_offres_catalogue')]
     public function catalogue(
         OffresRepository $offresRepo,
         Request $request,
         PaginatorInterface $paginator,
-        CategoriesOffresRepository $categoriesOffresRepo,
-        SportsRepository $sportRepo
+        CategoriesOffresRepository $categoriesOffresRepo
     ): Response {
-
         $categoriesOffres = $categoriesOffresRepo->findBy([], ['nom' => 'ASC']);
-        $sports = $sportRepo->findSportsInOffres();
-
         $data = $offresRepo->findBy(['isPublished' => true], ['dateDebut' => 'ASC']);
+        $offres = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
 
-        $offres = $paginator->paginate(
-            $data,
-            $request->query->getInt('page', 1),
-            12
-        );
-
-        // Si AJAX → on renvoie uniquement le wrapper
         if ($request->isXmlHttpRequest()) {
             $html = $this->renderView('_partials/_catalogue-offres-ajax-wrapper.html.twig', [
                 'offres' => $offres,
             ]);
 
-            return new JsonResponse([
-                'status' => 'success',
-                'html'   => $html,
-            ]);
+            return new JsonResponse(['status' => 'success', 'html' => $html]);
         }
 
-        // Sinon, rendu complet avec layout
         return $this->render('offres/catalogue-offres-clients.html.twig', [
             'offres'           => $offres,
             'categoriesOffres' => $categoriesOffres,
-            'sports'           => $sports,
-            'selectedSlugs'    => [], // aucune sélection par défaut
+            'selectedSlugs'    => [],
         ]);
     }
 
-    // Filtrer les offres par catégorie dans le front-end (catalogue client)
     #[Route('/offres-par-categorie/{slug}', name: 'offres-par-categories')]
     public function filterByCategorie(
         Request $request,
         OffresRepository $offresRepo,
         CategoriesOffresRepository $categoriesOffresRepo,
-        SportsRepository $sportRepo,
         string $slug,
         PaginatorInterface $paginator
     ): JsonResponse|Response {
         $data = $offresRepo->getOffresParCategories($slug);
-
-        $offres = $paginator->paginate(
-            $data,
-            $request->query->getInt('page', 1),
-            12
-        );
-
+        $offres = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
         $categoriesOffres = $categoriesOffresRepo->findBy([], ['nom' => 'ASC']);
-        $sports = $sportRepo->findSportsInOffres();
 
-        // Si AJAX → on renvoie uniquement le wrapper
         if ($request->isXmlHttpRequest()) {
             $html = $this->renderView('_partials/_catalogue-offres-ajax-wrapper.html.twig', [
                 'offres' => $offres,
             ]);
 
-            return new JsonResponse([
-                'status' => 'success',
-                'html'   => $html,
-            ]);
+            return new JsonResponse(['status' => 'success', 'html' => $html]);
         }
 
-        // Sinon, rendu complet avec layout
         return $this->render('offres/catalogue-offres-clients.html.twig', [
             'offres'           => $offres,
             'categorie'        => $slug,
             'categoriesOffres' => $categoriesOffres,
-            'sports'           => $sports,
-            'selectedSlugs'    => [], // pas de filtres sports ici
+            'selectedSlugs'    => [],
         ]);
     }
 
-    // Créer une offre
     #[Route('admin/offres/ajout', name: 'app_offres_new')]
     public function new(
         Request $request,
         EntityManagerInterface $em,
-        SluggerInterface $slugger
+        SluggerInterface $slugger,
+        PictureService $pictureService
     ): Response {
         $offre = new Offres();
-        $title = "Créer une offre";
-
         $form = $this->createForm(OffresFormType::class, $offre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $slug = $form->get('intitule')->getData();
-            $offre->setSlug($slugger->slug($slug));
+            $imageFile = $form->get('imageFile')->getData();
+            if ($imageFile) {
+                $filename = $pictureService->upload($imageFile, '/offres');
+                $offre->setImage($filename);
+            }
 
+            $offre->setSlug($slugger->slug($form->get('intitule')->getData()));
             $em->persist($offre);
             $em->flush();
 
@@ -150,33 +116,40 @@ final class OffresController extends AbstractController
 
         return $this->render('admin/offres/edit.html.twig', [
             'offre' => $offre,
-            'title' => $title,
+            'title' => "Créer une offre",
             'form'  => $form->createView(),
         ]);
     }
 
-    // Édition d'une offre
     #[Route('admin/edit/{slug}', name: 'app_offres_edit')]
     public function edit(
         OffresRepository $offresRepo,
         string $slug,
         Request $request,
         EntityManagerInterface $em,
-        SluggerInterface $slugger
+        SluggerInterface $slugger,
+        PictureService $pictureService
     ): Response {
         $offre = $offresRepo->findOneBy(['slug' => $slug]);
         if (!$offre) {
             throw $this->createNotFoundException("Offre non trouvée");
         }
 
-        $title = "Modifier une offre";
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(OffresFormType::class, $offre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $slug = $form->get('intitule')->getData();
-            $offre->setSlug($slugger->slug($slug));
+            $imageFile = $form->get('imageFile')->getData();
+            if ($imageFile) {
+                if ($offre->getImage()) {
+                    $pictureService->delete($offre->getImage(), '/offres');
+                }
+                $filename = $pictureService->upload($imageFile, '/offres');
+                $offre->setImage($filename);
+            }
 
+            $offre->setSlug($slugger->slug($form->get('intitule')->getData()));
             $em->persist($offre);
             $em->flush();
 
@@ -184,46 +157,44 @@ final class OffresController extends AbstractController
             return $this->redirectToRoute('app_offres_index');
         }
 
-        if (!$this->isGranted('ROLE_ADMIN')) {
-            $this->addFlash('danger', "Accès réservé aux administrateurs.");
-            return $this->redirectToRoute('app_login');
-        }
-
         return $this->render('admin/offres/edit.html.twig', [
             'offre' => $offre,
-            'title' => $title,
+            'title' => "Modifier une offre",
             'form'  => $form->createView(),
         ]);
     }
 
-    // Filtrer les offres par discipline sportive (slugs dans l’URL)
-    #[Route('/offres/sports/{slugs?}', name: 'app_offres_filter')]
+    #[Route('admin/offres/{id}/delete-image', name: 'app_offres_delete_image')]
+    public function deleteImage(
+        Offres $offre,
+        PictureService $pictureService,
+        EntityManagerInterface $em
+    ): Response {
+        if ($offre->getImage()) {
+            $pictureService->delete($offre->getImage(), '/offres');
+            $offre->setImage(null);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('app_offres_edit', ['slug' => $offre->getSlug()]);
+    }
+
+    #[Route('/offres/offres/{slugs?}', name: 'app_offres_filter')]
     public function filterBySportsSlugs(
-        SportsRepository $sportRepo,
-        OffresRepository $offreRepo,
-        CategoriesOffresRepository $categorieRepo,
+        SportsRepository $sportsRepo,
+        OffresRepository $offresRepo,
+        CategoriesOffresRepository $categoriesRepo,
         PaginatorInterface $paginator,
         string $slugs = null,
         Request $request
     ): Response {
         $slugsArray = $slugs ? explode(',', $slugs) : [];
-
-        $sports = $sportRepo->findSportsInOffres();
-
-        // ✅ renvoie un QueryBuilder/Query pour le paginator
         $data = !empty($slugsArray)
-            ? $offreRepo->findBySportSlugs($slugsArray)
-            : $offreRepo->createQueryBuilder('o')
-            ->orderBy('o.dateDebut', 'ASC')
-            ->getQuery();
+            ? $offresRepo->findBySportSlugs($slugsArray)
+            : $offresRepo->createQueryBuilder('o')->orderBy('o.dateDebut', 'ASC')->getQuery();
 
-        $offres = $paginator->paginate(
-            $data,
-            $request->query->getInt('page', 1),
-            12
-        );
-
-        $categoriesOffres = $categorieRepo->findAll();
+        $offres = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
+        $categoriesOffres = $categoriesRepo->findAll();
 
         if ($request->isXmlHttpRequest()) {
             return $this->render('_partials/_catalogue-offres-ajax-wrapper.html.twig', [
@@ -233,9 +204,8 @@ final class OffresController extends AbstractController
 
         return $this->render('offres/catalogue-offres-clients.html.twig', [
             'categoriesOffres' => $categoriesOffres,
-            'sports'          => $sports,
-            'selectedSlugs'   => $slugsArray,
-            'offres'          => $offres,
+            'offres'           => $offres,
+            'selectedSlugs'    => $slugsArray,
         ]);
     }
 }

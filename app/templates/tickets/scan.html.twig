@@ -5,19 +5,33 @@
 {% endblock %}
 
 {% block body %}
-<h1>Scan de tickets</h1>
+	<h1>
+		<i class="fa-solid fa-qrcode"></i>Scan de tickets</h1>
 
-<div id="scanner">
-	<div id="reader" style="width:500px"></div>
-	<p>
-		<button id="start-scan">Démarrer la caméra</button>
-		<button id="stop-scan" disabled>Stop</button>
-	</p>
-	<div id="scan-result" style="margin-top:1em;font-weight:bold"></div>
-</div>
+	<div id="scanner" style="display:flex;width:100%;align-items:center;justify-content:center;">
+		<div id="reader" style="width:500px;height:400px;border:1px solid #ccc;"></div>
+		<p>
+			<button id="start-scan" class="btn btn-primary">
+				<i class="fa-solid fa-video"></i>Démarrer la caméra</button>
+			<button id="stop-scan" class="btn btn-danger" disabled>
+				<i class="fa-solid fa-stop"></i>Stop</button>
+		</p>
+		<div id="scan-result" style="margin-top:1em;font-weight:bold;"></div>
+	</div>
 
-<hr>
+	<hr>
 
-<div id="manual">
-	<label for="ticketKey">Ticket (coller le ticketKey)</label>
-	<input id="ticketKey" type="text" placeholder="ticketKey..."
+	<div id="manual" style="display:flex;width:100%;align-items:center;justify-content:center;">
+		<label for="ticketKey">Ticket (coller le ticketKey)</label>
+		<input id="ticketKey" type="text" placeholder="ticketKey..." class="form-control"/>
+		<button id="manual-verify" class="btn btn-success centered">
+			<i class="fa-solid fa-circle-check centered"></i>Valider le ticket</button>
+	</div>
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/form.css')}}">
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('assets/js/html5-qrcode.min.js') }}"></script>
+	<script type="module" src="{{asset('assets/js/tickets-scan.js')}}"></script>
+{% endblock %}

@@ -64,36 +64,39 @@ return [
                     .')'
                 .')'
                 .'|/admin/(?'
-                    .'|offres/categories\\-offres/([^/]++)/edit(*:251)'
-                    .'|commande/scan/([^/]++)(*:281)'
-                    .'|edit/([^/]++)(*:302)'
-                    .'|sports/edit/([^/]++)(*:330)'
-                    .'|tickets/([^/]++)/show(?'
-                        .'|(*:362)'
-                        .'|\\-pdf(*:375)'
+                    .'|offres/(?'
+                        .'|categories\\-offres/([^/]++)/edit(*:254)'
+                        .'|([^/]++)/delete\\-image(*:284)'
                     .')'
-                    .'|utilisateurs/edit/(\\d+)(*:407)'
+                    .'|commande/scan/([^/]++)(*:315)'
+                    .'|edit/([^/]++)(*:336)'
+                    .'|sports/edit/([^/]++)(*:364)'
+                    .'|tickets/([^/]++)/show(?'
+                        .'|(*:396)'
+                        .'|\\-pdf(*:409)'
+                    .')'
+                    .'|utilisateurs/edit/(\\d+)(*:441)'
                 .')'
                 .'|/mo(?'
-                    .'|ck/payment/([^/]++)(*:441)'
-                    .'|t\\-de\\-passe\\-oublie/([^/]++)(*:478)'
+                    .'|ck/payment/([^/]++)(*:475)'
+                    .'|t\\-de\\-passe\\-oublie/([^/]++)(*:512)'
                 .')'
-                .'|/ticket/([^/]++)(*:503)'
+                .'|/ticket/([^/]++)(*:537)'
                 .'|/offres(?'
-                    .'|\\-par\\-categorie/([^/]++)(*:546)'
-                    .'|/sports(?:/([^/]++))?(*:575)'
+                    .'|\\-par\\-categorie/([^/]++)(*:580)'
+                    .'|/offres(?:/([^/]++))?(*:609)'
                 .')'
                 .'|/commandes/(?'
-                    .'|mock/payment/([^/]++)(*:619)'
-                    .'|liste\\-commandes\\-client/([^/]++)(*:660)'
-                    .'|([^/]++)/supprimer(*:686)'
+                    .'|mock/payment/([^/]++)(*:653)'
+                    .'|liste\\-commandes\\-client/([^/]++)(*:694)'
+                    .'|([^/]++)/supprimer(*:720)'
                 .')'
                 .'|/panier/(?'
-                    .'|add/([^/]++)(*:718)'
-                    .'|remove/([^/]++)(*:741)'
-                    .'|update/([^/]++)(*:764)'
+                    .'|add/([^/]++)(*:752)'
+                    .'|remove/([^/]++)(*:775)'
+                    .'|update/([^/]++)(*:798)'
                 .')'
-                .'|/verif/([^/]++)(*:788)'
+                .'|/verif/([^/]++)(*:822)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -105,25 +108,26 @@ return [
         168 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        251 => [[['_route' => 'app_categories_offres_edit', '_controller' => 'App\\Controller\\Admin\\CategoriesOffresController::edit'], ['slug'], null, null, false, false, null]],
-        281 => [[['_route' => 'admin_commande_scan', '_controller' => 'App\\Controller\\Admin\\CommandeScanController::scanCommande'], ['token'], null, null, false, true, null]],
-        302 => [[['_route' => 'app_offres_edit', '_controller' => 'App\\Controller\\Admin\\OffresController::edit'], ['slug'], null, null, false, true, null]],
-        330 => [[['_route' => 'app_sports_edit', '_controller' => 'App\\Controller\\Admin\\SportsController::edit'], ['slug'], null, null, false, true, null]],
-        362 => [[['_route' => 'admin_ticket_show', '_controller' => 'App\\Controller\\Admin\\TicketsController::showTicket'], ['id'], null, null, false, false, null]],
-        375 => [[['_route' => 'admin_tickets_show_pdf', '_controller' => 'App\\Controller\\Admin\\TicketsController::ticketsPdf'], ['id'], null, null, false, false, null]],
-        407 => [[['_route' => 'app_utilisateurs_edit', '_controller' => 'App\\Controller\\Admin\\UsersController::edit'], ['id'], null, null, false, true, null]],
-        441 => [[['_route' => 'app_mock-payment', '_controller' => 'App\\Controller\\Admin\\MockPaymentController::pay'], ['id'], null, null, false, true, null]],
-        478 => [[['_route' => 'reset_password', '_controller' => 'App\\Controller\\SecurityController::resetPassword'], ['token'], null, null, false, true, null]],
-        503 => [[['_route' => 'app_ticket_show', '_controller' => 'App\\Controller\\Admin\\MockPaymentController::showTicketByKey'], ['ticketKey'], null, null, false, true, null]],
-        546 => [[['_route' => 'offres-par-categories', '_controller' => 'App\\Controller\\Admin\\OffresController::filterByCategorie'], ['slug'], null, null, false, true, null]],
-        575 => [[['_route' => 'app_offres_filter', 'slugs' => null, '_controller' => 'App\\Controller\\Admin\\OffresController::filterBySportsSlugs'], ['slugs'], null, null, false, true, null]],
-        619 => [[['_route' => 'app_commandes_paiement', '_controller' => 'App\\Controller\\CommandesController::payerCommande'], ['id'], null, null, false, true, null]],
-        660 => [[['_route' => 'app_commandes_commandes-client', '_controller' => 'App\\Controller\\CommandesController::listeCommandesClient'], ['id'], ['GET' => 0], null, false, true, null]],
-        686 => [[['_route' => 'app_commandes_supprimer', '_controller' => 'App\\Controller\\CommandesController::supprimer'], ['id'], ['POST' => 0], null, false, false, null]],
-        718 => [[['_route' => 'panier_add', '_controller' => 'App\\Controller\\PanierController::add'], ['id'], ['POST' => 0], null, false, true, null]],
-        741 => [[['_route' => 'panier_remove', '_controller' => 'App\\Controller\\PanierController::remove'], ['id'], ['POST' => 0], null, false, true, null]],
-        764 => [[['_route' => 'panier_update', '_controller' => 'App\\Controller\\PanierController::update'], ['id'], ['POST' => 0], null, false, true, null]],
-        788 => [
+        254 => [[['_route' => 'app_categories_offres_edit', '_controller' => 'App\\Controller\\Admin\\CategoriesOffresController::edit'], ['slug'], null, null, false, false, null]],
+        284 => [[['_route' => 'app_offres_delete_image', '_controller' => 'App\\Controller\\Admin\\OffresController::deleteImage'], ['id'], null, null, false, false, null]],
+        315 => [[['_route' => 'admin_commande_scan', '_controller' => 'App\\Controller\\Admin\\CommandeScanController::scanCommande'], ['token'], null, null, false, true, null]],
+        336 => [[['_route' => 'app_offres_edit', '_controller' => 'App\\Controller\\Admin\\OffresController::edit'], ['slug'], null, null, false, true, null]],
+        364 => [[['_route' => 'app_sports_edit', '_controller' => 'App\\Controller\\Admin\\SportsController::edit'], ['slug'], null, null, false, true, null]],
+        396 => [[['_route' => 'admin_ticket_show', '_controller' => 'App\\Controller\\Admin\\TicketsController::showTicket'], ['id'], null, null, false, false, null]],
+        409 => [[['_route' => 'admin_tickets_show_pdf', '_controller' => 'App\\Controller\\Admin\\TicketsController::ticketsPdf'], ['id'], null, null, false, false, null]],
+        441 => [[['_route' => 'app_utilisateurs_edit', '_controller' => 'App\\Controller\\Admin\\UsersController::edit'], ['id'], null, null, false, true, null]],
+        475 => [[['_route' => 'app_mock-payment', '_controller' => 'App\\Controller\\Admin\\MockPaymentController::pay'], ['id'], null, null, false, true, null]],
+        512 => [[['_route' => 'reset_password', '_controller' => 'App\\Controller\\SecurityController::resetPassword'], ['token'], null, null, false, true, null]],
+        537 => [[['_route' => 'app_ticket_show', '_controller' => 'App\\Controller\\Admin\\MockPaymentController::showTicketByKey'], ['ticketKey'], null, null, false, true, null]],
+        580 => [[['_route' => 'offres-par-categories', '_controller' => 'App\\Controller\\Admin\\OffresController::filterByCategorie'], ['slug'], null, null, false, true, null]],
+        609 => [[['_route' => 'app_offres_filter', 'slugs' => null, '_controller' => 'App\\Controller\\Admin\\OffresController::filterBySportsSlugs'], ['slugs'], null, null, false, true, null]],
+        653 => [[['_route' => 'app_commandes_paiement', '_controller' => 'App\\Controller\\CommandesController::payerCommande'], ['id'], null, null, false, true, null]],
+        694 => [[['_route' => 'app_commandes_commandes-client', '_controller' => 'App\\Controller\\CommandesController::listeCommandesClient'], ['id'], ['GET' => 0], null, false, true, null]],
+        720 => [[['_route' => 'app_commandes_supprimer', '_controller' => 'App\\Controller\\CommandesController::supprimer'], ['id'], ['POST' => 0], null, false, false, null]],
+        752 => [[['_route' => 'panier_add', '_controller' => 'App\\Controller\\PanierController::add'], ['id'], ['POST' => 0], null, false, true, null]],
+        775 => [[['_route' => 'panier_remove', '_controller' => 'App\\Controller\\PanierController::remove'], ['id'], ['POST' => 0], null, false, true, null]],
+        798 => [[['_route' => 'panier_update', '_controller' => 'App\\Controller\\PanierController::update'], ['id'], ['POST' => 0], null, false, true, null]],
+        822 => [
             [['_route' => 'verify_user', '_controller' => 'App\\Controller\\RegistrationController::verifUser'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

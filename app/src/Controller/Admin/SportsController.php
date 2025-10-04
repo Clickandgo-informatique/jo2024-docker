@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Sports;
 use App\Form\SportsFormType;
 use App\Repository\SportsRepository;
-use BaconQrCode\Renderer\Color\Rgb;
+use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,20 +25,21 @@ final class SportsController extends AbstractController
 
     //Ajout d'une nouvelle discipline sportive
     #[Route('/admin/sports/ajout', name: 'app_sports_new')]
-    public function new(EntityManagerInterface $em, Request $request, SluggerInterface $slugger): Response
+    public function new(EntityManagerInterface $em, Request $request, SluggerInterface $slugger, PictureService $pictureService): Response
     {
-        $discipline = new Sports();
-        $title = "Ajouter une discipline";
+        $sport = new Sports();
+        $title = "Ajouter une discipline sportive";
 
-        $form = $this->createForm(SportsFormType::class, $discipline);
+        $form = $this->createForm(SportsFormType::class, $sport);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {            
+
             //On sluggifie sur le champ de formulaire "intitule"
             $slug = $form->get('intitule')->getData();
-            $discipline->setSlug($slugger->slug($slug));
+            $sport->setSlug($slugger->slug($slug));
 
-            $em->persist($discipline);
+            $em->persist($sport);
             $em->flush();
 
             $this->redirectToRoute('app_sports_index');
@@ -52,24 +53,24 @@ final class SportsController extends AbstractController
     #[Route('/admin/sports/edit/{slug}', name: 'app_sports_edit')]
     public function edit(SportsRepository $sportsRepo, EntityManagerInterface $em, Request $request, string $slug, SluggerInterface $slugger): Response
     {
-        $discipline = $sportsRepo->findOneBy(['slug' => $slug]);
+        $sport = $sportsRepo->findOneBy(['slug' => $slug]);
         $title = "Modifier une discipline";
 
-        $form = $this->createForm(SportsFormType::class, $discipline);
+        $form = $this->createForm(SportsFormType::class, $sport);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             //On sluggifie sur le champ de formulaire "intitule"
             $slug = $form->get('intitule')->getData();
-            $discipline->setSlug($slugger->slug($slug));
+            $sport->setSlug($slugger->slug($slug));
 
-            $em->persist($discipline);
+            $em->persist($sport);
             $em->flush();
 
             $this->redirectToRoute('app_sports_index');
         }
 
         $this->addFlash('succcess', 'Les modification concernant la discipline ont bien été enregistrées dans la base.');
-        return $this->render('admin/sports/sports-form.html.twig', ['discipline' => $discipline, 'form' => $form->createView(), 'title' => $title]);
+        return $this->render('admin/sports/sports-form.html.twig', ['discipline' => $sport, 'form' => $form->createView(), 'title' => $title]);
     }
 }

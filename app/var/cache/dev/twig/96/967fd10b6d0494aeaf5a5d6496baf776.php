@@ -156,8 +156,8 @@ class __TwigTemplate_f4b171965ffda6fa17e55f6a66205627 extends Template
 \t\t\t\t\t</td>
 \t\t\t\t\t<td>";
             // line 42
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", false, false, false, 42), "html", null, true);
-            yield "</td>
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "prix", [], "any", false, false, false, 42), 2, ",", " "), "html", null, true);
+            yield "€</td>
 \t\t\t\t\t<td class='date-italic'>";
             // line 43
             yield (((($tmp = CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateDebut", [], "any", false, false, false, 43)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "dateDebut", [], "any", false, false, false, 43), "d/m/Y H:i"), "html", null, true)) : ("N/A"));
@@ -317,7 +317,7 @@ class __TwigTemplate_f4b171965ffda6fa17e55f6a66205627 extends Template
 \t\t\t\t\t<td>
 \t\t\t\t\t\t<strong>{{ offre.intitule }}</strong>
 \t\t\t\t\t</td>
-\t\t\t\t\t<td>{{ offre.prix }}</td>
+\t\t\t\t\t<td>{{ offre.prix|number_format(2, ',', ' ') }}€</td>
 \t\t\t\t\t<td class='date-italic'>{{ offre.dateDebut ? offre.dateDebut|date('d/m/Y H:i') : 'N/A' }}</td>
 \t\t\t\t\t<td class='date-italic'>{{ offre.dateFin ? offre.dateFin|date('d/m/Y H:i') : 'N/A' }}</td>
 \t\t\t\t\t<td class='date-italic muted'>{{ offre.createdAt ? offre.createdAt|date('d/m/Y H:i') : 'N/A' }}</td>

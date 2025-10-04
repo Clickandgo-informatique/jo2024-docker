@@ -40,35 +40,26 @@ form .btn {
 .form-label,
 form label {
     display: block;
-    font-size: 0.875rem;
+    font-size: 0.7rem;
     color: var(--form-muted);
-    font-weight: 600;
     margin-bottom: 0.5rem; /* plus d’espace */
+    color: var(--label-text-color);
 }
 
 /* Labels horizontaux */
-.form-row.horizontal {
+.row-horizontal {
     display: grid;
     grid-template-columns: 200px 1fr;
     gap: 0.5rem 1rem; /* vertical | horizontal */
     align-items: center;
 }
 
-.form-row.horizontal label {
-    margin: 0;
-    padding-right: 0.5rem;
-    text-align: right;
-}
-
 /* ================= Inputs / textarea / select ================= */
+/* ========================
+   Styles généraux pour tous les champs
+   ======================== */
 .form-control,
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="search"],
-input[type="url"],
-input[type="tel"],
-input[type="number"],
+input:not([type="checkbox"]),
 textarea,
 select {
     appearance: none;
@@ -85,6 +76,62 @@ select {
     box-sizing: border-box;
     align-self: stretch;
     margin-bottom: 10px;
+}
+
+/* ========================
+   Styles spécifiques par type
+   ======================== */
+
+input[type="email"],
+.form-control[type="email"] {
+    border-color: #007bff;
+}
+
+input[type="password"],
+.form-control[type="password"] {
+    font-family: monospace;
+}
+
+/* ========================
+   Cases à cocher
+   ======================== */
+input[type="checkbox"] {
+    width: auto; /* largeur normale */
+    margin: 0 0.5em 0 0; /* espacement à droite */
+    vertical-align: middle; /* alignement avec label */
+    accent-color: var(--form-border);
+    appearance: auto;
+}
+
+input[type="checkbox"] + label {
+    font-size: 1rem;
+    line-height: 1.4;
+    cursor: pointer;
+}
+.euro-field {
+    padding-right: 2em;
+    position: relative;
+}
+
+.euro-field::after {
+    content: '€';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+}
+
+
+/* ========================
+   Optionnel : focus & hover
+   ======================== */
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--form-focus-border);
+    box-shadow: 0 0 0 3px var(--form-focus-shadow);
+    outline: none;
 }
 
 .form-control:focus {
@@ -234,10 +281,10 @@ select {
     width: 200px;
     height: 200px;
 }
-#form-2fa .totp_code{
+#form-2fa .totp_code {
     font-weight: bold;
     width: 200px;
-    margin:10px auto;
+    margin: 10px auto;
 }
 
 /* ================= Responsive ================= */

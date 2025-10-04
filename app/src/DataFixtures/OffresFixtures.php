@@ -43,11 +43,15 @@ class OffresFixtures extends Fixture implements DependentFixtureInterface
 
         // Récupérer les catégories d'offres
         $categoriesOffres = $manager->getRepository(CategoriesOffres::class)->findAll();
-
         $i = 0;
 
         foreach ($data[0]['data'] as $item) {
             $slug = $item['slug'];
+
+
+            // Pattern pour le prix
+            $euros = $this->faker->numberBetween(100, 1000); // partie entière
+            $centimes = $this->faker->randomElement([0, 15, 20, 25, 50, 75]); // centimes fixes
 
             // Récupérer le sport via repository ou via référence si définie dans SportsFixtures
             $sport = $manager->getRepository(Sports::class)->findOneBy(['slug' => $slug]);
@@ -64,8 +68,10 @@ class OffresFixtures extends Fixture implements DependentFixtureInterface
             $offre
                 ->setCode($this->faker->unique()->bothify('OFF###??'))
                 ->setSlug($slug)
-                ->setDescription("Description de l'offre " . ($i + 1))
-                ->setPrix($this->faker->numberBetween(100, 350))
+                ->setDescription("Description de l'offre " . ($i + 1));
+            $prix = (string)number_format($euros + ($centimes / 100), 2, '.', '');
+            dump($prix);
+            $offre->setPrix($prix)
                 ->setDateDebut(new \DateTime($item['dateDebut']))
                 ->setDateFin(new \DateTime($item['dateFin']))
                 ->setNbrAdultes($this->faker->numberBetween(1, 2))
@@ -74,7 +80,7 @@ class OffresFixtures extends Fixture implements DependentFixtureInterface
                 ->setLieux($item['lieux'])
                 ->addSport($sport)
                 ->setIntitule($sport->getIntitule())
-                ->setCategorie($this->faker->randomElement($categoriesOffres))                
+                ->setCategorie($this->faker->randomElement($categoriesOffres))
                 ->setIsPublished(true)
                 // sélectionne que 5 offres à mettre en avant sur la page d'accueil
                 ->setIsPromoted($this->faker->boolean(5))

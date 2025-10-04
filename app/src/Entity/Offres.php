@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: OffresRepository::class)]
 #[UniqueEntity(fields: ['intitule'], message: 'Il existe déjà une offre avec ce nom.')]
@@ -21,8 +23,12 @@ class Offres
     #[ORM\Column(length: 255)]
     private ?string $intitule = null;
 
-    #[ORM\Column(type: 'integer')]
-    private ?int $prix = null;
+    #[Assert\Type('numeric')]
+    #[Assert\NotBlank]
+    #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    #[Assert\Regex(pattern: '/^\d+(\.\d{1,2})?$/', message: 'Format de nombre invalide')]
+    private ?string $prix = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $dateDebut = null;
@@ -84,6 +90,9 @@ class Offres
 
     #[ORM\Column(type: 'json')]
     private array $lieux = [];
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -351,7 +360,7 @@ class Offres
 
     /**
      * Get the value of isPromoted
-     */ 
+     */
     public function getIsPromoted()
     {
         return $this->isPromoted;
@@ -361,10 +370,22 @@ class Offres
      * Set the value of isPromoted
      *
      * @return  self
-     */ 
+     */
     public function setIsPromoted($isPromoted)
     {
         $this->isPromoted = $isPromoted;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

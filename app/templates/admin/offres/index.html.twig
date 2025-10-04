@@ -39,13 +39,13 @@
 					<td>
 						<strong>{{ offre.intitule }}</strong>
 					</td>
-					<td>{{ offre.prix }}</td>
+					<td>{{ offre.prix|number_format(2, ',', ' ') }}€</td>
 					<td class='date-italic'>{{ offre.dateDebut ? offre.dateDebut|date('d/m/Y H:i') : 'N/A' }}</td>
 					<td class='date-italic'>{{ offre.dateFin ? offre.dateFin|date('d/m/Y H:i') : 'N/A' }}</td>
 					<td class='date-italic muted'>{{ offre.createdAt ? offre.createdAt|date('d/m/Y H:i') : 'N/A' }}</td>
 					<td class='date-italic muted'>{{ offre.updatedAt ? offre.updatedAt|date('d/m/Y H:i') : 'N/A' }}</td>
 					<td>
-						<a href="{{ path('app_offres_edit', { slug: offre.slug }) }}" class="btn btn-sm btn-primary">
+						<a href="{{ path('app_offres_edit', { slug: offre.slug }) }}" class="btn btn-action btn-open">
 							<i class="fa-solid fa-pen-to-square"></i>
 						</a>
 						<a href="#" class="btn btn-sm btn-danger">

@@ -13,7 +13,7 @@ class SportsFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('intitule', TextType::class, ['label' => 'Intitulé'])
+            ->add('intitule', TextType::class, ['label' => 'Intitulé'])           
             ->add('icone', TextType::class, ['label' => 'Icône', 'required' => false])
             ->add('background_color', TextType::class, ['label' => 'Couleur de fond', 'required' => false])
             ->add('slug', TextType::class, ['label' => 'Slug', 'disabled' => true, 'required' => false])

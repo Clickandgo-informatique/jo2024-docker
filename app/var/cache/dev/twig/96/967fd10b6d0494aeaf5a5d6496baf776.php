@@ -178,7 +178,7 @@ class __TwigTemplate_f4b171965ffda6fa17e55f6a66205627 extends Template
 \t\t\t\t\t\t<a href=\"";
             // line 48
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_offres_edit", ["slug" => CoreExtension::getAttribute($this->env, $this->source, $context["offre"], "slug", [], "any", false, false, false, 48)]), "html", null, true);
-            yield "\" class=\"btn btn-sm btn-primary\">
+            yield "\" class=\"btn btn-action btn-open\">
 \t\t\t\t\t\t\t<i class=\"fa-solid fa-pen-to-square\"></i>
 \t\t\t\t\t\t</a>
 \t\t\t\t\t\t<a href=\"#\" class=\"btn btn-sm btn-danger\">
@@ -323,7 +323,7 @@ class __TwigTemplate_f4b171965ffda6fa17e55f6a66205627 extends Template
 \t\t\t\t\t<td class='date-italic muted'>{{ offre.createdAt ? offre.createdAt|date('d/m/Y H:i') : 'N/A' }}</td>
 \t\t\t\t\t<td class='date-italic muted'>{{ offre.updatedAt ? offre.updatedAt|date('d/m/Y H:i') : 'N/A' }}</td>
 \t\t\t\t\t<td>
-\t\t\t\t\t\t<a href=\"{{ path('app_offres_edit', { slug: offre.slug }) }}\" class=\"btn btn-sm btn-primary\">
+\t\t\t\t\t\t<a href=\"{{ path('app_offres_edit', { slug: offre.slug }) }}\" class=\"btn btn-action btn-open\">
 \t\t\t\t\t\t\t<i class=\"fa-solid fa-pen-to-square\"></i>
 \t\t\t\t\t\t</a>
 \t\t\t\t\t\t<a href=\"#\" class=\"btn btn-sm btn-danger\">

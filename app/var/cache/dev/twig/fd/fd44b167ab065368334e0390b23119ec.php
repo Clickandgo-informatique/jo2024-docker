@@ -115,31 +115,32 @@ class __TwigTemplate_140d68e4fd3c82775da88ba5d02d2cdf extends Template
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["title"]) || array_key_exists("title", $context) ? $context["title"] : (function () { throw new RuntimeError('Variable "title" does not exist.', 11, $this->source); })()), "html", null, true);
         yield "</h1>
 \t</caption>
-\t";
-        // line 13
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 13, $this->source); })()), "intitule", [], "any", false, false, false, 13), 'row');
-        yield "
+\t
 \t";
         // line 14
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 14, $this->source); })()), "intitule", [], "any", false, false, false, 14), 'errors');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 14, $this->source); })()), "intitule", [], "any", false, false, false, 14), 'row');
         yield "
 \t";
         // line 15
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 15, $this->source); })()), "background_color", [], "any", false, false, false, 15), 'row');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 15, $this->source); })()), "intitule", [], "any", false, false, false, 15), 'errors');
         yield "
 \t";
         // line 16
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 16, $this->source); })()), "icone", [], "any", false, false, false, 16), 'row');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 16, $this->source); })()), "background_color", [], "any", false, false, false, 16), 'row');
         yield "
 \t";
         // line 17
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 17, $this->source); })()), "slug", [], "any", false, false, false, 17), 'row');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 17, $this->source); })()), "icone", [], "any", false, false, false, 17), 'row');
+        yield "
+\t";
+        // line 18
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 18, $this->source); })()), "slug", [], "any", false, false, false, 18), 'row');
         yield "
 \t<button type=\"submit\" class=\"btn btn-primary\">
 \t\t<i class=\"fa-solid fa-floppy-disk\"></i>Enregistrer</button>
 \t";
-        // line 20
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 20, $this->source); })()), 'form_end');
+        // line 21
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 21, $this->source); })()), 'form_end');
         yield "
 
 
@@ -153,7 +154,7 @@ class __TwigTemplate_140d68e4fd3c82775da88ba5d02d2cdf extends Template
         yield from [];
     }
 
-    // line 24
+    // line 25
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -166,7 +167,7 @@ class __TwigTemplate_140d68e4fd3c82775da88ba5d02d2cdf extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 25
+        // line 26
         yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/form.css"), "html", null, true);
         yield "\">
@@ -201,7 +202,7 @@ class __TwigTemplate_140d68e4fd3c82775da88ba5d02d2cdf extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  170 => 25,  157 => 24,  142 => 20,  136 => 17,  132 => 16,  128 => 15,  124 => 14,  120 => 13,  115 => 11,  108 => 7,  105 => 6,  92 => 5,  78 => 3,  65 => 2,  42 => 1,);
+        return array (  171 => 26,  158 => 25,  143 => 21,  137 => 18,  133 => 17,  129 => 16,  125 => 15,  121 => 14,  115 => 11,  108 => 7,  105 => 6,  92 => 5,  78 => 3,  65 => 2,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -218,6 +219,7 @@ class __TwigTemplate_140d68e4fd3c82775da88ba5d02d2cdf extends Template
 \t\t\t<i class=\"fa-solid fa-circle-plus\"></i>
 \t\t\t{{title}}</h1>
 \t</caption>
+\t
 \t{{ form_row(form.intitule) }}
 \t{{ form_errors(form.intitule) }}
 \t{{ form_row(form.background_color) }}

@@ -32,6 +32,8 @@ class __TwigTemplate_3a036854b67358e51f7a9079e2e2ec28 extends Template
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
+            'stylesheets' => [$this, 'block_stylesheets'],
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -73,7 +75,8 @@ class __TwigTemplate_3a036854b67358e51f7a9079e2e2ec28 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Réinitialisation du mot de passe";
+        yield "Réinitialisation du mot de passe
+";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -83,7 +86,7 @@ class __TwigTemplate_3a036854b67358e51f7a9079e2e2ec28 extends Template
         yield from [];
     }
 
-    // line 5
+    // line 6
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -96,23 +99,86 @@ class __TwigTemplate_3a036854b67358e51f7a9079e2e2ec28 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 6
-        yield "    <h1>Réinitialisation du mot de passe</h1>
+        // line 7
+        yield "\t<h1>Réinitialisation du mot de passe</h1>
 
-    ";
-        // line 8
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["resetPassForm"]) || array_key_exists("resetPassForm", $context) ? $context["resetPassForm"] : (function () { throw new RuntimeError('Variable "resetPassForm" does not exist.', 8, $this->source); })()), 'form_start');
-        yield "
-        ";
+\t";
         // line 9
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetPassForm"]) || array_key_exists("resetPassForm", $context) ? $context["resetPassForm"] : (function () { throw new RuntimeError('Variable "resetPassForm" does not exist.', 9, $this->source); })()), "password", [], "any", false, false, false, 9), 'row');
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["resetPassForm"]) || array_key_exists("resetPassForm", $context) ? $context["resetPassForm"] : (function () { throw new RuntimeError('Variable "resetPassForm" does not exist.', 9, $this->source); })()), 'form_start');
         yield "
-      
-        <button type=\"submit\"class=\"btn btn-primary\"><i class=\"fa-solid fa-paper-plane\"></i>Envoyer</button>
-    ";
-        // line 12
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["resetPassForm"]) || array_key_exists("resetPassForm", $context) ? $context["resetPassForm"] : (function () { throw new RuntimeError('Variable "resetPassForm" does not exist.', 12, $this->source); })()), 'form_end');
+\t";
+        // line 10
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetPassForm"]) || array_key_exists("resetPassForm", $context) ? $context["resetPassForm"] : (function () { throw new RuntimeError('Variable "resetPassForm" does not exist.', 10, $this->source); })()), "password", [], "any", false, false, false, 10), 'row');
         yield "
+
+\t";
+        // line 13
+        yield "\t";
+        yield from $this->load("_partials/_password-checklist.html.twig", 13)->unwrap()->yield(CoreExtension::merge($context, ["form" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["resetPassForm"]) || array_key_exists("resetPassForm", $context) ? $context["resetPassForm"] : (function () { throw new RuntimeError('Variable "resetPassForm" does not exist.', 13, $this->source); })()), "password", [], "any", false, false, false, 13)]));
+        // line 14
+        yield "
+\t<button type=\"submit\" class=\"btn btn-success\">
+\t\t<i class=\"fa-solid fa-paper-plane\"></i>
+\t\tEnvoyer
+\t</button>
+\t";
+        // line 19
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["resetPassForm"]) || array_key_exists("resetPassForm", $context) ? $context["resetPassForm"] : (function () { throw new RuntimeError('Variable "resetPassForm" does not exist.', 19, $this->source); })()), 'form_end');
+        yield "
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 22
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_stylesheets(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        // line 23
+        yield "\t<link rel=\"stylesheet\" href=\"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/form.css"), "html", null, true);
+        yield "\">
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 26
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_javascripts(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        // line 27
+        yield "\t<script type=\"module\" src=\"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/password-check.js"), "html", null, true);
+        yield "\"></script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -144,23 +210,39 @@ class __TwigTemplate_3a036854b67358e51f7a9079e2e2ec28 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  114 => 12,  108 => 9,  104 => 8,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  179 => 27,  166 => 26,  152 => 23,  139 => 22,  126 => 19,  119 => 14,  116 => 13,  111 => 10,  107 => 9,  103 => 7,  90 => 6,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Réinitialisation du mot de passe{% endblock %}
+{% block title %}Réinitialisation du mot de passe
+{% endblock %}
 
 {% block body %}
-    <h1>Réinitialisation du mot de passe</h1>
+\t<h1>Réinitialisation du mot de passe</h1>
 
-    {{ form_start(resetPassForm) }}
-        {{ form_row(resetPassForm.password) }}
-      
-        <button type=\"submit\"class=\"btn btn-primary\"><i class=\"fa-solid fa-paper-plane\"></i>Envoyer</button>
-    {{ form_end(resetPassForm) }}
-{% endblock %}", "security/reset_password.html.twig", "/var/www/symfony/templates/security/reset_password.html.twig");
+\t{{ form_start(resetPassForm) }}
+\t{{ form_row(resetPassForm.password) }}
+
+\t{# Checklist mot de passe réutilisable #}
+\t{% include '_partials/_password-checklist.html.twig' with { 'form': resetPassForm.password } %}
+
+\t<button type=\"submit\" class=\"btn btn-success\">
+\t\t<i class=\"fa-solid fa-paper-plane\"></i>
+\t\tEnvoyer
+\t</button>
+\t{{ form_end(resetPassForm) }}
+{% endblock %}
+
+{% block stylesheets %}
+\t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/form.css') }}\">
+{% endblock %}
+
+{% block javascripts %}
+\t<script type=\"module\" src=\"{{ asset('assets/js/password-check.js') }}\"></script>
+{% endblock %}
+", "security/reset_password.html.twig", "/var/www/symfony/templates/security/reset_password.html.twig");
     }
 }

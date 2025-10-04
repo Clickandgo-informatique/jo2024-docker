@@ -4,26 +4,42 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="text-center"><i class="fa-solid fa-user-plus"></i>S'inscrire</h1>
-	<form method="post">
+	<h1 class="text-center">
+		<i class="fa-solid fa-user-plus"></i>
+		S'inscrire
+	</h1>
 
-		{{ form_errors(registrationForm) }}
-		{{ form_start(registrationForm) }}
-		{{ form_row(registrationForm.nickname) }}
-		{{ form_row(registrationForm.email) }}
-		{{ form_row(registrationForm.plainPassword) }}
-		<div class="flex items-center">
-			{{ form_widget(registrationForm.agreeTerms) }}
-			{{ form_label(registrationForm.agreeTerms) }}
-		</div>
+	{{ form_start(registrationForm) }}
+	{{ form_errors(registrationForm) }}
 
-		<button type="submit" class="btn"><i class="fa-solid fa-user-plus"></i>S'inscrire</button>
-		<p>Déjà inscrit ? connectez-vous
-			<a href="{{ path('app_login') }}">ici</a>
-		</p>
-		{{ form_end(registrationForm) }}
-	</form>
+	{{ form_row(registrationForm.nickname) }}
+	{{ form_row(registrationForm.email) }}
+	{{ form_row(registrationForm.plainPassword) }}
+
+	{# Checklist mot de passe réutilisable #}
+	{% include '_partials/_password-checklist.html.twig' with { 'form': registrationForm.plainPassword } %}
+
+	<div class="flex items-center mt-3">
+		{{ form_widget(registrationForm.agreeTerms) }}
+		{{ form_label(registrationForm.agreeTerms) }}
+	</div>
+
+	<button type="submit" class="btn mt-3">
+		<i class="fa-solid fa-user-plus"></i>
+		S'inscrire
+	</button>
+
+	<p class="mt-2">Déjà inscrit ? Connectez-vous
+		<a href="{{ path('app_login') }}">ici</a>
+	</p>
+
+	{{ form_end(registrationForm) }}
 {% endblock %}
+
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script type="module" src="{{ asset('assets/js/password-check.js') }}"></script>
 {% endblock %}

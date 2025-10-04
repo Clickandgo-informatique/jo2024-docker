@@ -4,7 +4,8 @@
 	<div id="subnav" class="subnav">
 		{% if app.user %}
 			<div class="connected">
-				Vous êtes connecté(e) en tant que
+				<span class="connected-message">Vous êtes connecté(e) en tant que
+				</span>
 				<span class="nickname">{{ app.user.userIdentifier }}</span>
 			</div>
 			<div class="user-options">

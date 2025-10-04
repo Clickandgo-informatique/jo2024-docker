@@ -54,9 +54,7 @@ class __TwigTemplate_2e29b6a9a50665bcd47114a10ed1df27 extends Template
 <p><a href=\"";
         // line 4
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\HttpFoundationExtension']->generateAbsoluteUrl($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verify_user", ["token" => (isset($context["token"]) || array_key_exists("token", $context) ? $context["token"] : (function () { throw new RuntimeError('Variable "token" does not exist.', 4, $this->source); })())])), "html", null, true);
-        yield "\">Lien</a></p>";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["token"]) || array_key_exists("token", $context) ? $context["token"] : (function () { throw new RuntimeError('Variable "token" does not exist.', 4, $this->source); })()), "html", null, true);
-        yield "
+        yield "\">Lien</a></p>
 <p>Merci</p>
 ";
         
@@ -97,7 +95,7 @@ class __TwigTemplate_2e29b6a9a50665bcd47114a10ed1df27 extends Template
         return new Source("<h1>Activation de votre compte sur reservations-jo-2024</h1>
 <p>Bonjour {{ user.getNickname() }},</p>
 <p>Pour activer votre compte, veuillez cliquer sur le lien suivant :</p>
-<p><a href=\"{{ absolute_url(path('verify_user', {token: token})) }}\">Lien</a></p>{{token}}
+<p><a href=\"{{ absolute_url(path('verify_user', {token: token})) }}\">Lien</a></p>
 <p>Merci</p>
 ", "emails/register-confirmation.html.twig", "/var/www/symfony/templates/emails/register-confirmation.html.twig");
     }

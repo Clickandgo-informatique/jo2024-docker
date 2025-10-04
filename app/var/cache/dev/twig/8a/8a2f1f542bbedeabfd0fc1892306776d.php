@@ -176,6 +176,6 @@ class __TwigTemplate_74d74f2a83a02b644dc25de7a7b43ecb extends Template
 \t<a href=\"{{ path('app_main') }}\" class=\"btn btn-primary\">
 \t\t<i class=\"fa-solid fa-home\"></i>Retour à l'accueil</a>
 {% endblock %}
-", "security/enable_2fa.html.twig", "/home/clavi/jo2024-docker/app/templates/security/enable_2fa.html.twig");
+", "security/enable_2fa.html.twig", "/var/www/symfony/templates/security/enable_2fa.html.twig");
     }
 }

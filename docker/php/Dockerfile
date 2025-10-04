@@ -1,4 +1,4 @@
-# Étape 1 : Build avec Composer
+# Étape 1 : build avec Composer
 FROM php:8.3-fpm AS builder
 
 # Installer dépendances système et extensions PHP
@@ -19,19 +19,19 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/symfony
 
-# Copier uniquement les fichiers composer.* pour profiter du cache Docker
+# Copier uniquement composer.* pour cache Docker
 COPY ./app/composer.* ./
 
-# Installer dépendances PHP sans dev (cache Docker optimisé)
+# Installer dépendances PHP
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # Copier le reste du projet
 COPY ./app ./
 
-# Étape 2 : Image finale
+# --- Étape finale ---
 FROM php:8.3-fpm
 
-# Installer seulement les extensions nécessaires
+# Installer extensions nécessaires
 RUN apt-get update && apt-get install -y \
     libicu-dev libonig-dev libxml2-dev libzip-dev \
     libfreetype6-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libxpm-dev \
@@ -46,13 +46,20 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /var/www/symfony
 
-# Copier le projet et vendor depuis le builder
+# Copier le projet depuis le builder
 COPY --from=builder /var/www/symfony ./
 
-# Garder Composer dans l’image finale
+# Garder Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Ajouter une conf PHP (Opcache activé)
+# Copier la conf PHP
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
+# --- Entrypoint pour préparer cache et logs ---
+COPY ./docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+USER www-data
+
 CMD ["php-fpm"]
+ENTRYPOINT ["entrypoint.sh"]

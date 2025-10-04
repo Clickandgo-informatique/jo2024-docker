@@ -31,12 +31,20 @@
     cursor: pointer;
 }
 .connected {
-    color: var(--primary-color);
+    width: auto;
+}
+.connected-message {
+    color: #fff;
 }
 .not-connected {
     color: orange;
 }
-.user-options{display:flex;flex-direction: row;align-items: center;justify-content: center;}
+.user-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 /* Responsive mobile */
 @media (max-width: 768px) {
     .subnav-container {

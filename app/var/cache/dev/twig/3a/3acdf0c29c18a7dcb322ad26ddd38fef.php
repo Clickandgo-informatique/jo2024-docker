@@ -32,6 +32,7 @@ class __TwigTemplate_ca273f5d4c0191311fb6912786b4ba46 extends Template
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
+            'stylesheets' => [$this, 'block_stylesheets'],
         ];
     }
 
@@ -123,6 +124,33 @@ class __TwigTemplate_ca273f5d4c0191311fb6912786b4ba46 extends Template
         yield from [];
     }
 
+    // line 14
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_stylesheets(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        // line 15
+        yield "\t<link rel=\"stylesheet\" href=\"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/form.css"), "html", null, true);
+        yield "\">
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
     /**
      * @codeCoverageIgnore
      */
@@ -144,7 +172,7 @@ class __TwigTemplate_ca273f5d4c0191311fb6912786b4ba46 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  113 => 11,  108 => 9,  104 => 8,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  141 => 15,  128 => 14,  114 => 11,  109 => 9,  105 => 8,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -162,6 +190,8 @@ class __TwigTemplate_ca273f5d4c0191311fb6912786b4ba46 extends Template
         {{ form_end(requestPassForm) }}
     </section>
 {% endblock %}
-", "security/reset_password_request.html.twig", "/var/www/symfony/templates/security/reset_password_request.html.twig");
+{% block stylesheets %}
+\t<link rel=\"stylesheet\" href=\"{{ asset('assets/css/form.css') }}\">
+{% endblock %}", "security/reset_password_request.html.twig", "/var/www/symfony/templates/security/reset_password_request.html.twig");
     }
 }

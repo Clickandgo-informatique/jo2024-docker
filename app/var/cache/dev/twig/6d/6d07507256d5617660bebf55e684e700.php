@@ -143,6 +143,6 @@ class __TwigTemplate_89214761daf5e2adc256f54dd1945edc extends Template
 {% endblock %}
 {% block body %}
     <h1 class=\"text-center\"><i class=\"fa-solid fa-credit-card\"></i>Paiement de la commande ...</h1>
-{% endblock %}", "commandes/paiement-commandes.html.twig", "/home/clavi/jo2024-docker/app/templates/commandes/paiement-commandes.html.twig");
+{% endblock %}", "commandes/paiement-commandes.html.twig", "/var/www/symfony/templates/commandes/paiement-commandes.html.twig");
     }
 }

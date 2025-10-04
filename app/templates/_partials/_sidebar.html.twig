@@ -1,4 +1,13 @@
-<aside id="sidebar" class="sidebar">
+<aside
+	id="sidebar" class="sidebar">
+	{# Dashboard #}
+	<div class="sidebar-item">
+		<div class="sidebar-item-title">
+			<a href="{{ path('admin_dashboard') }}" class="sidebar-link">
+				<i class="fa-solid fa-list"></i>
+				Dashboard</a>
+		</div>
+	</div>
 	<div class="sidebar-item">
 		<div class="sidebar-item-title">
 			<i class="fa-solid fa-users"></i>
@@ -6,7 +15,6 @@
 		<a href="{{ path('app_utilisateurs_index') }}" class="sidebar-link">
 			<i class="fa-solid fa-list"></i>
 			Liste</a>
-
 	</div>
 	<div class="sidebar-item">
 		<div class="sidebar-item-title">

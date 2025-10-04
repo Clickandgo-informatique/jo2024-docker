@@ -16,28 +16,31 @@ class DetailsCommandesRepository extends ServiceEntityRepository
         parent::__construct($registry, DetailsCommandes::class);
     }
 
-    //    /**
-    //     * @return DetailsCommandes[] Returns an array of DetailsCommandes objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('d')
-    //            ->andWhere('d.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('d.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?DetailsCommandes
-    //    {
-    //        return $this->createQueryBuilder('d')
-    //            ->andWhere('d.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
-}
+    public function les10MeilleuresVentesOffres(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->select('o.intitule AS offre, s.emoji AS emoji, SUM(d.quantite) AS totalVentes')
+            ->join('d.offres', 'o')
+            ->join('o.sports', 's')       // relation vers Sport
+            ->join('d.commande', 'c')
+            ->where('c.payee_le IS NOT NULL')
+            ->groupBy('o.id, s.emoji')
+            ->orderBy('totalVentes', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+    public function pourcentageParCategorieOffres():array
+    {
+        return $this->createQueryBuilder('d')
+              ->select('c.nom AS categorie, SUM(d.quantite) AS totalVentes')
+        ->join('d.offres', 'o')
+        ->join('o.categorie', 'c')       // relation vers CategoriesOffres
+        ->join('d.commande', 'cmd')
+        ->where('cmd.payee_le IS NOT NULL') // seulement commandes payées
+        ->groupBy('c.id')
+        ->orderBy('totalVentes', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+};

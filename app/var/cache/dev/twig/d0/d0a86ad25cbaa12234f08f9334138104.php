@@ -47,31 +47,43 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "_partials/_sidebar.html.twig"));
 
         // line 1
-        yield "<aside id=\"sidebar\" class=\"sidebar\">
+        yield "<aside
+\tid=\"sidebar\" class=\"sidebar\">
+\t";
+        // line 4
+        yield "\t<div class=\"sidebar-item\">
+\t\t<div class=\"sidebar-item-title\">
+\t\t\t<a href=\"";
+        // line 6
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_dashboard");
+        yield "\" class=\"sidebar-link\">
+\t\t\t\t<i class=\"fa-solid fa-list\"></i>
+\t\t\t\tDashboard</a>
+\t\t</div>
+\t</div>
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-users\"></i>
 \t\t\tUtilisateurs</div>
 \t\t<a href=\"";
-        // line 6
+        // line 15
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_utilisateurs_index");
         yield "\" class=\"sidebar-link\">
 \t\t\t<i class=\"fa-solid fa-list\"></i>
 \t\t\tListe</a>
-
 \t</div>
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-briefcase\"></i>
 \t\t\tOffres</div>
 \t\t<a href=\"";
-        // line 15
+        // line 23
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_offres_index");
         yield "\" class=\"sidebar-link\">
 \t\t\t<i class=\"fa-solid fa-list\"></i>
 \t\t\tListe</a>
 \t\t<a href=\"";
-        // line 18
+        // line 26
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_categories_offres_index");
         yield "\" class=\"sidebar-link\">
 \t\t\t<i class=\"fa-solid fa-tags\"></i>
@@ -82,7 +94,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
 \t\t\t<i class=\"fa-solid fa-futbol\"></i>
 \t\t\tSports</div>
 \t\t<a href=\"";
-        // line 26
+        // line 34
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sports_index");
         yield "\" class=\"sidebar-link\">
 \t\t\t<i class=\"fa-solid fa-list\"></i>
@@ -93,7 +105,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
 \t\t\t<i class=\"fa-solid fa-qrcode\"></i>
 \t\t\tQrCodes</div>
 \t\t<a href=\"";
-        // line 34
+        // line 42
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_tickets_scan");
         yield "\" class=\"sidebar-link\">
 \t\t\t<i class=\"fa-solid fa-expand\"></i>
@@ -106,9 +118,9 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
 </button>
 
 ";
-        // line 44
+        // line 52
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
-        // line 47
+        // line 55
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -119,7 +131,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         yield from [];
     }
 
-    // line 44
+    // line 52
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -132,7 +144,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 45
+        // line 53
         yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/sidebar.css"), "html", null, true);
         yield "\">
@@ -146,7 +158,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         yield from [];
     }
 
-    // line 47
+    // line 55
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -159,7 +171,7 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 48
+        // line 56
         yield "\t<script type=\"module\" src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/sidebar.js"), "html", null, true);
         yield "\"></script>
@@ -194,12 +206,21 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  163 => 48,  150 => 47,  136 => 45,  123 => 44,  112 => 47,  110 => 44,  97 => 34,  86 => 26,  75 => 18,  69 => 15,  57 => 6,  50 => 1,);
+        return array (  175 => 56,  162 => 55,  148 => 53,  135 => 52,  124 => 55,  122 => 52,  109 => 42,  98 => 34,  87 => 26,  81 => 23,  70 => 15,  58 => 6,  54 => 4,  50 => 1,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("<aside id=\"sidebar\" class=\"sidebar\">
+        return new Source("<aside
+\tid=\"sidebar\" class=\"sidebar\">
+\t{# Dashboard #}
+\t<div class=\"sidebar-item\">
+\t\t<div class=\"sidebar-item-title\">
+\t\t\t<a href=\"{{ path('admin_dashboard') }}\" class=\"sidebar-link\">
+\t\t\t\t<i class=\"fa-solid fa-list\"></i>
+\t\t\t\tDashboard</a>
+\t\t</div>
+\t</div>
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">
 \t\t\t<i class=\"fa-solid fa-users\"></i>
@@ -207,7 +228,6 @@ class __TwigTemplate_b1575e4e74a5729cc6f70e75f58ff9cf extends Template
 \t\t<a href=\"{{ path('app_utilisateurs_index') }}\" class=\"sidebar-link\">
 \t\t\t<i class=\"fa-solid fa-list\"></i>
 \t\t\tListe</a>
-
 \t</div>
 \t<div class=\"sidebar-item\">
 \t\t<div class=\"sidebar-item-title\">

@@ -23,6 +23,8 @@ return [
         '/admin/offres/ajout' => [[['_route' => 'app_offres_new', '_controller' => 'App\\Controller\\Admin\\OffresController::new'], null, null, null, false, false, null]],
         '/admin/sports' => [[['_route' => 'app_sports_index', '_controller' => 'App\\Controller\\Admin\\SportsController::index'], null, null, null, false, false, null]],
         '/admin/sports/ajout' => [[['_route' => 'app_sports_new', '_controller' => 'App\\Controller\\Admin\\SportsController::new'], null, null, null, false, false, null]],
+        '/admin/stats-ventes-offres-top-ten' => [[['_route' => 'stats_ventes_offres_top_ten', '_controller' => 'App\\Controller\\Admin\\StatsController::ventes'], null, null, null, false, false, null]],
+        '/admin/stats-ventes-offres-par-categories' => [[['_route' => 'stats_ventes_offres_par_categories', '_controller' => 'App\\Controller\\Admin\\StatsController::ventesParCategorie'], null, null, null, false, false, null]],
         '/admin/tickets/scan' => [[['_route' => 'admin_tickets_scan', '_controller' => 'App\\Controller\\Admin\\TicketScanController::scan'], null, ['GET' => 0], null, false, false, null]],
         '/admin/tickets/verify' => [[['_route' => 'admin_tickets_verify', '_controller' => 'App\\Controller\\Admin\\TicketScanController::verify'], null, ['POST' => 0], null, false, false, null]],
         '/admin/utilisateurs' => [[['_route' => 'app_utilisateurs_index', '_controller' => 'App\\Controller\\Admin\\UsersController::index'], null, null, null, true, false, null]],

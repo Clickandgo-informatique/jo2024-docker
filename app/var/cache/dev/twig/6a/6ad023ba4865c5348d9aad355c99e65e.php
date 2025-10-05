@@ -32,6 +32,8 @@ class __TwigTemplate_3e62550727f79f41a296170e4ec94754 extends Template
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
+            'stylesheets' => [$this, 'block_stylesheets'],
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -100,6 +102,78 @@ class __TwigTemplate_3e62550727f79f41a296170e4ec94754 extends Template
         // line 7
         yield "\t<h1 class=\"text-center\">Administration</h1>
 \t<p class=\"text-center\">Bienvenue dans la zone d'administration.</p>
+\t<div class=\"charts-grid\">
+\t\t<div class=\"chart-card\">
+\t\t\t<h3>Top 10 ventes par offre</h3>
+\t\t\t<canvas id=\"bestSalesChart\"></canvas>
+\t\t</div>
+
+\t\t<div class=\"chart-card\">
+\t\t\t<h3>Répartition par catégorie</h3>
+\t\t\t<canvas id=\"salesCategoryChart\"></canvas>
+\t\t</div>
+\t</div>
+
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 22
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_stylesheets(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        // line 23
+        yield "\t<link rel=\"stylesheet\" href=\"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/charts.css"), "html", null, true);
+        yield "\">
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 25
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_javascripts(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        // line 26
+        yield "\t<script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+\t<script type=\"module\" src=\"";
+        // line 27
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/charts/top10-offres.js"), "html", null, true);
+        yield "\"></script>
+\t<script type=\"module\" src=\"";
+        // line 28
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/charts/offres-par-categories.js"), "html", null, true);
+        yield "\"></script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -131,7 +205,7 @@ class __TwigTemplate_3e62550727f79f41a296170e4ec94754 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  101 => 7,  88 => 6,  64 => 3,  41 => 1,);
+        return array (  175 => 28,  171 => 27,  168 => 26,  155 => 25,  141 => 23,  128 => 22,  103 => 7,  90 => 6,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -144,6 +218,26 @@ class __TwigTemplate_3e62550727f79f41a296170e4ec94754 extends Template
 {% block body %}
 \t<h1 class=\"text-center\">Administration</h1>
 \t<p class=\"text-center\">Bienvenue dans la zone d'administration.</p>
+\t<div class=\"charts-grid\">
+\t\t<div class=\"chart-card\">
+\t\t\t<h3>Top 10 ventes par offre</h3>
+\t\t\t<canvas id=\"bestSalesChart\"></canvas>
+\t\t</div>
+
+\t\t<div class=\"chart-card\">
+\t\t\t<h3>Répartition par catégorie</h3>
+\t\t\t<canvas id=\"salesCategoryChart\"></canvas>
+\t\t</div>
+\t</div>
+
+{% endblock %}
+{% block stylesheets %}
+\t<link rel=\"stylesheet\" href=\"{{asset(\"assets/css/charts.css\")}}\">
+{% endblock %}
+{% block javascripts %}
+\t<script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+\t<script type=\"module\" src=\"{{asset('assets/js/charts/top10-offres.js')}}\"></script>
+\t<script type=\"module\" src=\"{{asset('assets/js/charts/offres-par-categories.js')}}\"></script>
 {% endblock %}
 ", "admin/index.html.twig", "/var/www/symfony/templates/admin/index.html.twig");
     }

@@ -1,42 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
     const sidebar = document.getElementById("sidebar");
     const toggleBtn = document.getElementById("sidebar-toggle");
-    const mainWrapper = document.querySelector(".main-wrapper");
-    const navbar = document.getElementById("navbar");
-    const subnav = document.getElementById("subnav-container");
+    const mainContent = document.querySelector(".main-content");
 
-    function adjustSidebar() {
-        const navbarHeight = navbar ? navbar.offsetHeight : 0;
-        const subnavHeight = subnav ? subnav.offsetHeight : 0; // assure que subnav existe
-        const totalTop = navbarHeight + subnavHeight;
-
-        sidebar.style.top = totalTop + "px";
-        sidebar.style.height = `calc(100% - ${totalTop}px)`;
+    // Mini par défaut desktop
+    if (window.innerWidth >= 769) {
+        sidebar.classList.add("sidebar-mini");
+        mainContent.style.marginLeft = "60px";
+        toggleBtn.style.left = "60px";
+        toggleBtn.textContent = "▶";
     }
 
-    // Initial adjustment
-    adjustSidebar();
-
-    // Ajuster à chaque resize
-    window.addEventListener("resize", adjustSidebar);
-
-    // Toggle sidebar
+    // Toggle sidebar desktop / mobile
     toggleBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("hidden");
-
-        // Desktop : main-wrapper poussé
         if (window.innerWidth >= 769) {
-            mainWrapper.style.marginLeft = sidebar.classList.contains("hidden")
-                ? "0"
-                : "240px";
+            const expanded = sidebar.classList.toggle("expanded");
+            sidebar.classList.toggle("sidebar-mini", !expanded);
+            mainContent.style.marginLeft = expanded ? "250px" : "60px";
+            toggleBtn.style.left = expanded ? "250px" : "60px";
+            toggleBtn.textContent = expanded ? "◀" : "▶";
+        } else {
+            sidebar.classList.toggle("active");
         }
-
-        // Flèche
-        toggleBtn.textContent = sidebar.classList.contains("hidden")
-            ? "▶"
-            : "◀";
     });
 
-    // Initial icon
-    toggleBtn.textContent = sidebar.classList.contains("hidden") ? "▶" : "◀";
+    // Cliquer sur un item avec sous-menu en mode mini → ouvrir sidebar + afficher sous-menu
+    const sidebarItems = document.querySelectorAll(".sidebar-item");
+    sidebarItems.forEach(item => {
+        const title = item.querySelector(".sidebar-item-title");
+        const sublist = item.querySelector(".sidebar-sublist");
+        if (title && sublist) {
+            title.addEventListener("click", () => {
+                if (window.innerWidth >= 769 && sidebar.classList.contains("sidebar-mini")) {
+                    // Étendre sidebar
+                    sidebar.classList.add("expanded");
+                    sidebar.classList.remove("sidebar-mini");
+                    mainContent.style.marginLeft = "250px";
+                    toggleBtn.style.left = "250px";
+                    toggleBtn.textContent = "◀";
+
+                    // Afficher le sous-menu
+                    sublist.style.display = "block";
+                } else if (sublist) {
+                    // Toggle sous-menu si déjà étendu
+                    sublist.style.display = sublist.style.display === "block" ? "none" : "block";
+                }
+            });
+        }
+    });
+
+    // Reset sur resize
+    window.addEventListener("resize", () => {
+        if (window.innerWidth >= 769) {
+            sidebar.classList.add("sidebar-mini");
+            sidebar.classList.remove("expanded", "active");
+            mainContent.style.marginLeft = "60px";
+            toggleBtn.style.left = "60px";
+            toggleBtn.textContent = "▶";
+            document.querySelectorAll(".sidebar-sublist").forEach(sub => sub.style.display = "none");
+        } else {
+            sidebar.classList.remove("sidebar-mini", "expanded");
+            sidebar.classList.remove("active");
+            mainContent.style.marginLeft = "0";
+            toggleBtn.style.left = "";
+            toggleBtn.textContent = "▶";
+            document.querySelectorAll(".sidebar-sublist").forEach(sub => sub.style.display = "none");
+        }
+    });
 });

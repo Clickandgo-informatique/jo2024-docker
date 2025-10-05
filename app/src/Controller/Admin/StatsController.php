@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Repository\DetailsCommandesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,17 +12,32 @@ class StatsController extends AbstractController
 {
     //Les 10 meilleures ventes d'offres
     #[Route('/admin/stats-ventes-offres-top-ten', name: 'stats_ventes_offres_top_ten')]
-    public function ventes(DetailsCommandesRepository $repo): Response
+    public function ventes(DetailsCommandesRepository $repo): JsonResponse
     {
         $top10 = $repo->les10MeilleuresVentesOffres();
 
-        // Concaténer emoji + nom pour l'affichage
-        $labels = array_map(fn($row) => $row['emoji'] . ' ' . $row['offre'], $top10);
-        $data = array_column($top10, 'totalVentes');
+        $labels = [];
+        $data = [];
+        $colors = [];
 
-        return $this->render('stats/ventes-offres-top-ten.html.twig', [
+        $sportColors = [
+            1 => '#FF6384',
+            2 => '#36A2EB',
+            3 => '#FFCE56',
+            4 => '#4BC0C0',
+            5 => '#9966FF',
+            6 => '#FF9F40',
+        ];
+
+        foreach ($top10 as $row) {
+            $labels[] = $row['emoji'] . ' ' . $row['offre'];
+            $data[] = $row['totalVentes'];
+            $colors[] = $sportColors[$row['sport_id']] ?? '#cccccc';
+        }
+        return $this->json([
             'labels' => $labels,
             'data' => $data,
+            'colors' => $colors,
         ]);
     }
 
@@ -44,7 +60,7 @@ class StatsController extends AbstractController
             '#FF9F40'
         ];
 
-        return $this->render('stats/ventes-offres-par-categories.html.twig', [
+        return $this->json([
             'labels' => $labels,
             'data' => $data,
             'colors' => $colors

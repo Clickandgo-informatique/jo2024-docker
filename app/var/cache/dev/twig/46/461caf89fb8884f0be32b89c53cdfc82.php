@@ -110,22 +110,19 @@ class __TwigTemplate_064afbc991ad69341347607a81aa1aa5 extends Template
 
 \t<table>
 \t\t<thead>
+\t\t\t<th></th>
 \t\t\t<th>Intitulé</th>
-\t\t\t<th>Actions</th>
+\t\t\t<th></th>
 \t\t</thead>
 \t\t<tbody>
 \t\t\t";
-        // line 17
+        // line 18
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["categoriesOffres"]) || array_key_exists("categoriesOffres", $context) ? $context["categoriesOffres"] : (function () { throw new RuntimeError('Variable "categoriesOffres" does not exist.', 17, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["categoriesOffres"]) || array_key_exists("categoriesOffres", $context) ? $context["categoriesOffres"] : (function () { throw new RuntimeError('Variable "categoriesOffres" does not exist.', 18, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["c"]) {
-            // line 18
-            yield "\t\t\t\t<tr>
-\t\t\t\t\t<td>";
             // line 19
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "nom", [], "any", false, false, false, 19), "html", null, true);
-            yield "</td>
+            yield "\t\t\t\t<tr>
 \t\t\t\t\t<td class=\"text-center\">
 \t\t\t\t\t\t<a href=\"";
             // line 21
@@ -134,20 +131,30 @@ class __TwigTemplate_064afbc991ad69341347607a81aa1aa5 extends Template
 \t\t\t\t\t\t\t<i class=\"fa-solid fa-pen-to-square\"></i>
 \t\t\t\t\t\t</a>
 \t\t\t\t\t</td>
+\t\t\t\t\t<td>";
+            // line 25
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["c"], "nom", [], "any", false, false, false, 25), "html", null, true);
+            yield "</td>
+\t\t\t\t\t\t<td class=\"text-center\">
+\t\t\t\t\t\t<a href=\"#\"class=\"btn-action btn-delete\">
+\t\t\t\t\t\t\t<i class=\"fa-solid fa-trash-can \"></i>
+\t\t\t\t\t\t</a>
+\t\t\t\t\t</td>
+\t\t\t\t\t
 \t\t\t\t</tr>
 \t\t\t";
             $context['_iterated'] = true;
         }
-        // line 26
+        // line 33
         if (!$context['_iterated']) {
-            // line 27
+            // line 34
             yield "\t\t\t\t<p class=\"text-center\">Il n'existe encore aucune catégorie d'offre enregistrée.</p>
 \t\t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['c'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 29
+        // line 36
         yield "\t\t</tbody>
 \t</table>
 
@@ -161,7 +168,7 @@ class __TwigTemplate_064afbc991ad69341347607a81aa1aa5 extends Template
         yield from [];
     }
 
-    // line 33
+    // line 40
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -174,7 +181,7 @@ class __TwigTemplate_064afbc991ad69341347607a81aa1aa5 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 34
+        // line 41
         yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/table.css"), "html", null, true);
         yield "\">
@@ -209,7 +216,7 @@ class __TwigTemplate_064afbc991ad69341347607a81aa1aa5 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  178 => 34,  165 => 33,  151 => 29,  144 => 27,  142 => 26,  132 => 21,  127 => 19,  124 => 18,  119 => 17,  107 => 8,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
+        return array (  185 => 41,  172 => 40,  158 => 36,  151 => 34,  149 => 33,  136 => 25,  129 => 21,  125 => 19,  120 => 18,  107 => 8,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -226,18 +233,25 @@ class __TwigTemplate_064afbc991ad69341347607a81aa1aa5 extends Template
 
 \t<table>
 \t\t<thead>
+\t\t\t<th></th>
 \t\t\t<th>Intitulé</th>
-\t\t\t<th>Actions</th>
+\t\t\t<th></th>
 \t\t</thead>
 \t\t<tbody>
 \t\t\t{% for c in categoriesOffres %}
 \t\t\t\t<tr>
-\t\t\t\t\t<td>{{c.nom}}</td>
 \t\t\t\t\t<td class=\"text-center\">
 \t\t\t\t\t\t<a href=\"{{path('app_categories_offres_edit',{slug:c.slug})}}\">
 \t\t\t\t\t\t\t<i class=\"fa-solid fa-pen-to-square\"></i>
 \t\t\t\t\t\t</a>
 \t\t\t\t\t</td>
+\t\t\t\t\t<td>{{c.nom}}</td>
+\t\t\t\t\t\t<td class=\"text-center\">
+\t\t\t\t\t\t<a href=\"#\"class=\"btn-action btn-delete\">
+\t\t\t\t\t\t\t<i class=\"fa-solid fa-trash-can \"></i>
+\t\t\t\t\t\t</a>
+\t\t\t\t\t</td>
+\t\t\t\t\t
 \t\t\t\t</tr>
 \t\t\t{% else %}
 \t\t\t\t<p class=\"text-center\">Il n'existe encore aucune catégorie d'offre enregistrée.</p>

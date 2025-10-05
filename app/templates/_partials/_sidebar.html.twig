@@ -1,57 +1,78 @@
-<aside
-	id="sidebar" class="sidebar">
-	{# Dashboard #}
-	<div class="sidebar-item">
-		<div class="sidebar-item-title">
+<aside id="sidebar" class="sidebar sidebar-mini">
+	<ul class="sidebar-list">
+
+		<li class="sidebar-item">
 			<a href="{{ path('admin_dashboard') }}" class="sidebar-link">
 				<i class="fa-solid fa-list"></i>
-				Dashboard</a>
-		</div>
-	</div>
-	<div class="sidebar-item">
-		<div class="sidebar-item-title">
-			<i class="fa-solid fa-users"></i>
-			Utilisateurs</div>
-		<a href="{{ path('app_utilisateurs_index') }}" class="sidebar-link">
-			<i class="fa-solid fa-list"></i>
-			Liste</a>
-	</div>
-	<div class="sidebar-item">
+				<span class="label">Dashboard</span>
+			</a>
+		</li>
+
+		<li class="sidebar-item">
+			<div class="sidebar-item-title">
+				<i class="fa-solid fa-users"></i>
+				<span class="label">Utilisateurs</span>
+			</div>
+			<ul class="sidebar-sublist">
+				<li>
+					<a href="{{ path('app_utilisateurs_index') }}" class="sidebar-link">
+						<i class="fa-solid fa-list"></i>
+						<span class="label">Liste</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+	</li>
+	<li class="sidebar-item">
 		<div class="sidebar-item-title">
 			<i class="fa-solid fa-briefcase"></i>
-			Offres</div>
-		<a href="{{ path('app_offres_index') }}" class="sidebar-link">
-			<i class="fa-solid fa-list"></i>
-			Liste</a>
-		<a href="{{ path('app_categories_offres_index') }}" class="sidebar-link">
-			<i class="fa-solid fa-tags"></i>
-			Catégories offres</a>
-	</div>
-	<div class="sidebar-item">
+			<span class="label">Offres</span>
+		</div>
+		<ul class="sidebar-sublist">
+			<li>
+				<a href="{{ path('app_offres_index') }}" class="sidebar-link">
+					<i class="fa-solid fa-list"></i>
+					<span class="label">Liste</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_categories_offres_index') }}" class="sidebar-link">
+					<i class="fa-solid fa-tags"></i>
+					<span class="label">Catégories offres</span>
+				</a>
+			</li>
+		</ul>
+	</li>
+
+	<li class="sidebar-item">
 		<div class="sidebar-item-title">
 			<i class="fa-solid fa-futbol"></i>
-			Sports</div>
-		<a href="{{ path('app_sports_index') }}" class="sidebar-link">
-			<i class="fa-solid fa-list"></i>
-			Liste</a>
-	</div>
-	<div class="sidebar-item">
+			<span class="label">Sports</span>
+		</div>
+		<ul class="sidebar-sublist">
+			<li>
+				<a href="{{ path('app_sports_index') }}" class="sidebar-link">
+					<i class="fa-solid fa-list"></i>
+					<span class="label">Liste</span>
+				</a>
+			</li>
+		</ul>
+	</li>
+
+	<li class="sidebar-item">
 		<div class="sidebar-item-title">
 			<i class="fa-solid fa-qrcode"></i>
-			QrCodes</div>
-		<a href="{{ path('admin_tickets_scan') }}" class="sidebar-link">
-			<i class="fa-solid fa-expand"></i>
-			Scanner</a>
-	</div>
-</aside>
-<!-- bouton flottant pour toggle -->
-<button id="sidebar-toggle" class="sidebar-toggle">
-	▶
-</button>
+			<span class="label">QrCodes</span>
+		</div>
+		<ul class="sidebar-sublist">
+			<li>
+				<a href="{{ path('admin_tickets_scan') }}" class="sidebar-link">
+					<i class="fa-solid fa-expand"></i>
+					<span class="label">Scanner</span>
+				</a>
+			</li>
+		</ul>
+	</li>
 
-{% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
-{% endblock %}
-{% block javascripts %}
-	<script type="module" src="{{asset('assets/js/sidebar.js')}}"></script>
-{% endblock %}
+</ul></aside>{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('assets/css/sidebar.css')}}">{% endblock %}

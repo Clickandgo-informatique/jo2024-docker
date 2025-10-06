@@ -4,14 +4,11 @@ framework:
     asset_mapper: false
     default_locale: fr_FR
 
-    # Note that the session will be started ONLY if you read or write from it.
-    session: true
+    session:
+        enabled: true
+        handler_id: null              # Stockage par fichiers (le plus courant)
+        cookie_secure: auto           # HTTPS uniquement si ton site est en HTTPS
+        cookie_samesite: lax          # Évite les blocages de cookies cross-site
+        cookie_lifetime: 0            # Session expire à la fermeture du navigateur
+        storage_factory_id: session.storage.factory.native
 
-    #esi: true
-    #fragments: true
-
-when@test:
-    framework:
-        test: true
-        session:
-            storage_factory_id: session.storage.factory.mock_file

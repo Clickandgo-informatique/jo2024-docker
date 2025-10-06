@@ -1,47 +1,62 @@
 {# panier/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon panier{% endblock %}
+{% block title %}Mon panier
+{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_offres_catalogue') }}" class="btn btn-primary">
-        <i class="fa-solid fa-list"></i> Revenir à la liste d'offres
-    </a>
+	<a href="{{ path('app_offres_catalogue') }}" class="btn btn-primary">
+		<i class="fa-solid fa-list"></i>
+		Revenir à la liste d'offres
+	</a>
 
-    <h1 class="text-center">
-        <i class="fa-solid fa-cart-shopping"></i> Mon panier
-    </h1>
+	<h1 class="text-center">
+		<i class="fa-solid fa-cart-shopping"></i>
+		Mon panier
+	</h1>
 
-    <div id="cart-container">
-        {% include '_partials/_cart-items.html.twig' with {
+	<div id="cart-container">
+		{% include '_partials/_cart-items.html.twig' with {
             panier: panier,
             data: data,
             totalItems: totalItems,
             total: total
         } %}
-    </div>
+	</div>
 
-    <form action="{{ path('panier_validate') }}" method="post">
-        {% if app.user and app.session.get('2fa_passed') %}
-            <button type="submit" class="btn btn-primary">
-                <i class="fa-solid fa-circle-check"></i> Valider le panier
-            </button>
-        {% else %}
-            <p class="text-warning">
-                Connectez-vous et validez la double authentification pour pouvoir valider le panier.
-            </p>
-            <button type="button" class="btn btn-danger text-center" disabled>
-                <i class="fa-solid fa-circle-check"></i> Valider le panier
-            </button>
-        {% endif %}
-    </form>
+	<form action="{{ path('panier_validate') }}" method="post">
+		{% if app.user and app.session.get('2fa_passed') %}
+			{# Désactive le bouton de validation du panier si vide #}
+			{% if panier is empty %}
+				<button type="button" class="btn btn-danger text-center" disabled>
+					<i class="fa-solid fa-circle-check"></i>
+					Valider le panier
+				</button>
+			{% else %}
+				{# Active le bouton de validation du panier si authentification ok + 2fa_passed #}
+				<button type="submit" class="btn btn-primary">
+					<i class="fa-solid fa-circle-check"></i>
+					Valider le panier
+				</button>
+			{% endif %}
+		{% else %}
+			<p class="text-warning">
+				Connectez-vous et validez la double authentification pour pouvoir valider le panier.
+			</p>
+			{# Désactive le bouton de validation du panier si authentification et 2fa_passed échouent #}
+			<button type="button" class="btn btn-danger text-center" disabled>
+				<i class="fa-solid fa-circle-check"></i>
+				Valider le panier
+			</button>
+		{% endif %}
+	</form>
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/cart.js') }}"></script>
+	<script src="{{ asset('assets/js/cart.js') }}"></script>
 {% endblock %}

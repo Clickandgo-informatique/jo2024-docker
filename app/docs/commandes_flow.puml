@@ -1,0 +1,45 @@
+@startuml commandes_flow
+actor Utilisateur
+participant "PanierController" as Panier
+participant "CommandesController" as Commandes
+participant "EntityManager/DB" as DB
+participant "TicketsController/Service" as Tickets
+
+== Ajouter au panier ==
+Utilisateur -> Panier: add(item)
+Panier -> Session: stocker l'article
+Panier --> Utilisateur: panier mis à jour
+
+== Modifier ou supprimer ==
+Utilisateur -> Panier: update/remove(item)
+Panier -> Session: mettre à jour la session
+Panier --> Utilisateur: panier mis à jour
+
+== Validation du panier ==
+Utilisateur -> Panier: valider panier
+Panier -> Utilisateur: vérifie 2FA
+alt 2FA non passée
+    Panier --> Utilisateur: redirige vers 2FA
+else 2FA passée
+    Panier --> Commandes: redirection pour créer commande
+end
+
+== Création de la commande ==
+Commandes -> Session: récupère panier
+Commandes -> DB: crée Commande
+Commandes -> DB: crée DetailsCommandes
+Commandes -> DB: persist/flush
+Commandes -> Session: supprime le panier
+Commandes --> Utilisateur: confirmation commande
+
+== Paiement ==
+Utilisateur -> Commandes: payerCommande(id)
+Commandes -> PaiementService: traitement du paiement
+alt paiement réussi
+    Commandes -> Tickets: générer ticket
+    Tickets -> DB: persist ticket
+    Tickets --> Utilisateur: ticket disponible
+else paiement échoué
+    Commandes --> Utilisateur: message d'erreur
+end
+@enduml

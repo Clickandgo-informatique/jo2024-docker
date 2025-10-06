@@ -1,0 +1,39 @@
+@startuml panier_flow
+start
+:Utilisateur consulte le panier;
+if (Panier vide ?) then (oui)
+    :Afficher message "Panier vide";
+    stop
+else (non)
+    :Afficher les articles du panier;
+endif
+
+:Utilisateur modifie/ajoute/supprime des articles;
+
+:Utilisateur clique sur "Valider le panier";
+if (2FA passée ?) then (non)
+    :Rediriger vers la vérification 2FA;
+    stop
+else (oui)
+    :Rediriger vers CommandesController pour création commande;
+endif
+
+:CommandesController récupère le panier;
+:Créer une commande avec référence unique;
+:Créer les détails de la commande;
+:Persister la commande en base;
+:Vider le panier;
+
+:Afficher confirmation "Commande créée";
+
+:Utilisateur procède au paiement;
+if (Paiement réussi ?) then (oui)
+    :Générer ticket QR;
+    :Persister le ticket en base;
+    :Afficher ticket à l'utilisateur;
+else (non)
+    :Afficher message "Paiement échoué";
+endif
+
+stop
+@enduml

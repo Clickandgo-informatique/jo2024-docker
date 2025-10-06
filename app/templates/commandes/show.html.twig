@@ -1,55 +1,68 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-	Commande
+	Payer une commande
 {% endblock %}
 {% block body %}
-	<main>
-		<h1 class="text-center">
-			Détails de la commande
-			{{commande.reference}}<br>
-			le
-			{{commande.createdAt|date("d-m-Y à H:i:s")}}
-		</h1>
-		<table>
-			<thead>
-				<th>Etat</th>
-				<th>Intitule</th>
-				<th>Total ligne</th>
-			</thead>
-			<tbody>
-				{% for ligne in commande.detailsCommandes %}
-					<tr>
-						<td>{{ligne.offres.intitule}}</td>
-						<td class="text-right">{{ligne.prix}}€</td>
-					</tr>
-				{% endfor %}
+
+	<a href="{{ path('app_offres_catalogue') }}" class="btn btn-primary text-center">
+		<i class="fa-solid fa-list"></i>
+		Revenir à la liste d'offres
+	</a>
+	<p class="text-center text-blue">
+		Détails de la commande
+		{{commande.reference}}<br>
+		du
+		{{commande.createdAt|date("d-m-Y à H:i:s")}}
+	</p>
+	<table>
+		<thead>
+			<th>Intitule</th>
+			<th>Description</th>
+			<th class="text-right">Total ligne</th>
+		</thead>
+		<tbody>
+			{% for ligne in commande.detailsCommandes %}
 				<tr>
-					<td>Total</td>
-					<td class="text-right">
-						<strong>{{commande.totalCommande}}€</strong>
-					</td>
+					<td>{{ligne.offres.sports[0].emoji}}&nbsp;
+						{{ligne.offres.intitule}}</td>
+					<td>{{ligne.offres.description}}</td>
+					<td class="text-right">{{ligne.prix}}€</td>
 				</tr>
-			</tbody>
+			{% endfor %}
 			<tr>
-				{% if commande.payeeLe is null %}
-					<td class="text-red">En attente de paiement
-					</td>
-					<td>
-						<a href="#" class="btn btn-primary">
-							<i class="fa-regular fa-credit-card"></i>Procéder au paiement</a>
-					</td>
-
-				{% else %}
-					<td>
-						<p class="text-green">
-							<i class="fa-regular fa-circle-check"></i>Payée le
-							{{commande.payeeLe|date('d/m/Y H:i')}}</p>
-					</td>
-				{% endif %}
+				<td class="text-right" colspan="2">Total</td>
+				<td class="text-right" colspan="3">
+					<strong>{{commande.totalCommande}}€</strong>
+				</td>
 			</tr>
+		</tbody>
+		<tr>
+			{% if commande.payeeLe is null %}
+				<td class="text-red">En attente de paiement</td>
+				<td>
+					<a href="#" class="btn btn-primary">
+						<i class="fa-regular fa-credit-card"></i>Procéder au paiement</a>
+				</td>
+				<td>
+					{# Formulaire de suppression de commande #}
+					<form action="{{ path('app_commandes_supprimer', { id: commande.id }) }}" method="post" onsubmit="return confirm('Confirmer la suppression ?');">
+						<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commande.id) }}">
+						<button type="submit" class="btn-action btn-danger btn-delete">
+							<i class="fa-solid fa-trash-can"></i>Annuler la commande
+						</button>
+					</form>
+				</td>
+			{% else %}
+				<td>
+					<p class="text-green">
+						<i class="fa-regular fa-circle-check"></i>Payée le
+						{{commande.payeeLe|date('d/m/Y H:i')}}</p>
+				</td>
+			{% endif %}
+		</tr>
 
-		</table>
-	</main>
+	</table>
+
 {% endblock %}
 {% block stylesheets %}<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">
 {% endblock %}

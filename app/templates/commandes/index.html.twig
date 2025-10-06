@@ -34,7 +34,7 @@
 			{% for c in commandes %}
 				<tr>
 					<td>
-						<a href="{{path('app_commandes_paiement',{id:c.id})}}">
+						<a href="#">
 							<i class="fa-solid fa-folder-open"></i>
 							{{c.reference}}</a>
 					</td>
@@ -46,7 +46,7 @@
 					<td>
 						{% if c.payeeLe is null%}
 							<div class="row">
-								<a href="{{path('app_mock-payment',{id:c.id})}}" class="btn btn-primary">
+								<a href="{{path('paiement_commande',{id:c.id})}}" class="btn btn-primary">
 									<i class="fa-regular fa-credit-card"></i>Procéder au paiement</a>
 								<a href="#" class="btn btn-warning">
 									<i class="fa-regular fa-trash-can"></i>Annuler cette commande</a>

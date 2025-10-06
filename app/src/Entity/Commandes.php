@@ -18,8 +18,9 @@ class Commandes
     #[ORM\Column(length: 20, unique: true)]
     private ?string $reference = null;
 
-    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
-    private ?\DateTimeImmutable $created_at = null;
+    // Correction : propriété camelCase côté PHP, nom snake_case côté BDD
+    #[ORM\Column(type: 'datetime_immutable', name: 'created_at', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
@@ -35,7 +36,7 @@ class Commandes
     private ?Tickets $ticket = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $payee_le = null;
+    private ?\DateTimeImmutable $payeeLe = null;
 
     #[ORM\Column(type: "string", unique: true)]
     private string $qrToken;
@@ -49,7 +50,7 @@ class Commandes
     public function __construct()
     {
         $this->detailsCommandes = new ArrayCollection();
-        $this->created_at = new \DateTimeImmutable();
+        $this->createdAt = new \DateTimeImmutable();
         $this->qrToken = bin2hex(random_bytes(16)); // ✅ Token unique généré automatiquement
     }
 
@@ -71,12 +72,12 @@ class Commandes
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
         return $this;
     }
 
@@ -125,12 +126,10 @@ class Commandes
 
     public function setTicket(Tickets $ticket): static
     {
-        // cohérence bidirectionnelle
         if ($ticket->getCommande() !== $this) {
             $ticket->setCommande($this);
         }
         $this->ticket = $ticket;
-
         return $this;
     }
 
@@ -138,19 +137,19 @@ class Commandes
     {
         $total = 0;
         foreach ($this->getDetailsCommandes() as $item) {
-            $total += $item->getPrix();
+            $total += $item->getPrix() * $item->getQuantite(); // Correction pour inclure la quantité
         }
         return $total;
     }
 
     public function getPayeeLe(): ?\DateTimeImmutable
     {
-        return $this->payee_le;
+        return $this->payeeLe;
     }
 
-    public function setPayeeLe(?\DateTimeImmutable $payee_le): static
+    public function setPayeeLe(?\DateTimeImmutable $payeeLe): static
     {
-        $this->payee_le = $payee_le;
+        $this->payeeLe = $payeeLe;
         return $this;
     }
 

@@ -33,14 +33,24 @@ class CommandesFixtures extends Fixture implements DependentFixtureInterface
         $users = $manager->getRepository(Users::class)->findAll();
         $offres = $manager->getRepository(Offres::class)->findAll();
 
+        $characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Lettres et chiffres lisibles
+        $randomLength = 5; // longueur du code alphanumérique
+
         for ($i = 0; $i < 100; $i++) {
             $commande = new Commandes();
             $user = $this->faker->randomElement($users);
 
-            $commande->setUser($user)
+            // Génération d'une référence courte et unique
+            $random = '';
+            for ($k = 0; $k < $randomLength; $k++) {
+                $random .= $characters[random_int(0, strlen($characters) - 1)];
+            }
+            $reference = sprintf('CMD-%03d-%s', $i + 1, $random); // ex: CMD-001-7G5K2
+
+            $commande->setReference($reference)
+                     ->setUser($user)
                      ->setPayeeLe(new DateTimeImmutable())
-                     ->setCreatedAt(new DateTimeImmutable())
-                     ->setReference($this->faker->unique()->bothify('##############'));
+                     ->setCreatedAt(new DateTimeImmutable());
 
             // Détails commande
             $numDetails = random_int(1, 5);
@@ -54,7 +64,8 @@ class CommandesFixtures extends Fixture implements DependentFixtureInterface
 
                 $details->setOffres($offre)
                         ->setPrix($offre->getPrix())
-                        ->setQuantite(random_int(1, 5));
+                        ->setQuantite(random_int(1, 5))
+                        ->setCommande($commande);
 
                 $commande->addDetailsCommande($details);
             }
@@ -78,9 +89,10 @@ class CommandesFixtures extends Fixture implements DependentFixtureInterface
             ], UrlGeneratorInterface::ABSOLUTE_URL);
             $ticket->setQrCodePath($ticketUrl);
 
-            $manager->persist($ticket);
             $commande->setTicket($ticket);
+
             $manager->persist($commande);
+            $manager->persist($ticket);
         }
 
         $manager->flush();

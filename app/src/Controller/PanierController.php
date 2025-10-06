@@ -1,10 +1,10 @@
 <?php
-// PanierController.php
 
 namespace App\Controller;
 
 use App\Entity\Offres;
 use App\Repository\OffresRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -15,12 +15,20 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/panier', name: 'panier_')]
 class PanierController extends AbstractController
 {
+    /**
+     * Affiche le contenu du panier.
+     * Supporte le rendu normal ou AJAX (HTML partiel renvoyé en JSON).
+     */
     #[Route('', name: 'index', methods: ['GET'])]
     public function index(Request $request, SessionInterface $session, OffresRepository $offresRepo): Response|JsonResponse
     {
         return $this->renderCart($session, $offresRepo, $request);
     }
 
+    /**
+     * Ajoute une offre au panier. Si l'offre existe déjà, incrémente sa quantité.
+     * Supporte AJAX pour mise à jour dynamique.
+     */
     #[Route('/add/{id}', name: 'add', methods: ['POST'])]
     public function add(Offres $offre, SessionInterface $session, OffresRepository $offresRepo, Request $request): Response|JsonResponse
     {
@@ -36,6 +44,11 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('panier_index');
     }
 
+    /**
+     * Supprime une offre du panier.
+     * Si l'offre n'existe pas, aucune action n'est effectuée.
+     * Supporte AJAX pour mise à jour dynamique.
+     */
     #[Route('/remove/{id}', name: 'remove', methods: ['POST'])]
     public function remove(Offres $offre, SessionInterface $session, OffresRepository $offresRepo, Request $request): Response|JsonResponse
     {
@@ -50,6 +63,11 @@ class PanierController extends AbstractController
         return $this->renderCart($session, $offresRepo, $request);
     }
 
+    /**
+     * Met à jour la quantité d'une offre dans le panier.
+     * La quantité minimale est 1.
+     * Supporte AJAX pour mise à jour dynamique.
+     */
     #[Route('/update/{id}', name: 'update', methods: ['POST'])]
     public function update(Offres $offre, Request $request, SessionInterface $session, OffresRepository $offresRepo): Response|JsonResponse
     {
@@ -62,6 +80,10 @@ class PanierController extends AbstractController
         return $this->renderCart($session, $offresRepo, $request);
     }
 
+    /**
+     * Vide complètement le panier.
+     * Supporte AJAX pour mise à jour dynamique.
+     */
     #[Route('/clear', name: 'clear', methods: ['POST'])]
     public function clear(SessionInterface $session, OffresRepository $offresRepo, Request $request): Response|JsonResponse
     {
@@ -69,6 +91,9 @@ class PanierController extends AbstractController
         return $this->renderCart($session, $offresRepo, $request);
     }
 
+    /**
+     * Retourne le nombre total d'articles dans le panier pour mise à jour AJAX.
+     */
     #[Route('/count', name: 'count', methods: ['GET'])]
     public function count(SessionInterface $session): JsonResponse
     {
@@ -79,6 +104,10 @@ class PanierController extends AbstractController
         ]);
     }
 
+    /**
+     * Méthode interne pour générer la vue du panier.
+     * Supporte AJAX (JSON avec HTML) ou rendu normal.
+     */
     private function renderCart(SessionInterface $session, OffresRepository $offresRepo, ?Request $request): Response|JsonResponse
     {
         $panier = $session->get('panier', []);
@@ -107,6 +136,9 @@ class PanierController extends AbstractController
         ]);
     }
 
+    /**
+     * Méthode interne pour récupérer les détails complets des offres dans le panier.
+     */
     private function getCartData(array $panier, OffresRepository $offresRepo): array
     {
         if (empty($panier)) return [];
@@ -127,6 +159,9 @@ class PanierController extends AbstractController
         return $data;
     }
 
+    /**
+     * Méthode interne pour calculer le total du panier.
+     */
     private function getCartTotal(array $panier, OffresRepository $offresRepo): float
     {
         if (empty($panier)) return 0;
@@ -143,14 +178,17 @@ class PanierController extends AbstractController
         return $total;
     }
 
+    /**
+     * Valide le panier et crée la commande correspondante.
+     * Vide le panier après création.
+     */
     #[Route('/valider', name: 'validate', methods: ['POST'])]
-    public function validateCart(SessionInterface $session): Response
+    public function validateCart(SessionInterface $session, EntityManagerInterface $em, OffresRepository $offresRepo): Response
     {
+        /** @var \App\Entity\Users $user */
         $user = $this->getUser();
-
-        if (!$user || !$session->get('2fa_passed', false)) {
-            $this->addFlash('error', 'Vous devez passer la double authentification avant de valider le panier.');
-            return $this->redirectToRoute('2fa_verify');
+        if (!$user) {
+            throw $this->createAccessDeniedException('Utilisateur non reconnu.');
         }
 
         $panier = $session->get('panier', []);
@@ -159,9 +197,32 @@ class PanierController extends AbstractController
             return $this->redirectToRoute('panier_index');
         }
 
-        $session->remove('panier');
-        $this->addFlash('success', 'Votre panier a été validé avec succès.');
+        $commande = new \App\Entity\Commandes();
+        $commande->setUser($user);
+        $commande->setCreatedAt(new \DateTimeImmutable());
+        $commande->setReference(uniqid());
 
-        return $this->redirectToRoute('panier_index');
+        foreach ($panier as $offreId => $quantite) {
+            $offre = $offresRepo->find($offreId);
+            if (!$offre) continue;
+
+            $details = new \App\Entity\DetailsCommandes();
+            $details->setOffres($offre)
+                ->setQuantite($quantite)
+                ->setPrix($offre->getPrix())
+                ->setCommande($commande);
+
+            $em->persist($details);
+            $commande->addDetailsCommande($details);
+        }
+
+        $em->persist($commande);
+        $em->flush();
+
+        $session->remove('panier');
+
+        $this->addFlash('success', 'Commande créée ! Vous pouvez maintenant procéder au paiement.');
+
+        return $this->redirectToRoute('app_commandes_liste-commandes-client', ['id' => $commande->getUser()->getId()]);
     }
 }

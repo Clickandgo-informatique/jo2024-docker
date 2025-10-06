@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Simulation de paiement
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1>💳 Simulation de paiement</h1>
+
+		<p>
+			Commande #{{ commande.id }}
+			– Montant :
+			<strong>{{ commande.totalCommande|number_format(2, ',', ' ') }}
+				€</strong>
+		</p>
+
+		{{ form_start(form) }}
+		<div class="mb-3">
+			{{ form_label(form.paymentMethod) }}
+			{{ form_widget(form.paymentMethod) }}
+		</div>
+
+		<div id="card-info">
+			{{ form_row(form.cardHolder) }}
+			{{ form_row(form.cardNumber) }}
+		</div>
+
+		{{ form_row(form.submit) }}
+		{{ form_end(form) }}
+	</div>
+
+	<script>
+		// Simple JS pour afficher les champs de carte uniquement si CB/Mastercard/Visa sélectionnés
+const methodInputs = document.querySelectorAll('input[name="paymentType[paymentMethod]"]');
+const cardInfo = document.getElementById('card-info');
+
+function toggleCardFields() {
+const selected = document.querySelector('input[name="paymentType[paymentMethod]"]:checked');
+if (selected && ['cb', 'mastercard', 'visa'].includes(selected.value)) {
+cardInfo.style.display = 'block';
+} else {
+cardInfo.style.display = 'none';
+}
+}
+
+methodInputs.forEach(input => input.addEventListener('change', toggleCardFields));
+toggleCardFields();
+	</script>
+{% endblock %}

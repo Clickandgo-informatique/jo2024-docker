@@ -23,7 +23,7 @@ class DetailsCommandesRepository extends ServiceEntityRepository
             ->join('d.offres', 'o')
             ->join('o.sports', 's')       // relation vers Sport
             ->join('d.commande', 'c')
-            ->where('c.payee_le IS NOT NULL')
+            ->where('c.payeeLe IS NOT NULL')
             ->groupBy('o.id, s.id, s.emoji')
             ->orderBy('totalVentes', 'DESC')
             ->setMaxResults(10)
@@ -37,7 +37,7 @@ class DetailsCommandesRepository extends ServiceEntityRepository
             ->join('d.offres', 'o')
             ->join('o.categorie', 'c')       // relation vers CategoriesOffres
             ->join('d.commande', 'cmd')
-            ->where('cmd.payee_le IS NOT NULL') // seulement commandes payées
+            ->where('cmd.payeeLe IS NOT NULL') // seulement commandes payées
             ->groupBy('c.id')
             ->orderBy('totalVentes', 'DESC')
             ->getQuery()

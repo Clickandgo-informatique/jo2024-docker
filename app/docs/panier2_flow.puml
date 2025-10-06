@@ -1,0 +1,82 @@
+@startuml
+' Configuration A4 pour PDF
+skinparam pageSize a4
+skinparam pageOrientation landscape
+skinparam dpi 150
+skinparam activity {
+    BackgroundColor<<Front>> #D3F4FF
+    BackgroundColor<<Back>> #FFE0B3
+    BackgroundColor<<Service>> #D3FFD3
+    BorderColor Black
+    RoundCorner 10
+    FontSize 12
+}
+
+' Légende
+legend right
+  Front = Interface utilisateur (AJAX, vues)
+  Back = Controllers, session, persistance DB
+  Service = Services externes (référence, paiement, tickets)
+endlegend
+
+|Utilisateur<<Front>>|
+start
+:Consulte le panier;
+
+if (Panier vide ?) then (oui)
+    :Afficher message "Panier vide";
+    stop
+else (non)
+    :Afficher les articles du panier;
+endif
+
+partition "Actions panier (Ajax) <<Front>>" {
+    :Ajouter un article;
+    :Mettre à jour quantité;
+    :Supprimer un article;
+    :Panier mis à jour en session;
+    --> :Stocker changements en session (Back)
+    --> :Confirmation mise à jour (Front)
+}
+
+:Clique sur "Valider le panier";
+
+if (2FA passée ?) then (non)
+    :Rediriger vers 2FA;
+    stop
+else (oui)
+    partition "CommandesController <<Back>>" {
+        :Récupère le panier depuis session;
+        --> :Données panier récupérées
+        :Créer commande avec référence unique;
+        --> :Appeler ReferenceGenerator (Service)
+        --> :Référence unique reçue
+        :Créer DetailsCommandes;
+        :Persister commande et détails en base;
+        --> :DB persist/flush
+        --> :Confirmation persistance
+    }
+    partition "Session <<Back>>" {
+        :Vider le panier;
+    }
+    :Afficher confirmation "Commande créée" (Front)
+endif
+
+:Procède au paiement;
+
+partition "PaiementService <<Service>>" {
+    --> :Initier paiement
+    if (Paiement réussi ?) then (oui)
+        partition "TicketsService <<Service>>" {
+            :Générer ticket QR;
+            --> :DB persist ticket
+            --> :Confirmation ticket
+        }
+        :Afficher ticket QR (Front)
+    else (non)
+        :Afficher message "Paiement échoué" (Front)
+    endif
+}
+
+stop
+@enduml

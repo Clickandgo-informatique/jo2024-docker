@@ -2,53 +2,47 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Commandes;
-use App\Entity\Tickets;
+use App\Repository\CommandesRepository;
 use App\Repository\TicketsRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MockPaymentController extends AbstractController
 {
-    #[Route('/mock/payment/{id}', name: 'app_mock-payment')]
-    public function pay(
-        Commandes $commande,
-        EntityManagerInterface $em,
-        UrlGeneratorInterface $urlGenerator
-    ): Response {
-        if ($commande->getPayeeLe() !== null) {
-            return new Response('Commande déjà payée', 400);
+    /**
+     * Affiche la commande pour le paiement mock.
+     * Vérifie que la commande appartient à l’utilisateur connecté.
+     *
+     * @param int $id
+     * @param CommandesRepository $commandesRepo
+     * @return Response
+     */
+    #[Route('/mock/payment/{id}', name: 'paiement_commande')]
+    public function payerCommande(int $id, CommandesRepository $commandesRepo): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        /** @var \App\Entity\Users $user */
+        $user = $this->getUser();
+        if (!$user) {
+            throw $this->createAccessDeniedException('Utilisateur non reconnu.');
         }
 
-        $commande->setPayeeLe(new \DateTimeImmutable());
+        $commande = $commandesRepo->find($id);
+        if (!$commande) {
+            $this->addFlash('error', 'Commande introuvable.');
+            return $this->redirectToRoute('app_commandes_liste');
+        }
 
-        // Création du ticket
-        $ticket = new Tickets();
-        $ticket->setCommande($commande)
-            ->setUser($commande->getUser());
+        // Vérifie que la commande appartient à l'utilisateur
+        if ($commande->getUser()->getId() !== $user->getId()) {
+            $this->addFlash('error', 'Vous n\'êtes pas autorisé à accéder à cette commande.');
+            return $this->redirectToRoute('app_commandes_liste');
+        }
 
-        $ticketKey = bin2hex(random_bytes(32)); // 64 caractères
-        $ticket->setTicketKey($ticketKey);
-
-        $payload = hash('sha256', $commande->getUser()->getAccountKey() . $ticketKey);
-        $ticket->setPayloadHash($payload);
-
-        // URL sécurisée pour le QR code
-        $ticketUrl = $urlGenerator->generate('app_ticket_show', [
-            'ticketKey' => $ticketKey
-        ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-        $ticket->setQrCodePath($ticketUrl);
-
-        $em->persist($ticket);
-        $em->flush();
-
-        return $this->render('tickets/show.html.twig', [
-            'commande' => $commande,
-            'ticket' => $ticket,
+        return $this->render('commandes/show.html.twig', [
+            'commande' => $commande
         ]);
     }
 

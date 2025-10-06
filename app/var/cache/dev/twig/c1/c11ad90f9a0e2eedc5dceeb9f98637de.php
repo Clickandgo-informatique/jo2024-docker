@@ -154,10 +154,7 @@ class __TwigTemplate_d1ad0b7fb4224b132b1dcc1f1c64ae8f extends Template
             // line 35
             yield "\t\t\t\t<tr>
 \t\t\t\t\t<td>
-\t\t\t\t\t\t<a href=\"";
-            // line 37
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commandes_paiement", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 37)]), "html", null, true);
-            yield "\">
+\t\t\t\t\t\t<a href=\"#\">
 \t\t\t\t\t\t\t<i class=\"fa-solid fa-folder-open\"></i>
 \t\t\t\t\t\t\t";
             // line 39
@@ -183,7 +180,7 @@ class __TwigTemplate_d1ad0b7fb4224b132b1dcc1f1c64ae8f extends Template
                 yield "\t\t\t\t\t\t\t<div class=\"row\">
 \t\t\t\t\t\t\t\t<a href=\"";
                 // line 49
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_mock-payment", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 49)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("paiement_commande", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["c"], "id", [], "any", false, false, false, 49)]), "html", null, true);
                 yield "\" class=\"btn btn-primary\">
 \t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-credit-card\"></i>Procéder au paiement</a>
 \t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-warning\">
@@ -322,7 +319,7 @@ class __TwigTemplate_d1ad0b7fb4224b132b1dcc1f1c64ae8f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  292 => 91,  287 => 90,  274 => 89,  259 => 84,  251 => 81,  242 => 76,  240 => 75,  236 => 73,  232 => 71,  228 => 69,  223 => 67,  220 => 66,  218 => 65,  214 => 64,  210 => 62,  208 => 61,  204 => 59,  199 => 57,  195 => 55,  186 => 49,  183 => 48,  181 => 47,  176 => 45,  170 => 42,  164 => 39,  159 => 37,  155 => 35,  151 => 34,  131 => 19,  123 => 16,  115 => 13,  108 => 9,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
+        return array (  289 => 91,  284 => 90,  271 => 89,  256 => 84,  248 => 81,  239 => 76,  237 => 75,  233 => 73,  229 => 71,  225 => 69,  220 => 67,  217 => 66,  215 => 65,  211 => 64,  207 => 62,  205 => 61,  201 => 59,  196 => 57,  192 => 55,  183 => 49,  180 => 48,  178 => 47,  173 => 45,  167 => 42,  161 => 39,  155 => 35,  151 => 34,  131 => 19,  123 => 16,  115 => 13,  108 => 9,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -363,7 +360,7 @@ class __TwigTemplate_d1ad0b7fb4224b132b1dcc1f1c64ae8f extends Template
 \t\t\t{% for c in commandes %}
 \t\t\t\t<tr>
 \t\t\t\t\t<td>
-\t\t\t\t\t\t<a href=\"{{path('app_commandes_paiement',{id:c.id})}}\">
+\t\t\t\t\t\t<a href=\"#\">
 \t\t\t\t\t\t\t<i class=\"fa-solid fa-folder-open\"></i>
 \t\t\t\t\t\t\t{{c.reference}}</a>
 \t\t\t\t\t</td>
@@ -375,7 +372,7 @@ class __TwigTemplate_d1ad0b7fb4224b132b1dcc1f1c64ae8f extends Template
 \t\t\t\t\t<td>
 \t\t\t\t\t\t{% if c.payeeLe is null%}
 \t\t\t\t\t\t\t<div class=\"row\">
-\t\t\t\t\t\t\t\t<a href=\"{{path('app_mock-payment',{id:c.id})}}\" class=\"btn btn-primary\">
+\t\t\t\t\t\t\t\t<a href=\"{{path('paiement_commande',{id:c.id})}}\" class=\"btn btn-primary\">
 \t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-credit-card\"></i>Procéder au paiement</a>
 \t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-warning\">
 \t\t\t\t\t\t\t\t\t<i class=\"fa-regular fa-trash-can\"></i>Annuler cette commande</a>

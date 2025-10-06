@@ -39,15 +39,18 @@ final class OffresController extends AbstractController
         OffresRepository $offresRepo,
         Request $request,
         PaginatorInterface $paginator,
-        CategoriesOffresRepository $categoriesOffresRepo
+        CategoriesOffresRepository $categoriesOffresRepo,
+        SportsRepository $sportsRepo
     ): Response {
         $categoriesOffres = $categoriesOffresRepo->findBy([], ['nom' => 'ASC']);
         $data = $offresRepo->findBy(['isPublished' => true], ['dateDebut' => 'ASC']);
         $offres = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
+        $sports = $sportsRepo->findBy([], ['intitule' => 'ASC']);
 
         if ($request->isXmlHttpRequest()) {
             $html = $this->renderView('_partials/_catalogue-offres-ajax-wrapper.html.twig', [
                 'offres' => $offres,
+                'sports' => $sports
             ]);
 
             return new JsonResponse(['status' => 'success', 'html' => $html]);
@@ -57,6 +60,7 @@ final class OffresController extends AbstractController
             'offres'           => $offres,
             'categoriesOffres' => $categoriesOffres,
             'selectedSlugs'    => [],
+            'sports' => $sports
         ]);
     }
 

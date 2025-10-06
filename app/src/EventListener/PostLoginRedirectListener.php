@@ -53,7 +53,7 @@ class PostLoginRedirectListener
         // 🔹 Redirection des admins vers le dashboard admin après login
         // uniquement si la route visitée est app_main
         if ($request->get('_route') === 'app_main' && in_array('ROLE_ADMIN', $user->getRoles(), true)) {
-            $response = new RedirectResponse($this->router->generate('app_admin_index'));
+            $response = new RedirectResponse($this->router->generate('admin_dashboard'));
             $event->setResponse($response);
         }
     }

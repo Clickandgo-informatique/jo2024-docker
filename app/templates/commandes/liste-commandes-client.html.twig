@@ -18,6 +18,7 @@
 				<th>Total</th>
 				<th>Paiement</th>
 				<th>Status ticket</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -72,8 +73,8 @@
 					</td>
 					<td>
 						{% if c.ticket is defined %}
-							<a href="{{ path('app_ticket_show', {ticketKey: c.ticket.ticketKey}) }}" class="btn btn-primary btn-sm">
-								<i class="fa-solid fa-folder-open"></i>
+							<a href="{{ path('app_ticket_show', {ticketKey: c.ticket.ticketKey}) }}" class="btn btn-primary">
+								<i class="fa-solid fa-ticket"></i>Voir ticket
 							</a>
 						{% endif %}
 					</td>

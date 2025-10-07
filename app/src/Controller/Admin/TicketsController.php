@@ -47,7 +47,7 @@ class TicketsController extends AbstractController
         $qrCodeBase64 = null;
         if ($ticket->getQrcodePath()) {
             $renderer = new ImageRenderer(
-                new RendererStyle(200),
+                new RendererStyle(150),
                 new SvgImageBackEnd() // Compatible BaconQrCode v3
             );
             $writer = new Writer($renderer);

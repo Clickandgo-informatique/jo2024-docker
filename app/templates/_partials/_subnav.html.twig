@@ -1,46 +1,61 @@
-<div class="subnav-container">
+<div
+	class="subnav-container">
+	{# Flèche gauche #}
 	<button class="subnav-arrow" id="subnavLeft">‹</button>
 
-	<div id="subnav" class="subnav">
-		{% if app.user %}
-			<div class="connected">
-				<span class="connected-message">Vous êtes connecté(e) en tant que
-				</span>
-				<span class="nickname">{{ app.user.userIdentifier }}</span>
-			</div>
-			<div class="orders">
-				<a href="{{path('app_commandes_liste-commandes-client',{'id':app.user.id})}}">
-					<i class="fa-solid fa-clipboard-list"></i>Mes commandes / tickets</a>
-			</div>
-			<div class="user-options">
-				<div class="profile">
-					<a class="nav-link" href="{{ path('app_profile_index') }}">
-						<i class="fa-regular fa-address-card"></i>
-						Mon profil</a>
+	{# Wrapper scrollable #}
+	<div class="subnav-wrapper">
+		<div id="subnav" class="subnav">
+			{% if app.user %}
+				<div class="connected">
+					<span class="connected-message">
+						Vous êtes connecté(e) en tant que
+					</span>
+					<span class="nickname">{{ app.user.userIdentifier }}</span>
 				</div>
-				{% if is_granted('ROLE_ADMIN') %}
-					<a class="nav-link" href="{{ path('admin_dashboard') }}">
-						<i class="fa fa-cog"></i>
-						Administration</a>
-				{% endif %}
+
+				<div class="orders">
+					<a href="{{ path('app_commandes_liste-commandes-client', {'id': app.user.id}) }}">
+						<i class="fa-solid fa-clipboard-list"></i>
+						Mes commandes / tickets
+					</a>
+				</div>
+
+				<div class="user-options">
+					<div class="profile">
+						<a class="nav-link" href="{{ path('app_profile_index') }}">
+							<i class="fa-regular fa-address-card"></i>
+							Mon profil
+						</a>
+					</div>
+					{% if is_granted('ROLE_ADMIN') %}
+						<a class="nav-link" href="{{ path('admin_dashboard') }}">
+							<i class="fa fa-cog"></i>
+							Administration
+						</a>
+					{% endif %}
+				</div>
+			{% else %}
+				<p class="text-center not-connected">
+					Bonjour visiteur, vous n'êtes pas encore connecté(e).
+				</p>
+			{% endif %}
+
+			<div class="cart">
+				<a href="{{ path('panier_index') }}" class="cart-button nav-link">
+					<span class="cart-icon-wrapper">
+						<i class="fa-solid fa-basket-shopping cart-icon"></i>
+						<span id="cart-count" class="cart-badge">{{ totalItems|default(0) }}</span>
+					</span>
+					<span class="cart-label">Mon panier</span>
+				</a>
 			</div>
-		{% else %}
-			<p class="text-center not-connected">Bonjour visiteur, vous n'êtes pas encore connecté(e).</p>
-		{% endif %}
-		<div class="cart">
-			<a href="{{ path('panier_index') }}" class="cart-button nav-link">
-				<span class="cart-icon-wrapper">
-					<i class="fa-solid fa-basket-shopping cart-icon"></i>
-					<span id="cart-count" class="cart-badge">{{ totalItems|default(0) }}</span>
-				</span>
-				<span class="cart-label">Mon panier</span>
-			</a>
 		</div>
 	</div>
 
+	{# Flèche droite #}
 	<button class="subnav-arrow" id="subnavRight">›</button>
 </div>
-
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('assets/css/subnav.css') }}">
 {% endblock %}

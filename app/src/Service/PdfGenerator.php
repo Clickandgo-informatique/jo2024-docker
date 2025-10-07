@@ -39,7 +39,7 @@ class PdfGenerator
         if ($ticket->getQrcodePath()) {
             // Utilisation de BaconQrCode pour générer le QR code SVG
             $renderer = new \BaconQrCode\Renderer\ImageRenderer(
-                new \BaconQrCode\Renderer\RendererStyle\RendererStyle(200),
+                new \BaconQrCode\Renderer\RendererStyle\RendererStyle(150),
                 new \BaconQrCode\Renderer\Image\SvgImageBackEnd() // compatible v3
             );
             $writer = new \BaconQrCode\Writer($renderer);
@@ -52,7 +52,7 @@ class PdfGenerator
         }
 
         // 🔹 Rendu du template Twig (utilise ticket-show.html.twig)
-        $html = $this->twig->render('tickets/ticket-show.html.twig', [
+        $html = $this->twig->render('tickets/ticket-pdf.html.twig', [
             'ticket' => $ticket,
             'commande' => $ticket->getCommande(),
             'qrCodeBase64' => $qrCodeBase64,

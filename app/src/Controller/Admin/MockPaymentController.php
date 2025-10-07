@@ -35,12 +35,7 @@ class MockPaymentController extends AbstractController
      *
      * @Route("/mock/payment/{id}", name="app_paiement_commande", methods={"GET","POST"}, requirements={"id"="\d+"})
      */
-    #[Route(
-        path: '/mock/payment/{id}',
-        name: 'app_paiement_commande',
-        methods: ['GET', 'POST'],
-        requirements: ['id' => '\d+']
-    )]
+    #[Route(path: '/mock/payment/{id}', name: 'app_paiement_commande', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function payerCommande(
         int $id,
         CommandesRepository $commandesRepo,

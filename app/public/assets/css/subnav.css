@@ -1,35 +1,72 @@
+/* -----------------------------
+   Conteneur principal
+   ----------------------------- */
 .subnav-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    overflow-x: auto;
+    position: relative; /* pour placer les flèches */
     background: var(--primary-color);
-    box-shadow: var(--box-shadow);
-    padding: 10px 20px;
+    padding: 10px 0;
+    z-index: 1050; /* sous sidebar (1000) pour desktop */
 }
 
+/* Wrapper scrollable */
+.subnav-wrapper {
+    flex: 1; /* prend toute la place entre les flèches */
+    overflow-x: auto; /* scroll horizontal natif */
+    -webkit-overflow-scrolling: touch; /* smooth scroll mobile */
+    white-space: nowrap; /* empêche de passer à la ligne */
+}
+.subnav-wrapper::-webkit-scrollbar {
+    display: none; /* masquer scrollbar Chrome/Safari */
+}
+
+/* Subnav items */
 .subnav {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
     gap: 15px;
     width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Liens */
 .subnav .nav-link {
     color: #fff;
     text-decoration: none;
     padding: 5px 10px;
+    white-space: nowrap;
 }
 
+/* Flèches de scroll */
 .subnav-arrow {
-    background: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.3);
     border: none;
+    border-radius: 50%;
     color: #fff;
     font-size: 24px;
-    cursor: pointer;
+    transition: background 0.2s;
 }
+.subnav-arrow:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+.subnav-arrow-left {
+    margin-right: 5px;
+}
+.subnav-arrow-right {
+    margin-left: 5px;
+}
+
+/* Section utilisateur / panier */
 .connected {
     width: auto;
 }
@@ -45,11 +82,14 @@
     align-items: center;
     justify-content: center;
 }
+
 /* Responsive mobile */
 @media (max-width: 768px) {
-    .subnav-container {
-        flex-direction: row;
-        overflow-x: auto;
-        padding: 10px;
+    .subnav-wrapper {
+        width: 100%;
+    }
+    .subnav-arrow-left,
+    .subnav-arrow-right {
+        display: flex;
     }
 }

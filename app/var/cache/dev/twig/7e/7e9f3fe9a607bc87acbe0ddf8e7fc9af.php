@@ -174,7 +174,10 @@ class __TwigTemplate_24ff1e2933818bd7a5c4ce2cc6b37d44 extends Template
             // line 41
             yield "\t\t\t\t<td class=\"text-red\">En attente de paiement</td>
 \t\t\t\t<td>
-\t\t\t\t\t<a href=\"#\" class=\"btn btn-primary\">
+\t\t\t\t\t<a href=\"";
+            // line 43
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_paiement_commande", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["commande"]) || array_key_exists("commande", $context) ? $context["commande"] : (function () { throw new RuntimeError('Variable "commande" does not exist.', 43, $this->source); })()), "id", [], "any", false, false, false, 43)]), "html", null, true);
+            yield "\" class=\"btn btn-primary\">
 \t\t\t\t\t\t<i class=\"fa-regular fa-credit-card\"></i>Procéder au paiement</a>
 \t\t\t\t</td>
 \t\t\t\t<td>
@@ -267,7 +270,7 @@ class __TwigTemplate_24ff1e2933818bd7a5c4ce2cc6b37d44 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  224 => 67,  209 => 62,  203 => 59,  198 => 56,  188 => 49,  183 => 48,  175 => 41,  173 => 40,  165 => 35,  160 => 32,  151 => 29,  147 => 28,  143 => 27,  139 => 26,  136 => 25,  132 => 24,  120 => 15,  115 => 13,  106 => 7,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
+        return array (  227 => 67,  212 => 62,  206 => 59,  201 => 56,  191 => 49,  186 => 48,  179 => 43,  175 => 41,  173 => 40,  165 => 35,  160 => 32,  151 => 29,  147 => 28,  143 => 27,  139 => 26,  136 => 25,  132 => 24,  120 => 15,  115 => 13,  106 => 7,  103 => 6,  90 => 5,  78 => 3,  65 => 2,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -314,7 +317,7 @@ class __TwigTemplate_24ff1e2933818bd7a5c4ce2cc6b37d44 extends Template
 \t\t\t{% if commande.payeeLe is null %}
 \t\t\t\t<td class=\"text-red\">En attente de paiement</td>
 \t\t\t\t<td>
-\t\t\t\t\t<a href=\"#\" class=\"btn btn-primary\">
+\t\t\t\t\t<a href=\"{{path('app_paiement_commande',{id:commande.id})}}\" class=\"btn btn-primary\">
 \t\t\t\t\t\t<i class=\"fa-regular fa-credit-card\"></i>Procéder au paiement</a>
 \t\t\t\t</td>
 \t\t\t\t<td>

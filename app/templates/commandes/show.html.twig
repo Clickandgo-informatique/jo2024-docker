@@ -40,7 +40,7 @@
 			{% if commande.payeeLe is null %}
 				<td class="text-red">En attente de paiement</td>
 				<td>
-					<a href="#" class="btn btn-primary">
+					<a href="{{path('app_paiement_commande',{id:commande.id})}}" class="btn btn-primary">
 						<i class="fa-regular fa-credit-card"></i>Procéder au paiement</a>
 				</td>
 				<td>

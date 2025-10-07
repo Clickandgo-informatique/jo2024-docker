@@ -68,38 +68,44 @@ class __TwigTemplate_efabb10962dc3799bd9de2076843f0ae extends Template
             $context['_seq'] = CoreExtension::ensureTraversable((isset($context["data"]) || array_key_exists("data", $context) ? $context["data"] : (function () { throw new RuntimeError('Variable "data" does not exist.', 15, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["item"]) {
                 // line 16
-                yield "\t\t\t\t<tr>\t\t\t\t\t
+                yield "\t\t\t\t<tr>
 \t\t\t\t\t<td class=\"cart-product text-left\">";
                 // line 17
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 17), "sports", [], "any", false, false, false, 17), 0, [], "array", false, false, false, 17), "emoji", [], "any", false, false, false, 17), "html", null, true);
-                yield " - ";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 17), "intitule", [], "any", false, false, false, 17), "html", null, true);
-                yield "</td>
-\t\t\t\t\t<td class=\"quantity-control\">
-\t\t\t\t\t\t<button type=\"button\" class=\"decrease btn btn-primary btn-qty\" data-url=\"";
+                yield "
+\t\t\t\t\t\t-
+\t\t\t\t\t\t<strong>";
                 // line 19
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_update", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 19), "id", [], "any", false, false, false, 19)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 19), "intitule", [], "any", false, false, false, 19), "html", null, true);
+                yield "</strong>
+\t\t\t\t\t</td>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t<div class=\"quantity-control\">
+\t\t\t\t\t\t\t<button type=\"button\" class=\"decrease btn btn-primary btn-qty\" data-url=\"";
+                // line 23
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_update", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 23), "id", [], "any", false, false, false, 23)]), "html", null, true);
                 yield "\" data-method=\"POST\">-</button>
-\t\t\t\t\t\t<input type=\"text\" class=\"quantity-input\" value=\"";
-                // line 20
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "quantite", [], "any", false, false, false, 20), "html", null, true);
+\t\t\t\t\t\t\t<input type=\"text\" class=\"quantity-input\" value=\"";
+                // line 24
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "quantite", [], "any", false, false, false, 24), "html", null, true);
                 yield "\" data-url=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_update", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 20), "id", [], "any", false, false, false, 20)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_update", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 24), "id", [], "any", false, false, false, 24)]), "html", null, true);
                 yield "\">
-\t\t\t\t\t\t<button type=\"button\" class=\"increase btn btn-primary btn-qty\" data-url=\"";
-                // line 21
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_update", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 21), "id", [], "any", false, false, false, 21)]), "html", null, true);
+\t\t\t\t\t\t\t<button type=\"button\" class=\"increase btn btn-primary btn-qty\" data-url=\"";
+                // line 25
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_update", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 25), "id", [], "any", false, false, false, 25)]), "html", null, true);
                 yield "\" data-method=\"POST\">+</button>
+\t\t\t\t\t\t</div>
 \t\t\t\t\t</td>
 \t\t\t\t\t<td class=\"cart-total text-right\">";
-                // line 23
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "total", [], "any", false, false, false, 23), 2, ",", " "), "html", null, true);
+                // line 28
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "total", [], "any", false, false, false, 28), 2, ",", " "), "html", null, true);
                 yield "
 \t\t\t\t\t\t€</td>
 \t\t\t\t\t<td class=\"cart-actions text-center\">
 \t\t\t\t\t\t<button type=\"button\" class=\"remove-item btn btn-danger\" data-url=\"";
-                // line 26
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_remove", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 26), "id", [], "any", false, false, false, 26)]), "html", null, true);
+                // line 31
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_remove", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["item"], "offre", [], "any", false, false, false, 31), "id", [], "any", false, false, false, 31)]), "html", null, true);
                 yield "\" data-method=\"POST\">
 \t\t\t\t\t\t\t<i class=\"fa-solid fa-trash-can\"></i>
 \t\t\t\t\t\t</button>
@@ -110,24 +116,24 @@ class __TwigTemplate_efabb10962dc3799bd9de2076843f0ae extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['item'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 32
+            // line 37
             yield "\t\t</tbody>
 \t\t<tfoot>
 \t\t\t<tr class=\"cart-summary\">
 \t\t\t\t<td class=\"summary-items\">Total articles :
 \t\t\t\t\t";
-            // line 36
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalItems"]) || array_key_exists("totalItems", $context) ? $context["totalItems"] : (function () { throw new RuntimeError('Variable "totalItems" does not exist.', 36, $this->source); })()), "html", null, true);
+            // line 41
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalItems"]) || array_key_exists("totalItems", $context) ? $context["totalItems"] : (function () { throw new RuntimeError('Variable "totalItems" does not exist.', 41, $this->source); })()), "html", null, true);
             yield "</td>
 \t\t\t\t<td class=\"summary-total\">Total panier :
 \t\t\t\t\t";
-            // line 38
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["total"]) || array_key_exists("total", $context) ? $context["total"] : (function () { throw new RuntimeError('Variable "total" does not exist.', 38, $this->source); })()), 2, ",", " "), "html", null, true);
+            // line 43
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["total"]) || array_key_exists("total", $context) ? $context["total"] : (function () { throw new RuntimeError('Variable "total" does not exist.', 43, $this->source); })()), 2, ",", " "), "html", null, true);
             yield "
 \t\t\t\t\t€</td>
 \t\t\t\t<td colspan=\"2\">
 \t\t\t\t\t<button type=\"button\" id=\"clear-cart\" class=\"btn btn-warning\" data-url=\"";
-            // line 41
+            // line 46
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("panier_clear");
             yield "\" data-method=\"POST\">
 \t\t\t\t\t\t<i class=\"fa-solid fa-shopping-basket\"></i>
@@ -139,10 +145,10 @@ class __TwigTemplate_efabb10962dc3799bd9de2076843f0ae extends Template
 \t</table>
 ";
         }
-        // line 50
+        // line 55
         yield "
 ";
-        // line 51
+        // line 56
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -165,7 +171,7 @@ class __TwigTemplate_efabb10962dc3799bd9de2076843f0ae extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 52
+        // line 57
         yield "\t<link rel=\"stylesheet\" href=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/table.css"), "html", null, true);
         yield "\">
@@ -200,7 +206,7 @@ class __TwigTemplate_efabb10962dc3799bd9de2076843f0ae extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  169 => 52,  146 => 51,  143 => 50,  131 => 41,  125 => 38,  120 => 36,  114 => 32,  102 => 26,  96 => 23,  91 => 21,  85 => 20,  81 => 19,  74 => 17,  71 => 16,  67 => 15,  55 => 5,  51 => 3,  49 => 2,);
+        return array (  175 => 57,  152 => 56,  149 => 55,  137 => 46,  131 => 43,  126 => 41,  120 => 37,  108 => 31,  102 => 28,  96 => 25,  90 => 24,  86 => 23,  79 => 19,  74 => 17,  71 => 16,  67 => 15,  55 => 5,  51 => 3,  49 => 2,);
     }
 
     public function getSourceContext(): Source
@@ -220,12 +226,17 @@ class __TwigTemplate_efabb10962dc3799bd9de2076843f0ae extends Template
 \t\t</thead>
 \t\t<tbody>
 \t\t\t{% for item in data %}
-\t\t\t\t<tr>\t\t\t\t\t
-\t\t\t\t\t<td class=\"cart-product text-left\">{{item.offre.sports[0].emoji}} - {{ item.offre.intitule }}</td>
-\t\t\t\t\t<td class=\"quantity-control\">
-\t\t\t\t\t\t<button type=\"button\" class=\"decrease btn btn-primary btn-qty\" data-url=\"{{ path('panier_update', {'id': item.offre.id}) }}\" data-method=\"POST\">-</button>
-\t\t\t\t\t\t<input type=\"text\" class=\"quantity-input\" value=\"{{ item.quantite }}\" data-url=\"{{ path('panier_update', {'id': item.offre.id}) }}\">
-\t\t\t\t\t\t<button type=\"button\" class=\"increase btn btn-primary btn-qty\" data-url=\"{{ path('panier_update', {'id': item.offre.id}) }}\" data-method=\"POST\">+</button>
+\t\t\t\t<tr>
+\t\t\t\t\t<td class=\"cart-product text-left\">{{item.offre.sports[0].emoji}}
+\t\t\t\t\t\t-
+\t\t\t\t\t\t<strong>{{ item.offre.intitule }}</strong>
+\t\t\t\t\t</td>
+\t\t\t\t\t<td>
+\t\t\t\t\t\t<div class=\"quantity-control\">
+\t\t\t\t\t\t\t<button type=\"button\" class=\"decrease btn btn-primary btn-qty\" data-url=\"{{ path('panier_update', {'id': item.offre.id}) }}\" data-method=\"POST\">-</button>
+\t\t\t\t\t\t\t<input type=\"text\" class=\"quantity-input\" value=\"{{ item.quantite }}\" data-url=\"{{ path('panier_update', {'id': item.offre.id}) }}\">
+\t\t\t\t\t\t\t<button type=\"button\" class=\"increase btn btn-primary btn-qty\" data-url=\"{{ path('panier_update', {'id': item.offre.id}) }}\" data-method=\"POST\">+</button>
+\t\t\t\t\t\t</div>
 \t\t\t\t\t</td>
 \t\t\t\t\t<td class=\"cart-total text-right\">{{ item.total|number_format(2, ',', ' ') }}
 \t\t\t\t\t\t€</td>

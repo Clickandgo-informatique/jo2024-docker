@@ -1,35 +1,60 @@
+{# 
+    Template d'affichage d'un ticket dans le navigateur
+    Variables disponibles :
+    - ticket : l'entité Ticket
+    - commande : l'entité Commande associée
+    - qrCodeBase64 : QR code SVG/PNG encodé en base64 pour affichage
+#}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Ticket - Commande
+{% block title %}
+	Ticket - Commande
 	{{ ticket.commande.reference }}
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('app_commandes_liste') }}" class="btn btn-primary">
-		<i class="fa-solid fa-list"></i>Retour à mes commandes</a>
-	<h1>Votre ticket</h1>
-	<p>Gardez soigneusement ce ticket avec vous, il vous sera demandé à la caisse.</p>
+	<div class="container mt-5" style="font-family:Verdana, sans-serif;">
+		<a href="{{ path('app_commandes_liste') }}" class="btn btn-primary mb-3">
+			<i class="fa-solid fa-list"></i>
+			Retour à mes commandes
+		</a>
 
-	<p>
-		<strong>Commande :</strong>
-		{{ ticket.commande.reference }}</p>
-	<p>
-		<strong>Payée le :</strong>
-		{{ ticket.commande.payeeLe|date('d/m/Y H:i') }}</p>
+		<h1>Votre ticket</h1>
+		<p>Gardez soigneusement ce ticket, il vous sera demandé à la caisse.</p>
 
-	{% if qrCodeUrl %}
-		<div class="qr-code">
-			{{ qrCodeUrl|raw }}
+		<div class="card p-3 mb-3" style="max-width: 400px; margin:auto; border:1px solid #ccc;">
+			<p>
+				<strong>Commande :</strong>
+				{{ ticket.commande.reference }}</p>
+			<p>
+				<strong>Payée le :</strong>
+				{{ ticket.commande.payeeLe|date('d/m/Y H:i') }}</p>
+
+			{# 🔹 Affiche le QR code si disponible #}
+			{% if qrCodeBase64 %}
+				<div class="text-center my-3">
+					<img src="{{ qrCodeBase64 }}" alt="QR Code du ticket" style="width:200px; height:200px;">
+				</div>
+			{% else %}
+				<p class="text-danger">QR code non disponible.</p>
+			{% endif %}
+
+			<p>
+				<strong>Clé du ticket :</strong>
+				{{ ticket.ticketKey }}</p>
+			<p>
+				<strong>Hash :</strong>
+				{{ ticket.payloadHash }}</p>
 		</div>
-	{% endif %}
 
-	<a href="{{path('admin_tickets_show_pdf',{id:ticket.id})}}" class="btn btn-primary">
-		<i class="fa-solid fa-file-pdf"></i>Voir / imprimer Pdf</a>
-	<p>
-		<strong>Clé du ticket :</strong>
-		{{ ticket.ticketKey }}</p>
-	<p>
-		<strong>Hash :</strong>
-		{{ ticket.payloadHash }}</p>
+		{# 🔹 Lien vers la génération PDF #}
+		<div class="text-center mt-3">
+			<a href="{{ path('app_ticket_pdf', {'ticketKey': ticket.ticketKey}) }}" class="btn btn-primary">
 
+				<i class="fa-solid fa-file-pdf"></i>
+				Voir / imprimer PDF
+			</a>
+		</div>
+	</div>
 {% endblock %}

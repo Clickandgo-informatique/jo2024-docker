@@ -8,6 +8,10 @@
 				</span>
 				<span class="nickname">{{ app.user.userIdentifier }}</span>
 			</div>
+			<div class="orders">
+				<a href="{{path('app_commandes_liste-commandes-client',{'id':app.user.id})}}">
+					<i class="fa-solid fa-clipboard-list"></i>Mes commandes / tickets</a>
+			</div>
 			<div class="user-options">
 				<div class="profile">
 					<a class="nav-link" href="{{ path('app_profile_index') }}">

@@ -14,13 +14,16 @@
 				€</strong>
 		</p>
 
+		{# --- Formulaire de paiement mock --- #}
 		{{ form_start(form) }}
+
 		<div class="mb-3">
 			{{ form_label(form.paymentMethod) }}
 			{{ form_widget(form.paymentMethod) }}
 		</div>
 
-		<div id="card-info">
+		{# Champs de carte masqués par défaut, affichés seulement si CB/Visa/Mastercard sélectionnée #}
+		<div id="card-info" style="display:none;">
 			{{ form_row(form.cardHolder) }}
 			{{ form_row(form.cardNumber) }}
 		</div>
@@ -30,7 +33,7 @@
 	</div>
 
 	<script>
-		// Simple JS pour afficher les champs de carte uniquement si CB/Mastercard/Visa sélectionnés
+		// --- JS : toggle des champs de carte selon le moyen de paiement ---
 const methodInputs = document.querySelectorAll('input[name="paymentType[paymentMethod]"]');
 const cardInfo = document.getElementById('card-info');
 
@@ -43,7 +46,10 @@ cardInfo.style.display = 'none';
 }
 }
 
+// Événement change sur tous les inputs pour mettre à jour l’affichage
 methodInputs.forEach(input => input.addEventListener('change', toggleCardFields));
+
+// Initialisation au chargement de la page
 toggleCardFields();
 	</script>
 {% endblock %}

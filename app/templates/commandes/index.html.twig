@@ -46,7 +46,7 @@
 					<td>
 						{% if c.payeeLe is null%}
 							<div class="row">
-								<a href="{{path('paiement_commande',{id:c.id})}}" class="btn btn-primary">
+								<a href="{{path('app_paiement_commande',{id:c.id})}}" class="btn btn-primary">
 									<i class="fa-regular fa-credit-card"></i>Procéder au paiement</a>
 								<a href="#" class="btn btn-warning">
 									<i class="fa-regular fa-trash-can"></i>Annuler cette commande</a>
@@ -73,7 +73,7 @@
 					</td>
 					<td>
 						{% if c.ticket.id is defined %}
-							<a href="{{path('admin_ticket_show',{id:c.ticket.id,commande:c.id})}}" class="btn btn-primary">
+							<a href="{{path('app_ticket_show',{ticketKey:c.ticket.ticketKey})}}" class="btn btn-primary">
 								<i class="fa-solid fa-folder-open"></i>
 							</a>
 

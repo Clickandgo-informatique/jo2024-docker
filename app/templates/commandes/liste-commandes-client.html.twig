@@ -36,7 +36,7 @@
 					<td>
 						{% if c.payeeLe is null %}
 							<div class="row">
-								<a href="{{ path('paiement_commande', {id: c.id}) }}" class="btn btn-primary">
+								<a href="{{ path('app_paiement_commande', {id: c.id}) }}" class="btn btn-primary">
 									<i class="fa-regular fa-credit-card"></i>
 									Procéder au paiement
 								</a>
@@ -71,8 +71,8 @@
 						{% endif %}
 					</td>
 					<td>
-						{% if c.ticket is defined and c.ticket %}
-							<a href="{{ path('admin_ticket_show', {id: c.ticket.id, commande: c.id}) }}" class="btn btn-primary btn-sm">
+						{% if c.ticket is defined %}
+							<a href="{{ path('app_ticket_show', {ticketKey: c.ticket.ticketKey}) }}" class="btn btn-primary btn-sm">
 								<i class="fa-solid fa-folder-open"></i>
 							</a>
 						{% endif %}

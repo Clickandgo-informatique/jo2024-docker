@@ -13,12 +13,17 @@
 		</thead>
 		<tbody>
 			{% for item in data %}
-				<tr>					
-					<td class="cart-product text-left">{{item.offre.sports[0].emoji}} - {{ item.offre.intitule }}</td>
-					<td class="quantity-control">
-						<button type="button" class="decrease btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">-</button>
-						<input type="text" class="quantity-input" value="{{ item.quantite }}" data-url="{{ path('panier_update', {'id': item.offre.id}) }}">
-						<button type="button" class="increase btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">+</button>
+				<tr>
+					<td class="cart-product text-left">{{item.offre.sports[0].emoji}}
+						-
+						<strong>{{ item.offre.intitule }}</strong>
+					</td>
+					<td>
+						<div class="quantity-control">
+							<button type="button" class="decrease btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">-</button>
+							<input type="text" class="quantity-input" value="{{ item.quantite }}" data-url="{{ path('panier_update', {'id': item.offre.id}) }}">
+							<button type="button" class="increase btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">+</button>
+						</div>
 					</td>
 					<td class="cart-total text-right">{{ item.total|number_format(2, ',', ' ') }}
 						€</td>

@@ -49,7 +49,7 @@ class __TwigTemplate_519dbc4f8ebeb174bc0f87f1b05d993b extends Template
         yield "<div id=\"sports-filter\" class=\"sports-filter\" data-base-url=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_offres_filter");
         yield "\">
-\t<h5 class=\"mb-2\">Filtrer par sport(s)</h5>
+\t<h5 class=\"filter-title\">Filtrer par sport(s)</h5>
 \t<div class=\"sports-checkboxes\">
 \t\t";
         // line 5
@@ -150,7 +150,7 @@ class __TwigTemplate_519dbc4f8ebeb174bc0f87f1b05d993b extends Template
     {
         return new Source("{# templates/_partials/_sports-filter.html.twig #}
 <div id=\"sports-filter\" class=\"sports-filter\" data-base-url=\"{{ path('app_offres_filter') }}\">
-\t<h5 class=\"mb-2\">Filtrer par sport(s)</h5>
+\t<h5 class=\"filter-title\">Filtrer par sport(s)</h5>
 \t<div class=\"sports-checkboxes\">
 \t\t{% for sport in sports %}
 \t\t\t<label class=\"sport-option\">

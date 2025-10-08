@@ -125,7 +125,10 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
 \t\t\t\t</main>
 \t\t\t</div>
 
-\t\t\t<footer class=\"footer\">&copy; 2025 JO 2024</footer>
+\t\t\t";
+        // line 41
+        yield Twig\Extension\CoreExtension::include($this->env, $context, "_partials/_footer.html.twig");
+        yield "
 
 \t\t\t<!-- Flashbags -->
 \t\t\t<script src=\"";
@@ -328,7 +331,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  289 => 62,  267 => 36,  254 => 19,  250 => 18,  246 => 17,  241 => 16,  228 => 15,  204 => 7,  191 => 63,  189 => 62,  186 => 61,  181 => 59,  178 => 58,  176 => 57,  171 => 55,  167 => 54,  161 => 50,  147 => 49,  143 => 48,  139 => 47,  133 => 44,  124 => 37,  122 => 36,  118 => 35,  114 => 34,  110 => 32,  103 => 29,  101 => 28,  94 => 26,  91 => 25,  89 => 24,  84 => 21,  82 => 15,  78 => 14,  74 => 13,  70 => 12,  66 => 11,  62 => 9,  60 => 7,  52 => 1,);
+        return array (  292 => 62,  270 => 36,  257 => 19,  253 => 18,  249 => 17,  244 => 16,  231 => 15,  207 => 7,  194 => 63,  192 => 62,  189 => 61,  184 => 59,  181 => 58,  179 => 57,  174 => 55,  170 => 54,  164 => 50,  150 => 49,  146 => 48,  142 => 47,  136 => 44,  130 => 41,  124 => 37,  122 => 36,  118 => 35,  114 => 34,  110 => 32,  103 => 29,  101 => 28,  94 => 26,  91 => 25,  89 => 24,  84 => 21,  82 => 15,  78 => 14,  74 => 13,  70 => 12,  66 => 11,  62 => 9,  60 => 7,  52 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -373,7 +376,7 @@ class __TwigTemplate_4a4ee1aff41c5ff92290c89eb1b41ee9 extends Template
 \t\t\t\t</main>
 \t\t\t</div>
 
-\t\t\t<footer class=\"footer\">&copy; 2025 JO 2024</footer>
+\t\t\t{{ include('_partials/_footer.html.twig') }}
 
 \t\t\t<!-- Flashbags -->
 \t\t\t<script src=\"{{ asset('assets/js/flashbags.js') }}\"></script>

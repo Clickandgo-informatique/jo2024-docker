@@ -242,6 +242,24 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Tickets::class, mappedBy: 'validatedBy')]
     private Collection $tickets;
 
+    #[ORM\Column(length: 60, nullable: true)]
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 60, nullable: true)]
+    private ?string $lastname = null;
+
+    #[ORM\Column(length: 80, nullable: true)]
+    private ?string $city = null;
+
+    #[ORM\Column(length: 6, nullable: true)]
+    private ?string $zipcode = null;
+
+    #[ORM\Column(length: 80, nullable: true)]
+    private ?string $country = null;
+
+    #[ORM\Column(length: 150, nullable: true)]
+    private ?string $address = null;
+
     public function isTwoFactorVerified(): bool
     {
         return $this->isTwoFactorVerified;
@@ -318,6 +336,78 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $ticket->setValidatedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): static
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): static
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): static
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?string
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipcode(?string $zipcode): static
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): static
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): static
+    {
+        $this->address = $address;
 
         return $this;
     }

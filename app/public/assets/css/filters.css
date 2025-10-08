@@ -7,23 +7,20 @@
     gap: 1.25rem;
     min-height: 100vh; /* prend au moins 100% de la hauteur de l'écran */
     max-width: fit-content;
+    background-color: var(--text-color);
 }
 
 /* Bloc individuel de filtre (carte) */
-.filter-block {
-    background: #ffffff;
+.filter-block-sports,
+.filter-block-categories {
     border-radius: 10px;
     padding: 0.9rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     border: 1px solid rgba(0, 0, 0, 0.03);
 }
-
-/* Titre du bloc de filtre */
-.filter-title {
-    font-size: 1rem;
-    font-weight: 700;
-    margin: 0 0 0.6rem 0;
-    color: #222;
+.filter-block-categories,
+.filter-block-sports {
+    background: var(--primary-color-gradient);
 }
 
 /* Liste catégories */
@@ -44,7 +41,7 @@
 .filter-link {
     display: inline-block;
     padding: 0.35rem 0.4rem;
-    color: #333;
+    color: var(--text-color);
     text-decoration: none;
     border-radius: 6px;
     transition: background 0.15s ease, color 0.15s ease, transform 0.08s;
@@ -70,6 +67,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    color: var(--text-color);
 }
 
 /* Option individuelle */
@@ -123,7 +121,7 @@
 .sport-option label {
     cursor: pointer;
     user-select: none;
-    color: #333;
+    color: var(--text-color);
     font-size: 0.95rem;
 }
 
@@ -161,19 +159,19 @@
 }
 
 /* Titre */
-.filter-block h5 {
+.filter-title {
     margin-bottom: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
+    font-size: 1rem;
+    color: var(--text-color);
 }
 
 .sports-checkboxes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 10px 16px;
-    height: 400px;
+    max-height: 600px;
     overflow-y: scroll;
+    background: var(--primary-color-gradient);
 }
 
 /* Chaque option */
@@ -182,8 +180,8 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    font-size: 15px;
-    color: #444;
+    font-size: 1rem;
+    color: var(--text-color);
     padding: 4px 6px;
     border-radius: 6px;
     transition: background 0.2s ease-in-out;

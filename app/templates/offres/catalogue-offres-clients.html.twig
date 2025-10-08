@@ -4,12 +4,13 @@
 {% endblock %}
 
 {% block body %}
+
 	<div
 		class="catalogue-layout">
 		{# Colonne filtres (desktop) #}
 		<aside class="filters-column">
 			<div
-				class="filter-block">
+				class="filter-block-categories">
 				{# filtre par catégories d'offre #}
 				<h5 class="filter-title">Catégories</h5>
 				<ul class="categories-list">
@@ -23,7 +24,7 @@
 				</ul>
 			</div>
 
-			<div class="filter-block">
+			<div class="filter-block-sports">
 				{% include '_partials/_sports-filter.html.twig' with {
                 sports: sports,
                 selectedSlugs: selectedSlugs
@@ -33,17 +34,7 @@
 
 		{# Colonne résultats (cards) #}
 		<div class="results-column">
-			<div class="results-header">
-				<span id="resultsCount">
-					{{ offres.getTotalItemCount }}&nbsp;
-					{% if offres.getTotalItemCount > 1 %}
-						offres
-					{% else %}
-						offre
-					{% endif %}
-				</span>
-			</div>
-
+			<h1 class="text-center">Catalogues des offres</h1>
 			<div id="results" class="ajax-reloaded-data">
 				{% include '_partials/_catalogue-offres-ajax-wrapper.html.twig' with { 'offres': offres } only %}
 			</div>

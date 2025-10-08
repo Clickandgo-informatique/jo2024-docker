@@ -25,6 +25,12 @@ class UsersFixtures extends Fixture
         $admin
             ->setNickname('adminjo2024')
             ->setPassword($this->passwordHasher->hashPassword($admin, 'Admin-jo2024!'))
+            ->setFirstname($this->faker->firstName())
+            ->setLastname($this->faker->lastName())
+            ->setAddress($this->faker->streetAddress())
+            ->setCity($this->faker->city())
+            ->setCountry('France')
+            ->setZipcode(trim($this->faker->postcode()))
             ->setEmail('admin@jo2024.fr')
             ->setRoles(['ROLE_ADMIN'])
             ->setCreatedAt(new \DateTimeImmutable());
@@ -36,6 +42,12 @@ class UsersFixtures extends Fixture
 
             $user = new Users();
             $user->setNickname($this->faker->username())
+                ->setFirstname($this->faker->firstName())
+                ->setLastname($this->faker->lastName())
+                ->setAddress($this->faker->streetAddress())
+                ->setCity($this->faker->city())
+                ->setCountry('France')
+                ->setZipcode(trim($this->faker->postcode()))
                 ->setEmail($this->faker->email())
                 ->setPassword($this->passwordHasher->hashPassword($user, 'User-jo2024!'))
                 ->setRoles(['ROLE_USER'])

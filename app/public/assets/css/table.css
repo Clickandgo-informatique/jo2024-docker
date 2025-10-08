@@ -129,9 +129,9 @@ table tbody:hover tr:not(:hover) {
         position: absolute;
         left: 0;
         width: 45%;
-        padding-left: 0.5rem;
-        font-weight: bold;
+        padding-left: 0.5rem;       
         text-align: left;
+        color:darkblue;
     }
     /* Cellules sans data-label */
     td:not([data-label]) {

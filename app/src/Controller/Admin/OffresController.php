@@ -70,7 +70,8 @@ final class OffresController extends AbstractController
         OffresRepository $offresRepo,
         CategoriesOffresRepository $categoriesOffresRepo,
         string $slug,
-        PaginatorInterface $paginator
+        PaginatorInterface $paginator,
+        SportsRepository $sportsRepo
     ): JsonResponse|Response {
         $data = $offresRepo->getOffresParCategories($slug);
         $offres = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
@@ -89,6 +90,7 @@ final class OffresController extends AbstractController
             'categorie'        => $slug,
             'categoriesOffres' => $categoriesOffres,
             'selectedSlugs'    => [],
+            'sports'           => $sportsRepo->findBy([], ['intitule' => 'ASC']),
         ]);
     }
 

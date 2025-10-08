@@ -112,7 +112,7 @@ class __TwigTemplate_6c90a0c3b023f358dd005460b14a1da5 extends Template
 \t\t\t\t<input type=\"search\" class=\"search-input\" data-url=\"";
             // line 11
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_utilisateurs_rechercher");
-            yield "\">
+            yield "\" placeholder=\"rechercher par pseudo / nom / email\">
 \t\t\t\t<button type=\"submit\" class=\"search-button\">
 \t\t\t\t\t<i class=\"fa-solid fa-magnifying-glass\"></i>
 \t\t\t\t</button>
@@ -234,7 +234,7 @@ class __TwigTemplate_6c90a0c3b023f358dd005460b14a1da5 extends Template
 \t{% if utilisateurs %}
 \t\t<form class=\"search-form\">
 \t\t\t<div class=\"search-container\">
-\t\t\t\t<input type=\"search\" class=\"search-input\" data-url=\"{{path('app_utilisateurs_rechercher')}}\">
+\t\t\t\t<input type=\"search\" class=\"search-input\" data-url=\"{{path('app_utilisateurs_rechercher')}}\" placeholder=\"rechercher par pseudo / nom / email\">
 \t\t\t\t<button type=\"submit\" class=\"search-button\">
 \t\t\t\t\t<i class=\"fa-solid fa-magnifying-glass\"></i>
 \t\t\t\t</button>

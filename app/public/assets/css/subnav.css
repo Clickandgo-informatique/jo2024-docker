@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     position: relative; /* pour placer les flèches */
-    background: var(--primary-color);
+    background: var(--secondary-color-gradient);
     padding: 10px 0;
     z-index: 1050; /* sous sidebar (1000) pour desktop */
 }

@@ -37,8 +37,10 @@
 .footer {
     text-align: center;
     padding: 15px;
-    background: #111;
+    background: var(--secondary-color-gradient);
     color: #fff;
+    min-height: 150px;
+
 }
 
 /* Responsive mobile: sidebar overlay */

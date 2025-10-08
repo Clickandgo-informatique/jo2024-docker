@@ -24,7 +24,14 @@ class UserFormType extends AbstractType
                     'expanded' => true,
                     'multiple' => true,
                 ]
-            )->add('email', EmailType::class)
+            )
+            ->add('email', EmailType::class, ['label' => 'Email'])
+            ->add('lastname', EmailType::class, ['label' => 'Nom'])
+            ->add('firstname', EmailType::class, ['label' => 'Prénom'])
+            ->add('postcode', EmailType::class, ['label' => 'Code postal'])
+            ->add('address', EmailType::class, ['label' => 'Adresse'])
+            ->add('city', EmailType::class, ['label' => 'Ville'])
+            ->add('country', EmailType::class, ['label' => 'Pays'])
         ;
     }
 

@@ -71,7 +71,7 @@ class __TwigTemplate_db9f24bb36bcebc7cd1bd15461c2dded extends Template
 \t\t\t\t</div>
 
 \t\t\t\t<div class=\"orders\">
-\t\t\t\t\t<a href=\"";
+\t\t\t\t\t<a class=\"nav-link\" href=\"";
             // line 18
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commandes_liste-commandes-client", ["id" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 18, $this->source); })()), "user", [], "any", false, false, false, 18), "id", [], "any", false, false, false, 18)]), "html", null, true);
             yield "\">
@@ -217,7 +217,7 @@ class __TwigTemplate_db9f24bb36bcebc7cd1bd15461c2dded extends Template
 \t\t\t\t</div>
 
 \t\t\t\t<div class=\"orders\">
-\t\t\t\t\t<a href=\"{{ path('app_commandes_liste-commandes-client', {'id': app.user.id}) }}\">
+\t\t\t\t\t<a class=\"nav-link\" href=\"{{ path('app_commandes_liste-commandes-client', {'id': app.user.id}) }}\">
 \t\t\t\t\t\t<i class=\"fa-solid fa-clipboard-list\"></i>
 \t\t\t\t\t\tMes commandes / tickets
 \t\t\t\t\t</a>

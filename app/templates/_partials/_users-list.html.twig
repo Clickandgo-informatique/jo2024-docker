@@ -1,3 +1,19 @@
+<div class="text-center pagination-counter">
+	Utilisateurs
+	{{ (utilisateurs.getCurrentPageNumber() - 1) * utilisateurs.getItemNumberPerPage() + 1 }}
+	à
+	{{ (utilisateurs.getCurrentPageNumber() - 1) * utilisateurs.getItemNumberPerPage() + utilisateurs.getItemNumberPerPage() > utilisateurs.getTotalItemCount() ? utilisateurs.getTotalItemCount() : (utilisateurs.getCurrentPageNumber() - 1) * utilisateurs.getItemNumberPerPage() + utilisateurs.getItemNumberPerPage() }}
+	sur
+	{{ utilisateurs.getTotalItemCount() }}
+</div>
+<div class="pagination">
+	{{ knp_pagination_render(utilisateurs) }}
+</div>
+{# Ajouter un nouvel utilisateur #}
+<form action="{{path('app_utilisateurs_ajouter')}}" method="POST" class="submit-btn-form">
+	<button class="btn btn-new text-center btn-primary" type="submit">
+		<i class="fa-solid fa-circle-plus"></i>Ajouter un utilisateur</button>
+</form>
 <table>
 	<thead>
 		<tr>
@@ -17,7 +33,7 @@
 		{% for u in utilisateurs %}
 			<tr>
 				<td class="text-center">
-					<a class="btn-action btn-primary btn-open" href="{{path('app_utilisateurs_edit',{id:u.id})}}">
+					<a class="btn-action btn-open" href="{{path('app_utilisateurs_modifier',{id:u.id})}}">
 						<i class="fa-solid fa-pen-to-square"></i>
 					</a>
 				</td>
@@ -27,7 +43,7 @@
 				<td data-label="Pseudo">
 					<strong>{{u.nickname}}</strong>
 				</td>
-				<td data-label="Email">				
+				<td data-label="Email">
 					{{u.email}}</td>
 				<td data-label="Vérifié" class="text-center">{{u.isVerified ? '<span class="text-green"><i class="fa-solid fa-check"></i>Oui</span>':'<span class="text-red"><i class="fa-regular fa-circle-xmark"></i>Non</span>'}}
 				</td>
@@ -45,9 +61,11 @@
 				{% endif %}
 				<td data-label="Créé le" class="text-muted text-right">{{u.createdAt|date('d-m-Y à H:i:s')}}</td>
 				<td class="text-center">
-					<a class="btn-action btn-danger btn-delete" href="#">
-						<i class="fa-solid fa-trash-can"></i>
-					</a>
+					<form method="post" class="submit-btn-form" action="{{ path('app_utilisateurs_supprimer', {'id': u.id}) }}" onsubmit="return confirm('Supprimer cet utilisateur ?');">
+						<input type="hidden" name="_token" value="{{ csrf_token('delete-user' ~ u.id) }}">
+						<button type="submit" class="btn-action btn-delete"><i class="fa-solid fa-trash-can"></i></button>
+					</form>
+
 				</td>
 			</tr>
 		{% endfor %}
@@ -56,3 +74,6 @@
 <div class="pagination">
 	{{ knp_pagination_render(utilisateurs) }}
 </div>
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/form.css')}}">
+{% endblock %}

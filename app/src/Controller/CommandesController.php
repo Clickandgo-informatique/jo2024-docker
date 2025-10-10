@@ -112,11 +112,13 @@ class CommandesController extends AbstractController
             $this->addFlash('error', 'Utilisateur introuvable.');
             return $this->redirectToRoute('app_admin_dashboard');
         }
-        $data = $commandesRepo->findBy([], ['createdAt' => 'DESC']);
+        $title = "Commandes en cours client : " . $user->getLastname() . ' ' . $user->getFirstname();
+       
+        $data = $commandesRepo->findBy(['user' => $user->getId()], ['createdAt' => 'DESC']);
 
         $commandes = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
 
-        return $this->render('commandes/liste-commandes-client.html.twig', ['commandes' => $commandes, 'id' => $id]);
+        return $this->render('commandes/liste-commandes-client.html.twig', ['commandes' => $commandes, 'id' => $id,'user'=>$user,'title'=>$title]);
     }
     // Supprimer une commande avec contrôle du token csrf
     #[Route('/{id}/supprimer', name: 'supprimer', methods: ['POST'])]

@@ -199,6 +199,25 @@ git push ovh master
 
 ---
 
+## 10. Tests
+
+S'assurer que les tables sont présentes dans la base de tests
+
+```docker compose exec -e APP_ENV=test php php bin/console doctrine:schema:create```
+
+Si besoin créer des fixtures pour les tests
+
+```docker compose exec -e APP_ENV=test php php bin/console doctrine:fixtures:load --no-interaction```
+
+Pour lancer des tests il faut taper en ligne de commande en mode WSL
+
+```docker compose exec -e APP_ENV=test php php bin/phpunit```
+
+Pour tout faire en une seule commande
+
+```docker compose exec -e APP_ENV=test php bash -c "php bin/console doctrine:database:create --if-not-exists && php bin/console doctrine:schema:create && php bin/console doctrine:fixtures:load --no-interaction && php bin/phpunit"```
+
+
 ## 🎉 C’est prêt !
 
 Vous devriez maintenant avoir le projet Symfony **JO2024** fonctionnel en local avec Docker 🚀.

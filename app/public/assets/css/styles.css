@@ -61,10 +61,10 @@ body {
 }
 
 h1 {
-    font-size: clamp(2rem, 5vw, 3rem); /* taille responsive */
+    font-size: clamp(1.5rem, 5vw, 2.4rem); /* taille responsive */
     font-weight: 800;
     line-height: 1.2;
-
+    margin: 10px;
     /* Dégradé vertical bombé */
     background: var(--primary-color-gradient);
     -webkit-background-clip: text;
@@ -120,6 +120,7 @@ p {
 .text-green {
     color: darkgreen;
 }
+.text-bold{font-weight: 700;}
 .btn,
 button.btn {
     display: inline-flex;

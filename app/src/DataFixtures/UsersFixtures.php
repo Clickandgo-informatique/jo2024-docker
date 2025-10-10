@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Uid\Uuid;
 use Faker\Factory;
 use Faker\Generator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -33,9 +34,32 @@ class UsersFixtures extends Fixture
             ->setZipcode(trim($this->faker->postcode()))
             ->setEmail('admin@jo2024.fr')
             ->setRoles(['ROLE_ADMIN'])
+            // Génération uniforme du accountKey
+            ->setAccountKey(Uuid::v4()->toRfc4122())
             ->setCreatedAt(new \DateTimeImmutable());
 
         $manager->persist($admin);
+
+        // Génération de 3 sales managers
+        for ($i = 0; $i < 3; $i++) {
+            $salesManager = new Users();
+            $salesManager
+                ->setNickname($this->faker->userName())
+                ->setPassword($this->passwordHasher->hashPassword($salesManager, 'Sm-jo2024!'))
+                ->setFirstname($this->faker->firstName())
+                ->setLastname($this->faker->lastName())
+                ->setAddress($this->faker->streetAddress())
+                ->setCity($this->faker->city())
+                ->setCountry('France')
+                ->setZipcode(trim($this->faker->postcode()))
+                ->setEmail($this->faker->email())
+                ->setRoles(['ROLE_SALES_MANAGER'])
+                // Génération uniforme du accountKey
+                ->setAccountKey(Uuid::v4()->toRfc4122())
+                ->setCreatedAt(new \DateTimeImmutable());
+
+            $manager->persist($salesManager);
+        }
 
         //Création d'utilisateurs factices
         for ($i = 0; $i < 50; $i++) {
@@ -49,6 +73,8 @@ class UsersFixtures extends Fixture
                 ->setCountry('France')
                 ->setZipcode(trim($this->faker->postcode()))
                 ->setEmail($this->faker->email())
+                // Génération uniforme du accountKey
+                ->setAccountKey(Uuid::v4()->toRfc4122())
                 ->setPassword($this->passwordHasher->hashPassword($user, 'User-jo2024!'))
                 ->setRoles(['ROLE_USER'])
                 ->setCreatedAt(new \DateTimeImmutable());

@@ -9,8 +9,7 @@
     padding: 10px 20px;
     box-sizing: border-box;
     z-index: 1001;
-    box-shadow: var(--box-shadow);
-}
+    box-shadow: var(--box-shadow);}
 .navbar-header {
     display: flex;
     flex-direction: row;

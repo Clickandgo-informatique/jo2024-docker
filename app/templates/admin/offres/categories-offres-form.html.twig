@@ -4,12 +4,10 @@
 {% endblock %}
 {% block body %}
 
+	<h1 class="text-center">
+		<i class="fa-solid fa-circle-plus"></i>
+		{{title}}</h1>
 	{{ form_start(form) }}
-	<caption>
-		<h1 class="text-center">
-			<i class="fa-solid fa-circle-plus"></i>
-			{{title}}</h1>
-	</caption>
 	{{ form_row(form.nom) }}
 	{{ form_row(form.icone) }}
 	{{ form_row(form.description) }}

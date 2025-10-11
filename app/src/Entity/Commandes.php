@@ -1,49 +1,79 @@
 <?php
-// App\Entity\Commandes.php
+// src/Entity/Commandes.php
+
 namespace App\Entity;
 
 use App\Repository\CommandesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommandesRepository::class)]
 class Commandes
 {
+    // Identifiant unique de la commande
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    // Référence unique de la commande
     #[ORM\Column(length: 20, unique: true)]
+    #[Assert\NotBlank(message: "La référence de commande est obligatoire.")]
+    #[Assert\Length(
+        max: 20,
+        maxMessage: "La référence ne peut pas dépasser {{ limit }} caractères."
+    )]
     private ?string $reference = null;
 
-    // Correction : propriété camelCase côté PHP, nom snake_case côté BDD
+    // Date de création de la commande
     #[ORM\Column(type: 'datetime_immutable', name: 'created_at', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[Assert\NotNull(message: "La date de création doit être renseignée.")]
     private ?\DateTimeImmutable $createdAt = null;
 
+    // Utilisateur associé à la commande
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
+    #[Assert\NotNull(message: "Un utilisateur doit être associé à la commande.")]
     private ?Users $user = null;
 
+    // Liste des détails de la commande (articles, quantité, prix)
     /**
      * @var Collection<int, DetailsCommandes>
      */
-    #[ORM\OneToMany(targetEntity: DetailsCommandes::class, mappedBy: 'commande', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(
+        targetEntity: DetailsCommandes::class,
+        mappedBy: 'commande',
+        orphanRemoval: true,
+        cascade: ['persist']
+    )]
     private Collection $detailsCommandes;
 
+    // Ticket associé à la commande
     #[ORM\OneToOne(mappedBy: 'commande', cascade: ['persist', 'remove'])]
     private ?Tickets $ticket = null;
 
+    // Date de paiement de la commande
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $payeeLe = null;
 
+    // Token unique pour identifier la commande dans le QR code
     #[ORM\Column(type: "string", unique: true)]
+    #[Assert\NotBlank(message: "Le QR token est obligatoire.")]
+    #[Assert\Length(
+        min: 16,
+        max: 64,
+        minMessage: "Le QR token doit comporter au moins {{ limit }} caractères.",
+        maxMessage: "Le QR token ne peut pas dépasser {{ limit }} caractères."
+    )]
     private string $qrToken;
 
+    // Date à laquelle le ticket a été scanné
     #[ORM\Column(type: "datetime_immutable", nullable: true)]
     private ?\DateTimeImmutable $dateScan = null;
 
+    // Utilisateur ayant scanné le ticket
     #[ORM\ManyToOne(targetEntity: Users::class)]
     private ?Users $scannedBy = null;
 
@@ -51,9 +81,10 @@ class Commandes
     {
         $this->detailsCommandes = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
-        $this->qrToken = bin2hex(random_bytes(16)); // ✅ Token unique généré automatiquement
+        $this->qrToken = bin2hex(random_bytes(16)); // Génération automatique d’un token unique
     }
 
+    // Getters / Setters
     public function getId(): ?int
     {
         return $this->id;
@@ -133,11 +164,12 @@ class Commandes
         return $this;
     }
 
+    // Calcule le total TTC de la commande
     public function getTotalCommande(): float
     {
         $total = 0;
         foreach ($this->getDetailsCommandes() as $item) {
-            $total += $item->getPrix() * $item->getQuantite(); // Correction pour inclure la quantité
+            $total += $item->getPrix() * $item->getQuantite();
         }
         return $total;
     }

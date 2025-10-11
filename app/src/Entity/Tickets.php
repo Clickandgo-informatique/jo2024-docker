@@ -5,55 +5,80 @@ namespace App\Entity;
 
 use App\Repository\TicketsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TicketsRepository::class)]
 #[ORM\Table(name: "tickets")]
 class Tickets
 {
+    // Identifiant unique du ticket
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    // Clé unique du ticket (générée au moment du paiement)
+    // Clé unique du ticket (64 caractères), obligatoire et unique
     #[ORM\Column(length: 64, unique: true, nullable: false)]
+    #[Assert\NotBlank(message: 'La clé du ticket est obligatoire.')]
+    #[Assert\Length(
+        min: 64,
+        max: 64,
+        exactMessage: 'La clé du ticket doit faire exactement {{ limit }} caractères.'
+    )]
     private ?string $ticketKey = null;
 
-    // Hash payload (sha256 hex) embarqué dans le QR code — utilisé pour la vérification
+    // Hash du payload (sha256 hex) utilisé pour la vérification
     #[ORM\Column(length: 64, unique: true, nullable: true)]
+    #[Assert\Length(
+        min: 64,
+        max: 64,
+        exactMessage: 'Le hash du payload doit faire exactement {{ limit }} caractères.'
+    )]
     private ?string $payloadHash = null;
 
-    // QR code SVG inline ou autre contenu
+    // Chemin ou contenu QR code (SVG/base64/etc)
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $qrCodePath = null;
 
+    // Date de création du ticket (initialisée automatiquement)
     #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $created_at = null;
 
+    // Indique si le ticket a été utilisé
     #[ORM\Column(type: 'boolean')]
     private bool $isUsed = false;
 
+    // Utilisateur possédant le ticket
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
     private ?Users $user = null;
 
+    // Commande associée (obligatoire)
     #[ORM\OneToOne(inversedBy: 'ticket', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Commandes $commande = null;
 
+    // Date et heure de l'utilisation du ticket
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $usedAt = null;
 
+    // Utilisateur ayant validé le ticket (scanner/admin)
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     private ?Users $validatedBy = null;
 
+    // Date d'expiration du ticket
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $expiresAt = null;
 
     public function __construct()
     {
+        // Initialise la date de création automatiquement
         $this->created_at = new \DateTimeImmutable();
     }
+
+    // -------------------------------
+    // Getters et Setters
+    // -------------------------------
 
     public function getId(): ?int
     {
@@ -83,16 +108,15 @@ class Tickets
     }
 
     /**
-     * Convenience: compute payload hash from accountKey (binary) + ticketKey (hex string)
-     * and set payloadHash automatically.
+     * Calcule et assigne automatiquement le hash du payload
+     * à partir de la clé utilisateur et ticketKey.
      */
     public function computeAndSetPayloadHashFromAccountKey(string $accountKey): static
     {
         if ($this->ticketKey === null) {
-            throw new \LogicException('ticketKey must be set before computing payloadHash.');
+            throw new \LogicException('ticketKey doit être défini avant de calculer le payloadHash.');
         }
 
-        // accountKey can be binary; hash returns hex 64 chars
         $this->payloadHash = hash('sha256', $accountKey . $this->ticketKey);
         return $this;
     }
@@ -160,7 +184,6 @@ class Tickets
     public function setUsedAt(?\DateTimeImmutable $usedAt): static
     {
         $this->usedAt = $usedAt;
-
         return $this;
     }
 
@@ -172,7 +195,6 @@ class Tickets
     public function setValidatedBy(?Users $validatedBy): static
     {
         $this->validatedBy = $validatedBy;
-
         return $this;
     }
 
@@ -184,7 +206,6 @@ class Tickets
     public function setExpiresAt(?\DateTimeImmutable $expiresAt): static
     {
         $this->expiresAt = $expiresAt;
-
         return $this;
     }
 }

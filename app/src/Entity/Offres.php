@@ -10,87 +10,125 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Entity(repositoryClass: OffresRepository::class)]
 #[UniqueEntity(fields: ['intitule'], message: 'Il existe déjà une offre avec ce nom.')]
 class Offres
 {
+    // Identifiant unique de l'offre
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    // Intitulé de l'offre (nom)
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "L'intitulé de l'offre est obligatoire.")]
+    #[Assert\Length(max: 255, maxMessage: "L'intitulé ne peut pas dépasser {{ limit }} caractères.")]
     private ?string $intitule = null;
 
-    #[Assert\Type('numeric')]
-    #[Assert\NotBlank]
-    #[Assert\PositiveOrZero]
+    // Prix de l'offre (float pour valeurs décimales)
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
-    #[Assert\Regex(pattern: '/^\d+(\.\d{1,2})?$/', message: 'Format de nombre invalide')]
+    #[Assert\NotBlank(message: "Le prix est obligatoire.")]
+    #[Assert\Type(type: 'numeric', message: "Le prix doit être un nombre.")]
+    #[Assert\PositiveOrZero(message: "Le prix doit être supérieur ou égal à zéro.")]
     private ?string $prix = null;
 
+    // Date de début de validité de l'offre
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotNull(message: "La date de début est obligatoire.")]
+    #[Assert\Type(\DateTimeInterface::class)]
     private ?\DateTime $dateDebut = null;
 
+    // Date de fin de validité de l'offre
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotNull(message: "La date de fin est obligatoire.")]
+    #[Assert\Type(\DateTimeInterface::class)]
+    #[Assert\Expression(
+        "this.getDateFin() >= this.getDateDebut()",
+        message: "La date de fin doit être supérieure ou égale à la date de début."
+    )]
     private ?\DateTime $dateFin = null;
 
+    // Description libre
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    // Code unique pour l'offre
     #[ORM\Column(length: 8)]
+    #[Assert\NotBlank(message: "Le code est obligatoire.")]
+    #[Assert\Length(max: 8, maxMessage: "Le code ne peut pas dépasser {{ limit }} caractères.")]
     private ?string $code = null;
 
+    // Date de création
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?\DateTimeImmutable $createdAt = null;
 
+    // Date de dernière mise à jour
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    // Nombre maximum d'adultes
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\PositiveOrZero(message: "Le nombre d'adultes doit être positif ou nul.")]
     private ?int $nbrAdultes = null;
 
+    // Nombre maximum d'enfants
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\PositiveOrZero(message: "Le nombre d'enfants doit être positif ou nul.")]
     private ?int $nbrEnfants = null;
 
+    // Indique si l'offre est verrouillée
     #[ORM\Column]
     private ?bool $isLocked = false;
 
+    // Indique si l'offre est publiée
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?bool $isPublished = null;
 
+    // Slug pour l'URL
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
+
+    // Indique si l'offre est mise en avant
     #[ORM\Column]
     private ?bool $isPromoted = false;
 
     /**
+     * Collection d'images associées à l'offre
      * @var Collection<int, Images>
      */
     #[ORM\OneToMany(targetEntity: Images::class, mappedBy: 'offres', orphanRemoval: true)]
     private Collection $images;
 
     /**
+     * Détails des commandes associées à l'offre
      * @var Collection<int, DetailsCommandes>
      */
     #[ORM\OneToMany(targetEntity: DetailsCommandes::class, mappedBy: 'offres')]
     private Collection $detailsCommandes;
 
+    // Catégorie de l'offre
     #[ORM\ManyToOne(inversedBy: 'offres')]
     #[ORM\JoinColumn(onDelete: 'SET NULL', nullable: true)]
     private ?CategoriesOffres $categorie = null;
 
     /**
+     * Sports associés à l'offre
      * @var Collection<int, Sports>
      */
     #[ORM\ManyToMany(targetEntity: Sports::class, inversedBy: 'offres')]
     #[ORM\JoinTable(name: 'offres_sports')]
     private Collection $sports;
 
+    // Liste des lieux disponibles pour l'offre
     #[ORM\Column(type: 'json')]
     private array $lieux = [];
 
+    // Image principale de l'offre
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
@@ -102,6 +140,10 @@ class Offres
         $this->detailsCommandes = new ArrayCollection();
         $this->sports = new ArrayCollection();
     }
+
+    // -------------------------------
+    // Getters et Setters
+    // -------------------------------
 
     public function getId(): ?int
     {
@@ -119,12 +161,12 @@ class Offres
         return $this;
     }
 
-    public function getPrix(): ?int
+    public function getPrix(): ?string
     {
         return $this->prix;
     }
 
-    public function setPrix(int $prix): static
+    public function setPrix(string $prix): static
     {
         $this->prix = $prix;
         return $this;
@@ -251,9 +293,28 @@ class Offres
         return $this;
     }
 
-    /**
-     * @return Collection<int, Images>
-     */
+    public function getIsPromoted(): ?bool
+    {
+        return $this->isPromoted;
+    }
+
+    public function setIsPromoted(bool $isPromoted): static
+    {
+        $this->isPromoted = $isPromoted;
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+        return $this;
+    }
+
     public function getImages(): Collection
     {
         return $this->images;
@@ -280,9 +341,6 @@ class Offres
         return $this;
     }
 
-    /**
-     * @return Collection<int, DetailsCommandes>
-     */
     public function getDetailsCommandes(): Collection
     {
         return $this->detailsCommandes;
@@ -320,9 +378,6 @@ class Offres
         return $this;
     }
 
-    /**
-     * @return Collection<int, Sports>
-     */
     public function getSports(): Collection
     {
         return $this->sports;
@@ -332,7 +387,7 @@ class Offres
     {
         if (!$this->sports->contains($sport)) {
             $this->sports->add($sport);
-            $sport->addOffre($this); // synchro côté Sports
+            $sport->addOffre($this);
         }
 
         return $this;
@@ -341,7 +396,7 @@ class Offres
     public function removeSport(Sports $sport): static
     {
         if ($this->sports->removeElement($sport)) {
-            $sport->removeOffre($this); // synchro côté Sports
+            $sport->removeOffre($this);
         }
 
         return $this;
@@ -355,38 +410,6 @@ class Offres
     public function setLieux(array $lieux): static
     {
         $this->lieux = $lieux;
-        return $this;
-    }
-
-    /**
-     * Get the value of isPromoted
-     */
-    public function getIsPromoted()
-    {
-        return $this->isPromoted;
-    }
-
-    /**
-     * Set the value of isPromoted
-     *
-     * @return  self
-     */
-    public function setIsPromoted($isPromoted)
-    {
-        $this->isPromoted = $isPromoted;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): static
-    {
-        $this->image = $image;
-
         return $this;
     }
 }

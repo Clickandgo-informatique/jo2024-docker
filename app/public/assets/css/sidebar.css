@@ -3,7 +3,7 @@
    =============================== */
 .sidebar {
     width: 250px; /* Largeur pleine */
-    background-color: #1a1a1a;
+    background: var(--primary-color-gradient);
     color: white;
     height: 100%;
     overflow: hidden;

@@ -1,11 +1,10 @@
 <aside id="sidebar" class="sidebar sidebar-mini">
 	<ul class="sidebar-list">
 
-		<li class="sidebar-item">
-			<a href="{{ path('admin_dashboard') }}" class="sidebar-link">
-				<i class="fa-solid fa-list"></i>
-				<span class="label">Dashboard</span>
-			</a>
+		<li class="sidebar-item">							
+				<a href="{{ path('admin_dashboard') }}" class="sidebar-link">
+				<i class="fa-solid fa-gears"></i>
+				</a>		
 		</li>
 
 		<li class="sidebar-item">
@@ -22,57 +21,56 @@
 				</li>
 			</ul>
 		</li>
-	</li>
-	<li class="sidebar-item">
-		<div class="sidebar-item-title">
-			<i class="fa-solid fa-briefcase"></i>
-			<span class="label">Offres</span>
-		</div>
-		<ul class="sidebar-sublist">
-			<li>
-				<a href="{{ path('app_offres_index') }}" class="sidebar-link">
-					<i class="fa-solid fa-list"></i>
-					<span class="label">Liste</span>
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('app_categories_offres_index') }}" class="sidebar-link">
-					<i class="fa-solid fa-tags"></i>
-					<span class="label">Catégories offres</span>
-				</a>
-			</li>
-		</ul>
-	</li>
 
-	<li class="sidebar-item">
-		<div class="sidebar-item-title">
-			<i class="fa-solid fa-futbol"></i>
-			<span class="label">Sports</span>
-		</div>
-		<ul class="sidebar-sublist">
-			<li>
-				<a href="{{ path('app_sports_index') }}" class="sidebar-link">
-					<i class="fa-solid fa-list"></i>
-					<span class="label">Liste</span>
-				</a>
-			</li>
-		</ul>
-	</li>
+		<li class="sidebar-item">
+			<div class="sidebar-item-title">
+				<i class="fa-solid fa-briefcase"></i>
+				<span class="label">Offres</span>
+			</div>
+			<ul class="sidebar-sublist">
+				<li>
+					<a href="{{ path('app_offres_index') }}" class="sidebar-link">
+						<i class="fa-solid fa-list"></i>
+						<span class="label">Liste</span>
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('app_categories_offres_index') }}" class="sidebar-link">
+						<i class="fa-solid fa-tags"></i>
+						<span class="label">Catégories offres</span>
+					</a>
+				</li>
+			</ul>
+		</li>
 
-	<li class="sidebar-item">
-		<div class="sidebar-item-title">
-			<i class="fa-solid fa-qrcode"></i>
-			<span class="label">QrCodes</span>
-		</div>
-		<ul class="sidebar-sublist">
-			<li>
-				<a href="{{ path('admin_tickets_scan') }}" class="sidebar-link">
-					<i class="fa-solid fa-expand"></i>
-					<span class="label">Scanner</span>
-				</a>
-			</li>
-		</ul>
-	</li>
+		<li class="sidebar-item">
+			<div class="sidebar-item-title">
+				<i class="fa-solid fa-futbol"></i>
+				<span class="label">Sports</span>
+			</div>
+			<ul class="sidebar-sublist">
+				<li>
+					<a href="{{ path('app_sports_index') }}" class="sidebar-link">
+						<i class="fa-solid fa-list"></i>
+						<span class="label">Liste</span>
+					</a>
+				</li>
+			</ul>
+		</li>
 
-</ul></aside>{% block stylesheets %}
-<link rel="stylesheet" href="{{asset('assets/css/sidebar.css')}}">{% endblock %}
+		<li class="sidebar-item">
+			<div class="sidebar-item-title">
+				<i class="fa-solid fa-qrcode"></i>
+				<span class="label">QrCodes</span>
+			</div>
+			<ul class="sidebar-sublist">
+				<li>
+					<a href="{{ path('admin_tickets_scan') }}" class="sidebar-link">
+						<i class="fa-solid fa-expand"></i>
+						<span class="label">Scanner</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</aside>

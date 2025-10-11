@@ -54,8 +54,10 @@
 				</td>
 				{% if u.commandes %}
 					<td data-label="Commandes">
-						<a href="{{path('app_commandes_liste-commandes-client',{id:u.id})}}">
-							<i class="fa-solid fa-magnifying-glass"></i>Voir</a>
+
+						<a href="{{path('app_commandes_liste-commandes-client',{id:u.id})}}"class="btn-action">
+							<i class="fa-solid fa-magnifying-glass"></i>
+							{{u.commandes|length}}&nbsp;</a>
 					</td>
 
 				{% endif %}
@@ -63,7 +65,9 @@
 				<td class="text-center">
 					<form method="post" class="submit-btn-form" action="{{ path('app_utilisateurs_supprimer', {'id': u.id}) }}" onsubmit="return confirm('Supprimer cet utilisateur ?');">
 						<input type="hidden" name="_token" value="{{ csrf_token('delete-user' ~ u.id) }}">
-						<button type="submit" class="btn-action btn-delete"><i class="fa-solid fa-trash-can"></i></button>
+						<button type="submit" class="btn-action btn-delete">
+							<i class="fa-solid fa-trash-can"></i>
+						</button>
 					</form>
 
 				</td>

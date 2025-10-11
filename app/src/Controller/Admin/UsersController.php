@@ -8,6 +8,7 @@ use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -108,5 +109,41 @@ class UsersController extends AbstractController
         }
 
         return $this->redirectToRoute('app_utilisateurs_index');
+    }
+    //Recherche des utilisateurs par différents critères
+
+
+
+    #[Route('/rechercher', name: '_rechercher')]
+    public function rechercher(Request $request, UsersRepository $usersRepo, PaginatorInterface $paginator): JsonResponse
+    {
+        $searchString = trim((string) $request->get('searchString'));
+
+        if ($searchString && mb_strlen($searchString, 'UTF-8') >= 2) {
+            $data = $usersRepo->filterUsersBy($searchString);
+        } else {
+            $data = $usersRepo->findBy([], ['nickname' => 'ASC']);
+        }
+        $utilisateurs = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            12
+        );
+
+
+        if ($request->isXmlHttpRequest()) {
+
+            $html = $this->renderView('_partials/_users-list.html.twig', [
+                'utilisateurs' => $utilisateurs,
+            ]);
+            return new JsonResponse([
+                'status' => 'success',
+                'html'   => $html,
+            ]);
+        } else {
+            return $this->render('users/index.html.twig', [
+                'utilisateurs' => $utilisateurs,
+            ]);
+        }
     }
 }

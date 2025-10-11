@@ -1,7 +1,13 @@
 .charts-grid {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: 1fr; /* par défaut une colonne */
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.chart-title {
+    text-align: center;
+    color: var(--primary-color);
+    margin: 5px;
 }
 .chart-wrapper {
     width: 90%;
@@ -9,18 +15,26 @@
     margin: 0 auto;
 }
 #bestSalesChart {
-    width: 100%;
+    min-width: 600px;
     height: 100%;
 }
-
-@media (min-width: 768px) {
-    .charts-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette+ */
-    }
+#salesCategoryChart {
+    max-width: 600px;
+}
+.chart-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    height: 100%;
+    border-radius: 10px;
 }
 
-@media (min-width: 1200px) {
+@media (max-width: 768px) {
     .charts-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 colonnes sur grand écran */
+        flex-direction: column;
+        align-items: center;
     }
 }

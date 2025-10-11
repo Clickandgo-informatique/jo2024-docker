@@ -624,7 +624,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.CHYt9Yd"/>
+      <argument type="service" id=".service_locator.a78Y5mO"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3125,7 +3125,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.CHYt9Yd"/>
+      <argument type="service" id=".service_locator.a78Y5mO"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -7243,6 +7243,19 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.JmFIrX_" method="withContext"/>
     </service>
+    <service id=".service_locator.HRV2e2T" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="categorie" type="service_closure" id=".errored..service_locator.HRV2e2T.App\Entity\CategoriesOffres"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.HRV2e2T.App\Controller\Admin\CategoriesOffresController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\CategoriesOffresController::delete()"/>
+      <argument>App\Controller\Admin\CategoriesOffresController::delete()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.HRV2e2T" method="withContext"/>
+    </service>
     <service id=".service_locator..5KpnnQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7743,7 +7756,7 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.g9vD4Q0" method="withContext"/>
     </service>
-    <service id=".service_locator.CHYt9Yd" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.a78Y5mO" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.zHyJIs5.kernel::registerContainerConfiguration()"/>
@@ -7753,6 +7766,7 @@
         <argument key="App\Controller\Admin\CategoriesOffresController::index" type="service_closure" id=".service_locator.iTJSlix.App\Controller\Admin\CategoriesOffresController::index()"/>
         <argument key="App\Controller\Admin\CategoriesOffresController::new" type="service_closure" id=".service_locator.zuLlZtR.App\Controller\Admin\CategoriesOffresController::new()"/>
         <argument key="App\Controller\Admin\CategoriesOffresController::edit" type="service_closure" id=".service_locator.JmFIrX_.App\Controller\Admin\CategoriesOffresController::edit()"/>
+        <argument key="App\Controller\Admin\CategoriesOffresController::delete" type="service_closure" id=".service_locator.HRV2e2T.App\Controller\Admin\CategoriesOffresController::delete()"/>
         <argument key="App\Controller\Admin\CommandeScanController::scanCommande" type="service_closure" id=".service_locator..5KpnnQ.App\Controller\Admin\CommandeScanController::scanCommande()"/>
         <argument key="App\Controller\Admin\MockPaymentController::payerCommande" type="service_closure" id=".service_locator.iDH1bai.App\Controller\Admin\MockPaymentController::payerCommande()"/>
         <argument key="App\Controller\Admin\OffresController::index" type="service_closure" id=".service_locator.YwLGueJ.App\Controller\Admin\OffresController::index()"/>
@@ -7800,6 +7814,7 @@
         <argument key="App\Controller\Admin\CategoriesOffresController:index" type="service_closure" id=".service_locator.iTJSlix.App\Controller\Admin\CategoriesOffresController::index()"/>
         <argument key="App\Controller\Admin\CategoriesOffresController:new" type="service_closure" id=".service_locator.zuLlZtR.App\Controller\Admin\CategoriesOffresController::new()"/>
         <argument key="App\Controller\Admin\CategoriesOffresController:edit" type="service_closure" id=".service_locator.JmFIrX_.App\Controller\Admin\CategoriesOffresController::edit()"/>
+        <argument key="App\Controller\Admin\CategoriesOffresController:delete" type="service_closure" id=".service_locator.HRV2e2T.App\Controller\Admin\CategoriesOffresController::delete()"/>
         <argument key="App\Controller\Admin\CommandeScanController:scanCommande" type="service_closure" id=".service_locator..5KpnnQ.App\Controller\Admin\CommandeScanController::scanCommande()"/>
         <argument key="App\Controller\Admin\MockPaymentController:payerCommande" type="service_closure" id=".service_locator.iDH1bai.App\Controller\Admin\MockPaymentController::payerCommande()"/>
         <argument key="App\Controller\Admin\OffresController:index" type="service_closure" id=".service_locator.YwLGueJ.App\Controller\Admin\OffresController::index()"/>
@@ -8423,6 +8438,9 @@
     </service>
     <service id=".errored..service_locator.zHyJIs5.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.zHyJIs5&quot;: it needs an instance of &quot;Symfony\Component\Config\Loader\LoaderInterface&quot; but this type has been excluded from autowiring."/>
+    </service>
+    <service id=".errored..service_locator.HRV2e2T.App\Entity\CategoriesOffres" class="App\Entity\CategoriesOffres">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.HRV2e2T&quot;: it needs an instance of &quot;App\Entity\CategoriesOffres&quot; but this type has been excluded because it's a Doctrine entity."/>
     </service>
     <service id=".errored..service_locator..5KpnnQ.Symfony\Bundle\SecurityBundle\SecurityBundle" class="Symfony\Bundle\SecurityBundle\SecurityBundle">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator..5KpnnQ&quot;: it references class &quot;Symfony\Bundle\SecurityBundle\SecurityBundle&quot; but no such service exists."/>
@@ -9435,7 +9453,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.CHYt9Yd"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.a78Y5mO"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
@@ -9457,6 +9475,7 @@
     <service id=".service_locator.itU8CWH" alias=".service_locator.iTJSlix"/>
     <service id=".service_locator.Tf2CChD" alias=".service_locator.zuLlZtR"/>
     <service id=".service_locator.ggSbQfb" alias=".service_locator.JmFIrX_"/>
+    <service id=".service_locator.7tmY9uC" alias=".service_locator.HRV2e2T"/>
     <service id=".service_locator.Q63lWCL" alias=".service_locator..5KpnnQ"/>
     <service id=".service_locator.5wvcL_8" alias=".service_locator.iDH1bai"/>
     <service id=".service_locator.Q3UQd9T" alias=".service_locator.YwLGueJ"/>

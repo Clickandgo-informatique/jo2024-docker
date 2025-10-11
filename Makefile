@@ -1,73 +1,124 @@
+# Nom du projet Docker, utilisé pour identifier les conteneurs
 PROJECT_NAME=jo2024-docker
 
-# Docker lifecycle
+# ----------------------
+# Cycle de vie Docker
+# ----------------------
+
+# Build complet : arrêt des conteneurs, suppression des volumes et reconstruction
 build:
 	docker-compose down --volumes --remove-orphans
 	docker system prune -af
 	docker-compose build --no-cache
 
+# Lancement des conteneurs en arrière-plan
 up:
 	docker-compose up -d
 
+# Arrêt des conteneurs et suppression des volumes orphelins
 down:
 	docker-compose down --volumes --remove-orphans
 
+# Redémarrage complet : down + build + up
 restart:
 	docker-compose down --volumes --remove-orphans
 	docker-compose build --no-cache
 	docker-compose up -d
 
+# Affichage des logs en temps réel
 logs:
 	docker-compose logs -f
 
-# Container access
+# ----------------------
+# Accès aux conteneurs
+# ----------------------
+
+# Accès au conteneur PHP en bash interactif
 php:
 	docker exec -it $(PROJECT_NAME)_php bash
 
+# Accès au conteneur Nginx en shell
 nginx:
 	docker exec -it $(PROJECT_NAME)_nginx sh
 
+# Accès au conteneur base de données en bash
 db:
 	docker exec -it $(PROJECT_NAME)_db bash
 
-# Web tools
+# ----------------------
+# Outils web
+# ----------------------
+
+# Accès à PhpMyAdmin
 pma:
 	open http://localhost:8081
 
+# Accès à MailHog
 mailhog:
 	open http://localhost:8025
 
+# ----------------------
 # Symfony CLI
+# ----------------------
+
+# Exécuter la console Symfony dans le conteneur PHP
 symfony:
 	docker exec -it $(PROJECT_NAME)_php php bin/console
 
+# Vider le cache Symfony
 cache-clear:
 	docker exec -it $(PROJECT_NAME)_php php bin/console cache:clear
 
-# Symfony commands
+# ----------------------
+# Commandes Symfony Doctrine
+# ----------------------
+
+# Appliquer les migrations
 migrate:
-	docker exec -it $(PROJECT_NAME)_php php bin/console doctrine:migrations:migrate --no-interaction
+	docker exec -i $(PROJECT_NAME)_php php bin/console doctrine:migrations:migrate --no-interaction
 
+# Générer une migration
 migration:
-	docker exec -it $(PROJECT_NAME)_php php bin/console make:migration --no-interaction
+	docker exec -i $(PROJECT_NAME)_php php bin/console make:migration --no-interaction
 
+# Charger les fixtures
 fixtures:
-	docker exec -it $(PROJECT_NAME)_php php bin/console doctrine:fixtures:load --no-interaction
+	docker exec -i $(PROJECT_NAME)_php php bin/console doctrine:fixtures:load --no-interaction
 
+# Mettre à jour le schéma de la base
 schema-update:
-	docker exec -it $(PROJECT_NAME)_php php bin/console doctrine:schema:update --force
+	docker exec -i $(PROJECT_NAME)_php php bin/console doctrine:schema:update --force
 
-# Reset database complet (création si inexistante)
+# ----------------------
+# Réinitialisation complète de la base de données
+# ----------------------
 reset-db:
-	docker exec -it $(PROJECT_NAME)_db mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS jo2024 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-	docker exec -it $(PROJECT_NAME)_php php bin/console doctrine:database:drop --force --if-exists
-	docker exec -it $(PROJECT_NAME)_php php bin/console doctrine:database:create --if-not-exists
-	docker exec -it $(PROJECT_NAME)_php php bin/console doctrine:migrations:migrate --no-interaction
-	docker exec -it $(PROJECT_NAME)_php php bin/console doctrine:fixtures:load --no-interaction
+	# Création de la base si elle n'existe pas
+	docker exec -i $(PROJECT_NAME)_db mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS jo2024 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+	# Suppression de la base de test existante
+	docker exec -i $(PROJECT_NAME)_php php bin/console doctrine:database:drop --force --if-exists --env=test
+	# Création de la base de test
+	docker exec -i $(PROJECT_NAME)_php php bin/console doctrine:database:create --if-not-exists --env=test
+	# Application des migrations
+	docker exec -i $(PROJECT_NAME)_php php bin/console doctrine:migrations:migrate --no-interaction --env=test
+	# Chargement des fixtures
+	docker exec -i $(PROJECT_NAME)_php php bin/console doctrine:fixtures:load --no-interaction --env=test
 
-# Tests
+# ----------------------
+# Tests PHPUnit
+# ----------------------
+
+# Lancer tous les tests en mode test
 test:
-	docker exec -it $(PROJECT_NAME)_php php bin/phpunit
+	# Exécute PHPUnit dans le conteneur PHP avec session mockée et test environment
+	clear
+	docker exec -i -e APP_ENV=test jo2024-docker_php php bin/phpunit --testdox --colors=always
 
+
+# ----------------------
+# Déploiement OVH
+# ----------------------
+
+# Connexion SSH sur le serveur OVH
 ovh:
 	ssh clickandug@ssh.cluster011.hosting.ovh.net

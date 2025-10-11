@@ -12,10 +12,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+  #[Route('admin/offres/categories-offres', name: 'app_categories_offres')]
 class CategoriesOffresController extends AbstractController
 {
     //Liste des categories d'offres (administration)
-    #[Route('admin/offres/categories-offres', name: 'app_categories_offres_index')]
+    #[Route('/', name: '_index')]
     public function index(CategoriesOffresRepository $categoriesOffresRepo): Response
     {
         $categoriesOffres = $categoriesOffresRepo->findBy([], ['nom' => 'ASC']);
@@ -23,7 +24,7 @@ class CategoriesOffresController extends AbstractController
     }
 
     //Créer une nouvelle catégorie d'offre
-    #[Route('admin/offres/categories-offres/ajout', name: 'app_categories_offres_new')]
+    #[Route('/ajout', name: '_new')]
     public function new(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $categorieOffres = new CategoriesOffres();
@@ -49,7 +50,7 @@ class CategoriesOffresController extends AbstractController
     }
 
     //Modifier une categorie d'offre (administration)
-    #[Route('admin/offres/categories-offres/{slug}/edit', name: 'app_categories_offres_edit')]
+    #[Route('/{slug}/edit', name: '_edit')]
     public function edit(CategoriesOffresRepository $categoriesOffresRepo, string $slug, Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $categorieOffres = $categoriesOffresRepo->findOneBy(['slug' => $slug]);
@@ -72,5 +73,22 @@ class CategoriesOffresController extends AbstractController
         }
 
         return $this->render('admin/offres/categories-offres-form.html.twig', ['form' => $form->createView(), 'title' => $title]);
+    }
+    // Supprimer une catégorie d'offre
+    // Supprimer un utilisateur
+    #[Route('/{id}/supprimer', name: '_supprimer', methods: ['POST'])]
+    public function delete(CategoriesOffres $categorie, Request $request, EntityManagerInterface $em)
+    {
+        $submittedToken = $request->request->get('_token');
+
+        if ($this->isCsrfTokenValid('delete-categorie' . $categorie->getId(), $submittedToken)) {
+            $em->remove($categorie);
+            $em->flush();
+            $this->addFlash('success', 'La catégorie d\'offre a été supprimée avec succès.');
+        } else {
+            $this->addFlash('error', 'Token CSRF invalide. Suppression annulée.');
+        }
+
+        return $this->redirectToRoute('app_categories_offres_index');
     }
 }

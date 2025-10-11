@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserFormType extends AbstractType
 {
@@ -42,7 +43,16 @@ class UserFormType extends AbstractType
             // Mot de passe
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
-                'required' => true,
+                'required' => false,
+                'mapped' => true,
+                'empty_data' => '',
+                'constraints' => [
+                    // ✅ Utilisation des arguments nommés pour éviter la dépréciation
+                    new NotBlank(
+                        message: 'Le mot de passe ne peut pas être vide',
+                        groups: ['registration']
+                    ),
+                ],
             ])
             // Rôles de l'utilisateur
             ->add('roles', ChoiceType::class, [
@@ -50,7 +60,7 @@ class UserFormType extends AbstractType
                 'choices' => [
                     'Administrateur' => 'ROLE_ADMIN',
                     'Utilisateur' => 'ROLE_USER',
-                    'Sales manager' => 'ROLE_SALES_MANAGER'
+                    'Sales manager' => 'ROLE_SALES_MANAGER',
                 ],
                 'expanded' => true,   // boutons radio ou checkbox
                 'multiple' => true,   // plusieurs rôles possibles

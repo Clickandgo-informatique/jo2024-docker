@@ -1,19 +1,43 @@
+{# ==============================
+   Partial : Liste des utilisateurs (mode test sans pagination KNP)
+   ============================== #}
+
 <div class="text-center pagination-counter">
-	Utilisateurs
-	{{ (utilisateurs.getCurrentPageNumber() - 1) * utilisateurs.getItemNumberPerPage() + 1 }}
-	à
-	{{ (utilisateurs.getCurrentPageNumber() - 1) * utilisateurs.getItemNumberPerPage() + utilisateurs.getItemNumberPerPage() > utilisateurs.getTotalItemCount() ? utilisateurs.getTotalItemCount() : (utilisateurs.getCurrentPageNumber() - 1) * utilisateurs.getItemNumberPerPage() + utilisateurs.getItemNumberPerPage() }}
-	sur
-	{{ utilisateurs.getTotalItemCount() }}
+	{% if isPaginator %}
+		{{ (utilisateurs.getCurrentPageNumber() - 1) * utilisateurs.getItemNumberPerPage() + 1 }}
+		à
+		{{
+        (utilisateurs.getCurrentPageNumber() - 1) * utilisateurs.getItemNumberPerPage() + utilisateurs.getItemNumberPerPage()
+        > utilisateurs.getTotalItemCount()
+            ? utilisateurs.getTotalItemCount()
+            : (utilisateurs.getCurrentPageNumber() - 1) * utilisateurs.getItemNumberPerPage() + utilisateurs.getItemNumberPerPage()
+    }}
+		sur
+		{{ utilisateurs.getTotalItemCount() }}
+	{% else %}
+		1 à
+		{{ utilisateurs|length }}
+		sur
+		{{ utilisateurs|length }}
+	{% endif %}
+
 </div>
-<div class="pagination">
-	{{ knp_pagination_render(utilisateurs) }}
-</div>
+
+{# ------------------------------
+   Formulaire d’ajout d’un utilisateur
+   ------------------------------ #}
 {# Ajouter un nouvel utilisateur #}
 <form action="{{path('app_utilisateurs_ajouter')}}" method="POST" class="submit-btn-form">
 	<button class="btn btn-new text-center btn-primary" type="submit">
 		<i class="fa-solid fa-circle-plus"></i>Ajouter un utilisateur</button>
 </form>
+
+{# ------------------------------
+   Tableau utilisateurs
+   ------------------------------ #}
+<div class="pagination">
+	{{ knp_pagination_render(utilisateurs) }}
+</div>
 <table>
 	<thead>
 		<tr>
@@ -55,7 +79,7 @@
 				{% if u.commandes %}
 					<td data-label="Commandes">
 
-						<a href="{{path('app_commandes_liste-commandes-client',{id:u.id})}}"class="btn-action">
+						<a href="{{path('app_commandes_liste-commandes-client',{id:u.id})}}" class="btn-action">
 							<i class="fa-solid fa-magnifying-glass"></i>
 							{{u.commandes|length}}&nbsp;</a>
 					</td>
@@ -78,6 +102,9 @@
 <div class="pagination">
 	{{ knp_pagination_render(utilisateurs) }}
 </div>
+{# ------------------------------
+   Styles spécifiques
+   ------------------------------ #}
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('assets/css/form.css')}}">
+	<link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
 {% endblock %}

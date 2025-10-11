@@ -78,7 +78,7 @@ class Offres
     private Collection $detailsCommandes;
 
     #[ORM\ManyToOne(inversedBy: 'offres')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL', nullable: true)]
     private ?CategoriesOffres $categorie = null;
 
     /**

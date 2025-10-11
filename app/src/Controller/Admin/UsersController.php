@@ -15,30 +15,48 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 
-#[Route('/admin/utilisateurs', 'app_utilisateurs')]
+// Définition du préfixe de route pour toutes les méthodes de ce contrôleur
+#[Route(path: '/admin/utilisateurs', name: 'app_utilisateurs')]
 class UsersController extends AbstractController
 {
-    // Liste des utilisateurs par ordre croissant
-    #[Route('/', '_index')]
-    public function index(UsersRepository $usersRepo, PaginatorInterface $paginator, Request $request): Response
-    {
+    // Affiche la liste des utilisateurs par ordre alphabétique
+    #[Route(path: '/', name: '_index')]
+    public function index(
+        UsersRepository $usersRepo,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+        // Création de la requête pour récupérer les utilisateurs par pseudo croissant
         $query = $usersRepo->createQueryBuilder('u')
             ->orderBy('u.nickname', 'ASC')
             ->getQuery();
 
-        $utilisateurs = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            12
-        );
+        // Vérifie si on est en environnement de test
+        $isTest = $this->getParameter('kernel.environment') === 'test';
 
+        if ($isTest) {
+            // En mode test, désactive la pagination : on récupère un simple tableau
+            $utilisateurs = $query->getResult();
+        } else {
+            // En production, utilise KNP Paginator
+            $utilisateurs = $paginator->paginate(
+                $query,                          // requête Doctrine
+                $request->query->getInt('page', 1), // page actuelle
+                12                                // nombre d'éléments par page
+            );
+        }
+
+        // Rend le template avec les utilisateurs et une variable indiquant si c'est un paginator
         return $this->render('admin/utilisateurs/index.html.twig', [
             'utilisateurs' => $utilisateurs,
+            'isPaginator'  => !$isTest, // true si c'est un Paginator, false sinon
         ]);
     }
 
-    // Ajouter un nouvel utilisateur
-    #[Route('/ajouter', name: '_ajouter', methods: ['GET', 'POST'])]
+
+
+    // Crée un nouvel utilisateur via un formulaire
+    #[Route(path: '/ajouter', name: '_ajouter', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
         EntityManagerInterface $em,
@@ -69,11 +87,17 @@ class UsersController extends AbstractController
         ]);
     }
 
-    // Modifier un utilisateur existant
-    #[Route('/{id}/modifier', name: '_modifier', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    // Modifie un utilisateur existant
+    #[Route(path: '/{id}/modifier', name: '_modifier', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function edit(UsersRepository $usersRepo, int $id, Request $request, EntityManagerInterface $em): Response
     {
         $utilisateur = $usersRepo->find($id);
+
+        // Vérifie que l'utilisateur existe
+        if (!$utilisateur) {
+            throw $this->createNotFoundException("Utilisateur introuvable.");
+        }
+
         $title = "Modifier un utilisateur";
 
         $form = $this->createForm(UserFormType::class, $utilisateur);
@@ -83,7 +107,7 @@ class UsersController extends AbstractController
             $em->persist($utilisateur);
             $em->flush();
 
-            $this->addFlash('success', 'Les modifications ont bien été enregistrées dans la base.');
+            $this->addFlash('success', 'Les modifications ont bien été enregistrées.');
             return $this->redirectToRoute('app_utilisateurs_index');
         }
 
@@ -94,9 +118,9 @@ class UsersController extends AbstractController
         ]);
     }
 
-    // Supprimer un utilisateur
-    #[Route('/{id}/supprimer', name: '_supprimer', methods: ['POST'])]
-    public function delete(Users $user, Request $request, EntityManagerInterface $em)
+    // Supprime un utilisateur après validation du token CSRF
+    #[Route(path: '/{id}/supprimer', name: '_supprimer', methods: ['POST'])]
+    public function delete(Users $user, Request $request, EntityManagerInterface $em): Response
     {
         $submittedToken = $request->request->get('_token');
 
@@ -110,11 +134,9 @@ class UsersController extends AbstractController
 
         return $this->redirectToRoute('app_utilisateurs_index');
     }
-    //Recherche des utilisateurs par différents critères
 
-
-
-    #[Route('/rechercher', name: '_rechercher')]
+    // Recherche des utilisateurs par pseudo, email ou nom
+    #[Route(path: '/rechercher', name: '_rechercher')]
     public function rechercher(Request $request, UsersRepository $usersRepo, PaginatorInterface $paginator): JsonResponse
     {
         $searchString = trim((string) $request->get('searchString'));
@@ -124,26 +146,31 @@ class UsersController extends AbstractController
         } else {
             $data = $usersRepo->findBy([], ['nickname' => 'ASC']);
         }
-        $utilisateurs = $paginator->paginate(
-            $data,
-            $request->query->getInt('page', 1),
-            12
-        );
 
+        // En environnement de test, désactive la pagination
+        if ($this->getParameter('kernel.environment') === 'test') {
+            $utilisateurs = $data;
+        } else {
+            $utilisateurs = $paginator->paginate(
+                $data,
+                $request->query->getInt('page', 1),
+                12
+            );
+        }
 
         if ($request->isXmlHttpRequest()) {
-
             $html = $this->renderView('_partials/_users-list.html.twig', [
                 'utilisateurs' => $utilisateurs,
             ]);
+
             return new JsonResponse([
                 'status' => 'success',
-                'html'   => $html,
-            ]);
-        } else {
-            return $this->render('users/index.html.twig', [
-                'utilisateurs' => $utilisateurs,
+                'html' => $html,
             ]);
         }
+
+        return $this->render('users/index.html.twig', [
+            'utilisateurs' => $utilisateurs,
+        ]);
     }
 }

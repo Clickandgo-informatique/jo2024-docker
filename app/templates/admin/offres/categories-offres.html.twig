@@ -23,12 +23,15 @@
 						</a>
 					</td>
 					<td>{{c.nom}}</td>
-						<td class="text-center">
-						<a href="#"class="btn-action btn-delete">
-							<i class="fa-solid fa-trash-can "></i>
-						</a>
+					<td class="text-center">
+						<form method="post" class="submit-btn-form" action="{{ path('app_categories_offres_supprimer', {'id': c.id}) }}" onsubmit="return confirm('Supprimer cette catégorie d\'offre ?');">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete-categorie' ~ c.id) }}">
+							<button type="submit" class="btn-action btn-delete">
+								<i class="fa-solid fa-trash-can"></i>
+							</button>
+						</form>
 					</td>
-					
+
 				</tr>
 			{% else %}
 				<p class="text-center">Il n'existe encore aucune catégorie d'offre enregistrée.</p>

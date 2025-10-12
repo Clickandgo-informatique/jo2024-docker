@@ -1,0 +1,104 @@
+/* Style pour la table des matières */
+.toc {
+    font-size: 0.9em;
+    margin-bottom: 1em;
+}
+
+/* Style pour les ancres */
+h2 a,
+h3 a {
+    text-decoration: none;
+    color: inherit;
+}
+/* Masque le # mais garde le lien cliquable */
+h1 .heading-anchor,
+h2 .heading-anchor,
+h3 .heading-anchor,
+h4 .heading-anchor,
+h5 .heading-anchor,
+h6 .heading-anchor {
+    text-decoration: none;
+    color: inherit; /* prend la couleur du texte */
+    font-size: 0; /* masque le # visuellement */
+}
+
+h1 .heading-anchor::after,
+h2 .heading-anchor::after,
+h3 .heading-anchor::after,
+h4 .heading-anchor::after,
+h5 .heading-anchor::after,
+h6 .heading-anchor::after {
+    content: ""; /* supprime le symbole # */
+}
+/* ------------------------ */
+/* Table des matières (TOC) */
+/* ------------------------ */
+.toc {
+    border: 1px solid #ddd;
+    padding: 1em;
+    background: #f9f9f9;
+    max-width: 250px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin-bottom: 1em;
+}
+
+.toc ul {
+    list-style-type: disc;
+    padding-left: 1em;
+    margin: 0;
+}
+
+.toc li {
+    margin: 0.3em 0;
+}
+
+/* Liens TOC */
+.toc a {
+    text-decoration: none;
+    color: #0366d6;
+}
+
+.toc a:hover {
+    text-decoration: underline;
+}
+
+/* ------------------------ */
+/* Titres et ancres          */
+/* ------------------------ */
+
+/* Style général des titres */
+h1, h2, h3, h4, h5, h6 {
+    position: relative;
+    scroll-margin-top: 80px; /* pour que l'ancre ne soit pas cachée par le header fixe */
+}
+
+/* Lien d’ancre invisible mais cliquable */
+.heading-anchor {
+    text-decoration: none;
+    color: inherit; /* prend la couleur du texte */
+    font-size: 0;    /* masque le symbole # */
+    position: absolute;
+    left: -1.2em; /* décalé à gauche */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Optionnel : montrer # au survol du titre */
+h1:hover .heading-anchor,
+h2:hover .heading-anchor,
+h3:hover .heading-anchor,
+h4:hover .heading-anchor,
+h5:hover .heading-anchor,
+h6:hover .heading-anchor {
+    font-size: 0.9em;
+    color: #0366d6;
+}
+
+/* Pour que le TOC reste lisible sur mobile */
+@media (max-width: 768px) {
+    .toc {
+        max-width: 100%;
+        font-size: 0.85em;
+    }
+}

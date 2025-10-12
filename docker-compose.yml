@@ -15,6 +15,9 @@ services:
       - ./app/.env.docker.local:/var/www/symfony/.env.local:ro
       - ./app/.env.test.local:/var/www/symfony/.env.test.local:ro
 
+      # Montage du dossier docs à la racine du projet
+      - ./docs:/var/www/symfony/docs:cached
+
     environment:
       - APP_ENV=dev # Peut être surchargé avec `-e APP_ENV=test`
       - COMPOSER_ALLOW_SUPERUSER=1

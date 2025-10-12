@@ -1,4 +1,6 @@
-# JO 2024 - Guide Utilisateur
+# Réservations JO 2024 - Guide Utilisateur
+
+[TOC]
 
 ## Table des matières
 

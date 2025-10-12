@@ -25,7 +25,7 @@
     background-color: #e0e0e0;
 }
 
-.quantity-control .quantity-input{
+.quantity-control .quantity-input {
     width: 50px !important;
     text-align: center;
     margin: 0 5px;
@@ -83,6 +83,7 @@
 
 .cart-icon {
     font-size: 24px;
+    background-color: transparent;
 }
 
 /* Badge positionné sur l’icône */
@@ -136,7 +137,7 @@
     }
     .cart-icon {
         font-size: 28px;
-        box-shadow: var(--box-shadow);
+        margin: 0;
     }
     .cart-badge {
         width: 24px;

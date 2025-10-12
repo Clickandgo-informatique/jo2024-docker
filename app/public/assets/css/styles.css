@@ -53,7 +53,7 @@ body {
 
 /* --- Footer --- */
 .footer {
-    background: #1a1a1a;
+    background: var(--secondary-color-gradient);
     color: #fff;
     text-align: center;
     padding: 1rem;
@@ -69,7 +69,7 @@ h1 {
     background: var(--primary-color-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);  
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
 }
 h2 {
     margin: 10px auto;
@@ -120,7 +120,9 @@ p {
 .text-green {
     color: darkgreen;
 }
-.text-bold{font-weight: 700;}
+.text-bold {
+    font-weight: 700;
+}
 .btn,
 button.btn {
     display: inline-flex;
@@ -130,7 +132,7 @@ button.btn {
     border: none;
     padding: 0.5rem 1rem; /* 8px vertical, 16px horizontal */
     font-size: 1rem; /* 16px */
-    border-radius: 8px;
+    border-radius: 25px;
     cursor: pointer;
     margin: 10px;
     width: fit-content;
@@ -235,7 +237,7 @@ ul {
 @media (max-width: 768px) {
     .btn,
     button.btn {
-        width: 300px;
+        width: 99%;
     }
     .cart-fab {
         display: flex;

@@ -23,7 +23,7 @@
 			</div>
 		{% endif %}
 
-				{# Affiche les sports en body #}
+		{# Affiche les sports en body #}
 		<div class="offer-sports">
 			<span class="sport-emoji">{{offre.sports[0].emoji}}</span>&nbsp;<span class="sport-intitule">{{offre.sports[0].intitule}}</span>
 		</div>
@@ -36,12 +36,12 @@
 		<div class="offer-content">
 			<div class="offer-meta">
 				{% if offre.dateDebut is defined %}
-					<span class="offer-date">Du
+					<span class="offer-date"><i class="fa-solid fa-calendar-days"></i>Du
 						{{ offre.dateDebut|date('d/m/Y') }}
 						au
 						{{ offre.dateFin|date('d/m/Y') }}</span>
 				{% endif %}
-				<div class="offer-emplacement">
+				<div class="offer-emplacement text-center">
 					{% for lieu in offre.lieux %}
 						<span>{{lieu}}</span>
 					{% endfor %}
@@ -55,7 +55,7 @@
 		<div class="offer-footer">
 			<form method="POST" action="{{ path('panier_add', {'id': offre.id}) }}">
 				<button type="submit" class="btn btn-primary">
-					<i class="fa-solid fa-basket-shopping cart-icon"></i>Ajouter au panier</button>
+					<i class="fa-solid fa-basket-shopping"></i>Ajouter au panier</button>
 			</form>
 
 		</div>

@@ -1,37 +1,31 @@
-/* ===============================
-   Sidebar principale
-   =============================== */
+/* Sidebar principale */
 .sidebar {
-    width: 250px; /* Largeur pleine */
+    width: 250px;
     background: var(--primary-color-gradient);
     color: white;
     height: 100%;
     overflow: hidden;
-    transition: width 0.3s ease, left 0.3s ease; /* animation fluide */
+    transition: width 0.3s ease, left 0.3s ease;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
 }
 
-/* Sidebar en mode mini (icônes seulement) */
+/* Sidebar mini */
 .sidebar.sidebar-mini {
-    width: 60px; /* largeur réduite pour icônes seulement */
+    width: 60px;
 }
 
-/* Liste principale */
+/* Items */
 .sidebar ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
-/* Item de la sidebar */
 .sidebar-item {
     display: block;
 }
-
-/* Liens et titres des items */
 .sidebar-link,
 .sidebar-item-title {
     display: flex;
@@ -41,55 +35,42 @@
     text-decoration: none;
     font-weight: 500;
 }
-
-/* Hover */
 .sidebar-link:hover,
 .sidebar-item-title:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
-
-/* Icones */
 .sidebar-link i,
 .sidebar-item-title i {
     width: 20px;
     text-align: center;
     margin-right: 10px;
 }
-
-/* Texte des labels */
 .label {
     transition: opacity 0.3s, margin 0.3s;
 }
-
-/* Masquer texte en mode mini */
 .sidebar.sidebar-mini .label {
     opacity: 0;
     pointer-events: none;
     margin-left: 0;
 }
 
-/* Sous-listes (sous-menus) */
+/* Sous-menus */
 .sidebar-sublist {
     display: block;
     padding-left: 20px;
 }
-
 .sidebar-sublist .sidebar-link {
     margin-left: 20px;
 }
-
-/* Cacher sous-menus en mode mini */
 .sidebar.sidebar-mini .sidebar-sublist {
     display: none;
 }
 
-/* ===============================
-   Toggle button
-   =============================== */
+/* Toggle */
 #sidebar-toggle {
     position: fixed;
     top: 50%;
-    left: 60px; /* position par défaut avec sidebar mini */
+    left: 60px;
     transform: translateY(-50%);
     width: 30px;
     height: 60px;
@@ -105,48 +86,56 @@
     user-select: none;
     transition: left 0.3s ease;
 }
-
-/* Déplacer toggle quand sidebar étendue */
 .sidebar.expanded + #sidebar-toggle,
 body.sidebar-expanded #sidebar-toggle {
     left: 250px;
 }
 
-/* ===============================
-   Main-wrapper (contenu principal)
-   =============================== */
+/* Main-wrapper */
 .main-wrapper {
-    margin-left: 250px; /* marge par défaut = largeur sidebar pleine */
-    width: calc(100% - 250px); /* largeur restante */
-    transition: margin-left 0.3s ease, width 0.3s ease; /* animation fluide */
+    margin-left: 0; /* par défaut, pas de sidebar */
+    width: 100%;
+    transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
-/* Synchronisation sidebar mini → main-wrapper */
+/* Main-wrapper si sidebar visible */
 body.sidebar-mini .main-wrapper {
-    margin-left: 60px; /* largeur sidebar mini */
+    margin-left: 60px;
     width: calc(100% - 60px);
 }
 
+/* Responsive */
 /* ===============================
-   Responsive mobile
+   Sidebar mobile
    =============================== */
 @media (max-width: 768px) {
     .sidebar {
-        left: -250px; /* cacher la sidebar par défaut */
+        left: -250px;
         width: 250px;
+        position: fixed;
+        top: 0;
+        z-index: 2000;
+        height: 100%;
         transition: left 0.3s ease;
     }
+
     .sidebar.active {
-        left: 0; /* afficher la sidebar */
+        left: 0;
     }
 
+    /* Toggle mobile */
     #sidebar-toggle {
-        left: auto;
-        right: 0; /* bouton à droite sur mobile */
+        position: fixed;
+        top: 50%; /* milieu vertical */
+        transform: translateY(-50%);
+        left: 0; /* par défaut collé à gauche */
+        z-index: 2100;
+        transition: left 0.3s ease;
     }
 
     .main-wrapper {
         margin-left: 0;
-        width: 100%; /* contenu prend toute la largeur */
+        width: 100%;
+        transition: none;
     }
 }

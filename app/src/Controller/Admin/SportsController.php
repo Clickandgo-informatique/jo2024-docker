@@ -25,7 +25,7 @@ final class SportsController extends AbstractController
 
     //Ajout d'une nouvelle discipline sportive
     #[Route('/admin/sports/ajout', name: 'app_sports_new')]
-    public function new(EntityManagerInterface $em, Request $request, SluggerInterface $slugger, PictureService $pictureService): Response
+    public function new(EntityManagerInterface $em, Request $request, SluggerInterface $slugger): Response
     {
         $sport = new Sports();
         $title = "Ajouter une discipline sportive";
@@ -33,7 +33,7 @@ final class SportsController extends AbstractController
         $form = $this->createForm(SportsFormType::class, $sport);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {            
+        if ($form->isSubmitted() && $form->isValid()) {
 
             //On sluggifie sur le champ de formulaire "intitule"
             $slug = $form->get('intitule')->getData();
@@ -42,10 +42,10 @@ final class SportsController extends AbstractController
             $em->persist($sport);
             $em->flush();
 
-            $this->redirectToRoute('app_sports_index');
+            $this->addFlash('success', 'La discipline a bien été enregistrée dans la base.');
+            return $this->redirectToRoute('app_sports_index');
         }
 
-        $this->addFlash('succcess', 'La discipline a bien été enregistrée dans la base.');
         return $this->render('admin/sports/sports-form.html.twig', ['form' => $form->createView(), 'title' => $title]);
     }
 
@@ -67,10 +67,27 @@ final class SportsController extends AbstractController
             $em->persist($sport);
             $em->flush();
 
-            $this->redirectToRoute('app_sports_index');
+            return $this->redirectToRoute('app_sports_index');
         }
 
         $this->addFlash('succcess', 'Les modification concernant la discipline ont bien été enregistrées dans la base.');
         return $this->render('admin/sports/sports-form.html.twig', ['discipline' => $sport, 'form' => $form->createView(), 'title' => $title]);
+    }
+    #[Route('/sports/{id}', name: 'app_sports_delete', methods: ['POST'])]
+    public function delete(Request $request, Sports $sport, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $sport->getId(), $request->request->get('_token'))) {
+            try {
+                $em->remove($sport);
+                $em->flush();
+                $this->addFlash('success', 'Le sport a bien été supprimé de la base de données.');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Une erreur est survenue lors de la suppression : ' . $e->getMessage());
+            }
+        } else {
+            $this->addFlash('error', 'Le token CSRF est invalide, suppression annulée.');
+        }
+
+        return $this->redirectToRoute('app_sports_index');
     }
 }

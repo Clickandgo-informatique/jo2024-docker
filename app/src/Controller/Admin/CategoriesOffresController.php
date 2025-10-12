@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-  #[Route('admin/offres/categories-offres', name: 'app_categories_offres')]
+#[Route('/admin/categories-offres', name: 'app_categories_offres')]
 class CategoriesOffresController extends AbstractController
 {
     //Liste des categories d'offres (administration)
@@ -27,7 +27,7 @@ class CategoriesOffresController extends AbstractController
     #[Route('/ajout', name: '_new')]
     public function new(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
-        $categorieOffres = new CategoriesOffres();
+        $categorieOffres = new CategoriesOffres(); 
 
         $form = $this->createForm(CategoriesOffresFormType::class, $categorieOffres);
         $form->handleRequest($request);
@@ -50,7 +50,7 @@ class CategoriesOffresController extends AbstractController
     }
 
     //Modifier une categorie d'offre (administration)
-    #[Route('/{slug}/edit', name: '_edit')]
+    #[Route('/{slug}/modifier', name: '_edit')]
     public function edit(CategoriesOffresRepository $categoriesOffresRepo, string $slug, Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $categorieOffres = $categoriesOffresRepo->findOneBy(['slug' => $slug]);
@@ -75,7 +75,6 @@ class CategoriesOffresController extends AbstractController
         return $this->render('admin/offres/categories-offres-form.html.twig', ['form' => $form->createView(), 'title' => $title]);
     }
     // Supprimer une catégorie d'offre
-    // Supprimer un utilisateur
     #[Route('/{id}/supprimer', name: '_supprimer', methods: ['POST'])]
     public function delete(CategoriesOffres $categorie, Request $request, EntityManagerInterface $em)
     {

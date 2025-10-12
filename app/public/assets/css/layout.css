@@ -1,58 +1,152 @@
-/* Conteneur principal */
-.app {
-    display: flex;
-    width: 100%;
-    min-height: 100vh;
-}
-
-/* Main wrapper */
-.main-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.main-content {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    transition: transform 0.3s ease;
-}
-
-/* Sidebar */
+/* ===============================
+   Sidebar principale
+   =============================== */
 .sidebar {
-    width: 250px;
+    width: 250px; /* Largeur pleine */
+    background: var(--primary-color-gradient);
+    color: white;
+    height: 100%;
+    overflow: hidden;
+    transition: width 0.3s ease, left 0.3s ease; /* animation fluide */
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
-    background: #111;
-    color: #fff;
-    padding: 20px 10px;
-    overflow-y: auto;
     z-index: 1000;
 }
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 15px;
-    background: var(--secondary-color-gradient);
-    color: #fff;
-    min-height: 150px;
 
+/* Sidebar en mode mini (icônes seulement) */
+.sidebar.sidebar-mini {
+    width: 60px; /* largeur réduite pour icônes seulement */
 }
 
-/* Responsive mobile: sidebar overlay */
+/* Liste principale */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Item de la sidebar */
+.sidebar-item {
+    display: block;
+}
+
+/* Liens et titres des items */
+.sidebar-link,
+.sidebar-item-title {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Hover */
+.sidebar-link:hover,
+.sidebar-item-title:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Icones */
+.sidebar-link i,
+.sidebar-item-title i {
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+/* Texte des labels */
+.label {
+    transition: opacity 0.3s, margin 0.3s;
+}
+
+/* Masquer texte en mode mini */
+.sidebar.sidebar-mini .label {
+    opacity: 0;
+    pointer-events: none;
+    margin-left: 0;
+}
+
+/* Sous-listes (sous-menus) */
+.sidebar-sublist {
+    display: block;
+    padding-left: 20px;
+}
+
+.sidebar-sublist .sidebar-link {
+    margin-left: 20px;
+}
+
+/* Cacher sous-menus en mode mini */
+.sidebar.sidebar-mini .sidebar-sublist {
+    display: none;
+}
+
+/* ===============================
+   Toggle button
+   =============================== */
+#sidebar-toggle {
+    position: fixed;
+    top: 50%;
+    left: 60px; /* position par défaut avec sidebar mini */
+    transform: translateY(-50%);
+    width: 30px;
+    height: 60px;
+    background: #333;
+    color: #fff;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1500;
+    font-size: 1.2rem;
+    user-select: none;
+    transition: left 0.3s ease;
+}
+
+/* Déplacer toggle quand sidebar étendue */
+.sidebar.expanded + #sidebar-toggle,
+body.sidebar-expanded #sidebar-toggle {
+    left: 250px;
+}
+
+/* ===============================
+   Main-wrapper (contenu principal)
+   =============================== */
+.main-wrapper {
+    margin-left: 250px; /* marge par défaut = largeur sidebar pleine */
+    width: calc(100% - 250px); /* largeur restante */
+    transition: margin-left 0.3s ease, width 0.3s ease; /* animation fluide */
+}
+
+/* Synchronisation sidebar mini → main-wrapper */
+body.sidebar-mini .main-wrapper {
+    margin-left: 60px; /* largeur sidebar mini */
+    width: calc(100% - 60px);
+}
+
+/* ===============================
+   Responsive mobile
+   =============================== */
 @media (max-width: 768px) {
     .sidebar {
-        transform: translateX(-100%);
-        width: 100%;
+        left: -250px; /* cacher la sidebar par défaut */
+        width: 250px;
+        transition: left 0.3s ease;
+    }
+    .sidebar.active {
+        left: 0; /* afficher la sidebar */
     }
 
-    body.sidebar-active .sidebar {
-        transform: translateX(0);
-        position: fixed;
-        z-index: 2000;
+    #sidebar-toggle {
+        left: auto;
+        right: 0; /* bouton à droite sur mobile */
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+        width: 100%; /* contenu prend toute la largeur */
     }
 }

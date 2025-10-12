@@ -1,27 +1,89 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}
-	{{title}}
+	{{ title }}
 {% endblock %}
+
 {% block body %}
 
-	{{ form_start(form) }}
-	<caption>
-		<h1 class="text-center">
-			<i class="fa-solid fa-circle-plus"></i>
-			{{title}}</h1>
-	</caption>
-	
-	{{ form_row(form.intitule) }}
-	{{ form_errors(form.intitule) }}
-	{{ form_row(form.background_color) }}
-	{{ form_row(form.icone) }}
-	{{ form_row(form.slug) }}
+	<a href="{{ path('app_sports_index') }}" class="btn btn-primary mb-2">
+		<i class="fa-solid fa-list"></i>
+		Revenir à la liste des sports
+	</a>
+
+	<h1 class="text-center mb-3">
+		<i class="fa-solid fa-circle-plus"></i>
+		{{ title }}
+	</h1>
+
+	{# Erreurs globales #}
+	{% if form.vars.errors|length > 0 %}
+		<div class="alert alert-danger">
+			{{ form_errors(form) }}
+		</div>
+	{% endif %}
+
+	{{ form_start(form, {'attr': {'class': 'custom-form'}}) }}
+
+	<div class="form-group">
+		{{ form_label(form.intitule) }}
+		{{ form_widget(form.intitule, {'attr': {'class': 'input-field'}}) }}
+		{{ form_errors(form.intitule) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.background_color) }}
+		{{ form_widget(form.background_color, {'attr': {'class': 'input-field', 'type': 'color'}}) }}
+		{{ form_errors(form.background_color) }}
+	</div>
+
+	<div class="form-row">
+		<div class="form-group col">
+			{{ form_label(form.icone) }}
+			{{ form_widget(form.icone, {'attr': {'class': 'input-field'}}) }}
+			{{ form_errors(form.icone) }}
+		</div>
+		<div class="form-group col">
+			{{ form_label(form.emoji) }}
+			{{ form_widget(form.emoji, {'attr': {'class': 'input-field', 'oninput': 'updateEmojiPreview(this.value)'}}) }}
+			<div id="emoji-preview" class="preview"></div>
+			{{ form_errors(form.emoji) }}
+		</div>
+		<div class="form-group col">
+			{{ form_label(form.pictogramme) }}
+			{{ form_widget(form.pictogramme, {'attr': {'class': 'input-field', 'oninput': 'updatePictogrammePreview(this.value)'}}) }}
+			<div id="pictogramme-preview" class="preview"></div>
+			{{ form_errors(form.pictogramme) }}
+		</div>
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.slug) }}
+		{{ form_widget(form.slug, {'attr': {'class': 'input-field'}}) }}
+		{{ form_errors(form.slug) }}
+	</div>
+
 	<button type="submit" class="btn btn-primary">
-		<i class="fa-solid fa-floppy-disk"></i>Enregistrer</button>
+		<i class="fa-solid fa-floppy-disk"></i>
+		Enregistrer
+	</button>
+
 	{{ form_end(form) }}
 
-
 {% endblock %}
+
+{% block javascripts %}
+	<script>
+		function updateEmojiPreview(value) {
+document.getElementById('emoji-preview').textContent = value;
+}
+
+function updatePictogrammePreview(value) {
+document.getElementById('pictogramme-preview').innerHTML = value;
+}
+	</script>
+{% endblock %}
+
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('assets/css/form.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
 {% endblock %}

@@ -35,8 +35,8 @@ class UsersController extends AbstractController
         $isTest = $this->getParameter('kernel.environment') === 'test';
 
         if ($isTest) {
-            // En mode test, désactive la pagination : on récupère un simple tableau
-            $utilisateurs = $query->getResult();
+            // En test, on renvoie un Paginator “vide” pour ne pas casser le template
+            $utilisateurs = $paginator->paginate($query, 1, 50);
         } else {
             // En production, utilise KNP Paginator
             $utilisateurs = $paginator->paginate(

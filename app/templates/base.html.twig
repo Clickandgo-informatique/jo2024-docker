@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>
-			{% block title %}Réservations JO 2024
-			{% endblock %}
-		</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Réservations JO 2024{% endblock %}</title>
 
-		<link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/flashbag.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/pagination.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/subnav.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/markdown.css') }}"> {% block stylesheets %}{% endblock %}
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-	</head>
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/flashbag.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pagination.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/subnav.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/markdown.css') }}">
+    {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
 
-	{% set sidebarVisible = is_granted('ROLE_ADMIN') and app.request.getSession().get('2fa_passed') %}
+{% set sidebarVisible = is_granted('ROLE_ADMIN') and app.request.getSession() is not null and app.request.getSession().get('2fa_passed') %}
 
-	<body class="sidebar-mini {% if sidebarVisible %}sidebar-present{% endif %}">
+<body {% if sidebarVisible %}class="sidebar-mini sidebar-present"{% endif %}>
 
-		{% if sidebarVisible %}
-			{{ include('_partials/_sidebar.html.twig') }}
-			<button id="sidebar-toggle" class="sidebar-toggle">▶</button>
-		{% endif %}
+{% if sidebarVisible %}
+    {{ include('_partials/_sidebar.html.twig') }}
+    <button id="sidebar-toggle" class="sidebar-toggle">▶</button>
+{% endif %}
 
-		<div class="main-wrapper">
-			{{ include('_partials/_navbar.html.twig') }}
-			{{ include('_partials/_subnav.html.twig') }}
-			<main class="main-content"> {% block body %}{% endblock %}
+<div class="main-wrapper">
+    {{ include('_partials/_navbar.html.twig') }}
+    {{ include('_partials/_subnav.html.twig') }}
+    <main class="main-content">
+        {% block body %}{% endblock %}
+    </main>
+</div>
 
-				</main>
-			</div>
+{{ include('_partials/_footer.html.twig') }}
 
-			{{ include('_partials/_footer.html.twig') }}
-
-			<!-- Flashbags -->
-			<script src="{{ asset('assets/js/flashbags.js') }}"></script>
-			<script>
-				document.addEventListener("DOMContentLoaded", function () {
-{% for label, messages in app.flashes %}
-{% for message in messages %}
-showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");{% endfor %}{% endfor %}
+<!-- Flashbags -->
+<script src="{{ asset('assets/js/flashbags.js') }}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            showFlashbag("{{ message|e('js') }}", "{{ label }}", 4000, "top-right");
+        {% endfor %}
+    {% endfor %}
 });
-			</script>
+</script>
 
-			<!-- Navbar & subnav -->
-			<script type="module" src="{{ asset('assets/js/navbar.js') }}"></script>
-			<script type="module" src="{{ asset('assets/js/subnav.js') }}"></script>
+<!-- Navbar & subnav -->
+<script type="module" src="{{ asset('assets/js/navbar.js') }}"></script>
+<script type="module" src="{{ asset('assets/js/subnav.js') }}"></script>
 
-			{% if sidebarVisible %}
-				<!-- Sidebar.js chargé **après le DOM complet**, pour que toggle fonctionne -->
-				<script type="module" src="{{ asset('assets/js/sidebar.js') }}"></script>
-			{% endif %}
+{% if sidebarVisible %}
+    <!-- Sidebar JS chargé uniquement si sidebar présente -->
+    <script type="module" src="{{ asset('assets/js/sidebar.js') }}"></script>
+{% endif %}
 
-			{% block javascripts %}{% endblock %}
-		</body>
-	</html>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

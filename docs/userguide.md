@@ -9,14 +9,13 @@
 3. [Navigation dans l’application](#navigation-dans-lapplication)  
 4. [Gestion des commandes](#gestion-des-commandes)  
 5. [Paiement et tickets](#paiement-et-tickets)  
-6. [2FA et sécurité avancée](#2fa-et-sécurité-avancée)  
-7. [FAQ et support](#faq-et-support)  
+6. [FAQ et support](#faq-et-support)  
 
 ---
 
 ## Introduction
 
-Bienvenue dans l’application officielle des Jeux Olympiques et Paralympiques de Paris 2024.  
+Bienvenue dans l’application officielle de réservations des Jeux Olympiques et Paralympiques de Paris 2024.  
 Cette application vous permet de :  
 
 - Consulter les sports et les offres disponibles  
@@ -37,7 +36,10 @@ Cette application vous permet de :
 ### Login
 
 - Entrez votre email et mot de passe.  
-- Si 2FA est activé, vous serez redirigé vers la vérification OTP.  
+- Une vérification à double facteur est réalisée à chaque connexion, vous devrez fournir un nouveau code à chaque fois que vous vous reconnectez sur notre plateforme.
+- Linstallation d'une appli d'authentification (Google Authenticator etc ...) est obligatoire pour procéder et terminer la phase de connexion.
+- Si tout se passe bien à la première inscription vos données basiques seront enregistrées sur nos serveurs de façon à ce que vous n'ayez plus besoin de passer par la première étape pour une future connexion.
+- Si vous n'arrivez pas à valider cette double authentification rescannez le qrCode qui s'affiche dans la page de login avec l'appli que vous avez télechargé antérieurement.  
 
 ### Mot de passe oublié
 
@@ -95,24 +97,17 @@ Cette application vous permet de :
 
 ---
 
-## 2FA et sécurité avancée
-
-- Si la 2FA est activée :  
-  - Vous devez entrer un OTP lors de la connexion.  
-  - L’OTP est généré via une application compatible (Google Authenticator, Authy, etc.)  
-- Vous pouvez configurer la 2FA dans **Mon compte → Sécurité**.  
-
----
-
 ## FAQ et support
 
 ### Je n’ai pas reçu mon ticket après paiement
 
-- Vérifiez votre dossier spam.  
+- Vérifiez votre dossier spam.
+- Cliquez sur "Mes commandes en cours" dans la barre de navigation pour accéder à l'historique de toutes vos commandes enregistrées, seules les commandes dont le paiement a abouti émettent un ticket...
+- Vous pouvez accéder puis imprimer tous vos tickets depuis cet interface, une commande payée = 1 ticket sécurisé.
 - Contactez le support si le problème persiste.  
 
 ### Comment annuler une commande ?
-
+- Seules les commandes non encore payées sont annulables depuis l'interface "Mes commandes en cours"
 - Les commandes payées ne peuvent pas être annulées via l’application.  
 - Contactez le service client pour toute demande spécifique.  
 

@@ -43,11 +43,13 @@
 .subnav-arrow {
     width: 40px;
     height: 40px;
-    display: flex;
+    position: absolute;
+    display: none; /* par défaut cachées */
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    flex-shrink: 0;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 1100;
     background: rgba(0, 0, 0, 0.3);
     border: none;
@@ -56,14 +58,17 @@
     font-size: 24px;
     transition: background 0.2s;
 }
+
 .subnav-arrow:hover {
     background: rgba(0, 0, 0, 0.6);
 }
+
+/* Placement correct des flèches par rapport au subnav-wrapper */
 .subnav-arrow-left {
-    margin-right: 5px;
+    left: 0; /* à gauche du wrapper */
 }
 .subnav-arrow-right {
-    margin-left: 5px;
+    right: 0; /* à droite du wrapper */
 }
 
 /* Section utilisateur / panier */
@@ -74,7 +79,7 @@
     color: #fff;
 }
 .not-connected {
-    color: orange;
+    color: rgb(254, 189, 69);
 }
 .user-options {
     display: flex;
@@ -88,6 +93,8 @@
     .subnav-wrapper {
         width: 100%;
     }
+
+    /* Flèches visibles seulement en mobile */
     .subnav-arrow-left,
     .subnav-arrow-right {
         display: flex;

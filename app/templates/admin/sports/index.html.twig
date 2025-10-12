@@ -15,20 +15,24 @@
 		</thead>
 		<tbody>
 
-			{% for d in sports %}
+			{% for sport in sports %}
 				<tr>
 					<td class="cell-actions text-center">
-						<a href="{{path('app_sports_edit',{slug:d.slug})}}" class="btn-action btn-open ">
+						<a href="{{path('app_sports_edit',{slug:sport.slug})}}" class="btn-action btn-open ">
 							<i class="fa-solid fa-pen-to-square"></i>
 						</a>
 
 					</td>
-					<td>{{ d.emoji }}
-						{{d.intitule}}</td>
+					<td>{{ sport.emoji }}
+						{{sport.intitule}}</td>
 					<td>
-						<a href="#" class="btn-action btn-delete ">
-							<i class="fa-solid fa-trash-can"></i>
-						</a>
+						{# Bouton de suppression par formulaire POST #}
+						<form method="post" action="{{ path('app_sports_delete', {'id': sport.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce sport ?');">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sport.id) }}">
+							<button class="btn-action btn-delete" value="delete">
+								<i class="fa-solid fa-trash-can"></i>
+							</button>
+						</form>
 					</td>
 				</tr>
 			{% else %}

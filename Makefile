@@ -122,3 +122,11 @@ test:
 # Connexion SSH sur le serveur OVH
 ovh:
 	ssh clickandug@ssh.cluster011.hosting.ovh.net
+
+composer-ovh:
+	composer install --no-dev --optimize-autoloader
+
+cache-ovh:
+	php bin/console cache:clear --env=prod
+	php bin/console cache:warmup --env=prod
+

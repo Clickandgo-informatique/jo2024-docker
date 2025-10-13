@@ -49,9 +49,11 @@ class PhpArrayAdapter implements AdapterInterface, CacheInterface, PruneableInte
         private string $file,
         AdapterInterface $fallbackPool,
     ) {
+
         $this->pool = $fallbackPool;
         self::$createCacheItem ??= \Closure::bind(
             static function ($key, $value, $isHit) {
+                /** @var \Symfony\Component\Cache\CacheItem $item */
                 $item = new CacheItem();
                 $item->key = $key;
                 $item->value = $value;
@@ -306,7 +308,7 @@ EOF;
             }
 
             if (!$isStaticValue) {
-                $value = 'new class() implements \\'.CachedValueInterface::class." { public function getValue(): mixed { return {$value}; } }";
+                $value = 'new class() implements \\' . CachedValueInterface::class . " { public function getValue(): mixed { return {$value}; } }";
             }
             $hash = hash('xxh128', $value);
 
@@ -315,7 +317,7 @@ EOF;
                 $dumpedValues .= "{$id} => {$value},\n";
             }
 
-            $dump .= var_export($key, true)." => {$id},\n";
+            $dump .= var_export($key, true) . " => {$id},\n";
         }
 
         $dump .= "\n], [\n\n{$dumpedValues}\n]];\n";

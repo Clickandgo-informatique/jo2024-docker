@@ -7,19 +7,15 @@
 
 {# Compteur au-dessus de la grille #}
 <div class="offres-counter">
-    Affichage <strong>{{ start }} à {{ end }}</strong>
-    sur <strong>{{ total }}</strong>
-    offre{{ total > 1 ? 's' : '' }}
-</div>
-
-{# La grille avec uniquement les cards #}
-<div class="offers-grid">
-    {% include '_partials/_catalogue-offres-clients.html.twig' with { 'offres': offres } only %}
-</div>
-
-{# Pagination en dessous de la grille #}
-{% if offres.pageCount > 1 %}
-    <div class="pagination-container">
-        {% include '_partials/_pagination-offres.html.twig' with { 'offres': offres } only %}
-    </div>
-{% endif %}
+	Affichage
+	<strong>{{ start }}
+		à
+	{{ end }}
+</strong>
+sur
+<strong>{{ total }}</strong>
+offre{{ total > 1 ? 's' : '' }}</div>{# La grille avec uniquement les cards #}<div class="offers-grid">
+{% include '_partials/_catalogue-offres-clients.html.twig' with { 'offres': offres } only %}</div>{# Pagination en dessous de la grille #}{% if offres.pageCount > 1 %}
+<div class="pagination-container">
+	{% include '_partials/_pagination-offres.html.twig' with { 'offres': offres } only %}
+</div>{% endif %}

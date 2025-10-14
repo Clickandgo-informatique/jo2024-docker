@@ -1,4 +1,7 @@
 {# templates/_partials/_sports-filter.html.twig #}
+{% set sports = sports is defined ? sports : [] %}
+{% set selectedSlugs = selectedSlugs is defined ? selectedSlugs : [] %}
+
 <div id="sports-filter" class="sports-filter" data-base-url="{{ path('app_offres_filter') }}">
 	<h5 class="filter-title">Filtrer par sport(s)</h5>
 	<div class="sports-checkboxes">

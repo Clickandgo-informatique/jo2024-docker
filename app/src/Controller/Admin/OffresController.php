@@ -42,27 +42,61 @@ final class OffresController extends AbstractController
         CategoriesOffresRepository $categoriesOffresRepo,
         SportsRepository $sportsRepo
     ): Response {
+
+        // Récupération de toutes les catégories et sports pour les filtres
         $categoriesOffres = $categoriesOffresRepo->findBy([], ['nom' => 'ASC']);
-        $data = $offresRepo->findBy(['isPublished' => true], ['dateDebut' => 'ASC']);
-        $offres = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
         $sports = $sportsRepo->findBy([], ['intitule' => 'ASC']);
 
-        if ($request->isXmlHttpRequest()) {
-            $html = $this->renderView('_partials/_catalogue-offres-ajax-wrapper.html.twig', [
-                'offres' => $offres,
-                'sports' => $sports
-            ]);
+        // Récupération des filtres depuis query string
+        $selectedSports = $request->query->get('sports', '');
+        $selectedCategories = $request->query->get('categories', '');
+        $selectedSports = $selectedSports ? explode(',', $selectedSports) : [];
+        $selectedCategories = $selectedCategories ? explode(',', $selectedCategories) : [];
 
-            return new JsonResponse(['status' => 'success', 'html' => $html]);
+        // Construction de la requête filtrée
+        $qb = $offresRepo->createQueryBuilder('o')
+            ->andWhere('o.isPublished = true');
+
+        // Filtre ManyToMany sports
+        if ($selectedSports) {
+            $qb->join('o.sports', 's')
+                ->andWhere('s.slug IN (:sports)')
+                ->setParameter('sports', $selectedSports);
         }
 
+        // Filtre ManyToOne catégories
+        if ($selectedCategories) {
+            $qb->join('o.categorie', 'c')
+                ->andWhere('c.slug IN (:categories)')
+                ->setParameter('categories', $selectedCategories);
+        }
+
+        $query = $qb->orderBy('o.dateDebut', 'ASC')->getQuery();
+
+        // Pagination
+        $offres = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            12
+        );
+
+        // Si requête AJAX : renvoyer uniquement le partial
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('_partials/_catalogue-offres-ajax-wrapper.html.twig', [
+                'offres' => $offres,
+            ]);
+        }
+
+        // Sinon : page complète
         return $this->render('offres/catalogue-offres-clients.html.twig', [
-            'offres'           => $offres,
+            'offres' => $offres,
             'categoriesOffres' => $categoriesOffres,
-            'selectedSlugs'    => [],
-            'sports' => $sports
+            'sports' => $sports,
+            'selectedSports' => $selectedSports,
+            'selectedCategories' => $selectedCategories,
         ]);
     }
+
 
     #[Route('/offres-par-categorie/{slug}', name: 'offres-par-categories')]
     public function filterByCategorie(

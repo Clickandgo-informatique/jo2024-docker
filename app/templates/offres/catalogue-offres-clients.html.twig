@@ -4,37 +4,39 @@
 {% endblock %}
 
 {% block body %}
+	<div class="catalogue-layout">
 
-	<div
-		class="catalogue-layout">
-		{# Colonne filtres (desktop) #}
-		<aside class="filters-column">
-			<div
-				class="filter-block-categories">
-				{# filtre par catégories d'offre #}
+		<aside
+			class="filters-column">
+			{# Filtre catégories #}
+			<div class="filter-block-categories" id="categories-filter">
 				<h5 class="filter-title">Catégories</h5>
 				<ul class="categories-list">
 					{% for cat in categoriesOffres %}
 						<li>
-							<a href="{{ path('offres-par-categories', { slug: cat.slug }) }}" class="filter-link {% if categorie is defined and categorie == cat.slug %}active{% endif %}" data-url="/offres-par-categorie/{{cat.slug}}">
+							<label>
+								<input type="checkbox" value="{{ cat.slug }}" {% if selectedCategories is defined and cat.slug in selectedCategories %} checked {% endif %}>
 								{{ cat.nom }}
-							</a>
+							</label>
 						</li>
 					{% endfor %}
 				</ul>
 			</div>
 
-			<div class="filter-block-sports">
-				{% include '_partials/_sports-filter.html.twig' with {
-                sports: sports,
-                selectedSlugs: selectedSlugs
-            } only %}
+			{# Filtre sports #}
+			<div class="filter-block-sports" id="sports-filter">
+				{% for sport in sports %}
+					<label>
+						<input type="checkbox" value="{{ sport.slug }}" {% if selectedSports is defined and sport.slug in selectedSports %} checked {% endif %}>
+						{{ sport.emoji }}
+						{{ sport.intitule }}
+					</label>
+				{% endfor %}
 			</div>
 		</aside>
 
-		{# Colonne résultats (cards) #}
 		<div class="results-column">
-			<h1 class="text-center">Catalogues des offres</h1>
+			<h1 class="text-center">Catalogue des offres</h1>
 			<div id="results" class="ajax-reloaded-data">
 				{% include '_partials/_catalogue-offres-ajax-wrapper.html.twig' with { 'offres': offres } only %}
 			</div>
@@ -45,18 +47,29 @@
 	<button id="filtersFAB" class="btn-filter-mobile" title="Filtrer">
 		<i class="fas fa-filter"></i>
 	</button>
-
 	<div id="filtersDrawer" class="filters-drawer" aria-hidden="true">
 		<div class="drawer-header">
 			<h4>Filtres</h4>
 			<button id="closeFilters" class="drawer-close">&times;</button>
 		</div>
 		<div class="drawer-content">
-			{% include '_partials/_categories-offres.html.twig' with { 'categoriesOffres': categoriesOffres } only %}
-			{% include '_partials/_sports-filter.html.twig' with {
-            sports: sports,
-            selectedSlugs: selectedSlugs
-        } only %}
+			<div id="categories-filter-drawer">
+				{% for cat in categoriesOffres %}
+					<label>
+						<input type="checkbox" value="{{ cat.slug }}" {% if selectedCategories is defined and cat.slug in selectedCategories %} checked {% endif %}>
+						{{ cat.nom }}
+					</label>
+				{% endfor %}
+			</div>
+			<div id="sports-filter-drawer">
+				{% for sport in sports %}
+					<label>
+						<input type="checkbox" value="{{ sport.slug }}" {% if selectedSports is defined and sport.slug in selectedSports %} checked {% endif %}>
+						{{ sport.emoji }}
+						{{ sport.intitule }}
+					</label>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 	<div id="drawerOverlay" class="drawer-overlay" style="display:none;"></div>
@@ -67,6 +80,7 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/catalogue-offres.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/filters.css') }}">
 {% endblock %}
+
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('assets/js/filters.js') }}"></script>

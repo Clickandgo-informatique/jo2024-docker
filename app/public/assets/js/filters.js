@@ -1,32 +1,49 @@
-// public/js/filters.js
 document.addEventListener("DOMContentLoaded", () => {
     const resultsContainer =
         document.querySelector("#results") ||
         document.querySelector(".ajax-reloaded-data");
-    const sportsFilter = document.querySelector("#sports-filter");
     const badge = document.getElementById("filterBadge");
+
+    // drawer mobile
+    const fab = document.getElementById("filtersFAB");
+    const drawer = document.getElementById("filtersDrawer");
+    const closeDrawer = document.getElementById("closeFilters");
+    const overlay = document.getElementById("drawerOverlay");
 
     function log(...args) {
         console.log("[filters.js]", ...args);
     }
 
-    function getSelectedSlugs() {
-        const boxes = document.querySelectorAll(
-            '#sports-filter input[type="checkbox"], #filtersDrawer #sports-filter input[type="checkbox"]'
-        );
-        return Array.from(boxes)
+    function getSelectedSports() {
+        return Array.from(
+            document.querySelectorAll(
+                '#sports-filter input[type="checkbox"], #sports-filter-drawer input[type="checkbox"]'
+            )
+        )
             .filter((cb) => cb.checked)
             .map((cb) => cb.value);
     }
 
-    function buildSportsUrl(selectedSlugs) {
-        const base = sportsFilter?.dataset.baseUrl || "/offres/sports";
-        const normalized = base.replace(/\/$/, ""); // supprime un slash final
+    function getSelectedCategories() {
+        return Array.from(
+            document.querySelectorAll(
+                '#categories-filter input[type="checkbox"], #categories-filter-drawer input[type="checkbox"]'
+            )
+        )
+            .filter((cb) => cb.checked && cb.value !== "toutes")
+            .map((cb) => cb.value);
+    }
+
+    function buildFilterUrl() {
+        const sports = getSelectedSports();
+        const categories = getSelectedCategories();
+        let params = [];
+        if (sports.length) params.push("sports=" + sports.join(","));
+        if (categories.length)
+            params.push("categories=" + categories.join(","));
         return (
-            normalized +
-            (selectedSlugs.length
-                ? "/" + encodeURIComponent(selectedSlugs.join(","))
-                : "")
+            "/catalogue-offres-clients" +
+            (params.length ? "?" + params.join("&") : "")
         );
     }
 
@@ -36,30 +53,26 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = url;
             return;
         }
-
         log("🔗 fetch", url);
         try {
             const resp = await fetch(url, {
                 headers: { "X-Requested-With": "XMLHttpRequest" },
             });
             if (!resp.ok) throw new Error("HTTP " + resp.status);
-
             const text = await resp.text();
             resultsContainer.innerHTML = text;
-
-            // 👉 mettre à jour l'URL AVANT de toucher à l'UI
             if (push) history.pushState({ url }, "", url);
-
             updateBadge();
         } catch (err) {
             console.error("fetchAndInject error:", err);
-            window.location.href = url; // fallback navigation
+            window.location.href = url;
         }
     }
 
     function updateBadge() {
         if (!badge) return;
-        const count = getSelectedSlugs().length;
+        const count =
+            getSelectedSports().length + getSelectedCategories().length;
         if (count > 0) {
             badge.textContent = count;
             badge.style.display = "inline-block";
@@ -68,77 +81,111 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function syncUIFromUrl(pathname) {
-        const match = pathname.match(/\/offres\/sports\/([^\/]+)/);
-        const boxes = document.querySelectorAll(
-            '#sports-filter input[type="checkbox"], #filtersDrawer #sports-filter input[type="checkbox"]'
-        );
+    function syncUIFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const sports = params.get("sports")?.split(",") || [];
+        const categories = params.get("categories")?.split(",") || [];
 
-        if (match) {
-            const slugs = decodeURIComponent(match[1]).split(",");
-            boxes.forEach((cb) => {
-                cb.checked = slugs.includes(cb.value);
+        document
+            .querySelectorAll(
+                "#sports-filter input, #sports-filter-drawer input"
+            )
+            .forEach((cb) => {
+                cb.checked = sports.includes(cb.value);
             });
-        } else {
-            boxes.forEach((cb) => (cb.checked = false));
+
+        document
+            .querySelectorAll(
+                "#categories-filter input, #categories-filter-drawer input"
+            )
+            .forEach((cb) => {
+                if (cb.value === "toutes") {
+                    cb.checked = categories.length === 0;
+                } else {
+                    cb.checked = categories.includes(cb.value);
+                }
+            });
+
+        // Mutual exclusivity
+        if (sports.length) {
+            document
+                .querySelectorAll(
+                    "#categories-filter input, #categories-filter-drawer input"
+                )
+                .forEach((cb) => (cb.checked = false));
+        }
+        if (categories.length) {
+            document
+                .querySelectorAll(
+                    "#sports-filter input, #sports-filter-drawer input"
+                )
+                .forEach((cb) => (cb.checked = false));
         }
     }
 
-    // écoute les changements sur les cases
+    // écoute des changements sur tous les filtres
     document.addEventListener("change", (e) => {
         const target = e.target;
-        if (
-            !target.matches(
-                '#sports-filter input[type="checkbox"], #filtersDrawer #sports-filter input[type="checkbox"]'
-            )
-        ) {
-            return;
+
+        if (target.closest("#sports-filter, #sports-filter-drawer")) {
+            document
+                .querySelectorAll(
+                    "#categories-filter input, #categories-filter-drawer input"
+                )
+                .forEach((cb) => (cb.checked = false));
         }
-        const selected = getSelectedSlugs();
-        const url = buildSportsUrl(selected);
+
+        if (target.closest("#categories-filter, #categories-filter-drawer")) {
+            document
+                .querySelectorAll(
+                    "#sports-filter input, #sports-filter-drawer input"
+                )
+                .forEach((cb) => (cb.checked = false));
+            // "Toutes" décochage automatique
+            if (target.value === "toutes" && target.checked) {
+                document
+                    .querySelectorAll(
+                        "#categories-filter input, #categories-filter-drawer input"
+                    )
+                    .forEach((cb) => {
+                        if (cb.value !== "toutes") cb.checked = false;
+                    });
+            }
+        }
+
+        const url = buildFilterUrl();
         fetchAndInject(url, true);
     });
 
     // back/forward
     window.addEventListener("popstate", (e) => {
-        const url = e.state?.url || window.location.pathname;
+        syncUIFromUrl();
+        const url = window.location.pathname + window.location.search;
         fetchAndInject(url, false);
-        syncUIFromUrl(window.location.pathname);
     });
 
     // sync initial
-    syncUIFromUrl(window.location.pathname);
+    syncUIFromUrl();
     updateBadge();
 
-    // debug helper
-    window.__filtersDebug = { getSelectedSlugs, buildSportsUrl };
-
-    // Gestion du FAB et du drawer mobile
-    const fab = document.getElementById("filtersFAB");
-    const drawer = document.getElementById("filtersDrawer");
-    const closeDrawer = document.getElementById("closeFilters");
-    const overlay = document.getElementById("drawerOverlay");
-
+    // drawer mobile
     function openDrawer() {
         drawer.classList.add("open");
         if (overlay) overlay.style.display = "block";
     }
-
     function closeDrawerFn() {
         drawer.classList.remove("open");
         if (overlay) overlay.style.display = "none";
     }
-
-    if (fab && drawer) {
-        fab.addEventListener("click", () => {
-            console.log("filtersFAB cliqué");
-            openDrawer();
-        });
-    }
-    if (closeDrawer && drawer) {
+    if (fab && drawer) fab.addEventListener("click", openDrawer);
+    if (closeDrawer && drawer)
         closeDrawer.addEventListener("click", closeDrawerFn);
-    }
-    if (overlay && drawer) {
-        overlay.addEventListener("click", closeDrawerFn);
-    }
+    if (overlay && drawer) overlay.addEventListener("click", closeDrawerFn);
+
+    // debug helper
+    window.__filtersDebug = {
+        getSelectedSports,
+        getSelectedCategories,
+        buildFilterUrl,
+    };
 });

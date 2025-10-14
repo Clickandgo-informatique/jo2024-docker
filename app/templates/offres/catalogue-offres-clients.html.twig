@@ -8,6 +8,17 @@
 
 		<aside
 			class="filters-column">
+
+			{# Filtre favoris #}
+			{% if app.user %}
+				<div id="favoris-filter">
+					<label>
+						<input type="checkbox" value="1"/>
+						💖 Mes favoris
+					</label>
+				</div>
+			{% endif %}
+
 			{# Filtre catégories #}
 			<div class="filter-block-categories" id="categories-filter">
 				<h5 class="filter-title">Catégories</h5>
@@ -52,7 +63,18 @@
 			<h4>Filtres</h4>
 			<button id="closeFilters" class="drawer-close">&times;</button>
 		</div>
-		<div class="drawer-content">
+		<div
+			class="drawer-content">
+
+			{# Filtre les favoris utilisateur #}
+			{% if app.user %}
+				<div id="favoris-filter-drawer">
+					<label for="favoris-drawer">
+						<input type="checkbox" id="favoris-drawer" value="1"/>
+						💖 Mes favoris
+					</label>
+				</div>
+			{% endif %}
 			<div id="categories-filter-drawer">
 				{% for cat in categoriesOffres %}
 					<label>

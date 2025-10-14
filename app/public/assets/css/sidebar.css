@@ -70,13 +70,13 @@
 #sidebar-toggle {
     position: fixed;
     top: 50%;
-    left: 60px;
+    left: 50px;
     transform: translateY(-50%);
-    width: 30px;
-    height: 60px;
-    background: #333;
+    /* width: 30px;
+    height: 60px; */
+    background: var(--primary-color);
     color: #fff;
-    border-radius: 0 4px 4px 0;
+    /* border-radius: 0 4px 4px 0; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,6 +85,7 @@
     font-size: 1.2rem;
     user-select: none;
     transition: left 0.3s ease;
+    padding: 0;
 }
 .sidebar.expanded + #sidebar-toggle,
 body.sidebar-expanded #sidebar-toggle {

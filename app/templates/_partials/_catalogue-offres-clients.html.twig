@@ -20,6 +20,13 @@
 						{% endfor %}
 					{% endif %}
 				</div>
+				{# Affiche l'icone de favori si utilisateur connecté #}
+				{% if app.user %}
+					<div class="favori">
+						<i class="favorite-icon fa-heart {% if offre.isFavori(app.user) %}fa-solid{% else %}fa-regular{% endif %}" data-offre-id="{{ offre.id }}"></i>
+					</div>
+
+				{% endif %}
 			</div>
 		{% endif %}
 
@@ -36,7 +43,8 @@
 		<div class="offer-content">
 			<div class="offer-meta">
 				{% if offre.dateDebut is defined %}
-					<span class="offer-date"><i class="fa-solid fa-calendar-days"></i>Du
+					<span class="offer-date">
+						<i class="fa-solid fa-calendar-days"></i>Du
 						{{ offre.dateDebut|date('d/m/Y') }}
 						au
 						{{ offre.dateFin|date('d/m/Y') }}</span>
@@ -63,4 +71,5 @@
 {% endfor %}
 {% block javascripts %}
 	<script src={{asset('assets/js/cart.js')}}></script>
+	<script src={{asset('assets/js/favoris-offres.js')}}></script>
 {% endblock %}

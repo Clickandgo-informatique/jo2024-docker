@@ -132,6 +132,14 @@ class Offres
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    /**
+     * @var Collection<int, FavorisOffres>
+     */
+    #[ORM\OneToMany(targetEntity: FavorisOffres::class, mappedBy: 'offre', orphanRemoval: true)]
+    private Collection $favorisOffres;
+
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -139,6 +147,7 @@ class Offres
         $this->images = new ArrayCollection();
         $this->detailsCommandes = new ArrayCollection();
         $this->sports = new ArrayCollection();
+        $this->favorisOffres = new ArrayCollection();
     }
 
     // -------------------------------
@@ -411,5 +420,50 @@ class Offres
     {
         $this->lieux = $lieux;
         return $this;
+    }
+
+    /**
+     * @return Collection<int, FavorisOffres>
+     */
+    public function getFavorisOffres(): Collection
+    {
+        return $this->favorisOffres;
+    }
+
+    public function addFavorisOffre(FavorisOffres $favorisOffre): static
+    {
+        if (!$this->favorisOffres->contains($favorisOffre)) {
+            $this->favorisOffres->add($favorisOffre);
+            $favorisOffre->setOffre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorisOffre(FavorisOffres $favorisOffre): static
+    {
+        if ($this->favorisOffres->removeElement($favorisOffre)) {
+            // set the owning side to null (unless already changed)
+            if ($favorisOffre->getOffre() === $this) {
+                $favorisOffre->setOffre(null);
+            }
+        }
+
+        return $this;
+    }
+    //Gestion des favoris d'offres
+    public function isFavori(?Users $user): bool
+    {
+        if (!$user) {
+            return false;
+        }
+
+        foreach ($this->favorisOffres as $favori) {
+            if ($favori->getUtilisateur() === $user) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

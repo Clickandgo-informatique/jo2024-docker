@@ -116,12 +116,19 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     private bool $isTwoFactorVerified = false;
 
+    /**
+     * @var Collection<int, FavorisOffres>
+     */
+    #[ORM\OneToMany(targetEntity: FavorisOffres::class, mappedBy: 'utilisateur', orphanRemoval: true)]
+    private Collection $favorisOffres;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->roles = ['ROLE_USER'];
         $this->commandes = new ArrayCollection();
         $this->tickets = new ArrayCollection();
+        $this->favorisOffres = new ArrayCollection();
     }
 
     // ------------------- GETTERS / SETTERS -------------------
@@ -355,5 +362,35 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getTickets(): Collection
     {
         return $this->tickets;
+    }
+
+    /**
+     * @return Collection<int, FavorisOffres>
+     */
+    public function getFavorisOffres(): Collection
+    {
+        return $this->favorisOffres;
+    }
+
+    public function addFavorisOffre(FavorisOffres $favorisOffre): static
+    {
+        if (!$this->favorisOffres->contains($favorisOffre)) {
+            $this->favorisOffres->add($favorisOffre);
+            $favorisOffre->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorisOffre(FavorisOffres $favorisOffre): static
+    {
+        if ($this->favorisOffres->removeElement($favorisOffre)) {
+            // set the owning side to null (unless already changed)
+            if ($favorisOffre->getUtilisateur() === $this) {
+                $favorisOffre->setUtilisateur(null);
+            }
+        }
+
+        return $this;
     }
 }

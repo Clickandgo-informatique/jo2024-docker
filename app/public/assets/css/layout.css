@@ -84,35 +84,6 @@
 }
 
 /* ===============================
-   Toggle button
-   =============================== */
-#sidebar-toggle {
-    position: fixed;
-    top: 50%;
-    left: 60px; /* position par défaut avec sidebar mini */
-    transform: translateY(-50%);
-    width: 30px;
-    height: 60px;
-    background: #333;
-    color: #fff;
-    border-radius: 0 4px 4px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1500;
-    font-size: 1.2rem;
-    user-select: none;
-    transition: left 0.3s ease;
-}
-
-/* Déplacer toggle quand sidebar étendue */
-.sidebar.expanded + #sidebar-toggle,
-body.sidebar-expanded #sidebar-toggle {
-    left: 250px;
-}
-
-/* ===============================
    Main-wrapper (contenu principal)
    =============================== */
 .main-wrapper {

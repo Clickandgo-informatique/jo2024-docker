@@ -4,16 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector(".ajax-reloaded-data");
     const badge = document.getElementById("filterBadge");
 
-    // drawer mobile
+    // Drawer mobile
     const fab = document.getElementById("filtersFAB");
     const drawer = document.getElementById("filtersDrawer");
     const closeDrawer = document.getElementById("closeFilters");
     const overlay = document.getElementById("drawerOverlay");
 
-    function log(...args) {
-        console.log("[filters.js]", ...args);
-    }
-
+    // --- Fonctions utilitaires pour récupérer l'état des filtres ---
     function getSelectedSports() {
         return Array.from(
             document.querySelectorAll(
@@ -34,26 +31,32 @@ document.addEventListener("DOMContentLoaded", () => {
             .map((cb) => cb.value);
     }
 
+    function isFavorisSelected() {
+        const fav = document.querySelector(
+            '#favoris-filter input[type="checkbox"], #favoris-filter-drawer input[type="checkbox"]'
+        );
+        return fav ? fav.checked : false;
+    }
+
+    // --- Construction de l'URL AJAX ---
     function buildFilterUrl() {
         const sports = getSelectedSports();
         const categories = getSelectedCategories();
+        const favoris = isFavorisSelected();
         let params = [];
         if (sports.length) params.push("sports=" + sports.join(","));
         if (categories.length)
             params.push("categories=" + categories.join(","));
+        if (favoris) params.push("favoris=1");
         return (
             "/catalogue-offres-clients" +
             (params.length ? "?" + params.join("&") : "")
         );
     }
 
+    // --- Chargement AJAX ---
     async function fetchAndInject(url, push = true) {
-        if (!resultsContainer) {
-            log("❌ No results container, redirect to", url);
-            window.location.href = url;
-            return;
-        }
-        log("🔗 fetch", url);
+        if (!resultsContainer) return (window.location.href = url);
         try {
             const resp = await fetch(url, {
                 headers: { "X-Requested-With": "XMLHttpRequest" },
@@ -69,10 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // --- Mise à jour du badge ---
     function updateBadge() {
         if (!badge) return;
         const count =
-            getSelectedSports().length + getSelectedCategories().length;
+            getSelectedSports().length +
+            getSelectedCategories().length +
+            (isFavorisSelected() ? 1 : 0);
         if (count > 0) {
             badge.textContent = count;
             badge.style.display = "inline-block";
@@ -81,10 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // --- Synchronisation URL -> UI ---
     function syncUIFromUrl() {
         const params = new URLSearchParams(window.location.search);
         const sports = params.get("sports")?.split(",") || [];
         const categories = params.get("categories")?.split(",") || [];
+        const favoris = params.get("favoris") === "1";
 
         document
             .querySelectorAll(
@@ -99,49 +107,41 @@ document.addEventListener("DOMContentLoaded", () => {
                 "#categories-filter input, #categories-filter-drawer input"
             )
             .forEach((cb) => {
-                if (cb.value === "toutes") {
-                    cb.checked = categories.length === 0;
-                } else {
-                    cb.checked = categories.includes(cb.value);
-                }
+                if (cb.value === "toutes") cb.checked = categories.length === 0;
+                else cb.checked = categories.includes(cb.value);
             });
 
-        // Mutual exclusivity
-        if (sports.length) {
-            document
-                .querySelectorAll(
-                    "#categories-filter input, #categories-filter-drawer input"
-                )
-                .forEach((cb) => (cb.checked = false));
-        }
-        if (categories.length) {
-            document
-                .querySelectorAll(
-                    "#sports-filter input, #sports-filter-drawer input"
-                )
-                .forEach((cb) => (cb.checked = false));
-        }
+        const favCb = document.querySelector(
+            '#favoris-filter input[type="checkbox"], #favoris-filter-drawer input[type="checkbox"]'
+        );
+        if (favCb) favCb.checked = favoris;
     }
 
-    // écoute des changements sur tous les filtres
+    // --- Event delegation pour tous les filtres ---
     document.addEventListener("change", (e) => {
         const target = e.target;
 
+        // Sports
         if (target.closest("#sports-filter, #sports-filter-drawer")) {
+            // Décocher catégories et favoris
             document
                 .querySelectorAll(
-                    "#categories-filter input, #categories-filter-drawer input"
+                    "#categories-filter input, #categories-filter-drawer input, #favoris-filter input, #favoris-filter-drawer input"
                 )
                 .forEach((cb) => (cb.checked = false));
+            fetchAndInject(buildFilterUrl(), true);
         }
 
+        // Catégories
         if (target.closest("#categories-filter, #categories-filter-drawer")) {
+            // Décocher sports et favoris
             document
                 .querySelectorAll(
-                    "#sports-filter input, #sports-filter-drawer input"
+                    "#sports-filter input, #sports-filter-drawer input, #favoris-filter input, #favoris-filter-drawer input"
                 )
                 .forEach((cb) => (cb.checked = false));
-            // "Toutes" décochage automatique
+
+            // Si "Toutes" est coché, décocher les autres catégories
             if (target.value === "toutes" && target.checked) {
                 document
                     .querySelectorAll(
@@ -151,24 +151,55 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (cb.value !== "toutes") cb.checked = false;
                     });
             }
+
+            fetchAndInject(buildFilterUrl(), true);
         }
 
-        const url = buildFilterUrl();
-        fetchAndInject(url, true);
+        // Favoris
+        if (
+            target.matches(
+                '#favoris-filter input[type="checkbox"], #favoris-filter-drawer input[type="checkbox"]'
+            )
+        ) {
+            // Décocher sports et catégories
+            document
+                .querySelectorAll(
+                    "#sports-filter input, #sports-filter-drawer input, #categories-filter input, #categories-filter-drawer input"
+                )
+                .forEach((cb) => (cb.checked = false));
+
+            fetchAndInject(buildFilterUrl(), true);
+        }
     });
 
-    // back/forward
-    window.addEventListener("popstate", (e) => {
+    // --- Toggle favoris sur les offres ---
+    if (resultsContainer) {
+        resultsContainer.addEventListener("click", function (e) {
+            const btn = e.target.closest(".btn-favori");
+            if (!btn) return;
+            const offreId = btn.dataset.id;
+            fetch(`/offres/${offreId}/favoris-offres`, { method: "POST" })
+                .then((r) => r.json())
+                .then((data) => {
+                    btn.innerHTML = data.favori
+                        ? "Retirer des favoris"
+                        : "Ajouter aux favoris";
+                    btn.dataset.favori = data.favori ? "1" : "0";
+                })
+                .catch((err) => console.error("Erreur toggle favoris :", err));
+        });
+    }
+
+    // --- Gestion du bouton retour / avancé navigateur ---
+    window.addEventListener("popstate", () => {
         syncUIFromUrl();
-        const url = window.location.pathname + window.location.search;
-        fetchAndInject(url, false);
+        fetchAndInject(
+            window.location.pathname + window.location.search,
+            false
+        );
     });
 
-    // sync initial
-    syncUIFromUrl();
-    updateBadge();
-
-    // drawer mobile
+    // --- Drawer mobile ---
     function openDrawer() {
         drawer.classList.add("open");
         if (overlay) overlay.style.display = "block";
@@ -182,10 +213,15 @@ document.addEventListener("DOMContentLoaded", () => {
         closeDrawer.addEventListener("click", closeDrawerFn);
     if (overlay && drawer) overlay.addEventListener("click", closeDrawerFn);
 
-    // debug helper
+    // --- Initialisation ---
+    syncUIFromUrl();
+    updateBadge();
+
+    // --- Debug helper ---
     window.__filtersDebug = {
         getSelectedSports,
         getSelectedCategories,
+        isFavorisSelected,
         buildFilterUrl,
     };
 });

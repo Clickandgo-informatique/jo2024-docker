@@ -3,24 +3,30 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\FavorisOffres;
+use App\Entity\FavorisOffresUtilisateur;
 use App\Entity\Offres;
+use App\Entity\Users;
 use App\Form\OffresFormType;
 use App\Repository\CategoriesOffresRepository;
+use App\Repository\FavorisOffresRepository;
 use App\Repository\OffresRepository;
 use App\Repository\SportsRepository;
 use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class OffresController extends AbstractController
 {
-    #[Route('admin/offres', name: 'app_offres_index')]
+    #[Route(path: 'admin/offres', name: 'app_offres_index')]
     public function index(
         OffresRepository $offresRepo,
         Request $request,
@@ -34,71 +40,80 @@ final class OffresController extends AbstractController
         ]);
     }
 
-    #[Route('/catalogue-offres-clients', name: 'app_offres_catalogue')]
+    #[Route(path: '/catalogue-offres-clients', name: 'app_offres_catalogue')]
+    #[Route(path: '/catalogue-offres-clients', name: 'app_offres_catalogue')]
     public function catalogue(
         OffresRepository $offresRepo,
         Request $request,
         PaginatorInterface $paginator,
         CategoriesOffresRepository $categoriesOffresRepo,
-        SportsRepository $sportsRepo
+        SportsRepository $sportsRepo,
+        Security $security
     ): Response {
 
-        // Récupération de toutes les catégories et sports pour les filtres
         $categoriesOffres = $categoriesOffresRepo->findBy([], ['nom' => 'ASC']);
         $sports = $sportsRepo->findBy([], ['intitule' => 'ASC']);
 
-        // Récupération des filtres depuis query string
         $selectedSports = $request->query->get('sports', '');
         $selectedCategories = $request->query->get('categories', '');
+        $favoris = $request->query->get('favoris') === '1';
+
         $selectedSports = $selectedSports ? explode(',', $selectedSports) : [];
         $selectedCategories = $selectedCategories ? explode(',', $selectedCategories) : [];
 
-        // Construction de la requête filtrée
         $qb = $offresRepo->createQueryBuilder('o')
             ->andWhere('o.isPublished = true');
 
-        // Filtre ManyToMany sports
+        // Filtre sports
         if ($selectedSports) {
             $qb->join('o.sports', 's')
                 ->andWhere('s.slug IN (:sports)')
                 ->setParameter('sports', $selectedSports);
         }
 
-        // Filtre ManyToOne catégories
+        // Filtre catégories
         if ($selectedCategories) {
             $qb->join('o.categorie', 'c')
                 ->andWhere('c.slug IN (:categories)')
                 ->setParameter('categories', $selectedCategories);
         }
 
+        // Filtre favoris
+        if ($favoris) {
+            $user = $security->getUser();
+            if ($user) {
+                $qb->join('o.favorisOffres', 'f')
+                    ->andWhere('f.utilisateur = :user')
+                    ->setParameter('user', $user->getId());
+            }
+        }
+
         $query = $qb->orderBy('o.dateDebut', 'ASC')->getQuery();
 
-        // Pagination
         $offres = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
             12
         );
 
-        // Si requête AJAX : renvoyer uniquement le partial
         if ($request->isXmlHttpRequest()) {
             return $this->render('_partials/_catalogue-offres-ajax-wrapper.html.twig', [
                 'offres' => $offres,
             ]);
         }
 
-        // Sinon : page complète
         return $this->render('offres/catalogue-offres-clients.html.twig', [
             'offres' => $offres,
             'categoriesOffres' => $categoriesOffres,
             'sports' => $sports,
             'selectedSports' => $selectedSports,
             'selectedCategories' => $selectedCategories,
+            'favorisSelected' => $favoris,
         ]);
     }
 
 
-    #[Route('/offres-par-categorie/{slug}', name: 'offres-par-categories')]
+    #[Route(path: '/offres-par-categorie/{slug}', name: 'offres-par-categories')]
     public function filterByCategorie(
         Request $request,
         OffresRepository $offresRepo,
@@ -128,7 +143,7 @@ final class OffresController extends AbstractController
         ]);
     }
 
-    #[Route('admin/offres/ajout', name: 'app_offres_new')]
+    #[Route(path: 'admin/offres/ajout', name: 'app_offres_new')]
     public function new(
         Request $request,
         EntityManagerInterface $em,
@@ -161,7 +176,7 @@ final class OffresController extends AbstractController
         ]);
     }
 
-    #[Route('admin/edit/{slug}', name: 'app_offres_edit')]
+    #[Route(path: 'admin/edit/{slug}', name: 'app_offres_edit')]
     public function edit(
         OffresRepository $offresRepo,
         string $slug,
@@ -204,7 +219,7 @@ final class OffresController extends AbstractController
         ]);
     }
 
-    #[Route('admin/offres/{id}/delete-image', name: 'app_offres_delete_image')]
+    #[Route(path: 'admin/offres/{id}/delete-image', name: 'app_offres_delete_image')]
     public function deleteImage(
         Offres $offre,
         PictureService $pictureService,
@@ -219,7 +234,7 @@ final class OffresController extends AbstractController
         return $this->redirectToRoute('app_offres_edit', ['slug' => $offre->getSlug()]);
     }
 
-    #[Route('/offres/offres/{slugs?}', name: 'app_offres_filter')]
+    #[Route(path: '/offres/offres/{slugs?}', name: 'app_offres_filter')]
     public function filterBySportsSlugs(
         SportsRepository $sportsRepo,
         OffresRepository $offresRepo,
@@ -247,5 +262,34 @@ final class OffresController extends AbstractController
             'offres'           => $offres,
             'selectedSlugs'    => $slugsArray,
         ]);
+    }
+
+    #[Route(path: '/offres/{id}/favoris-offres', name: 'app_favoris_offres')]
+    public function toggleFavori(
+        Offres $offre,
+        EntityManagerInterface $em,
+        Security $security
+    ): JsonResponse {
+        /** @var \App\Entity\User $user */
+        $user = $security->getUser();
+        if (!$user) {
+            return $this->json(['success' => false, 'message' => 'Vous devez être connecté.'], 403);
+        }
+
+        $repo = $em->getRepository(FavorisOffres::class);
+        $favori = $repo->findOneBy(['utilisateur' => $user, 'offre' => $offre]);
+
+        if ($favori) {
+            $em->remove($favori);
+            $em->flush();
+            return $this->json(['success' => true, 'favori' => false]);
+        } else {
+            $favori = new FavorisOffres();
+            $favori->setUtilisateur($user);
+            $favori->setOffre($offre);
+            $em->persist($favori);
+            $em->flush();
+            return $this->json(['success' => true, 'favori' => true]);
+        }
     }
 }

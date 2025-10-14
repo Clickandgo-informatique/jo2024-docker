@@ -13,7 +13,7 @@ class DocsController extends AbstractController
     public function show(string $filename, MarkdownParser $parser): Response
     {
         $path = $this->getParameter('kernel.project_dir') . '/docs/' . $filename . '.md';
-
+        dd($path);
         if (!file_exists($path)) {
             throw $this->createNotFoundException("Le fichier '$filename.md' est introuvable.");
         }

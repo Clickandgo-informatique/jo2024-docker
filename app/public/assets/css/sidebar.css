@@ -10,6 +10,7 @@
     top: 0;
     left: 0;
     z-index: 1000;
+    box-shadow: var(--box-shadow);
 }
 
 /* Sidebar mini */
@@ -72,11 +73,11 @@
     top: 50%;
     left: 50px;
     transform: translateY(-50%);
-    /* width: 30px;
-    height: 60px; */
+    width: 30px;
+    height: 40px;
     background: var(--primary-color);
     color: #fff;
-    /* border-radius: 0 4px 4px 0; */
+    border-radius: 0 4px 4px 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,7 +86,9 @@
     font-size: 1.2rem;
     user-select: none;
     transition: left 0.3s ease;
-    padding: 0;
+    padding: 3;
+    border: none;
+    box-shadow: var(--box-shadow);
 }
 .sidebar.expanded + #sidebar-toggle,
 body.sidebar-expanded #sidebar-toggle {

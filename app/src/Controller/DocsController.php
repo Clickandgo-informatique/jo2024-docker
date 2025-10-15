@@ -12,11 +12,26 @@ class DocsController extends AbstractController
     #[Route('/docs/{filename}', name: 'app_docs_file')]
     public function show(string $filename, MarkdownParser $parser): Response
     {
-        $docsDir = $this->getParameter('kernel.project_dir') . '/app/docs';
+        $projectDir = $this->getParameter('kernel.project_dir');
 
-        // Vérifie que le dossier docs existe
-        if (!is_dir($docsDir)) {
-            throw $this->createNotFoundException("Le dossier docs est introuvable dans $docsDir");
+        // Détection automatique du dossier docs selon l'environnement
+        $pathsToTry = [
+            $projectDir . '/docs',      // distant / OVH
+            $projectDir . '/app/docs',  // local / Docker
+        ];
+
+        $docsDir = null;
+        foreach ($pathsToTry as $path) {
+            if (is_dir($path)) {
+                $docsDir = $path;
+                break;
+            }
+        }
+
+        if (!$docsDir) {
+            throw $this->createNotFoundException(
+                "Le dossier docs est introuvable. Chemins testés : " . implode(', ', $pathsToTry)
+            );
         }
 
         // Liste tous les fichiers Markdown disponibles
@@ -54,7 +69,7 @@ class DocsController extends AbstractController
         return $this->render('docs/index.html.twig', [
             'content' => $html,
             'filename' => $filename,
-            'availableFiles' => $availableFiles, // pour info ou affichage dans Twig
+            'availableFiles' => $availableFiles, // pour affichage dans Twig si besoin
         ]);
     }
 }

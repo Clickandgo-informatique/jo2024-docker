@@ -89,6 +89,7 @@
     padding: 3;
     border: none;
     box-shadow: var(--box-shadow);
+    opacity:0.4;
 }
 .sidebar.expanded + #sidebar-toggle,
 body.sidebar-expanded #sidebar-toggle {

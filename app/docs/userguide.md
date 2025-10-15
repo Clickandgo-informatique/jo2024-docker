@@ -1,12 +1,49 @@
-# Réservations JO 2024 - Guide Utilisateur
+<style>
+/* Exemple de CSS pour ton guide */
+.markdown-body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 10px;
+    max-width:1000px;
+}
 
-[TOC]
+h1 {
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+h2 {
+    color: #0055aa;
+    margin-top: 10px;
+}
+
+h3 {
+    color: #0077cc;
+    margin-top:10px;
+}
+a{text-decoration:underline;}
+p{  max-width: 65ch; /* environ 65 caractères par ligne */
+    line-height: 1.5; /* ajoute du confort vertical */}
+p, li {
+    font-size: 16px;
+}
+ul,ol{margin-left:30px;}
+code {
+    background-color: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+hr{margin-top:15px;margin-bottom:10px;color:blue;}
+</style>
+[Read this user guide in English clicking on this title ](userguide_english)
 
 ## Table des matières
 
 1. [Introduction](#introduction)  
-2. [Connexion et sécurité](#connexion-et-sécurité)  
-3. [Navigation dans l’application](#navigation-dans-lapplication)  
+2. [Connexion et securite](#connexion-et-securite)  
+3. [Navigation dans lapplication](#navigation-dans-lapplication)  
 4. [Gestion des commandes](#gestion-des-commandes)  
 5. [Paiement et tickets](#paiement-et-tickets)  
 6. [FAQ et support](#faq-et-support)  
@@ -25,9 +62,9 @@ Cette application vous permet de :
 
 ---
 
-## Connexion et sécurité
+## Connexion et securite
 
-### Création de compte
+### Creation de compte
 
 1. Rendez-vous sur la page de connexion.  
 2. Cliquez sur **S’inscrire** et remplissez vos informations.  
@@ -36,19 +73,19 @@ Cette application vous permet de :
 ### Login
 
 - Entrez votre email et mot de passe.  
-- Une vérification à double facteur est réalisée à chaque connexion, vous devrez fournir un nouveau code à chaque fois que vous vous reconnectez sur notre plateforme.
-- Linstallation d'une appli d'authentification (Google Authenticator etc ...) est obligatoire pour procéder et terminer la phase de connexion.
-- Si tout se passe bien à la première inscription vos données basiques seront enregistrées sur nos serveurs de façon à ce que vous n'ayez plus besoin de passer par la première étape pour une future connexion.
-- Si vous n'arrivez pas à valider cette double authentification rescannez le qrCode qui s'affiche dans la page de login avec l'appli que vous avez télechargé antérieurement.  
+- Une vérification à double facteur est réalisée à chaque connexion, vous devrez fournir un nouveau code à chaque fois que vous vous reconnectez sur notre plateforme.  
+- L’installation d'une appli d'authentification (Google Authenticator etc.) est obligatoire pour procéder et terminer la phase de connexion.  
+- Si tout se passe bien à la première inscription vos données basiques seront enregistrées sur nos serveurs de façon à ce que vous n'ayez plus besoin de passer par la première étape pour une future connexion.  
+- Si vous n'arrivez pas à valider cette double authentification, rescannez le QR code qui s'affiche dans la page de login avec l'appli que vous avez telechargée antérieurement.  
 
-### Mot de passe oublié
+### Mot de passe oublie
 
 - Cliquez sur **Mot de passe oublié**.  
 - Suivez les instructions envoyées par email.  
 
 ---
 
-## Navigation dans l’application
+## Navigation dans lapplication
 
 - **Sidebar** : liste des sports et offres disponibles  
 - **Filtres** : rechercher par type (Olympique / Paralympique) et par lieu  
@@ -58,14 +95,14 @@ Cette application vous permet de :
 
 ## Gestion des commandes
 
-### Créer une commande
+### Creer une commande
 
 1. Sélectionnez une ou plusieurs offres.  
 2. Définissez la quantité pour chaque offre.  
 3. Cliquez sur **Ajouter au panier**.  
 4. Vérifiez le total de votre commande.  
 
-### Détails d’une commande
+### Details d’une commande
 
 - **Référence** : identifiant unique de votre commande  
 - **Offres** : liste des offres sélectionnées avec quantité et prix  
@@ -99,15 +136,16 @@ Cette application vous permet de :
 
 ## FAQ et support
 
-### Je n’ai pas reçu mon ticket après paiement
+### Je n’ai pas recu mon ticket apres paiement
 
-- Vérifiez votre dossier spam.
-- Cliquez sur "Mes commandes en cours" dans la barre de navigation pour accéder à l'historique de toutes vos commandes enregistrées, seules les commandes dont le paiement a abouti émettent un ticket...
-- Vous pouvez accéder puis imprimer tous vos tickets depuis cet interface, une commande payée = 1 ticket sécurisé.
+- Vérifiez votre dossier spam.  
+- Cliquez sur "Mes commandes en cours" dans la barre de navigation pour accéder à l'historique de toutes vos commandes enregistrées, seules les commandes dont le paiement a abouti émettent un ticket.  
+- Vous pouvez accéder puis imprimer tous vos tickets depuis cette interface, une commande payée = 1 ticket sécurisé.  
 - Contactez le support si le problème persiste.  
 
 ### Comment annuler une commande ?
-- Seules les commandes non encore payées sont annulables depuis l'interface "Mes commandes en cours"
+
+- Seules les commandes non encore payées sont annulables depuis l'interface "Mes commandes en cours".  
 - Les commandes payées ne peuvent pas être annulées via l’application.  
 - Contactez le service client pour toute demande spécifique.  
 
@@ -115,9 +153,6 @@ Cette application vous permet de :
 
 - Email : support@jo2024.fr  
 - Téléphone : 01 23 45 67 89  
-
----
-
 ## Notes pour la conversion en PDF
 
 1. Installer Pandoc : `sudo apt install pandoc`  

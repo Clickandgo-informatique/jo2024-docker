@@ -8,19 +8,21 @@ services:
     working_dir: /var/www/symfony
 
     volumes:
-      # Code de l'application Symfony
+      # Code Symfony complet
       - ./app:/var/www/symfony:cached
 
-      # Fichiers d'environnement (s'assurer que ce sont bien des fichiers)
+      # Dossier docs monté automatiquement dans app/docs
+      # Il doit exister sur l'hôte sous app/docs
+      - ./app/docs:/var/www/symfony/app/docs:cached
+
+      # Fichiers d'environnement
       - ./app/.env.docker.local:/var/www/symfony/.env.local:ro
       - ./app/.env.test.local:/var/www/symfony/.env.test.local:ro
 
-      # Montage du dossier docs à la racine du projet
-      - ./docs:/var/www/symfony/docs:cached
-
     environment:
-      - APP_ENV=dev # Peut être surchargé avec `-e APP_ENV=test`
+      - APP_ENV=dev
       - COMPOSER_ALLOW_SUPERUSER=1
+
     depends_on:
       - db
       - redis
@@ -33,10 +35,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      # Même code Symfony que dans le conteneur PHP
       - ./app:/var/www/symfony:cached
-
-      # Fichier de configuration Nginx
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - php
@@ -55,7 +54,7 @@ services:
       - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./docker/mysql/init:/docker-entrypoint-initdb.d # script d'init pour jo2024_test
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
     networks:
       - symfony
 

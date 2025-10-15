@@ -64,7 +64,7 @@ class CategoriesOffres
     /**
      * Description détaillée (facultatif)
      */
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(length:400,type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     /**

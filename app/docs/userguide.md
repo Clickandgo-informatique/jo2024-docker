@@ -1,42 +1,4 @@
-<style>
-/* Exemple de CSS pour ton guide */
-.markdown-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    margin: 10px;
-    max-width:1000px;
-}
-
-h1 {
-    color: #003366;
-    border-bottom: 2px solid #003366;
-    padding-bottom: 10px;
-}
-
-h2 {
-    color: #0055aa;
-    margin-top: 10px;
-}
-
-h3 {
-    color: #0077cc;
-    margin-top:10px;
-}
-a{text-decoration:underline;}
-p{  max-width: 65ch; /* environ 65 caractères par ligne */
-    line-height: 1.5; /* ajoute du confort vertical */}
-p, li {
-    font-size: 16px;
-}
-ul,ol{margin-left:30px;}
-code {
-    background-color: #f4f4f4;
-    padding: 2px 4px;
-    border-radius: 4px;
-}
-hr{margin-top:15px;margin-bottom:10px;color:blue;}
-</style>
+# Guide utilisateur
 [Read this user guide in English clicking on this title ](userguide_english)
 
 ## Table des matières

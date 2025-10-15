@@ -1,20 +1,25 @@
 {# templates/_partials/_sports-filter.html.twig #}
 {% set sports = sports is defined ? sports : [] %}
-{% set selectedSlugs = selectedSlugs is defined ? selectedSlugs : [] %}
+{% set selectedSports = selectedSports is defined ? selectedSports : [] %}
+{% set sportCounts = sportCounts is defined ? sportCounts : {} %}
 
 <div id="sports-filter" class="sports-filter" data-base-url="{{ path('app_offres_filter') }}">
 	<h5 class="filter-title">Filtrer par sport(s)</h5>
 	<div class="sports-checkboxes">
 		{% for sport in sports %}
+			{% set count = sportCounts[sport.slug]|default(0) %}
 			<label class="sport-option">
-				<input type="checkbox" value="{{ sport.slug }}" {% if selectedSlugs is defined and sport.slug in selectedSlugs %} checked {% endif %}>
-
-				<span>{{sport.emoji}}
-					{{ sport.intitule }}</span>
+				<input type="checkbox" value="{{ sport.slug }}" {% if sport.slug in selectedSports %} checked {% endif %}>
+				<span>
+					{{ sport.emoji }}
+					{{ sport.intitule }}
+					<small class="count">({{ count }})</small>
+				</span>
 			</label>
 		{% endfor %}
 	</div>
 </div>
+
 {% block javascripts %}
-	<script type="module" src="{{asset('assets/js/filters.js')}}"></script>
+	<script type="module" src="{{ asset('assets/js/filters.js') }}"></script>
 {% endblock %}

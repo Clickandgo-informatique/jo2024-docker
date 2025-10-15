@@ -15,6 +15,10 @@
 					<label>
 						<input type="checkbox" value="1"/>
 						💖 Mes favoris
+																		&nbsp;
+						<span>
+							<small>({{countFavoris}})</small>
+						</span>
 					</label>
 				</div>
 			{% endif %}
@@ -24,86 +28,70 @@
 				<h5 class="filter-title">Catégories</h5>
 				<ul class="categories-list">
 					{% for cat in categoriesOffres %}
+						{% set count = categorieCounts[cat.slug]|default(0) %}
 						<li>
 							<label>
 								<input type="checkbox" value="{{ cat.slug }}" {% if selectedCategories is defined and cat.slug in selectedCategories %} checked {% endif %}>
-								{{ cat.nom }}
-							</label>
+								{{ cat.nom }}&nbsp;
+								<small class="count">({{ count }})</small>
+							</span>
 						</li>
-					{% endfor %}
-				</ul>
-			</div>
-
-			{# Filtre sports #}
-			<div class="filter-block-sports" id="sports-filter">
-				{% for sport in sports %}
-					<label>
-						<input type="checkbox" value="{{ sport.slug }}" {% if selectedSports is defined and sport.slug in selectedSports %} checked {% endif %}>
-						{{ sport.emoji }}
-						{{ sport.intitule }}
 					</label>
-				{% endfor %}
-			</div>
-		</aside>
-
-		<div class="results-column">
-			<h1 class="text-center">Catalogue des offres</h1>
-			<div id="results" class="ajax-reloaded-data">
-				{% include '_partials/_catalogue-offres-ajax-wrapper.html.twig' with { 'offres': offres } only %}
-			</div>
-		</div>
+				</li>
+			{% endfor %}
+		</ul>
 	</div>
 
-	{# Drawer mobile #}
-	<button id="filtersFAB" class="btn-filter-mobile" title="Filtrer">
-		<i class="fas fa-filter"></i>
-	</button>
-	<div id="filtersDrawer" class="filters-drawer" aria-hidden="true">
-		<div class="drawer-header">
-			<h4>Filtres</h4>
-			<button id="closeFilters" class="drawer-close">&times;</button>
-		</div>
-		<div
-			class="drawer-content">
-
-			{# Filtre les favoris utilisateur #}
-			{% if app.user %}
-				<div id="favoris-filter-drawer">
-					<label for="favoris-drawer">
-						<input type="checkbox" id="favoris-drawer" value="1"/>
-						💖 Mes favoris
-					</label>
-				</div>
-			{% endif %}
-			<div id="categories-filter-drawer">
-				{% for cat in categoriesOffres %}
-					<label>
-						<input type="checkbox" value="{{ cat.slug }}" {% if selectedCategories is defined and cat.slug in selectedCategories %} checked {% endif %}>
-						{{ cat.nom }}
-					</label>
-				{% endfor %}
-			</div>
-			<div id="sports-filter-drawer">
-				{% for sport in sports %}
-					<label>
-						<input type="checkbox" value="{{ sport.slug }}" {% if selectedSports is defined and sport.slug in selectedSports %} checked {% endif %}>
-						{{ sport.emoji }}
-						{{ sport.intitule }}
-					</label>
-				{% endfor %}
-			</div>
-		</div>
+	{# Filtre sports #}
+	<div class="filter-block-sports" id="sports-filter">
+		{% for sport in sports %}
+			<label>
+				<input type="checkbox" value="{{ sport.slug }}" {% if selectedSports is defined and sport.slug in selectedSports %} checked {% endif %}>
+				{{ sport.emoji }}
+				{{ sport.intitule }}
+			</label>
+		{% endfor %}
 	</div>
-	<div id="drawerOverlay" class="drawer-overlay" style="display:none;"></div>
-{% endblock %}
+</aside>
 
-{% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('assets/css/catalogue-offres.css') }}">
-	<link rel="stylesheet" href="{{ asset('assets/css/filters.css') }}">
-{% endblock %}
+<div class="results-column">
+	<h1 class="text-center">Catalogue des offres</h1>
+	<div id="results" class="ajax-reloaded-data">
+		{% include '_partials/_catalogue-offres-ajax-wrapper.html.twig' with { 'offres': offres } only %}
+	</div>
+</div></div>{# Drawer mobile #}<button id="filtersFAB" class="btn-filter-mobile" title="Filtrer">
+<i class="fas fa-filter"></i></button><div id="filtersDrawer" class="filters-drawer" aria-hidden="true">
+<div class="drawer-header">
+	<h4>Filtres</h4>
+	<button id="closeFilters" class="drawer-close">&times;</button>
+</div>
+<div
+	class="drawer-content">
 
-{% block javascripts %}
-	{{ parent() }}
-	<script src="{{ asset('assets/js/filters.js') }}"></script>
-{% endblock %}
+	{# Filtre les favoris utilisateur #}
+	{% if app.user %}
+		<div id="favoris-filter-drawer">
+			<label for="favoris-drawer">
+				<input type="checkbox" id="favoris-drawer" value="1"/>
+				💖 Mes favoris
+			</label>
+		</div>
+	{% endif %}
+	<div id="categories-filter-drawer">
+		{% for cat in categoriesOffres %}
+			<label>
+				<input type="checkbox" value="{{ cat.slug }}" {% if selectedCategories is defined and cat.slug in selectedCategories %} checked {% endif %}>
+				{{ cat.nom }}
+			</label>
+		{% endfor %}
+	</div>
+	<div id="sports-filter-drawer">
+		{% for sport in sports %}
+			<label>
+				<input type="checkbox" value="{{ sport.slug }}" {% if selectedSports is defined and sport.slug in selectedSports %} checked {% endif %}>
+				{{ sport.emoji }}
+				{{ sport.intitule }}
+			</label>
+		{% endfor %}
+	</div>
+</div></div><div id="drawerOverlay" class="drawer-overlay" style="display:none;"></div>{% endblock %}{% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset('assets/css/catalogue-offres.css') }}"><link rel="stylesheet" href="{{ asset('assets/css/filters.css') }}">{% endblock %}{% block javascripts %}{{ parent() }}<script src="{{ asset('assets/js/filters.js') }}"></script>{% endblock %}

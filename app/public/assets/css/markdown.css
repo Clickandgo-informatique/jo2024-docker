@@ -1,103 +1,134 @@
+/* ------------------------ */
 /* Style pour la table des matières */
-.toc {
+/* ------------------------ */
+.markdown-body .toc {
     font-size: 0.9em;
     margin-bottom: 1em;
-}
-
-/* Style pour les ancres */
-h2 a,
-h3 a {
-    text-decoration: none;
-    color: inherit;
-}
-/* Masque le # mais garde le lien cliquable */
-h1 .heading-anchor,
-h2 .heading-anchor,
-h3 .heading-anchor,
-h4 .heading-anchor,
-h5 .heading-anchor,
-h6 .heading-anchor {
-    text-decoration: none;
-    color: inherit; /* prend la couleur du texte */
-    font-size: 0; /* masque le # visuellement */
-}
-
-h1 .heading-anchor::after,
-h2 .heading-anchor::after,
-h3 .heading-anchor::after,
-h4 .heading-anchor::after,
-h5 .heading-anchor::after,
-h6 .heading-anchor::after {
-    content: ""; /* supprime le symbole # */
-}
-/* ------------------------ */
-/* Table des matières (TOC) */
-/* ------------------------ */
-.toc {
     border: 1px solid #ddd;
     padding: 1em;
     background: #f9f9f9;
     max-width: 250px;
-    font-size: 0.9em;
     line-height: 1.4;
-    margin-bottom: 1em;
 }
 
-.toc ul {
+.markdown-body .toc ul {
     list-style-type: disc;
     padding-left: 1em;
     margin: 0;
 }
 
-.toc li {
+.markdown-body .toc li {
     margin: 0.3em 0;
 }
 
-/* Liens TOC */
-.toc a {
+.markdown-body .toc a {
     text-decoration: none;
     color: #0366d6;
 }
 
-.toc a:hover {
+.markdown-body .toc a:hover {
     text-decoration: underline;
 }
 
 /* ------------------------ */
 /* Titres et ancres          */
 /* ------------------------ */
-
-/* Style général des titres */
-h1, h2, h3, h4, h5, h6 {
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
     position: relative;
-    scroll-margin-top: 80px; /* pour que l'ancre ne soit pas cachée par le header fixe */
+    scroll-margin-top: 80px;
+    color: inherit;
 }
 
 /* Lien d’ancre invisible mais cliquable */
-.heading-anchor {
+.markdown-body .heading-anchor {
     text-decoration: none;
-    color: inherit; /* prend la couleur du texte */
-    font-size: 0;    /* masque le symbole # */
+    color: inherit;
+    font-size: 0;
     position: absolute;
-    left: -1.2em; /* décalé à gauche */
+    left: -1.2em;
     top: 50%;
     transform: translateY(-50%);
 }
 
-/* Optionnel : montrer # au survol du titre */
-h1:hover .heading-anchor,
-h2:hover .heading-anchor,
-h3:hover .heading-anchor,
-h4:hover .heading-anchor,
-h5:hover .heading-anchor,
-h6:hover .heading-anchor {
+/* Montrer # au survol du titre */
+.markdown-body h1:hover .heading-anchor,
+.markdown-body h2:hover .heading-anchor,
+.markdown-body h3:hover .heading-anchor,
+.markdown-body h4:hover .heading-anchor,
+.markdown-body h5:hover .heading-anchor,
+.markdown-body h6:hover .heading-anchor {
     font-size: 0.9em;
     color: #0366d6;
 }
 
-/* Pour que le TOC reste lisible sur mobile */
+/* ------------------------ */
+/* Conteneur Markdown Body   */
+/* ------------------------ */
+.markdown-body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 10px auto;
+    max-width: 600px;
+}
+
+.markdown-body h1 {
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+.markdown-body h2 {
+    color: #0055aa;
+    margin-top: 10px;
+}
+
+.markdown-body h3 {
+    color: #0077cc;
+    margin-top: 10px;
+}
+
+.markdown-body a {
+    text-decoration: underline;
+}
+
+.markdown-body p {
+    max-width: 65ch;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.markdown-body li {
+    font-size: 16px;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    margin-left: 30px;
+}
+
+.markdown-body code {
+    background-color: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.markdown-body hr {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: blue;
+}
+
+/* ------------------------ */
+/* Responsive mobile         */
+/* ------------------------ */
 @media (max-width: 768px) {
-    .toc {
+    .markdown-body .toc {
         max-width: 100%;
         font-size: 0.85em;
     }

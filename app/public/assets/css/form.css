@@ -19,6 +19,13 @@ form {
     width: 100%;
     max-width: 500px;
 }
+form input:hover {
+    border: 3px solid var(--primary-color);
+    box-shadow: var(--box-shadow);
+}
+form input:focus{
+    background-color: #ecffa0;
+}
 form.submit-btn-form {
     display: flex;
     justify-content: center;
@@ -71,14 +78,14 @@ textarea,
 select {
     appearance: none;
     background: var(--form-bg);
-    border: 1px solid var(--form-border);
+    border: 1px solid var(--primary-color);
     border-radius: var(--form-radius);
     padding: var(--form-padding);
     font-size: 1rem;
     line-height: 1.4;
     transition: border-color var(--transition-fast),
         box-shadow var(--transition-fast), transform var(--transition-fast);
-    box-shadow: none;
+
     width: 100%;
     box-sizing: border-box;
     align-self: stretch;

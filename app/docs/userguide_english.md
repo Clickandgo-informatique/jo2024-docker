@@ -1,1 +1,1 @@
-# Welcome to the official Olympic games Paris tickets platform
+# User guide

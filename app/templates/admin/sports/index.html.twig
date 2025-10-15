@@ -4,44 +4,59 @@
 {% endblock %}
 {% block body %}
 
-	<H1 class="text-center">Liste des disciplines sportives</H1>
+	<H1 class="text-center"><i class="fa-solid fa-football"></i>Liste des disciplines sportives</H1>
 	<a href="{{path('app_sports_new')}}" class="btn btn-primary">
 		<i class="fa-solid fa-circle-plus"></i>Ajouter une discipline sportive</a>
-	<table>
-		<thead>
-			<th></th>
-			<th>Intitulé</th>
-			<th></th>
-		</thead>
-		<tbody>
 
-			{% for sport in sports %}
-				<tr>
-					<td class="cell-actions text-center">
-						<a href="{{path('app_sports_edit',{slug:sport.slug})}}" class="btn-action btn-open ">
-							<i class="fa-solid fa-pen-to-square"></i>
-						</a>
+	{% set paginationData = sports.getPaginationData %}
+	{% set start = (paginationData.current - 1) * paginationData.numItemsPerPage + 1 %}
+	{% set end = start + sports|length - 1 %}
+	{% set total = sports.getTotalItemCount %}
 
-					</td>
-					<td>{{ sport.emoji }}
-						{{sport.intitule}}</td>
-					<td>
-						{# Bouton de suppression par formulaire POST #}
-						<form method="post" action="{{ path('app_sports_delete', {'id': sport.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce sport ?');">
-							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sport.id) }}">
-							<button class="btn-action btn-delete" value="delete">
-								<i class="fa-solid fa-trash-can"></i>
-							</button>
-						</form>
-					</td>
-				</tr>
-			{% else %}
-				<p>Il n'existe encore aucune discipline sportive enregistrée dans la base.</p>
-			{% endfor %}
-		</tbody>
-	</table>
+	{# Compteur au-dessus du tableau #}
+	<div class="counter-pagination">
+		Affichage
+		<strong>{{ start }}
+			à
+		{{ end }}
+	</strong>
+	sur
+	<strong>{{ total }}</strong>
+	offre{{ total > 1 ? 's' : '' }}</div>
+<table>
+	<thead>
+		<th></th>
+		<th>Intitulé</th>
+		<th></th>
+	</thead>
+	<tbody>
 
-{% endblock %}
-{% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">
-{% endblock %}
+		{% for sport in sports %}
+			<tr>
+				<td class="cell-actions text-center">
+					<a href="{{path('app_sports_edit',{slug:sport.slug})}}" class="btn-action btn-open ">
+						<i class="fa-solid fa-pen-to-square"></i>
+					</a>
+
+				</td>
+				<td>{{ sport.emoji }}
+					{{sport.intitule}}</td>
+				<td>
+					{# Bouton de suppression par formulaire POST #}
+					<form method="post" action="{{ path('app_sports_delete', {'id': sport.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce sport ?');">
+						<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sport.id) }}">
+						<button class="btn-action btn-delete" value="delete">
+							<i class="fa-solid fa-trash-can"></i>
+						</button>
+					</form>
+				</td>
+			</tr>
+		{% else %}
+			<p>Il n'existe encore aucune discipline sportive enregistrée dans la base.</p>
+		{% endfor %}
+	</tbody>
+</table>
+<div class="pagination">
+	{{ knp_pagination_render(sports) }}
+</div>{% endblock %}{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">{% endblock %}

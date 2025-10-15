@@ -250,7 +250,7 @@
 }
 
 .offer-category {
-    background-color: var(--secondary-color);
+    background: var(--secondary-color-gradient);
     width: 90px;
     color: #ffff;
     padding: 10px;
@@ -280,10 +280,10 @@
 .persons-number {
     display: flex;
     flex-direction: row;
-    padding: 5px;
-    margin: 5px;
+    padding: 5px;  
     align-items: center;
     justify-content: center;
+    background: #d8d8d8;
 }
 .add-child-plus-sign {
     color: white;
@@ -379,7 +379,7 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    background-color: var(--primary-color);
+    background: var(--primary-color-gradient);
 }
 @media (max-width: 576px) {
     .catalogue-layout {

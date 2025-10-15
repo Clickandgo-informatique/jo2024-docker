@@ -8,28 +8,28 @@
 			<div class="offer-header">
 				<span class="offer-category">{{ offre.categorie.nom }}</span>
 				&nbsp;
-				{# affiche visuellement le nombre de personnes adultes et enfants #}
-				<div class="persons-number">
-					{% for i in 1..offre.nbrAdultes %}
-						<i class="fa-solid fa-person adult-icon"></i>
-					{% endfor %}
-					{% if offre.nbrEnfants>0 %}
-						<span class="add-child-plus-sign">+</span>
-						{% for i in 1..offre.nbrEnfants %}
-							<i class="fa-solid fa-child child-icon"></i>
-						{% endfor %}
-					{% endif %}
-				</div>
+
 				{# Affiche l'icone de favori si utilisateur connecté #}
 				{% if app.user %}
 					<div class="favori">
 						<i class="favorite-icon fa-heart {% if offre.isFavori(app.user) %}fa-solid{% else %}fa-regular{% endif %}" data-offre-id="{{ offre.id }}"></i>
 					</div>
-
 				{% endif %}
 			</div>
 		{% endif %}
-
+		{# affiche visuellement le nombre de personnes adultes et enfants #}
+		<div class="persons-number">
+			{% for i in 1..offre.nbrAdultes %}
+				<i class="fa-solid fa-person adult-icon"></i>
+			{% endfor %}
+			{% if offre.nbrEnfants>0 %}
+				<span class="add-child-plus-sign">+</span>
+				{% for i in 1..offre.nbrEnfants %}
+					<i class="fa-solid fa-child child-icon"></i>
+				{% endfor %}
+			{% endif %}
+		</div>
+		
 		{# Affiche les sports en body #}
 		<div class="offer-sports">
 			<span class="sport-emoji">{{offre.sports[0].emoji}}</span>&nbsp;<span class="sport-intitule">{{offre.sports[0].intitule}}</span>

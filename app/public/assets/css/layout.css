@@ -90,6 +90,7 @@
     margin-left: 250px; /* marge par défaut = largeur sidebar pleine */
     width: calc(100% - 250px); /* largeur restante */
     transition: margin-left 0.3s ease, width 0.3s ease; /* animation fluide */
+    flex: 1;
 }
 
 /* Synchronisation sidebar mini → main-wrapper */

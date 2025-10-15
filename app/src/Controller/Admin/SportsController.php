@@ -5,8 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Sports;
 use App\Form\SportsFormType;
 use App\Repository\SportsRepository;
-use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +15,14 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class SportsController extends AbstractController
 {
-    //liste de toutes les sports
+    //liste de tous les sports
     #[Route('/admin/sports', name: 'app_sports_index')]
-    public function index(SportsRepository $sportsRepo): Response
+    public function index(SportsRepository $sportsRepo, PaginatorInterface $paginator, Request $request): Response
     {
-        $sports = $sportsRepo->findBy([], ['intitule' => 'ASC']);
+        $data = $sportsRepo->findBy([], ['intitule' => 'ASC']);
+
+        $sports = $paginator->paginate($data, $request->query->get('page', 1), 12);
+
         return $this->render('admin/sports/index.html.twig', ['sports' => $sports]);
     }
 
@@ -73,6 +76,8 @@ final class SportsController extends AbstractController
         $this->addFlash('succcess', 'Les modification concernant la discipline ont bien été enregistrées dans la base.');
         return $this->render('admin/sports/sports-form.html.twig', ['discipline' => $sport, 'form' => $form->createView(), 'title' => $title]);
     }
+
+    //Suppression d'une discipline sportive
     #[Route('/sports/{id}', name: 'app_sports_delete', methods: ['POST'])]
     public function delete(Request $request, Sports $sport, EntityManagerInterface $em): Response
     {

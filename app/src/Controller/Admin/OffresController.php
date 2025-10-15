@@ -40,7 +40,7 @@ final class OffresController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/catalogue-offres-clients', name: 'app_offres_catalogue')]
+    //Catalogue des offres
     #[Route(path: '/catalogue-offres-clients', name: 'app_offres_catalogue')]
     public function catalogue(
         OffresRepository $offresRepo,
@@ -48,11 +48,16 @@ final class OffresController extends AbstractController
         PaginatorInterface $paginator,
         CategoriesOffresRepository $categoriesOffresRepo,
         SportsRepository $sportsRepo,
-        Security $security
+        Security $security,
+        FavorisOffresRepository $favorisOffresRepo
     ): Response {
 
         $categoriesOffres = $categoriesOffresRepo->findBy([], ['nom' => 'ASC']);
         $sports = $sportsRepo->findBy([], ['intitule' => 'ASC']);
+
+        //Comptage des favoris
+        $countFavoris = $favorisOffresRepo->count(['utilisateur' => $this->getUser()]);
+
 
         $selectedSports = $request->query->get('sports', '');
         $selectedCategories = $request->query->get('categories', '');
@@ -76,6 +81,12 @@ final class OffresController extends AbstractController
             $qb->join('o.categorie', 'c')
                 ->andWhere('c.slug IN (:categories)')
                 ->setParameter('categories', $selectedCategories);
+        }
+        //Compteur sur les catégories
+        $categorieCounts = [];
+
+        foreach ($categoriesOffres as $cat) {
+            $categorieCounts[$cat->getSlug()] = count($cat->getOffres());
         }
 
         // Filtre favoris
@@ -108,7 +119,9 @@ final class OffresController extends AbstractController
             'sports' => $sports,
             'selectedSports' => $selectedSports,
             'selectedCategories' => $selectedCategories,
+            'categorieCounts' => $categorieCounts,
             'favorisSelected' => $favoris,
+            'countFavoris' => $countFavoris
         ]);
     }
 

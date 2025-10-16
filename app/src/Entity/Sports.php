@@ -73,6 +73,12 @@ class Sports
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $regles = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $duree_match = null;
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
@@ -214,6 +220,30 @@ class Sports
     public function setDescription(?string $Description): static
     {
         $this->Description = $Description;
+
+        return $this;
+    }
+
+    public function getRegles(): ?string
+    {
+        return $this->regles;
+    }
+
+    public function setRegles(?string $regles): static
+    {
+        $this->regles = $regles;
+
+        return $this;
+    }
+
+    public function getDureeMatch(): ?string
+    {
+        return $this->duree_match;
+    }
+
+    public function setDureeMatch(?string $duree_match): static
+    {
+        $this->duree_match = $duree_match;
 
         return $this;
     }

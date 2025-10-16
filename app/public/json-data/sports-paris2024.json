@@ -11,7 +11,10 @@
         "type": "olympiques",
         "lieux": [
           "Esplanade des Invalides (Paris)"
-        ]
+        ],
+        "description": "Tir à l’arc est une discipline olympique pratiquée en compétition.",
+        "regles": "Compétition selon les règles internationales de la fédération.",
+        "duree_match": "Variable."
       },
       {
         "slug": "gymnastique-artistique",
@@ -23,7 +26,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition halls (Paris)"
-        ]
+        ],
+        "description": "La gymnastique artistique combine force, souplesse et technique sur plusieurs agrès (barres, poutre, sol, cheval d'arçons).",
+        "regles": "Les gymnastes réalisent des exercices notés par un jury selon la difficulté et l'exécution. Les fautes entraînent des pénalités au score.",
+        "duree_match": "Exercices individuels : 1–2 minutes par agrès; compétitions complètes : plusieurs heures."
       },
       {
         "slug": "natation-artistique",
@@ -35,7 +41,10 @@
         "type": "olympiques",
         "lieux": [
           "Paris La Défense Arena (Nanterre)"
-        ]
+        ],
+        "description": "La natation artistique (synchronisée) est une discipline aquatique chorégraphiée en solo, duo ou équipe.",
+        "regles": "Les routines sont évaluées sur l'exécution technique, l'artisticité et la difficulté. Les juges attribuent des notes combinées.",
+        "duree_match": "Routines : 2–4 minutes selon le type d'épreuve."
       },
       {
         "slug": "athletisme",
@@ -48,7 +57,10 @@
         "lieux": [
           "Stade de France (Saint-Denis)",
           "Pont d'Iéna / Paris roads (road events)"
-        ]
+        ],
+        "description": "L'athlétisme regroupe courses, sauts et lancers; il constitue un pilier des compétitions olympiques.",
+        "regles": "Chaque épreuve possède ses règles (départ, tours, haies, essais de saut/lancer). Les meilleurs chronos/performances déterminent les médaillés.",
+        "duree_match": "Variable : de 10 secondes (sprint) à plusieurs heures (session complète)."
       },
       {
         "slug": "badminton",
@@ -60,7 +72,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le badminton est un sport de raquette rapide opposant deux ou quatre joueurs frappant un volant au-dessus d'un filet.",
+        "regles": "Match en trois manches gagnantes jusqu'à 21 points avec écart de 2 points (règles BWF).",
+        "duree_match": "30–60 minutes en moyenne par match."
       },
       {
         "slug": "basketball-5x5",
@@ -73,7 +88,10 @@
         "lieux": [
           "Accor Arena / Bercy (Paris) - finals",
           "Stade Pierre-Mauroy (Villeneuve d'Ascq) - pool games"
-        ]
+        ],
+        "description": "Le basketball 5x5 oppose deux équipes de cinq joueurs cherchant à marquer des paniers.",
+        "regles": "Quatre quart-temps, dribble obligatoire, faute personnelle et équipe. Possibilité de prolongation en cas d'égalité.",
+        "duree_match": "4 × 10 minutes (temps jeu effectif FIBA) — match ~1h30 avec arrêts."
       },
       {
         "slug": "basket-3x3",
@@ -85,7 +103,10 @@
         "type": "olympiques",
         "lieux": [
           "Place de la Concorde (Paris)"
-        ]
+        ],
+        "description": "Le basket 3x3 est une version rapide du basketball jouée sur un demi-terrain par équipes de trois.",
+        "regles": "Premier à 21 points ou la plus haute score après 10 minutes; possession de 12 s; tirs valant 1 ou 2 points.",
+        "duree_match": "10 minutes ou jusqu'à 21 points (très rapide)."
       },
       {
         "slug": "volleyball-de-plage",
@@ -97,7 +118,10 @@
         "type": "olympiques",
         "lieux": [
           "Temporary beach lieux (Paris)"
-        ]
+        ],
+        "description": "Le beach-volley se joue en plein air sur sable, deux contre deux, avec un filet central.",
+        "regles": "Match en deux sets gagnants jusqu'à 21 points (éventuel 3e set à 15). Écart de 2 points requis.",
+        "duree_match": "30–50 minutes par match."
       },
       {
         "slug": "boxe",
@@ -109,7 +133,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "La boxe est un sport de combat où deux athlètes s'affrontent à coups de poing dans des catégories de poids.",
+        "regles": "Rounds de durée fixe, coups contestés par l'arbitre; points attribués pour l'efficacité, knock-out possible.",
+        "duree_match": "Amateur/Olympique : 3 rounds de 3 minutes (varie)."
       },
       {
         "slug": "breaking",
@@ -121,7 +148,10 @@
         "type": "olympiques",
         "lieux": [
           "Place de la Concorde (Paris)"
-        ]
+        ],
+        "description": "Le breaking est une discipline de danse acrobatique et rythmée en compétition individuelle ou en équipe.",
+        "regles": "Battles en 1v1 ou 3v3 jugées sur originalité, musicalité, techniques et style; plusieurs rounds.",
+        "duree_match": "Battles courts : 1–3 minutes par round."
       },
       {
         "slug": "canoe-slalom",
@@ -133,7 +163,10 @@
         "type": "olympiques",
         "lieux": [
           "Canoe slalom course (regional site)"
-        ]
+        ],
+        "description": "Le canoë slalom est une descente chronométrée en rivière artificielle avec portes à franchir.",
+        "regles": "Levees de pénalité pour portes touchées ou manquées; meilleur temps (avec pénalités) remporte la course.",
+        "duree_match": "Runs : 90–120 secondes en moyenne."
       },
       {
         "slug": "canoe-sprint",
@@ -145,7 +178,10 @@
         "type": "olympiques",
         "lieux": [
           "Vaires-sur-Marne"
-        ]
+        ],
+        "description": "Le canoë sprint est une course de vitesse sur eau plate sur distances fixes en kayak ou canoë.",
+        "regles": "Courses en ligne sur 200/500/1000 m; le plus rapide gagne.",
+        "duree_match": "Seconds to a few minutes selon la distance (200 m ~40–50s)."
       },
       {
         "slug": "cyclisme-bmx-freestyle",
@@ -157,7 +193,10 @@
         "type": "olympiques",
         "lieux": [
           "BMX Park (Paris event site)"
-        ]
+        ],
+        "description": "Le BMX Freestyle est une discipline acrobatique où les cyclistes réalisent figures sur un park aménagé.",
+        "regles": "Jugé sur la difficulté, l'exécution et l'originalité des figures dans des runs chronométrés.",
+        "duree_match": "Runs : 60–90 secondes."
       },
       {
         "slug": "cyclisme-bmx-racing",
@@ -169,7 +208,10 @@
         "type": "olympiques",
         "lieux": [
           "BMX Racing circuit"
-        ]
+        ],
+        "description": "Le BMX Racing est une course sur piste courte et technique au départ groupé.",
+        "regles": "Courses à élimination directe; premières places qualifient pour les tours suivants.",
+        "duree_match": "Courses courtes : ~30–60 secondes."
       },
       {
         "slug": "cyclisme-vtt",
@@ -181,7 +223,10 @@
         "type": "olympiques",
         "lieux": [
           "Mountain bike course (regional)"
-        ]
+        ],
+        "description": "Le VTT cross-country est une course sur terrain varié demandant technique et endurance.",
+        "regles": "Tour(s) de circuit; classement par ordre d'arrivée au terme des tours.",
+        "duree_match": "Environ 1h15 pour élites (variable)."
       },
       {
         "slug": "cyclisme-sur-route",
@@ -193,7 +238,10 @@
         "type": "olympiques",
         "lieux": [
           "Road courses across Paris and regions"
-        ]
+        ],
+        "description": "Le cyclisme sur route comprend courses en ligne et contre-la-montre sur routes ouvertes.",
+        "regles": "Épreuves par équipes ou individuelles; stratégies d'échappée et relais; arrivée au sprint, contre-la-montre chronométré.",
+        "duree_match": "De ~30 minutes (CLM) à plusieurs heures (courses en ligne)."
       },
       {
         "slug": "cyclisme-sur-piste",
@@ -205,7 +253,10 @@
         "type": "olympiques",
         "lieux": [
           "Velodrome (Saint-Quentin-en-Yvelines)"
-        ]
+        ],
+        "description": "Le cyclisme sur piste se déroule dans un vélodrome sur différentes épreuves de vitesse et endurance.",
+        "regles": "Épreuves multiples (sprint, poursuite, omnium) avec règles propres à chaque format.",
+        "duree_match": "Varie : de 3–4 minutes (sprint) à 45+ minutes (omnium sessions)."
       },
       {
         "slug": "plongeon",
@@ -217,7 +268,10 @@
         "type": "olympiques",
         "lieux": [
           "Paris La Défense Arena (Nanterre) - aquatic centre"
-        ]
+        ],
+        "description": "Le plongeon est une épreuve acrobatique depuis tremplins ou plateformes, jugée sur technique et amplitude.",
+        "regles": "Les plongeurs exécutent des séries de plongeons notés par des juges; la somme des notes détermine le classement.",
+        "duree_match": "Séries : 30–60 minutes selon le nombre de plongeons."
       },
       {
         "slug": "equitation-dressage",
@@ -229,7 +283,10 @@
         "type": "olympiques",
         "lieux": [
           "Equestrian park (regional)"
-        ]
+        ],
+        "description": "Le dressage est une épreuve équestre de précision et harmonie entre cavalier et cheval.",
+        "regles": "Les couples réalisent des reprises notées sur la technique, la soumission et l'expression; scores additionnés.",
+        "duree_match": "Reprises : environ 5–8 minutes."
       },
       {
         "slug": "equitation-concours-complet",
@@ -241,7 +298,10 @@
         "type": "olympiques",
         "lieux": [
           "Equestrian park (regional)"
-        ]
+        ],
+        "description": "Le concours complet (eventing) combine dressage, cross-country et saut d'obstacles sur plusieurs jours.",
+        "regles": "Scores cumulatifs sur les trois phases; pénalités pour fautes et temps dépassé.",
+        "duree_match": "Épreuve sur 2–3 jours selon les phases."
       },
       {
         "slug": "equitation-saut-d-obstacles",
@@ -253,7 +313,10 @@
         "type": "olympiques",
         "lieux": [
           "Equestrian park (regional)"
-        ]
+        ],
+        "description": "Le saut d'obstacles évalue la capacité du couple à franchir un parcours sans fautes.",
+        "regles": "Fautes et temps dépassé donnent des pénalités; tours de barrage en cas d'égalité.",
+        "duree_match": "Parcours : 1–2 minutes; compétitions sur plusieurs heures."
       },
       {
         "slug": "escrime",
@@ -265,7 +328,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "L'escrime est un sport de combat utilisant fleuret, épée ou sabre, où les touches sont comptées au point.",
+        "regles": "Les assauts sont chronométrés; différents matériels et priorités selon l'arme; victoire au nombre de touches.",
+        "duree_match": "Assauts : 3 × 3 minutes (tableau de direct) ; tournois sur la journée."
       },
       {
         "slug": "football",
@@ -277,7 +343,10 @@
         "type": "olympiques",
         "lieux": [
           "Multiple stadiums (Stade de France, regional stadiums)"
-        ]
+        ],
+        "description": "Le football oppose deux équipes de 11 joueurs visant à marquer des buts dans le camp adverse.",
+        "regles": "Deux mi-temps, hors-jeu, fautes sanctionnées; prolongations et tirs au but en phase finale si nécessaire.",
+        "duree_match": "2 × 45 minutes (+ temps additionnel)."
       },
       {
         "slug": "golf",
@@ -289,7 +358,10 @@
         "type": "olympiques",
         "lieux": [
           "Le Golf National (Saint-Quentin-en-Yvelines)"
-        ]
+        ],
+        "description": "Le golf est une épreuve individuelle par parcours où chaque joueur cherche à terminer le trou en le moins de coups possible.",
+        "regles": "Stroke play sur 18 trous; le total de coups détermine le classement.",
+        "duree_match": "Une partie complète ~4–5 heures."
       },
       {
         "slug": "handball",
@@ -301,7 +373,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor arenas (Paris)"
-        ]
+        ],
+        "description": "Le handball est un sport collectif où deux équipes de 7 joueurs cherchent à marquer dans le but adverse.",
+        "regles": "Deux mi-temps de 30 minutes; dribbles et passes réglementés; fautes et exclusions temporaires possibles.",
+        "duree_match": "2 × 30 minutes (match ~1h15 avec interruptions)."
       },
       {
         "slug": "hockey-sur-gazon",
@@ -313,7 +388,10 @@
         "type": "olympiques",
         "lieux": [
           "Hockey lieux (regional)"
-        ]
+        ],
+        "description": "Le hockey sur gazon oppose deux équipes qui utilisent une crosse pour diriger la balle vers le but adverse.",
+        "regles": "Match en 4 quarts; règles strictes pour la zone de tir et la sécurité; penalty corners pour fautes graves.",
+        "duree_match": "4 × 15 minutes (~1h30 avec arrêts)."
       },
       {
         "slug": "judo",
@@ -325,7 +403,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le judo est un art martial et sport de combat basé sur projections et immobilisations.",
+        "regles": "Matchs en catégories de poids; victoire par ippon (technique parfaite) ou au bout du temps aux points.",
+        "duree_match": "Environ 4 minutes pour les combats olympiques (variable selon catégorie)."
       },
       {
         "slug": "natation-marathon",
@@ -337,7 +418,10 @@
         "type": "olympiques",
         "lieux": [
           "Seine / open-water sites in Paris"
-        ]
+        ],
+        "description": "La natation en eau libre (marathon) est une course longue distance en milieu naturel.",
+        "regles": "Les nageurs suivent un parcours balisé; assistance et ravitaillement réglementés; classement par ordre d'arrivée.",
+        "duree_match": "Environ 1h30 à 2h pour 10 km."
       },
       {
         "slug": "pentathlon-moderne",
@@ -349,7 +433,10 @@
         "type": "olympiques",
         "lieux": [
           "Multi-discipline lieuxs (Paris region)"
-        ]
+        ],
+        "description": "Le pentathlon moderne combine plusieurs disciplines (escrime, natation, équitation, tir/course) pour juger de la polyvalence.",
+        "regles": "Points accumulés sur chaque épreuve; la finale combinée (tir-course) se dispute en handicap basé sur le score.",
+        "duree_match": "Journée complète : plusieurs heures."
       },
       {
         "slug": "gymnastique-rythmique",
@@ -361,7 +448,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "La gymnastique rythmique mélange mouvements de danse et manipulation d'appareils (ruban, ballon, massues).",
+        "regles": "Routines notées selon l'exécution, la difficulté et l'expression artistique.",
+        "duree_match": "Routines : 1,5–2,5 minutes."
       },
       {
         "slug": "aviron",
@@ -373,7 +463,10 @@
         "type": "olympiques",
         "lieux": [
           "Vaires-sur-Marne Rowing Centre"
-        ]
+        ],
+        "description": "L'aviron est une épreuve d'endurance et de puissance en bateaux sur une distance donnée.",
+        "regles": "Courses en ligne sur 2000 m (standard olympique); équipages classés par ordre d'arrivée.",
+        "duree_match": "Environ 6–7 minutes pour 2000 m (selon la catégorie)."
       },
       {
         "slug": "rugby-a-7",
@@ -385,7 +478,10 @@
         "type": "olympiques",
         "lieux": [
           "Stade de France / regional stadiums"
-        ]
+        ],
+        "description": "Le rugby à 7 est une version abrégée du rugby avec 7 joueurs par équipe et du jeu rapide.",
+        "regles": "Deux mi-temps courtes de 7 minutes; phases éliminatoires en tournois.",
+        "duree_match": "2 × 7 minutes (match ~15–20 minutes avec arrêts)."
       },
       {
         "slug": "voile",
@@ -397,7 +493,10 @@
         "type": "olympiques",
         "lieux": [
           "Marseille / coastal lieuxs"
-        ]
+        ],
+        "description": "La voile regroupe des courses de bateaux sur différents parcours côtiers ou en flotte.",
+        "regles": "Courses par flotte; pénalités pour infractions de route; scoring par points cumulés.",
+        "duree_match": "Courses : 30 minutes à plusieurs heures selon la régate."
       },
       {
         "slug": "tir",
@@ -409,7 +508,10 @@
         "type": "olympiques",
         "lieux": [
           "Shooting range (competition site)"
-        ]
+        ],
+        "description": "Le tir sportif est une discipline de précision utilisant carabine ou pistolet à différentes distances.",
+        "regles": "Séries de tirs notées sur la précision; finales éliminatoires et format de qualification.",
+        "duree_match": "Séries de qualification 30–60 minutes; finales ~20–30 minutes."
       },
       {
         "slug": "skateboard",
@@ -421,7 +523,10 @@
         "type": "olympiques",
         "lieux": [
           "Skatepark / Paris temporary lieux"
-        ]
+        ],
+        "description": "Le skateboard aux JO comprend épreuves park et street où les athlètes réalisent figures et enchaînements.",
+        "regles": "Jugé sur la difficulté, la créativité et l'exécution; plusieurs runs/rounds notation.",
+        "duree_match": "Runs : 45–90 secondes; compétition sur plusieurs heures."
       },
       {
         "slug": "escalade-sportive",
@@ -433,7 +538,10 @@
         "type": "olympiques",
         "lieux": [
           "Climbing centre (Paris event site)"
-        ]
+        ],
+        "description": "L'escalade sportive inclut épreuves de vitesse, difficulté et bloc selon le format.",
+        "regles": "Épreuves séparées (vitesse, difficulté, bloc) avec qualifications et finales; sommation des résultats pour l'omnium.",
+        "duree_match": "Varie : de quelques secondes (vitesse) à plusieurs minutes (difficulté)."
       },
       {
         "slug": "surf",
@@ -445,7 +553,10 @@
         "type": "olympiques",
         "lieux": [
           "Official surfing lieux (ocean site)"
-        ]
+        ],
+        "description": "Le surf est une compétition en vagues naturelles où les athlètes exécutent manœuvres et figures.",
+        "regles": "Séries où les surfeurs surfent les meilleures vagues; les juges donnent des notes sur la manoeuvrabilité et la difficulté.",
+        "duree_match": "Series : 20–30 minutes; session variable selon le planning."
       },
       {
         "slug": "natation-piscine",
@@ -457,7 +568,10 @@
         "type": "olympiques",
         "lieux": [
           "Paris La Défense Arena (Nanterre)"
-        ]
+        ],
+        "description": "La natation en piscine rassemble des courses sur différentes distances en style libre, dos, brasse ou papillon.",
+        "regles": "Les nageurs se classent sur la vitesse; les touches de mur et changements de nage doivent suivre les règles de chaque style.",
+        "duree_match": "Courses courtes : 20–60 secondes; courses longues : jusqu'à 15 minutes pour relais/marathon en piscine."
       },
       {
         "slug": "tennis-de-table",
@@ -469,7 +583,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le tennis de table oppose deux ou quatre joueurs échangeant la balle avec une petite raquette sur une table.",
+        "regles": "Matches en 7 manches gagnantes (format variable) jusqu'à 11 points par manche avec écart de 2 points.",
+        "duree_match": "20–60 minutes selon le niveau et le nombre de manches."
       },
       {
         "slug": "taekwondo",
@@ -481,7 +598,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le taekwondo est un art martial coréen axé sur des coups de pieds spectaculaires et techniques.",
+        "regles": "Points attribués pour coups au torso et tête avec équipement électronique; rounds chronométrés.",
+        "duree_match": "3 rounds de 2 minutes en règle générale."
       },
       {
         "slug": "tennis",
@@ -493,7 +613,10 @@
         "type": "olympiques",
         "lieux": [
           "Stade Roland-Garros (Paris)"
-        ]
+        ],
+        "description": "Le tennis est un sport de raquette opposant deux joueurs (simple) ou deux équipes (double) marquant des jeux et sets.",
+        "regles": "Points (15/30/40) et sets; tie-breaks selon le format, matchs en meilleur des 3 sets (JO).",
+        "duree_match": "Matchs en 2–3 sets : 1h30 en moyenne (varie beaucoup)."
       },
       {
         "slug": "trampoline",
@@ -505,7 +628,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le trampoline est une discipline gymnastique où les athlètes réalisent des enchaînements acrobatiques en hauteur.",
+        "regles": "Séries évaluées sur la difficulté, l'exécution et la hauteur; qualifications et finales.",
+        "duree_match": "Runs courts : ~1 minute; compétition sur plusieurs heures."
       },
       {
         "slug": "triathlon",
@@ -517,7 +643,10 @@
         "type": "olympiques",
         "lieux": [
           "Pont d'Iéna / Seine course / Paris streets"
-        ]
+        ],
+        "description": "Le triathlon combine natation, cyclisme et course à pied en un format enchaîné demandant polyvalence et endurance.",
+        "regles": "Parcours enchaîné sans interruption; transitions chronométrées; pénalités pour infractions.",
+        "duree_match": "Olympique : 1.5 km natation / 40 km vélo / 10 km course -> ~1h45 pour élites."
       },
       {
         "slug": "volleyball-interieur",
@@ -529,7 +658,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor arenas (Paris)"
-        ]
+        ],
+        "description": "Le volleyball intérieur oppose deux équipes sur un terrain séparé par un filet, objectifs : marquer des points en faisant tomber le ballon dans le camp adverse.",
+        "regles": "Match en 5 sets (3 gagnants), sets à 25 points (5e set à 15), rotation et positions réglementées.",
+        "duree_match": "Match complet ~1h30–2h."
       },
       {
         "slug": "water-polo",
@@ -541,7 +673,10 @@
         "type": "olympiques",
         "lieux": [
           "Paris La Défense Arena (Nanterre)"
-        ]
+        ],
+        "description": "Le water-polo est un sport d'équipe aquatique mêlant natation, tactique et tir au but.",
+        "regles": "Quatre périodes; possession limitée; exclusions temporaires pour fautes majeures.",
+        "duree_match": "4 × 8 minutes (temps effectif) — match ~1h."
       },
       {
         "slug": "halterophilie",
@@ -553,7 +688,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "L'haltérophilie oppose des athlètes réalisant des mouvements d'arraché et d'épaulé-jeté pour soulever des charges maximales.",
+        "regles": "Deux mouvements officiels; meilleure charge validée détermine le classement; trois essais par mouvement.",
+        "duree_match": "Session individuelle ~30–60 minutes."
       },
       {
         "slug": "lutte",
@@ -565,7 +703,10 @@
         "type": "olympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "La lutte olympique est un sport de combat au corps à corps avec prises et projections.",
+        "regles": "Matchs en deux ou trois périodes selon le style; victoire par chute ou points.",
+        "duree_match": "Combats : ~6 minutes (varie selon le format)."
       },
       {
         "slug": "para-tir-a-l-arc",
@@ -577,7 +718,10 @@
         "type": "paralympiques",
         "lieux": [
           "Esplanade des Invalides (Paris)"
-        ]
+        ],
+        "description": "Para Tir à l’arc est une discipline de tir adaptée où les athlètes visent la précision depuis différentes positions.",
+        "regles": "Formats similaires au tir olympique, avec adaptations et classifications selon handicap; séries de qualification puis finales.",
+        "duree_match": "Similaire au tir : qualification 30–60 minutes; finales ~20–30 minutes."
       },
       {
         "slug": "para-athletisme",
@@ -589,7 +733,10 @@
         "type": "paralympiques",
         "lieux": [
           "Stade de France (Saint-Denis)"
-        ]
+        ],
+        "description": "L'athlétisme regroupe courses, sauts et lancers; il constitue un pilier des compétitions olympiques.",
+        "regles": "Chaque épreuve possède ses règles (départ, tours, haies, essais de saut/lancer). Les meilleurs chronos/performances déterminent les médaillés.",
+        "duree_match": "Variable : de 10 secondes (sprint) à plusieurs heures (session complète)."
       },
       {
         "slug": "para-badminton",
@@ -601,7 +748,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le badminton est un sport de raquette rapide opposant deux ou quatre joueurs frappant un volant au-dessus d'un filet.",
+        "regles": "Match en trois manches gagnantes jusqu'à 21 points avec écart de 2 points (règles BWF).",
+        "duree_match": "30–60 minutes en moyenne par match."
       },
       {
         "slug": "blind-football",
@@ -613,7 +763,10 @@
         "type": "paralympiques",
         "lieux": [
           "Football lieuxs (regional)"
-        ]
+        ],
+        "description": "Le football oppose deux équipes de 11 joueurs visant à marquer des buts dans le camp adverse.",
+        "regles": "Deux mi-temps, hors-jeu, fautes sanctionnées; prolongations et tirs au but en phase finale si nécessaire.",
+        "duree_match": "2 × 45 minutes (+ temps additionnel)."
       },
       {
         "slug": "boccia",
@@ -625,7 +778,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Boccia est une discipline olympique pratiquée en compétition.",
+        "regles": "Compétition selon les règles internationales de la fédération.",
+        "duree_match": "Variable."
       },
       {
         "slug": "goalball",
@@ -637,7 +793,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Goalball est une discipline olympique pratiquée en compétition.",
+        "regles": "Compétition selon les règles internationales de la fédération.",
+        "duree_match": "Variable."
       },
       {
         "slug": "para-canoe",
@@ -649,7 +808,10 @@
         "type": "paralympiques",
         "lieux": [
           "Vaires-sur-Marne"
-        ]
+        ],
+        "description": "Le para-canoë est une course de vitesse en kayaks adaptés pour athlètes en situation de handicap.",
+        "regles": "Courses sur distances fixées; classement par temps; catégories selon classification.",
+        "duree_match": "De ~40s (200m) à quelques minutes."
       },
       {
         "slug": "paracyclisme-sur-route",
@@ -661,7 +823,10 @@
         "type": "paralympiques",
         "lieux": [
           "Road courses across Paris and regions"
-        ]
+        ],
+        "description": "Le cyclisme sur route comprend courses en ligne et contre-la-montre sur routes ouvertes.",
+        "regles": "Épreuves par équipes ou individuelles; stratégies d'échappée et relais; arrivée au sprint, contre-la-montre chronométré.",
+        "duree_match": "De ~30 minutes (CLM) à plusieurs heures (courses en ligne)."
       },
       {
         "slug": "paracyclisme-sur-piste",
@@ -673,7 +838,10 @@
         "type": "paralympiques",
         "lieux": [
           "Velodrome (competition site)"
-        ]
+        ],
+        "description": "Le cyclisme sur piste se déroule dans un vélodrome sur différentes épreuves de vitesse et endurance.",
+        "regles": "Épreuves multiples (sprint, poursuite, omnium) avec règles propres à chaque format.",
+        "duree_match": "Varie : de 3–4 minutes (sprint) à 45+ minutes (omnium sessions)."
       },
       {
         "slug": "para-equitation",
@@ -685,7 +853,10 @@
         "type": "paralympiques",
         "lieux": [
           "Equestrian park (regional)"
-        ]
+        ],
+        "description": "Para Équitation est une discipline sportive pratiquée en compétition.",
+        "regles": "Règles générales : compétition selon les règles internationales de la fédération concernée.",
+        "duree_match": "Variable selon l'épreuve."
       },
       {
         "slug": "para-judo",
@@ -697,7 +868,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le judo est un art martial et sport de combat basé sur projections et immobilisations.",
+        "regles": "Matchs en catégories de poids; victoire par ippon (technique parfaite) ou au bout du temps aux points.",
+        "duree_match": "Environ 4 minutes pour les combats olympiques (variable selon catégorie)."
       },
       {
         "slug": "para-force-athletique",
@@ -709,7 +883,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Para Force athlétique est une discipline paralympique adaptée selon les classifications des athlètes.",
+        "regles": "Format similaire à la version olympique avec adaptations et classifications pour équité.",
+        "duree_match": "Variable selon l'épreuve."
       },
       {
         "slug": "para-aviron",
@@ -721,7 +898,10 @@
         "type": "paralympiques",
         "lieux": [
           "Vaires-sur-Marne Rowing Centre"
-        ]
+        ],
+        "description": "L'aviron est une épreuve d'endurance et de puissance en bateaux sur une distance donnée.",
+        "regles": "Courses en ligne sur 2000 m (standard olympique); équipages classés par ordre d'arrivée.",
+        "duree_match": "Environ 6–7 minutes pour 2000 m (selon la catégorie)."
       },
       {
         "slug": "para-tir-sportif",
@@ -733,7 +913,10 @@
         "type": "paralympiques",
         "lieux": [
           "Shooting range (competition site)"
-        ]
+        ],
+        "description": "Para Tir sportif est une discipline de tir adaptée où les athlètes visent la précision depuis différentes positions.",
+        "regles": "Formats similaires au tir olympique, avec adaptations et classifications selon handicap; séries de qualification puis finales.",
+        "duree_match": "Similaire au tir : qualification 30–60 minutes; finales ~20–30 minutes."
       },
       {
         "slug": "para-natation",
@@ -745,7 +928,10 @@
         "type": "paralympiques",
         "lieux": [
           "Paris La Défense Arena (Nanterre)"
-        ]
+        ],
+        "description": "La para-natation comprend des courses en piscine avec classifications adaptées selon les capacités des athlètes.",
+        "regles": "Courses chronométrées; classements par catégorie de classification; règles techniques similaires à la natation.",
+        "duree_match": "Courses : de quelques dizaines de secondes à plusieurs minutes selon la distance."
       },
       {
         "slug": "para-tennis-de-table",
@@ -757,7 +943,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le tennis de table oppose deux ou quatre joueurs échangeant la balle avec une petite raquette sur une table.",
+        "regles": "Matches en 7 manches gagnantes (format variable) jusqu'à 11 points par manche avec écart de 2 points.",
+        "duree_match": "20–60 minutes selon le niveau et le nombre de manches."
       },
       {
         "slug": "para-taekwondo",
@@ -769,7 +958,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le taekwondo est un art martial coréen axé sur des coups de pieds spectaculaires et techniques.",
+        "regles": "Points attribués pour coups au torso et tête avec équipement électronique; rounds chronométrés.",
+        "duree_match": "3 rounds de 2 minutes en règle générale."
       },
       {
         "slug": "para-triathlon",
@@ -781,7 +973,10 @@
         "type": "paralympiques",
         "lieux": [
           "Triathlon course (Paris streets / Seine)"
-        ]
+        ],
+        "description": "Le triathlon combine natation, cyclisme et course à pied en un format enchaîné demandant polyvalence et endurance.",
+        "regles": "Parcours enchaîné sans interruption; transitions chronométrées; pénalités pour infractions.",
+        "duree_match": "Olympique : 1.5 km natation / 40 km vélo / 10 km course -> ~1h45 pour élites."
       },
       {
         "slug": "volley-assis",
@@ -793,7 +988,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le volleyball intérieur oppose deux équipes sur un terrain séparé par un filet, objectifs : marquer des points en faisant tomber le ballon dans le camp adverse.",
+        "regles": "Match en 5 sets (3 gagnants), sets à 25 points (5e set à 15), rotation et positions réglementées.",
+        "duree_match": "Match complet ~1h30–2h."
       },
       {
         "slug": "basket-fauteuil-roulant",
@@ -805,7 +1003,10 @@
         "type": "paralympiques",
         "lieux": [
           "Accor Arena / Bercy (Paris)"
-        ]
+        ],
+        "description": "Le basket fauteuil est une version du basketball jouée en fauteuil roulant, avec règles proches du basketball classique.",
+        "regles": "Règles semblables au basketball (dribbles, tirs) avec adaptations; classification des joueurs selon capacités.",
+        "duree_match": "Match ~1h30 (4 × 10 minutes effectifs)."
       },
       {
         "slug": "escrime-fauteuil",
@@ -817,7 +1018,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "L'escrime est un sport de combat utilisant fleuret, épée ou sabre, où les touches sont comptées au point.",
+        "regles": "Les assauts sont chronométrés; différents matériels et priorités selon l'arme; victoire au nombre de touches.",
+        "duree_match": "Assauts : 3 × 3 minutes (tableau de direct) ; tournois sur la journée."
       },
       {
         "slug": "rugby-fauteuil",
@@ -829,7 +1033,10 @@
         "type": "paralympiques",
         "lieux": [
           "Indoor competition hall (Paris)"
-        ]
+        ],
+        "description": "Le rugby à 7 est une version abrégée du rugby avec 7 joueurs par équipe et du jeu rapide.",
+        "regles": "Deux mi-temps courtes de 7 minutes; phases éliminatoires en tournois.",
+        "duree_match": "2 × 7 minutes (match ~15–20 minutes avec arrêts)."
       },
       {
         "slug": "tennis-fauteuil",
@@ -841,7 +1048,10 @@
         "type": "paralympiques",
         "lieux": [
           "Roland-Garros / Tennis lieux (Paris)"
-        ]
+        ],
+        "description": "Le tennis est un sport de raquette opposant deux joueurs (simple) ou deux équipes (double) marquant des jeux et sets.",
+        "regles": "Points (15/30/40) et sets; tie-breaks selon le format, matchs en meilleur des 3 sets (JO).",
+        "duree_match": "Matchs en 2–3 sets : 1h30 en moyenne (varie beaucoup)."
       }
     ]
   }

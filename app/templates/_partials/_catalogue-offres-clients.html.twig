@@ -29,7 +29,7 @@
 				{% endfor %}
 			{% endif %}
 		</div>
-		
+
 		{# Affiche les sports en body #}
 		<div class="offer-sports">
 			<span class="sport-emoji">{{offre.sports[0].emoji}}</span>&nbsp;<span class="sport-intitule">{{offre.sports[0].intitule}}</span>
@@ -49,11 +49,11 @@
 						au
 						{{ offre.dateFin|date('d/m/Y') }}</span>
 				{% endif %}
-				<div class="offer-emplacement text-center">
+				<span class="offer-emplacement text-center">
 					{% for lieu in offre.lieux %}
-						<span>{{lieu}}</span>
+						{{lieu}}
 					{% endfor %}
-				</div>
+				</span>
 				{% if offre.prix is defined %}
 					<span class="offer-price">{{ offre.prix }}
 						€</span>

@@ -36,15 +36,18 @@ class SportsFixtures extends Fixture
         //Création de chaque sport dans la bdd
         foreach ($data[0]['data'] as $item) {
             $sport = new Sports();
-            $sport->setIntitule($item['sport']);
-            //On crée le slug correspondant
-            $sport->setSlug($this->slugger->slug(strtolower($sport->getIntitule())));
-            $sport->setEmoji($item['emoji']);
-            $sport->setPictogramme($item['pictogramme']);
-            
+
+            //Remplissage de la table sports avec le data du fichier json
+            $sport->setIntitule($item['sport'])
+                //On crée le slug correspondant
+                ->setSlug($this->slugger->slug(strtolower($sport->getIntitule())))
+                ->setEmoji($item['emoji'])
+                ->setPictogramme($item['pictogramme'])
+                ->setRegles($item['regles'])
+                ->setDureeMatch($item['duree_match'])
+                ->setDescription($item['description']);
+
             $this->addReference('sport_' . $sport->getSlug(), $sport);
-
-
 
             $manager->persist($sport);
         }

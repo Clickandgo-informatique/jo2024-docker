@@ -168,6 +168,8 @@
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     height: 100%;
+    width: 100%;
+    max-width: 300px;
 }
 .offer-card form {
     display: flex;
@@ -204,7 +206,13 @@
 }
 .offer-date {
     margin: 5px;
+    color: rgb(110, 110, 110);
+    display: inline-flex;
+    text-align: center;
+}
+.offer-date i {
     color: darkgray;
+    text-shadow: none;
 }
 /* Contenu */
 .offer-content {
@@ -238,6 +246,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .offer-price {
@@ -280,7 +289,7 @@
 .persons-number {
     display: flex;
     flex-direction: row;
-    padding: 5px;  
+    padding: 5px;
     align-items: center;
     justify-content: center;
     background: #d8d8d8;
@@ -313,8 +322,12 @@
     padding: 5px;
 }
 .offer-emplacement {
+    display: inline-block;
+    max-width: 100%;
     padding: 5px;
     margin: 5px;
+    word-wrap: break-word;
+    white-space: normal;
 }
 .sport-list {
     list-style: none; /* supprime les puces */

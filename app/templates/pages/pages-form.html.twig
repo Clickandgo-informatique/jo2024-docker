@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{{titre}}
+{% endblock %}
+{% block body %}
+	<h1 class="text-center">{{titre}}</h1>
+	{{ form_start(form) }}
+	{{ form_row(form.titre) }}
+	{{ form_row(form.description) }}
+	{{ form_row(form.slug) }}
+	{{ form_row(form.position) }}
+	<div class="row-horizontal">
+		{{ form_row(form.createdAt) }}
+		{{ form_row(form.updatedAt) }}
+	</div>
+	<button type="submit" class="btn btn-primary">
+		<i class="fa-solid fa-floppy-disk"></i>Enregistrer</button>
+	{{ form_end(form) }}
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/form.css')}}">
+{% endblock %}

@@ -58,7 +58,7 @@
   animation: shrink linear forwards;
 }
 
-.flashbag.success { background-color: rgba(46, 204, 113, 0.95); }
+.flashbag.success { background-color: rgba(15, 95, 48, 0.95); }
 .flashbag.error   { background-color: rgba(231, 76, 60, 0.95); }
 .flashbag.warning { background-color: rgba(241, 196, 15, 0.95); color: #222; }
 .flashbag.info    { background-color: rgba(52, 152, 219, 0.95); }

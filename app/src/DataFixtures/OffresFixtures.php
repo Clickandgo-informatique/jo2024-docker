@@ -70,7 +70,7 @@ class OffresFixtures extends Fixture implements DependentFixtureInterface
                 ->setSlug($slug)
                 ->setDescription("Description de l'offre " . ($i + 1));
             $prix = (string)number_format($euros + ($centimes / 100), 2, '.', '');
-            dump($prix);
+
             $offre->setPrix($prix)
                 ->setDateDebut(new \DateTime($item['dateDebut']))
                 ->setDateFin(new \DateTime($item['dateFin']))

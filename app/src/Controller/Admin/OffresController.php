@@ -4,9 +4,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\FavorisOffres;
-use App\Entity\FavorisOffresUtilisateur;
 use App\Entity\Offres;
-use App\Entity\Users;
 use App\Form\OffresFormType;
 use App\Repository\CategoriesOffresRepository;
 use App\Repository\FavorisOffresRepository;

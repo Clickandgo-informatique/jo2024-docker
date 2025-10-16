@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Liste des pages
+{% endblock %}
+{% block body %}
+	<a href="{{path('app_pages_ajout')}}" class="btn btn-primary">
+		<i class="fa-solid fa-circle-plus"></i>Créer une nouvelle page</a>
+	{% if pages %}
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th>Titre</th>
+					<th>Crée le</th>
+					<th>Sections</th>
+					<th>url</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				{% for page in pages %}
+
+					<tr>
+						<td>
+							<a href="{{path('app_pages_modifier',{slug:page.slug})}}" class="fa-solid fa-pen-to-square btn-action"></a>
+						</td>
+						<td>{{page.titre}}</td>
+						<td>{{page.createdAt|date('d/m/Y H:i:s')}}</td>
+						<td class="text-center">
+							{{page.pagesSections|length}}
+						</td>
+						<td>{{page.url}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</tbody>
+	</table>
+{% else %}
+	<p class="warning">Il n'existe encore aucune page dans la base de données</p>
+{% endif %}{% endblock %}{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('assets/css/table.css')}}">{% endblock %}

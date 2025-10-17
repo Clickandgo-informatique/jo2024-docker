@@ -79,7 +79,8 @@
     color: #fff;
 }
 .not-connected {
-    color: rgb(254, 189, 69);
+    color:rgb(252, 211, 136);
+    font-weight: 900;
 }
 .user-options {
     display: flex;

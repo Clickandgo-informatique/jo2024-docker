@@ -46,7 +46,6 @@
     text-decoration: underline;
 }
 
-
 .connexion {
     display: flex;
     gap: 10px;
@@ -60,6 +59,10 @@
     flex-direction: column;
     gap: 4px;
     cursor: pointer;
+    padding: 10px;
+    background: none;
+    border-radius: 10px;
+    border: 1px solid darkgray;
 }
 
 .hamburger span {

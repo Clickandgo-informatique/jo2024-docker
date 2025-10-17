@@ -23,7 +23,7 @@ form input:hover {
     border: 3px solid var(--primary-color);
     box-shadow: var(--box-shadow);
 }
-form input:focus{
+form input:focus {
     background-color: #ecffa0;
 }
 form.submit-btn-form {
@@ -249,6 +249,29 @@ select:focus {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+.agree-terms {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.agree-terms label {
+    margin-left: 0.5rem;
+    margin-bottom: 0;
+}
+/*================== wrapper contrôle mot de passe ====*/
+.password-strength ul {
+    list-style: none;
+    margin: 10px;
+}
+
+.deja-inscrit {
+    font-size: 16px;
+    color: darkblue;
+}
+.deja-inscrit a{
+    text-decoration: underline;
 }
 
 /* ================= Search form ================= */

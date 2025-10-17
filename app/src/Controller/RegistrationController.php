@@ -83,9 +83,13 @@ class RegistrationController extends AbstractController
             if ($user && !$user->isVerified()) {
                 $user->setIsVerified(true);
 
-                // ✅ Génération de la clé de compte unique lors de l’activation
+                // ✅ Génération de la clé de compte unique lors de l’activation avec contrôle d'unicité
                 if (!$user->getAccountKey()) {
-                    $user->setAccountKey(random_bytes(32));
+                    do {
+                        $key = bin2hex(random_bytes(32)); // 64 caractères hexadécimaux
+                    } while ($usersRepository->findOneBy(['accountKey' => $key]));
+
+                    $user->setAccountKey($key);
                 }
 
                 $em->flush();

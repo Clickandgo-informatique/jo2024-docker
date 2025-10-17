@@ -1,5 +1,5 @@
 @startuml
-title Flux 2FA Symfony - Version finale avec légende
+title Flux 2FA
 
 skinparam activity {
   FontName Arial
@@ -17,14 +17,14 @@ start
 :📝 Page de login;
 
 if (🔑 Utilisateur valide ?) then (Non)
-  ->[red] :❌ Retour page login;
+  ->❌ Retour page login;
   stop
 else (Oui)
   if (2FA activée ?) then (Non)
-    ->[yellow] :✅ Connexion normale vers app_main;
+    ->✅ Connexion normale vers app_main;
     stop
   else (Oui)
-    ->[yellow] :🔒 Redirection vers page 2FA verify;
+    ->🔒 Redirection vers page 2FA verify;
   endif
 endif
 
@@ -32,13 +32,13 @@ endif
 ' 2FA Verify
 ' ======================
 if (Code 2FA correct ?) then (Non)
-  ->[red] :❌ Rester sur page 2FA verify;
+  ->❌ Rester sur page 2FA verify;
 else (Oui)
-  ->[yellow] :👤 Authentifie complètement l'utilisateur;
+  ->👤 Authentifie complètement l'utilisateur;
   if (ROLE_ADMIN ?) then (Oui)
-    ->[green] :🛡️ Redirection vers app_admin_index;
+    ->🛡️ Redirection vers app_admin_index;
   else (Non)
-    ->[yellow] :🏠 Redirection vers app_main;
+    ->🏠 Redirection vers app_main;
   endif
 endif
 
@@ -48,17 +48,17 @@ endif
 :⚙️ Page /2fa/setup;
 
 if (Utilisateur connecté ?) then (Non)
-  ->[red] :❌ Retour page login;
+  ->❌ Retour page login;
 else (Oui)
   if (Secret 2FA présent ?) then (Non)
-    ->[red] :❌ Retour page login;
+    ->❌ Retour page login;
   else (Oui)
-    ->[yellow] :📷 Affiche QR code et formulaire;
+    ->📷 Affiche QR code et formulaire;
     if (Code 2FA validé ?) then (Non)
-      ->[red] :❌ Rester sur setup 2FA;
+      ->❌ Rester sur setup 2FA;
     else (Oui)
-      ->[yellow] :✅ Active 2FA pour l'utilisateur;
-      ->[yellow] :🏠 Redirection vers app_main;
+      ->✅ Active 2FA pour l'utilisateur;
+      ->🏠 Redirection vers app_main;
     endif
   endif
 endif

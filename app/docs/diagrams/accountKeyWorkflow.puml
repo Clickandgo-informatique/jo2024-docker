@@ -1,0 +1,34 @@
+@startuml accountKeyWorkflow
+
+title Workflow de génération de la clé accountKey
+
+actor Utilisateur
+participant "RegistrationController" as RC
+participant "UsersFixtures" as Fixtures
+participant "UsersRepository" as Repo
+participant "Users Entity" as Entity
+database "Base de données" as DB
+
+== Activation du compte utilisateur ==
+Utilisateur -> RC : Clique sur le lien d'activation
+RC -> Entity : Vérifie si le compte est activé
+RC -> RC : Vérifie si accountKey est vide
+RC -> Repo : Vérifie unicité de la clé
+loop do...while
+    RC -> RC : Génère bin2hex(random_bytes(32))
+    Repo --> RC : findOneBy(accountKey)
+end
+RC -> Entity : setAccountKey($key)
+RC -> DB : flush()
+
+== Création via Fixtures ==
+Fixtures -> Entity : Crée un nouvel utilisateur
+Fixtures -> Fixtures : Appelle generateUniqueAccountKey()
+loop do...while
+    Fixtures -> Fixtures : Génère bin2hex(random_bytes(32))
+    Fixtures -> Repo : Vérifie unicité
+end
+Fixtures -> Entity : setAccountKey($key)
+Fixtures -> DB : persist() + flush()
+
+@enduml

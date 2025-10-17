@@ -1,24 +1,25 @@
 {% block body %}
-	<h2 class="text-center">Liste des épreuves sportives JO 2024 :</h2>
+	<div class="wrapper-liste-sports">
 
-	{% for sport in sports %}
-		<details>
-			<div class="content">
-				<span class="sport-description">Description :</span>
-				<p>{{sport.description}}</p>
-				<span class="sport-regles">Règles :</span>
-				<p>{{sport.regles}}</p>
-				<span class="sport-duree-match">Durée match :</span>
-				{{sport.dureeMatch}}</div>
-			<summary>
-            <div class="sport-title-wrapper">
-				<span class="sport-emoji">{{sport.emoji}}</span>
-				<span class="sport-intitule"></span>
-				{{sport.intitule}}</div>
-			</summary>
-		</details>
-	{% endfor %}
+		{% for sport in sports %}
+			<details>
+				<div class="content">
+					<span class="sport-description">Description :</span>
+					<p>{{sport.description}}</p>
+					<span class="sport-regles">Règles :</span>
+					<p>{{sport.regles}}</p>
+					<span class="sport-duree-match">Durée match :</span>
+					{{sport.dureeMatch}}</div>
+				<summary>
+					<div class="sport-title-wrapper">
+						<span class="sport-emoji">{{sport.emoji}}</span>
+						<span class="sport-intitule"></span>
+						{{sport.intitule}}</div>
+				</summary>
+			</details>
+		{% endfor %}
+	</div>
 {% endblock %}
-{% block stylesheets %}	
+{% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('assets/css/accordion.css')}}">
 {% endblock %}

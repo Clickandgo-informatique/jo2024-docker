@@ -14,8 +14,53 @@
 			{% include('_partials/_catalogue-offres-clients.html.twig') with { 'offres': offres } only %}
 		</div>
 	</div>
-	{{ include('_partials/_fiches-sports.html.twig') }}
+	{# Accordion présentation #}
+	<div class="wrapper-accordion-main">
+		<details>
+			<p>Toute l'équipe des organisateurs des jeux olympiques Paris 2024 vous souhaite la bienvenue !</p>
+			<summary>Présentation</summary>
+		</details>
+		<details>
+			<p>Les jeux olympiques Paris 2024 se dérouleront sur la période allant du au 2024</p>
+			<summary>Dates importantes, déroulement des épreuves sportives</summary>
+		</details>
+		<details>
+			<p>Vous pouvez cliquer ici pour obtenir le guide utilisateur :
+			</p>
+
+			<summary>Comment utiliser ce site ?</summary>
+		</details>
+		<details>
+			<p>Les jeux olympiques ...</p>
+			<summary>Un peu d'histoire</summary>
+		</details>
+		<details>
+			<summary>Liste des 89 disciplines sportives</summary>
+			{{ include('_partials/_fiches-sports.html.twig') }}
+		</details>
+		<details>
+			<p>parlons un peu de l'organisation des Jo 2024 :</p>
+			<summary>Organisation des JO 2024</summary>
+		</details>
+		<details>
+			<p>Parlons un peu du réglement en vigueur de  l'organisation des Jo 2024 :</p>
+			<summary>Règlement</summary>
+		</details>
+		<details>
+			<p>Nos équipes dédiées sont à votre écoute, apellez le standard au :
+				<br><strong>01.02.03.04.05</strong>
+			</p>
+			<summary>Comment nous joindre ? Quels sont nos horaires ?</summary>
+		</details>
+		<details>
+			<p>Commencez par suivre le guide qui contient les questions / réponses les plus courantes
+				<a href="#">Cliquez ici</a>
+			</p>
+			<summary>J'ai besoin d'aide, que dois-je faire ?</summary>
+		</details>
+	</div>
 {% endblock %}
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('assets/css/catalogue-offres.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/css/accordion.css')}}">
 {% endblock %}

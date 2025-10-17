@@ -21,16 +21,18 @@ details span {
 }
 /* En-tête de l'accordion */
 summary {
-    background: var(--primary-color-gradient);
+    /* background: var(--primary-color-gradient); */
     display: flex;
     list-style: none;
     cursor: pointer;
     padding: 15px 20px;
     font-weight: bold;
     position: relative;
-    color: #fff;
+    color: var(--primary-color);
     transition: background-color 1s ease;
-    padding: 5px;align-items: center;
+    padding: 5px;
+    align-items: center;
+    background-color: #ffff;
 }
 .content {
     padding: 25px;
@@ -38,31 +40,48 @@ summary {
 
 /* Effet au survol */
 summary:hover {
-    background: var(--secondary-color-gradient);
+    background: var(--primary-color-gradient);
+    color: #ffff;
 }
 .sport-emoji {
-    font-size: 2rem;
-    margin-right: 8px;    
+    font-size: 1.7rem;
+    margin-right: 8px;
 }
 /* Flèche à droite */
 summary::after {
     content: "▶";
     position: absolute;
     right: 20px;
-    transition: transform 1s ease;
+    transition: transform 0.5s ease;
 }
 
 /* Rotation de la flèche quand l'accordion est ouvert */
 details[open] summary::after {
     transform: rotate(90deg);
 }
+/* Mise en évidence de l'entête choisie */
+details[open] summary {
+    color: rgb(227, 227, 74);
+    background: var(--primary-color-gradient);
+}
 
 /* Contenu de l'accordion */
 details > *:not(summary) {
     padding: 15px 20px;
     animation: fadeIn 1s ease;
+    background-color: #ededed;
 }
-
+.wrapper-accordion-main {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.wrapper-accordion-main summary {
+    padding: 10px;
+}
 /* Animation d'apparition */
 @keyframes fadeIn {
     from {

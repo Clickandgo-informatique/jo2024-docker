@@ -63,7 +63,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeImmutable $createdAt = null;
 
     // Informations optionnelles
-    #[ORM\Column(type: 'string', length: 36, nullable: true)]
+    #[ORM\Column(type: 'string', length: 64, unique: true, nullable: true)]
     private ?string $accountKey = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

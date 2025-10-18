@@ -2,24 +2,28 @@
 	<div class="wrapper-liste-sports">
 
 		{% for sport in sports %}
-			<details>
-				<div class="content">
-					<span class="sport-description">Description :</span>
-					<p>{{sport.description}}</p>
-					<span class="sport-regles">Règles :</span>
-					<p>{{sport.regles}}</p>
-					<span class="sport-duree-match">Durée match :</span>
-					{{sport.dureeMatch}}</div>
+			<details class="accordion-child-item">
 				<summary>
-					<div class="sport-title-wrapper">
-						<span class="sport-emoji">{{sport.emoji}}</span>
-						<span class="sport-intitule"></span>
-						{{sport.intitule}}</div>
+					<span class="sport-emoji">{{ sport.emoji }}</span>
+					<span class="sport-intitule">{{ sport.intitule }}</span>
 				</summary>
+				<div class="content">
+					<p>
+						<strong>Description :</strong>
+						{{ sport.description }}</p>
+					<p>
+						<strong>Règles :</strong>
+						{{ sport.regles }}</p>
+					<p>
+						<strong>Durée match :</strong>
+						{{ sport.dureeMatch }}</p>
+				</div>
 			</details>
 		{% endfor %}
+
 	</div>
 {% endblock %}
+
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('assets/css/accordion.css')}}">
+	<link rel="stylesheet" href="{{ asset('assets/css/accordion.css') }}">
 {% endblock %}

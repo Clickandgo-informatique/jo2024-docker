@@ -91,14 +91,19 @@ h1 {
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
 }
-h1 i {
-    color: darkblue;
+h1.text-center > i {
+    color: lightblue;
     font-size: 2rem;
 }
 h2 {
     margin: 10px auto;
     color: var(--primary-color);
 }
+.text-success,
+.text-success i {
+    color: green;
+}
+
 .btn-danger {
     background: var(--secondary-color-gradient);
 }
@@ -109,12 +114,25 @@ h2 {
     border-radius: 10px;
     background: orangered;
 }
+.btn-warning {
+    background-color: var(--secondary-color);
+}
+.btn-delete i {
+    color: red;
+}
 /* --- Liens et paragraphes --- */
 a {
     text-decoration: none;
     white-space: nowrap;
 }
-
+.text-red,
+.text-red i {
+    color: red;
+}
+.btn-open i,
+.btn-open {
+    color: var(--primary-color);
+}
 p {
     display: block;
     margin: 1em 0;

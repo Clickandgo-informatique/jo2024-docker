@@ -28,8 +28,8 @@
 					<td class="cart-total text-right">{{ item.total|number_format(2, ',', ' ') }}
 						€</td>
 					<td class="cart-actions text-center">
-						<button type="button" class="remove-item btn btn-danger" data-url="{{ path('panier_remove', {'id': item.offre.id}) }}" data-method="POST">
-							<i class="fa-solid fa-trash-can"></i>
+						<button type="button" class="remove-item btn btn-action " data-url="{{ path('panier_remove', {'id': item.offre.id}) }}" data-method="POST">
+							<i class="fa-solid fa-trash-can btn-delete"></i>
 						</button>
 					</td>
 				</tr>

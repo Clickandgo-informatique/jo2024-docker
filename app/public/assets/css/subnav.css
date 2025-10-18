@@ -79,8 +79,11 @@
     color: #fff;
 }
 .not-connected {
-    color:rgb(252, 211, 136);
+    color: rgb(252, 211, 136);
     font-weight: 900;
+}
+.nickname {
+    color: yellow;
 }
 .user-options {
     display: flex;

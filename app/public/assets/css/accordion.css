@@ -1,88 +1,114 @@
-/* Style de base pour l'accordion */
-details {
+/* --- Accordion de base --- */
+.wrapper-accordion-main {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    width: 100%;
+    align-items: center;
+    margin: 20px;
+}
+
+.wrapper-accordion-main details {
     display: flex;
     flex-direction: column;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 1px;
-    padding: 0px;
+    margin-bottom: 10px;
     overflow: hidden;
-    transition: all 0.3s ease;
     max-width: 800px;
     width: 100%;
     background-color: #fff;
+    transition: all 0.3s ease;
+    overflow-y: scroll;
+    max-height: 400px;
 }
-details p {
-    margin: 5px;
-    padding: 5px;
+
+/* --- Contenu animé --- */
+.wrapper-accordion-main details > *:not(summary),
+.wrapper-accordion-main details .accordion-child-content {
+    overflow: hidden;
+    max-height: 0;
+    padding: 0 20px;
+    opacity: 0;
+    transition: max-height 0.5s ease, padding 0.3s ease, opacity 0.5s ease;
+    background-color: #ededed;
 }
-details span {
-    color: darkblue;
-}
-/* En-tête de l'accordion */
-summary {
-    /* background: var(--primary-color-gradient); */
-    display: flex;
-    list-style: none;
-    cursor: pointer;
+
+/* --- Contenu ouvert --- */
+.wrapper-accordion-main details[open] > *:not(summary),
+.wrapper-accordion-main details[open] .accordion-child-content {
+    max-height: 1000px; /* ajuster selon la taille du contenu */
     padding: 15px 20px;
-    font-weight: bold;
-    position: relative;
-    color: var(--primary-color);
-    transition: background-color 1s ease;
-    padding: 5px;
+    opacity: 1;
+    animation: fadeIn 0.5s ease;
+}
+
+/* --- Summary --- */
+.wrapper-accordion-main summary {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* icône | texte | flèche */
     align-items: center;
-    background-color: #ffff;
-}
-.content {
-    padding: 25px;
+    cursor: pointer;
+    padding: 10px 20px;
+    position: relative;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    word-break: break-word;
 }
 
-/* Effet au survol */
-summary:hover {
-    background: var(--primary-color-gradient);
-    color: #ffff;
+.wrapper-accordion-main summary span {
+    white-space: normal;
+    color: var(--primary-color);
 }
-.sport-emoji {
-    font-size: 1.7rem;
-    margin-right: 8px;
+
+.wrapper-accordion-main summary i {
+    margin-right: 0.5em;
+    font-size: 1.2rem;
+    color: var(--primary-color);
 }
-/* Flèche à droite */
-summary::after {
+
+/* --- Flèche --- */
+.wrapper-accordion-main summary::after {
     content: "▶";
-    position: absolute;
-    right: 20px;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: var(--primary-color);
 }
 
-/* Rotation de la flèche quand l'accordion est ouvert */
-details[open] summary::after {
+.wrapper-accordion-main details[open] summary::after {
     transform: rotate(90deg);
+    color: #fff; /* flèche blanche à l’ouverture */
 }
-/* Mise en évidence de l'entête choisie */
-details[open] summary {
+
+/* --- Hover --- */
+.wrapper-accordion-main summary:hover {
+    background: var(--primary-color-gradient);
+}
+
+.wrapper-accordion-main summary:hover span,
+.wrapper-accordion-main summary:hover i,
+.wrapper-accordion-main summary:hover::after {
+    color: #fff; /* texte, icône et flèche deviennent blancs au hover */
+}
+
+/* --- Summary ouvert --- */
+.wrapper-accordion-main details[open] summary,
+.wrapper-accordion-main details[open] summary span,
+.wrapper-accordion-main details[open] summary i {
     color: rgb(227, 227, 74);
     background: var(--primary-color-gradient);
 }
 
-/* Contenu de l'accordion */
-details > *:not(summary) {
-    padding: 15px 20px;
-    animation: fadeIn 1s ease;
-    background-color: #ededed;
+/* --- Sport emoji --- */
+.sport-emoji {
+    font-size: 1.4rem;
 }
-.wrapper-accordion-main {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
+
+/* --- Paragraphes --- */
+details p {
+    margin: 0;
 }
-.wrapper-accordion-main summary {
-    padding: 10px;
-}
-/* Animation d'apparition */
+
+/* --- Animation apparition du contenu --- */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -92,4 +118,10 @@ details > *:not(summary) {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* --- Contenu enfant héritage --- */
+.wrapper-accordion-main details .accordion-child-content p {
+    margin: 5px 0;
+    color: #333;
 }

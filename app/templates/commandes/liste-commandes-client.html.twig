@@ -27,7 +27,7 @@
 				<tr>
 					<td data-label="Référence">
 						<a href="{{ path('app_commandes_show', {id: c.id}) }}">
-							<i class="fa-solid fa-folder-open"></i>
+							<i class="fa-solid fa-folder-open btn-action btn-open"></i>
 							{{ c.reference }}
 						</a>
 					</td>
@@ -79,7 +79,7 @@
 						{% endif %}
 					</td>
 					<td>
-						{% if c.ticket is defined %}
+						{% if c.ticket is defined and c.ticket is not null %}
 							<a href="{{ path('app_ticket_show', {ticketKey: c.ticket.ticketKey}) }}" class="btn btn-primary">
 								<i class="fa-solid fa-ticket"></i>Voir ticket
 							</a>

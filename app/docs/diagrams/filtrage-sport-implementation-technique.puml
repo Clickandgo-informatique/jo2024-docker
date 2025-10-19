@@ -1,0 +1,56 @@
+@startuml
+title Implémentation technique du filtrage AJAX (Symfony 7.3 + JS Vanilla)
+
+participant "JavaScript Front-End\n(fetch/ajax)" as JS
+participant "Route Symfony\n/api/sports" as Route
+participant "Contrôleur\nSportController" as Controller
+participant "Repository\nSportRepository" as Repo
+database "Base MySQL" as DB
+
+== Envoi AJAX ==
+JS -> Route : GET /api/sports?categorie=olympiques
+activate Route
+
+Route -> Controller : handleRequest(Request $request)
+activate Controller
+
+== Lecture du filtre ==
+Controller -> Controller : $filter = $request->query->all()
+Controller -> Repo : findByFilters($filter)
+
+activate Repo
+Repo -> DB : SELECT * FROM sport\nWHERE type = 'olympiques'
+DB --> Repo : Résultats (array d'entités Sport)
+Repo --> Controller : Collection<Sport>
+deactivate Repo
+
+== Génération réponse ==
+Controller -> Controller : Transformation en JSON\n(serializer / normalizer)
+Controller --> JS : JsonResponse {sports: [...]}
+deactivate Controller
+deactivate Route
+
+== Traitement côté client ==
+JS -> JS : Parse JSON
+JS -> JS : Met à jour le DOM (liste des sports)
+JS --> JS : Rafraîchit l’affichage sans rechargement
+
+note right of Controller
+  Exemple Symfony :
+  #[Route('/api/sports', name: 'api_sports')]
+  public function index(Request $request, SportRepository $repo): JsonResponse {
+      $filters = $request->query->all();
+      $sports = $repo->findByFilters($filters);
+      return $this->json(['sports' => $sports]);
+  }
+end note
+
+note right of JS
+  Exemple JavaScript :
+  const params = new URLSearchParams({ categorie: 'olympiques' });
+  fetch('/api/sports?' + params)
+    .then(r => r.json())
+    .then(data => renderSports(data.sports));
+end note
+
+@enduml

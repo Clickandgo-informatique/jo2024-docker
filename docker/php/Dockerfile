@@ -55,11 +55,12 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Copier la conf PHP
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
-# Entrypoint pour préparer cache et logs
+# Entrypoint pour préparer cache et logs, migrations et fixtures
 COPY ./docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 USER www-data
 
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["php-fpm"]
-ENTRYPOINT ["entrypoint.sh"]
+

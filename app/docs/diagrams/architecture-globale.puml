@@ -1,0 +1,27 @@
+@startuml
+title Architecture logicielle globale - Application Symfony 7.3 (JO 2024)
+
+actor Utilisateur as U
+
+rectangle "Navigateur Web" as Browser {
+  component "Front-End\n(Twig + JavaScript)" as FE #ffefc3
+}
+
+node "Serveur OVH Mutualisé" as OVH {
+  component "Back-End\nSymfony 7.3" as BE #cfe2f3
+  database "Base de données\nMySQL" as DB #d9ead3
+  folder "Cache / Logs / Fichiers" as Storage
+}
+
+cloud "Services externes\n(API QR Code...)" as Ext
+folder "Git Repository\n(Bare repo)" as Git
+
+U --> Browser : Interaction (HTTP/HTTPS)
+Browser --> FE : Chargement HTML/Twig + JS
+FE --> BE : Requêtes AJAX / XHR (JSON)
+BE --> DB : Lecture / Écriture (Doctrine ORM)
+BE --> Storage : Accès fichiers et cache
+BE --> Ext : Appels API externes
+Git --> OVH : Déploiement via hook post-receive
+
+@enduml

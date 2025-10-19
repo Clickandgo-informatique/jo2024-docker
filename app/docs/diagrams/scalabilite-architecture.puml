@@ -1,0 +1,45 @@
+@startuml
+title Scalabilité de l'application Symfony 7.3 - Front JS + AJAX + MySQL
+
+actor Utilisateur as U
+
+rectangle "Navigateur Web" as Browser {
+  component "Front-End\nTwig + JavaScript" as FE
+  component "Cache navigateur / Service Worker" as FECache
+}
+
+node "Serveur OVH / Cloud" as Server {
+  component "Back-End Symfony 7.3" as BE
+  component "Cache serveur (Redis / Memcached)" as BECache
+  database "Base de données MySQL\n(read/write)" as DB
+  database "Read Replica MySQL" as DBReplica
+}
+
+cloud "Services externes\nAPI QR Code, etc." as Ext
+
+rectangle "Load Balancer\n(optionnel cloud)" as LB
+
+U --> Browser : Interactions + AJAX
+Browser --> FECache : Vérifie cache local
+FECache --> FE : Si cache manquant
+FE --> LB : Requêtes AJAX
+LB --> BE : Route Symfony / Contrôleur
+BE --> BECache : Vérifie cache serveur
+BECache --> DB : Si cache miss
+DB --> BE : Résultats requête
+DBReplica --> BE : Requêtes lecture (si configuré)
+BE --> FE : JsonResponse
+FE --> FECache : Stockage dans cache local
+FE --> U : Mise à jour DOM
+BE --> Ext : Appels API externes (QR, etc.)
+
+note right of LB
+  Load Balancer + multiples serveurs Symfony
+  pour supporter montée en charge
+end note
+
+note right of BECache
+  Cache serveur pour données fréquentes
+end note
+
+@enduml

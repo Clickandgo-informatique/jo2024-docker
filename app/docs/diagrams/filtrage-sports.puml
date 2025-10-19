@@ -1,0 +1,51 @@
+@startuml
+title Filtrage dynamique des sports - AJAX + QueryString (Symfony 7.3)
+
+actor Utilisateur as U
+participant "Interface Web\n(Twig + JavaScript)" as FE
+participant "Contrôleur Symfony\n(SportController)" as BE
+database "Base de données\nMySQL" as DB
+
+== Choix d’un filtre ==
+U -> FE : Sélection d’un filtre exclusif\n(sport / catégorie / favoris)
+FE -> FE : Réinitialise les autres filtres
+FE -> FE : Construit l’URL avec querystring\nex: /api/sports?categorie=olympiques
+
+== Requête AJAX ==
+FE -> BE : XMLHttpRequest GET /api/sports?categorie=olympiques
+activate BE
+
+BE -> DB : SELECT * FROM sport\nWHERE type = 'olympiques'
+DB --> BE : Résultats JSON (liste des sports filtrés)
+BE --> FE : JsonResponse { sports: [...] }
+deactivate BE
+
+== Mise à jour du DOM ==
+FE -> FE : Met à jour la liste affichée (innerHTML)
+FE -> FE : Supprime les anciens résultats
+FE --> U : Affiche les sports filtrés instantanément\n(sans rechargement de page)
+
+== Cas particulier : Favoris ==
+U -> FE : Clic sur "Favoris"
+FE -> BE : XMLHttpRequest GET /api/sports?favoris=1
+BE -> DB : SELECT * FROM sport WHERE favoris = true
+DB --> BE : Résultats filtrés
+BE --> FE : JsonResponse { favoris: [...] }
+FE --> U : Liste mise à jour (favoris uniquement)
+
+note right of FE
+  ⚙️ Requêtes AJAX typiques :
+  - /api/sports?sport=natation
+  - /api/sports?categorie=paralympiques
+  - /api/sports?favoris=1
+
+  💬 Réponse JSON :
+  {
+    "sports": [
+      {"id":1, "sport":"Natation", "emoji":"🏊‍♂️"},
+      {"id":2, "sport":"Plongée", "emoji":"🤿"}
+    ]
+  }
+end note
+
+@enduml

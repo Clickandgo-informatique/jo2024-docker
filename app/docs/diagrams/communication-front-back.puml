@@ -1,0 +1,24 @@
+@startuml
+title Communication front ↔ back - AJAX / Symfony 7.3
+
+actor Utilisateur as U
+participant "Front-End\n(Twig + JavaScript)" as FE
+participant "Back-End\nSymfony 7.3" as BE
+database "Base MySQL" as DB
+
+U -> FE : Clic sur un bouton (ex: "Afficher les sports")
+FE -> BE : XMLHttpRequest (GET /api/sports)
+BE -> DB : SELECT * FROM sport
+DB --> BE : Données JSON
+BE --> FE : Réponse JSON { sports: [...] }
+FE -> FE : JavaScript met à jour le DOM
+FE --> U : Page actualisée sans rechargement
+
+note right of BE
+  Exemple d’endpoint :
+  - Route: /api/sports
+  - Contrôleur: SportController
+  - Réponse: JsonResponse
+end note
+
+@enduml

@@ -1,58 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Simulation de paiement
+{% block title %}Paiement d'une commande
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-5">
-		<h1>💳 Simulation de paiement</h1>
+	<div class="container-payment">
+		<h1 class="text-center">
+			<i class="fa-solid fa-credit-card"></i>Paiement de la commande</h1>
 
-		<p>
-			Commande #{{ commande.id }}
-			– Montant :
-			<strong>{{ commande.totalCommande|number_format(2, ',', ' ') }}
-				€</strong>
-		</p>
+		<table class="table table-bordered text-center">
+			<thead>
+				<tr>
+					<th>Référence</th>
+					<th>Client</th>
+					<th>Montant</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{ commande.reference }}</td>
+					<td>{{ commande.user.lastname }}&nbsp;
+						{{ commande.user.firstname }}</td>
+					<td>{{ commande.totalCommande|number_format(2, ',', ' ') }}
+						€</td>
+					<td>{{ commande.createdAt|date('d/m/Y H:i') }}</td>
+				</tr>
+			</tbody>
+		</table>
 
-		{# --- Formulaire de paiement mock --- #}
+
 		{{ form_start(form) }}
 
-		<div class="mb-3">
+		<div class="payment-methods">
 			{{ form_label(form.paymentMethod) }}
-			{{ form_widget(form.paymentMethod) }}
+			<div class="choices">
+				{{ form_widget(form.paymentMethod) }}
+			</div>
 		</div>
 
-		{# Champs de carte masqués par défaut, affichés seulement si CB/Visa/Mastercard sélectionnée #}
-		<div id="card-info" style="display:none;">
+		<div id="card-info" class="card-info">
 			{{ form_row(form.cardHolder) }}
 			{{ form_row(form.cardNumber) }}
 		</div>
 
-		{{ form_row(form.submit) }}
+		<button type="submit" class="btn btn-primary" id="submit-payment">
+			<i class="fas fa-check"></i>
+			Valider le paiement
+		</button>
+
 		{{ form_end(form) }}
 	</div>
-
-	<script>
-		// --- JS : toggle des champs de carte selon le moyen de paiement ---
-const methodInputs = document.querySelectorAll('input[name="paymentType[paymentMethod]"]');
-const cardInfo = document.getElementById('card-info');
-
-function toggleCardFields() {
-const selected = document.querySelector('input[name="paymentType[paymentMethod]"]:checked');
-if (selected && ['cb', 'mastercard', 'visa'].includes(selected.value)) {
-cardInfo.style.display = 'block';
-} else {
-cardInfo.style.display = 'none';
-}
-}
-
-// Événement change sur tous les inputs pour mettre à jour l’affichage
-methodInputs.forEach(input => input.addEventListener('change', toggleCardFields));
-
-// Initialisation au chargement de la page
-toggleCardFields();
-	</script>
 {% endblock %}
+
+{% block javascripts %}
+	<script type="module" src="{{asset('assets/js/mock-payment-form.js')}}"></script>
+{% endblock %}
+
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('assets/css/form.css')}}">
+	<link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/table.css') }}">
 {% endblock %}

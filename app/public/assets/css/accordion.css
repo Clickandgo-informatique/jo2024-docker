@@ -37,12 +37,14 @@
 /* --- Contenu ouvert --- */
 .wrapper-accordion-main details[open] > *:not(summary),
 .wrapper-accordion-main details[open] .accordion-child-content {
-    max-height: 1000px; /* ajuster selon la taille du contenu */
+    max-height: 4500px; /* ajuster selon la taille du contenu */
     padding: 15px 20px;
     opacity: 1;
     animation: fadeIn 0.5s ease;
 }
-
+.sport-intitule {
+    text-shadow: none;
+}
 /* --- Summary --- */
 .wrapper-accordion-main summary {
     display: grid;
@@ -91,12 +93,12 @@
 }
 
 /* --- Summary ouvert --- */
-.wrapper-accordion-main details[open] summary,
+/* .wrapper-accordion-main details[open] summary,
 .wrapper-accordion-main details[open] summary span,
 .wrapper-accordion-main details[open] summary i {
     color: rgb(227, 227, 74);
     background: var(--primary-color-gradient);
-}
+} */
 
 /* --- Sport emoji --- */
 .sport-emoji {

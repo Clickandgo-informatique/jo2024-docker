@@ -2,7 +2,7 @@
 {% if data is empty %}
 	<p class="cart-empty">Votre panier est vide.</p>
 {% else %}
-	<table>
+	<table id="cart-table">
 		<thead>
 			<tr>
 				<th class="cart-header text-left">Intitulé</th>
@@ -13,22 +13,23 @@
 		</thead>
 		<tbody>
 			{% for item in data %}
-				<tr>
+				<tr class="cart-table-header">
 					<td class="cart-product text-left">{{item.offre.sports[0].emoji}}
 						-
+						{{item.offre.categorie.nom}}&nbsp;
 						<strong>{{ item.offre.intitule }}</strong>
 					</td>
 					<td>
 						<div class="quantity-control">
-							<button type="button" class="decrease btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">-</button>
+							<button type="button" class="decrease btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">-</button>
 							<input type="text" class="quantity-input" value="{{ item.quantite }}" data-url="{{ path('panier_update', {'id': item.offre.id}) }}">
-							<button type="button" class="increase btn btn-primary btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">+</button>
+							<button type="button" class="increase btn-qty" data-url="{{ path('panier_update', {'id': item.offre.id}) }}" data-method="POST">+</button>
 						</div>
 					</td>
 					<td class="cart-total text-right">{{ item.total|number_format(2, ',', ' ') }}
 						€</td>
 					<td class="cart-actions text-center">
-						<button type="button" class="remove-item btn btn-action " data-url="{{ path('panier_remove', {'id': item.offre.id}) }}" data-method="POST">
+						<button type="button" class="remove-item btn-action " data-url="{{ path('panier_remove', {'id': item.offre.id}) }}" data-method="POST">
 							<i class="fa-solid fa-trash-can btn-delete"></i>
 						</button>
 					</td>
@@ -55,4 +56,5 @@
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('assets/css/table.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
 {% endblock %}

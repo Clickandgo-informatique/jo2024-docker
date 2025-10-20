@@ -1,8 +1,9 @@
+// assets/js/cart.js
 window.addEventListener("DOMContentLoaded", () => {
     const cartBadge = document.getElementById("cart-count");
     const reloadedContent = document.querySelector("#cart-container");
 
-    // 🔹 Mise à jour du badge
+    // 🔹 Met à jour le badge du panier
     function updateCartCount(newCount) {
         if (!cartBadge) return;
         cartBadge.textContent = newCount;
@@ -11,13 +12,13 @@ window.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => cartBadge.classList.remove("animate"), 300);
     }
 
-    // 🔹 Fonction AJAX pour manipuler le panier
+    // 🔹 Requête AJAX générique pour manipuler le panier
     async function fetchCartData(url, method = "POST", data = null) {
         try {
             const options = {
                 method,
                 headers: { "X-Requested-With": "XMLHttpRequest" },
-                credentials: "same-origin", // 👈 Très important pour garder la session
+                credentials: "same-origin", // 👈 garde la session active
             };
             if (data) {
                 options.body =
@@ -26,6 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             const res = await fetch(url, options);
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
             const result = await res.json();
 
             if (result.success) {
@@ -47,37 +49,33 @@ window.addEventListener("DOMContentLoaded", () => {
 
         fetchCartData(btn.dataset.url, btn.dataset.method || "POST")
             .then(() => {
-                // Redirige vers la page panier après ajout
+                // Redirection après ajout
                 window.location.href = "/panier";
             })
             .catch((err) => console.error("Erreur ajout au panier :", err));
     });
 
-    // 🔹 Modification quantité / suppression / clear
+    // 🔹 Modification quantité (boutons +/-)
     document.addEventListener("click", (e) => {
-        const btn = e.target.closest(".btn[data-url]");
+        const btn = e.target.closest(".btn-qty[data-url]");
         if (!btn) return;
         e.preventDefault();
 
         const method = btn.dataset.method || "POST";
-
-        // Si bouton + ou -
         const input = btn.parentElement.querySelector(".quantity-input");
+
         if (btn.classList.contains("increase"))
             input.value = parseInt(input.value) + 1;
         if (btn.classList.contains("decrease"))
             input.value = Math.max(1, parseInt(input.value) - 1);
 
-        // Préparer les données
         let data = null;
         if (input) data = { quantite: input.value };
-        else if (btn.dataset.form)
-            data = new FormData(document.querySelector(btn.dataset.form));
 
         fetchCartData(btn.dataset.url, method, data);
     });
 
-    // 🔹 Modification manuelle de la quantité
+    // 🔹 Modification manuelle dans input quantité
     document.addEventListener("change", (e) => {
         const input = e.target.closest(".quantity-input");
         if (!input) return;
@@ -85,20 +83,49 @@ window.addEventListener("DOMContentLoaded", () => {
         fetchCartData(input.dataset.url, "POST", { quantite: input.value });
     });
 
-    // 🔹 Initialisation badge au chargement
+    // 🔹 Suppression d’un article
+    document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".remove-item");
+        if (!btn) return;
+        e.preventDefault();
+
+        const url = btn.dataset.url;
+        const method = btn.dataset.method || "POST";
+
+        if (confirm("Voulez-vous vraiment supprimer cet article ?")) {
+            fetchCartData(url, method);
+        }
+    });
+
+    // 🔹 Vider tout le panier
+    document.addEventListener("click", (e) => {
+        const btn = e.target.closest("#clear-cart");
+        if (!btn) return;
+        e.preventDefault();
+
+        const url = btn.dataset.url;
+        const method = btn.dataset.method || "POST";
+
+        if (confirm("Voulez-vous vraiment vider tout le panier ?")) {
+            fetchCartData(url, method);
+        }
+    });
+
+    // 🔹 Initialisation du badge au chargement
     fetchCartData("/panier/count", "GET");
 
     // 🔹 Validation du panier (optionnel en AJAX)
-    const validateForm = document.querySelector("form[action$='/panier/valider']");
+    const validateForm = document.querySelector(
+        "form[action$='/panier/valider']"
+    );
     if (validateForm) {
         validateForm.addEventListener("submit", (e) => {
-            // Si  AJAX au lieu de POST normal, décommenter :
+            // Si tu veux gérer la validation en AJAX :
             /*
             e.preventDefault();
             const url = validateForm.action;
             fetchCartData(url, "POST").then(() => {
-                // Redirection vers paiement mock
-                window.location.href = "/panier";
+                window.location.href = "/paiement/mock";
             });
             */
         });

@@ -35,22 +35,4 @@ JS -> JS : Parse JSON
 JS -> JS : Met à jour le DOM (liste des sports)
 JS --> JS : Rafraîchit l’affichage sans rechargement
 
-note right of Controller
-  Exemple Symfony :
-  #[Route('/api/sports', name: 'api_sports')]
-  public function index(Request $request, SportRepository $repo): JsonResponse {
-      $filters = $request->query->all();
-      $sports = $repo->findByFilters($filters);
-      return $this->json(['sports' => $sports]);
-  }
-end note
-
-note right of JS
-  Exemple JavaScript :
-  const params = new URLSearchParams({ categorie: 'olympiques' });
-  fetch('/api/sports?' + params)
-    .then(r => r.json())
-    .then(data => renderSports(data.sports));
-end note
-
 @enduml

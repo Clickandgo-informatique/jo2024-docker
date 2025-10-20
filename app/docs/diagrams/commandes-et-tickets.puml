@@ -1,0 +1,44 @@
+@startuml Commandes_Tickets
+!theme spacelab
+
+package "Commandes et Tickets" {
+    class Users {
+        +id: int
+        +nickname: string
+        +email: string
+        +roles: array
+        +password: string
+        +isVerified: bool
+        +accountKey: string
+    }
+
+    class Commandes {
+        +id: int
+        +reference: string
+        +total: float
+        +createdAt: DateTimeImmutable
+    }
+
+    class DetailsCommandes {
+        +quantite: int
+        +prix: float
+    }
+
+    class Tickets {
+        +id: int
+        +ticketKey: string
+        +payloadHash: string
+        +qrCodePath: text
+        +created_at: DateTimeImmutable
+        +isUsed: bool
+        +usedAt: DateTimeImmutable
+        +expiresAt: DateTimeImmutable
+    }
+
+    Users "1" -- "0..*" Commandes : passe
+    Commandes "1" -- "0..*" DetailsCommandes : contient
+    DetailsCommandes "*" -- "1" Offres : concerne
+    Commandes "1" -- "0..1" Tickets : génère
+    Tickets "0..1" -- "0..1" Users : validé par
+}
+@enduml

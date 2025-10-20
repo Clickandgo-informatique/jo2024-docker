@@ -1,28 +1,20 @@
 services:
   php:
-    user: "${UID}:${GID}"
     build:
       context: .
       dockerfile: docker/php/Dockerfile
     container_name: jo2024-docker_php
     working_dir: /var/www/symfony
-
+    user: "${UID}:${GID}" # pour WSL / Linux
     volumes:
-      # Code Symfony complet
       - ./app:/var/www/symfony:cached
-
-      # Dossier docs monté automatiquement dans app/docs
-      # Il doit exister sur l'hôte sous app/docs
+      - ./app/var/coverage:/var/www/symfony/var/coverage
       - ./app/docs:/var/www/symfony/app/docs:cached
-
-      # Fichiers d'environnement
       - ./app/.env.docker.local:/var/www/symfony/.env.local:ro
       - ./app/.env.test.local:/var/www/symfony/.env.test.local:ro
-
     environment:
       - APP_ENV=dev
       - COMPOSER_ALLOW_SUPERUSER=1
-
     depends_on:
       - db
       - redis
@@ -76,8 +68,8 @@ services:
     image: mailhog/mailhog
     container_name: jo2024-docker_mailhog
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - "1025:1025" # SMTP
+      - "8025:8025" # Web UI
     networks:
       - symfony
 
@@ -94,3 +86,4 @@ volumes:
 
 networks:
   symfony:
+    driver: bridge

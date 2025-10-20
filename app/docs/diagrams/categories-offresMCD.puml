@@ -1,0 +1,26 @@
+@startuml Entité CategoriesOffres
+!theme spacelab
+class CategoriesOffres {
+  - id : int
+  - nom : string
+  - slug : string
+  - icone : string
+  - description : text
+  - isTest : bool
+  - offres : Collection<Offres>
+  + getId() : ?int
+  + getNom() : ?string
+  + setNom(nom : string) : static
+  + getSlug() : ?string
+  + setSlug(slug : string) : static
+  + getIcone() : ?string
+  + setIcone(icone : ?string) : static
+  + getDescription() : ?string
+  + setDescription(description : ?string) : static
+  + isTest() : bool
+  + setIsTest(isTest : bool) : static
+  + getOffres() : Collection<Offres>
+  + addOffre(offre : Offres) : static
+  + removeOffre(offre : Offres) : static
+}
+@enduml

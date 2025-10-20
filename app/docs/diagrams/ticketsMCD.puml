@@ -1,0 +1,38 @@
+@startuml
+!theme spacelab
+class Tickets {
+  - id : int
+  - ticketKey : string
+  - payloadHash : string
+  - qrCodePath : text
+  - created_at : DateTimeImmutable
+  - isUsed : bool
+  - usedAt : DateTimeImmutable
+  - expiresAt : DateTimeImmutable
+  - user : Users
+  - validatedBy : Users
+  - commande : Commandes
+  + getId() : ?int
+  + getTicketKey() : ?string
+  + setTicketKey(ticketKey : string) : static
+  + getPayloadHash() : ?string
+  + setPayloadHash(payloadHash : string) : static
+  + computeAndSetPayloadHashFromAccountKey(accountKey : string) : static
+  + getQrCodePath() : ?string
+  + setQrCodePath(qrCodePath : ?string) : static
+  + getCreatedAt() : ?DateTimeImmutable
+  + setCreatedAt(created_at : DateTimeImmutable) : static
+  + isUsed() : bool
+  + setIsUsed(isUsed : bool) : static
+  + getUser() : ?Users
+  + setUser(user : ?Users) : static
+  + getCommande() : ?Commandes
+  + setCommande(commande : ?Commandes) : static
+  + getUsedAt() : ?DateTimeImmutable
+  + setUsedAt(usedAt : ?DateTimeImmutable) : static
+  + getValidatedBy() : ?Users
+  + setValidatedBy(validatedBy : ?Users) : static
+  + getExpiresAt() : ?DateTimeImmutable
+  + setExpiresAt(expiresAt : ?DateTimeImmutable) : static
+}
+@enduml

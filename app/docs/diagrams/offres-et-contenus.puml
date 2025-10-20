@@ -1,0 +1,58 @@
+@startuml Offres_Contenus
+!theme spacelab
+
+package "Offres et Contenus" {
+    class Offres {
+        +id: int
+        +intitule: string
+        +prix: decimal
+        +dateDebut: DateTime
+        +dateFin: DateTime
+        +description: text
+        +code: string
+        +createdAt: DateTimeImmutable
+        +updatedAt: DateTimeImmutable
+        +nbrAdultes: int
+        +nbrEnfants: int
+        +isLocked: bool
+        +isPublished: bool
+        +slug: string
+        +isPromoted: bool
+        +lieux: array
+        +image: string
+    }
+
+    class Images {
+        +id: int
+        +nom: string
+    }
+
+    class Sports {
+        +id: int
+        +intitule: string
+        +emoji: string
+        +pictogramme: string
+        +icone: string
+        +background_color: string
+        +slug: string
+        +image: string
+        +Description: text
+        +regles: string
+        +duree_match: string
+    }
+
+    class CategoriesOffres {
+        +id: int
+        +nom: string
+    }
+
+    class FavorisOffres {
+        +id: int
+    }
+
+    Offres "1" -- "0..*" Images : contient
+    Offres "1" -- "0..*" FavorisOffres : favoris
+    Offres "0..*" -- "0..*" Sports : "associée à"
+    Offres "*" -- "0..1" CategoriesOffres : catégorie
+}
+@enduml

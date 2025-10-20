@@ -1,0 +1,22 @@
+@startuml Favoris
+!theme spacelab
+
+package "Favoris Utilisateurs" {
+    class Users {
+        +id: int
+        +nickname: string
+    }
+
+    class Offres {
+        +id: int
+        +intitule: string
+    }
+
+    class FavorisOffres {
+        +id: int
+    }
+
+    Users "1" -- "0..*" FavorisOffres : crée
+    Offres "1" -- "0..*" FavorisOffres : contient
+}
+@enduml

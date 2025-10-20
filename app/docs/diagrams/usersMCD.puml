@@ -1,0 +1,43 @@
+@startuml Users_Entity_Detail
+!theme spacelab
+
+class Users {
+    +id: int
+    +nickname: string
+    +email: string
+    +roles: array
+    +password: string
+    +isVerified: bool
+    +createdAt: DateTimeImmutable
+    +accountKey: string
+    +google2FASecret: string
+    +is2FAEnabled: bool
+    +trustedToken: string
+    +firstname: string
+    +lastname: string
+    +city: string
+    +zipcode: string
+    +country: string
+    +address: string
+    +used_at: DateTimeImmutable
+}
+
+class Commandes {
+    +id: int
+}
+
+class Tickets {
+    +id: int
+}
+
+class FavorisOffres {
+    +id: int
+}
+
+' ---------------- Relations Doctrine ----------------
+' Un utilisateur peut avoir plusieurs commandes
+Users "1" -- "0..*" Commandes : OneToMany / commandes
+Commandes "*" -- "1" Users : ManyToOne / user
+
+' Un utilisateur peut posséder plusieurs tickets et peut aussi les avoir validés
+Users "1" -- "0..*" Tickets : OneToMany / tickets*

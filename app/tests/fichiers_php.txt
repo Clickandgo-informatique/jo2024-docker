@@ -1,0 +1,16 @@
+./PasswordPolicyServiceTest.php
+./Entity/CommandesWorkflowTest.php
+./Entity/CommandeOffresIntegrationTest.php
+./Entity/CommandePanierStressSimulationTest.php
+./Entity/OffresTest.php
+./Entity/CommandesTest.php
+./Entity/SportsValidationTest.php
+./Entity/TicketsTest.php
+./Entity/UsersEntityTest.php
+./Entity/SportsTest.php
+./Entity/CategoriesOffresTest.php
+./Entity/CommandeSimulationTest.php
+./Controller/SportsControllerTest.php
+./Controller/UsersControllerTest.php
+./Controller/CategoriesOffresControllerTest.php
+

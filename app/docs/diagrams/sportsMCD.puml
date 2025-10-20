@@ -1,0 +1,41 @@
+@startuml Entité Sports
+!theme spacelab
+class Sports {
+  - id : int
+  - intitule : string
+  - icone : string
+  - background_color : string
+  - slug : string
+  - emoji : string
+  - pictogramme : string
+  - image : string
+  - Description : text
+  - regles : string
+  - duree_match : string
+  - offres : Collection<Offres>
+  + getId() : ?int
+  + getIntitule() : ?string
+  + setIntitule(intitule : string) : static
+  + getIcone() : ?string
+  + setIcone(icone : ?string) : static
+  + getBackgroundColor() : ?string
+  + setBackgroundColor(background_color : ?string) : static
+  + getSlug() : ?string
+  + setSlug(slug : ?string) : static
+  + getEmoji() : ?string
+  + setEmoji(emoji : ?string) : static
+  + getPictogramme() : ?string
+  + setPictogramme(pictogramme : ?string) : static
+  + getImage() : ?string
+  + setImage(image : ?string) : static
+  + getDescription() : ?string
+  + setDescription(description : ?string) : static
+  + getRegles() : ?string
+  + setRegles(regles : ?string) : static
+  + getDureeMatch() : ?string
+  + setDureeMatch(duree_match : ?string) : static
+  + getOffres() : Collection<Offres>
+  + addOffre(offre : Offres) : static
+  + removeOffre(offre : Offres) : static
+}
+@enduml

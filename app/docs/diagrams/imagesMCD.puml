@@ -1,0 +1,13 @@
+@startuml Entité Images
+!theme spacelab
+class Images {
+  - id : int
+  - nom : string
+  - offres : Offres
+  + getId() : ?int
+  + getNom() : ?string
+  + setNom(nom : string) : static
+  + getOffres() : ?Offres
+  + setOffres(offres : ?Offres) : static
+}
+@enduml

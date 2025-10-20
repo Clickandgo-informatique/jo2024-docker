@@ -1,0 +1,75 @@
+@startuml 
+!theme spacelab
+class Offres {
+  - id : int
+  - intitule : string
+  - prix : decimal
+  - dateDebut : DateTime
+  - dateFin : DateTime
+  - description : text
+  - code : string
+  - createdAt : DateTimeImmutable
+  - updatedAt : DateTimeImmutable
+  - nbrAdultes : int
+  - nbrEnfants : int
+  - isLocked : bool
+  - isPublished : bool
+  - slug : string
+  - isPromoted : bool
+  - lieux : array
+  - image : string
+  - images : Collection<Images>
+  - detailsCommandes : Collection<DetailsCommandes>
+  - categorie : CategoriesOffres
+  - sports : Collection<Sports>
+  - favorisOffres : Collection<FavorisOffres>
+  + getId() : ?int
+  + getIntitule() : ?string
+  + setIntitule(intitule : string) : static
+  + getPrix() : ?string
+  + setPrix(prix : string) : static
+  + getDateDebut() : ?DateTime
+  + setDateDebut(dateDebut : DateTime) : static
+  + getDateFin() : ?DateTime
+  + setDateFin(dateFin : DateTime) : static
+  + getDescription() : ?string
+  + setDescription(description : ?string) : static
+  + getCode() : ?string
+  + setCode(code : string) : static
+  + getCreatedAt() : ?DateTimeImmutable
+  + setCreatedAt(createdAt : DateTimeImmutable) : static
+  + getUpdatedAt() : ?DateTimeImmutable
+  + setUpdatedAt(updatedAt : ?DateTimeImmutable) : static
+  + getNbrAdultes() : ?int
+  + setNbrAdultes(nbrAdultes : int) : static
+  + getNbrEnfants() : ?int
+  + setNbrEnfants(nbrEnfants : int) : static
+  + isLocked() : ?bool
+  + setIsLocked(isLocked : bool) : static
+  + isPublished() : ?bool
+  + setIsPublished(isPublished : bool) : static
+  + getSlug() : ?string
+  + setSlug(slug : ?string) : static
+  + getIsPromoted() : ?bool
+  + setIsPromoted(isPromoted : bool) : static
+  + getImage() : ?string
+  + setImage(image : ?string) : static
+  + getImages() : Collection<Images>
+  + addImage(image : Images) : static
+  + removeImage(image : Images) : static
+  + getDetailsCommandes() : Collection<DetailsCommandes>
+  + addDetailsCommande(detailsCommande : DetailsCommandes) : static
+  + removeDetailsCommande(detailsCommande : DetailsCommandes) : static
+  + getCategorie() : ?CategoriesOffres
+  + setCategorie(categorie : ?CategoriesOffres) : static
+  + getSports() : Collection<Sports>
+  + addSport(sport : Sports) : static
+  + removeSport(sport : Sports) : static
+  + getLieux() : array
+  + setLieux(lieux : array) : static
+  + getFavorisOffres() : Collection<FavorisOffres>
+  + addFavorisOffre(favorisOffre : FavorisOffres) : static
+  + removeFavorisOffre(favorisOffre : FavorisOffres) : static
+  + isFavori(user : ?Users) : bool
+}
+@enduml

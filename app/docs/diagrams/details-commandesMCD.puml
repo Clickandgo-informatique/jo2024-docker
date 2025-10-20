@@ -1,0 +1,17 @@
+@startuml Entité DetailsCommandes
+!theme spacelab
+class DetailsCommandes {
+  - quantite : int
+  - prix : float
+  - commande : Commandes
+  - offres : Offres
+  + getQuantite() : ?int
+  + setQuantite(quantite : int) : static
+  + getPrix() : ?float
+  + setPrix(prix : float) : static
+  + getCommande() : ?Commandes
+  + setCommande(commande : ?Commandes) : static
+  + getOffres() : ?Offres
+  + setOffres(offres : ?Offres) : static
+}
+@enduml

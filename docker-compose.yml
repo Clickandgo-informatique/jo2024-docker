@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   php:
     build:
@@ -5,7 +7,6 @@ services:
       dockerfile: docker/php/Dockerfile
     container_name: jo2024-docker_php
     working_dir: /var/www/symfony
-    user: "${UID}:${GID}" # pour WSL / Linux
     volumes:
       - ./app:/var/www/symfony:cached
       - ./app/var/coverage:/var/www/symfony/var/coverage
@@ -50,6 +51,14 @@ services:
     networks:
       - symfony
 
+  redis:
+    image: redis:alpine
+    container_name: jo2024-docker_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - symfony
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: jo2024-docker_pma
@@ -68,16 +77,8 @@ services:
     image: mailhog/mailhog
     container_name: jo2024-docker_mailhog
     ports:
-      - "1025:1025" # SMTP
-      - "8025:8025" # Web UI
-    networks:
-      - symfony
-
-  redis:
-    image: redis:alpine
-    container_name: jo2024-docker_redis
-    ports:
-      - "6379:6379"
+      - "1025:1025"
+      - "8025:8025"
     networks:
       - symfony
 

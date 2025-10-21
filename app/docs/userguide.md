@@ -115,7 +115,7 @@ Cette application vous permet de :
 
 - Email : support@jo2024.fr  
 - Téléphone : 01 23 45 67 89  
-## Notes pour la conversion en PDF
+<!-- ## Notes pour la conversion en PDF
 
 1. Installer Pandoc : `sudo apt install pandoc`  
 2. Générer PDF :  
@@ -128,4 +128,4 @@ pandoc UserGuide.md -o UserGuide.pdf --pdf-engine=xelatex
 
 ```bash
 pandoc UserGuide.md -o UserGuide.html
-```
+``` -->

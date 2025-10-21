@@ -2,7 +2,6 @@
 # Fichiers dotenv / environnements
 # ------------------------------
 # Ne pas versionner les fichiers sensibles
-app/.env
 app/.env.local
 app/.env.prod.local
 app/.env.test.local

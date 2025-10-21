@@ -10,9 +10,6 @@ pseudo : adminjo2024
 
 password : Admin-jo2024!
 
-## Le dossier projet en format Word est ici :
-https://clickandgo-my.sharepoint.com/:w:/g/personal/mail_clickandgo-informatique_com/EbyVRadMDAZOoGVSZCSlkDYBzX6dmEFrEsjKYRJ1Fk7XBw?e=DCa6fh
-
 # Manuel des Tests et Commandes – JO 2024 Symfony 7
 
 ## Table des matières

@@ -205,6 +205,7 @@ button:hover,
     .btn,
     button.btn {
         width: 99%;
+        max-width: 300px;
     }
 }
 

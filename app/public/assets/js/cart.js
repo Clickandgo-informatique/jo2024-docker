@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const cartBadge = document.getElementById("cart-count");
     const reloadedContent = document.querySelector("#cart-container");
 
-    // 🔹 Met à jour le badge du panier
+    // Met à jour le badge du panier
     function updateCartCount(newCount) {
         if (!cartBadge) return;
         cartBadge.textContent = newCount;
@@ -12,7 +12,7 @@ window.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => cartBadge.classList.remove("animate"), 300);
     }
 
-    // 🔹 Requête AJAX générique pour manipuler le panier
+    // Requête AJAX générique pour manipuler le panier
     async function fetchCartData(url, method = "POST", data = null) {
         try {
             const options = {
@@ -41,7 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 🔹 Ajout au panier
+    // Ajout au panier
     document.addEventListener("click", (e) => {
         const btn = e.target.closest(".add-to-cart");
         if (!btn) return;
@@ -55,7 +55,7 @@ window.addEventListener("DOMContentLoaded", () => {
             .catch((err) => console.error("Erreur ajout au panier :", err));
     });
 
-    // 🔹 Modification quantité (boutons +/-)
+    // Modification quantité (boutons +/-)
     document.addEventListener("click", (e) => {
         const btn = e.target.closest(".btn-qty[data-url]");
         if (!btn) return;
@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", () => {
         fetchCartData(btn.dataset.url, method, data);
     });
 
-    // 🔹 Modification manuelle dans input quantité
+    // Modification manuelle dans input quantité
     document.addEventListener("change", (e) => {
         const input = e.target.closest(".quantity-input");
         if (!input) return;
@@ -83,7 +83,7 @@ window.addEventListener("DOMContentLoaded", () => {
         fetchCartData(input.dataset.url, "POST", { quantite: input.value });
     });
 
-    // 🔹 Suppression d’un article
+    // Suppression d’un article
     document.addEventListener("click", (e) => {
         const btn = e.target.closest(".remove-item");
         if (!btn) return;
@@ -97,7 +97,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 🔹 Vider tout le panier
+    // Vider tout le panier
     document.addEventListener("click", (e) => {
         const btn = e.target.closest("#clear-cart");
         if (!btn) return;
@@ -111,10 +111,10 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 🔹 Initialisation du badge au chargement
+    //Initialisation du badge au chargement
     fetchCartData("/panier/count", "GET");
 
-    // 🔹 Validation du panier (optionnel en AJAX)
+    // Validation du panier (optionnel en AJAX)
     const validateForm = document.querySelector(
         "form[action$='/panier/valider']"
     );

@@ -66,9 +66,17 @@ form label {
     grid-template-columns: 200px 1fr;
     gap: 0.5rem 1rem; /* vertical | horizontal */
     align-items: center;
+    width: 100%;
 }
 
 /* ================= Inputs / textarea / select ================= */
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+}
+
 /* ========================
    Styles généraux pour tous les champs
    ======================== */
@@ -418,11 +426,27 @@ input[type="submit"]:hover {
     border: 1px solid #f5c6cb;
 }
 
-/* Form layout */
-.row-horizontal {
-    display: flex;
-    gap: 1rem;
+#offres_form_nbr_adultes,
+#offres_form_nbr_enfants {
+    text-align: center;
 }
+.timestamp {
+    border: inherit !important;
+    outline: none;
+    text-align: right;
+    color: darkgray;
+}
+.isLocked,
+.isPublished {
+    margin-bottom: 20px;
+}
+.isLocked div,
+.isPublished div {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+/* Form layout */
 .form-group {
     flex: 1;
     display: flex;

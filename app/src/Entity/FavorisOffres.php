@@ -6,6 +6,7 @@ use App\Repository\FavorisOffresRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FavorisOffresRepository::class)]
+// Permet de mettre en favoris des offres quand utilisateur connecté
 class FavorisOffres
 {
     #[ORM\Id]

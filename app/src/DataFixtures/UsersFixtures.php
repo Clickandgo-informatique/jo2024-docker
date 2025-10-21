@@ -27,7 +27,7 @@ class UsersFixtures extends Fixture
         $admin = new Users();
         $admin
             ->setNickname('adminjo2024')
-            ->setPassword($this->passwordHasher->hashPassword($admin, 'Admin-jo2024!'))
+            ->setPassword($this->passwordHasher->hashPassword($admin, 'Adminjo2024!'))
             ->setFirstname($this->faker->firstName())
             ->setLastname($this->faker->lastName())
             ->setAddress($this->faker->streetAddress())
@@ -46,7 +46,7 @@ class UsersFixtures extends Fixture
             $salesManager = new Users();
             $salesManager
                 ->setNickname($this->faker->userName())
-                ->setPassword($this->passwordHasher->hashPassword($salesManager, 'Sm-jo2024!'))
+                ->setPassword($this->passwordHasher->hashPassword($salesManager, 'Smjo2024!'))
                 ->setFirstname($this->faker->firstName())
                 ->setLastname($this->faker->lastName())
                 ->setAddress($this->faker->streetAddress())

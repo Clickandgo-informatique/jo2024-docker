@@ -72,13 +72,13 @@ class OffresFormType extends AbstractType
                 'mapped' => false,
                 'label' => 'Créé le',
                 'widget' => 'single_text',
-                'attr' => ['disabled' => true],
+                'attr' => ['disabled' => true, 'class' => 'timestamp'],
             ])
             ->add('updated_at', DateTimeType::class, [
                 'mapped' => false,
                 'label' => 'Mise à jour le',
                 'widget' => 'single_text',
-                'attr' => ['disabled' => true],
+                'attr' => ['disabled' => true, 'class' => 'timestamp'],
             ])
         ;
     }

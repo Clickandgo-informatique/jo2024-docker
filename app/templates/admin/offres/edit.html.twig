@@ -39,6 +39,10 @@
 		{{ form_row(form.isLocked) }}
 		{{ form_row(form.isPublished) }}
 	</div>
+	<div class="row-horizontal">
+		{{ form_row(form.date_debut) }}
+		<span class="text-right">{{ form_row(form.date_fin) }}</span>
+	</div>
 
 	<div class="row-horizontal">
 		{{ form_row(form.nbr_adultes) }}
@@ -53,11 +57,6 @@
 	{{ form_widget(form.prix) }}
 	{{ form_errors(form.prix) }}
 
-
-	<div class="row-horizontal">
-		{{ form_row(form.date_debut) }}
-		<span class="text-right">{{ form_row(form.date_fin) }}</span>
-	</div>
 
 	<div class="row-horizontal">
 		{{ form_row(form.created_at) }}

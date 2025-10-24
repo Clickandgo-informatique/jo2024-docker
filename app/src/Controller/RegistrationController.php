@@ -47,7 +47,7 @@ class RegistrationController extends AbstractController
 
             // Envoyer le mail de confirmation
             $mailer->send(
-                'no-reply-reservations-jo2024@jo2024.fr',
+                'no-reply-reservations-jo2024@clickandgo-informatique.com',
                 $user->getEmail(),
                 'Activation de votre compte',
                 'register-confirmation',

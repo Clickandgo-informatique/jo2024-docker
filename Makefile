@@ -119,7 +119,7 @@ test:
 
 # Connexion SSH sur le serveur OVH
 ovh:
-	ssh clickandug@ssh.cluster011.hosting.ovh.net 'cd jo2024-docker && pwd && exec bash'
+	ssh -t clickandug@ssh.cluster011.hosting.ovh.net 'cd jo2024-docker && bash --login -i'
 
 # Installation des dépendances Symfony sur OVH
 composer-ovh:

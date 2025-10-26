@@ -576,9 +576,73 @@ input[type="radio"]:checked::after {
     margin-top: 0.25rem !important;
 }
 
-/* Symfony default error wrapper */
-ul.form-errors {
+/* Conteneur de chaque champ */
+.form-field {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label du champ */
+.form-field label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+/* Champ input / textarea / select */
+.form-field input,
+.form-field textarea,
+.form-field select {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Focus sur le champ */
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Champ invalide */
+.form-field input:invalid,
+.form-field textarea:invalid,
+.form-field select:invalid {
+    border-color: #c0392b;
+    box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.2);
+}
+
+/* Liste des erreurs */
+ul.form-error {
+    color: #c0392b;
     margin: 0.25rem 0 0 0;
-    padding-left: 1.15rem;
-    color: var(--form-error);
+    padding-left: 1.2rem;
+    font-size: 0.875rem;
+}
+
+/* Chaque erreur individuelle */
+ul.form-error li {
+    list-style-type: disc;
+    margin-left: 0;
+}
+
+/* Optionnel : style du bouton submit */
+button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
 }

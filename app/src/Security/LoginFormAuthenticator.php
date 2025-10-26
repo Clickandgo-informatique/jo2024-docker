@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
@@ -31,7 +32,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $password = $request->request->get('password', '');
 
         return new Passport(
-            new UserBadge($nickname),
+            new UserBadge($nickname, function ($userIdentifier) {
+                $user = $this->em->getRepository(Users::class)->findOneBy(['nickname' => $userIdentifier]);
+                if (!$user) {
+                    // Message personnalisé si utilisateur non trouvé
+                    throw new CustomUserMessageAuthenticationException('Adresse e-mail ou mot de passe incorrect, veuillez vérifier les deux champs.');
+                }
+                return $user;
+            }),
             new PasswordCredentials($password)
         );
     }
